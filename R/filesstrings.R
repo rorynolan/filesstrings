@@ -1,2 +1,2 @@
-#' @importFrom magrittr "%>%"
+#' @import stringr
 NULL

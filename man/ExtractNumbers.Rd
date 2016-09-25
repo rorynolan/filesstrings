@@ -52,6 +52,7 @@ ExtractNonNumerics("abc1..23abc456", decimals = TRUE)
 ExtractNonNumerics("abc1..23abc456", decimals = TRUE, leading.decimals = TRUE)
 ExtractNonNumerics("-123abc456")
 ExtractNonNumerics("-123abc456", negs = TRUE)
+ExtractNonNumerics("--123abc456", negs = TRUE)
 \dontrun{
 ExtractNumbers("abc1.2.3", decimals = TRUE)}
 }

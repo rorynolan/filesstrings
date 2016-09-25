@@ -1,6 +1,3 @@
-#' @import stringr
-NULL
-
 #' Check if all elements are equal.
 #'
 #' If one argument is specified, check that all elements of that argument are
