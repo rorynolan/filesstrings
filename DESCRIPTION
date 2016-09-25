@@ -1,0 +1,20 @@
+Package: filesstrings
+Type: Package
+Title: Handy String and File Manipulation
+Version: 0.0.0.9000
+Authors@R: person("Rory", "Nolan", email = "rorynoolan@gmail.com", role = c("aut", "cre"))
+Maintainer: The package maintainer <yourself@somewhere.net>
+Description: This package is built upon the functionalities of stringr and
+    readr. It uses these to create further handy string and file processing
+    and manipulation tools, such as a function to reverse a string, a function
+    to extract the nth number from a string (where a "number" is a sequence of
+    numeric charachters) and a function to move a specified set of files to a
+    directory, creating that directory if it does not already exist.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Imports:
+    stringr,
+    readr
+RoxygenNote: 5.0.1
+Suggests: testthat
