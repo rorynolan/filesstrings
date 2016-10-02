@@ -9,6 +9,7 @@
 #' @examples
 #' CreateDirsIfNotThere("mydir")
 #' CreateDirsIfNotThere("/home/mydir")
+#' @export
 CreateDirsIfNotThere <- function(dir.names) {
   created <- sapply(dir.names,
                     function(dir.name) {
@@ -32,6 +33,7 @@ CreateDirsIfNotThere <- function(dir.names) {
 #' @examples
 #' RemoveDirs("mydir1", "mydir2")
 #' RemoveDirs("/home/mydir")
+#' @export
 RemoveDirs <- function(dirs) {
   success <- !sapply(dirs, function(dir) unlink(dir, recursive = T))
   success
@@ -73,6 +75,7 @@ MoveFile <- function(file, destination) {
 #'   which to move the files.
 #' @return A logical vector with a \code{TRUE} for each time the operation
 #'   succeeded and a \code{FALSE} for every fail.
+#' @export
 MoveFiles <- function(files, destinations) {
   if(length(destinations) == length(files)) {
     mapply(MoveFile, files, destinations)
@@ -105,6 +108,7 @@ MoveFiles <- function(files, destinations) {
 #'   restricted to ones matching this pattern (in their name).
 #' @return A logical vector with a \code{TRUE} for each successful rename
 #'   (should be all TRUEs) and \code{FALSE}s otherwise.
+#' @export
 NiceFileNums <- function(dir = ".", pattern = NA) {
   init.dir <- getwd()
   setwd(dir)
@@ -127,6 +131,7 @@ NiceFileNums <- function(dir = ".", pattern = NA) {
 #'   relative or absolute path
 #' @return A logical vector with a \code{TRUE} for each successful file move and
 #'   a \code{FALSE} otherwise.
+#' @export
 PutFilesInDir <- function(file.names, dir.name) {
   CreateDirsIfNotThere(dir.name)
   MoveFiles(file.names, dir.name)
@@ -143,6 +148,7 @@ PutFilesInDir <- function(file.names, dir.name) {
 #' @return A logical vector indicating which operation succeeded for each of the
 #'   files attempted. Using a missing value for a file or path name will always
 #'   be regarded as a failure.
+#' @export
 RemoveFileSpaces <- function(dir = ".", pattern = "", replace.with = "") {
   init.dir <- getwd()
   setwd(dir)
@@ -161,6 +167,7 @@ RemoveFileSpaces <- function(dir = ".", pattern = "", replace.with = "") {
 #' @param pattern A regular expression. If specified, only files with names
 #'   matching this pattern will be treated.
 #' @return A logical vector with a \code{TRUE} for each successful renaming.
+#' @export
 RenameWithNums <- function(dir = ".", pattern = NULL) {
   init.dir <- getwd()
   setwd(dir)
@@ -200,6 +207,7 @@ RenameWithNums <- function(dir = ".", pattern = NULL) {
 #' UnitDirs("litres", "\\.txt")
 #' setwd("..")
 #' RemoveDirs("UnitDirs_test")
+#' @export
 UnitDirs <- function(unit, pattern = NULL, dir = ".") {
   lf <- list.files(pattern = pattern)
   if (!all(str_detect(lf, unit))) {

@@ -9,8 +9,8 @@ TrimAnything(string, char, side = "both")
 \arguments{
 \item{string}{A string.}
 
-\item{char}{A single charachter, \emph{not} in regular expression. So to trim
-a period, use \code{char = "."} and not \code{char = "\\\\."}.}
+\item{char}{A single charachter (\emph{not} in regular expression. So to trim
+a period, use \code{char = "."} and not \code{char = "\\\\."}).}
 
 \item{side}{Which side do you want to trim from? \code{"both"} is the
 default, but you can also have just either \code{"left"} or \code{"right"}

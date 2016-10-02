@@ -10,6 +10,7 @@
 #' CanBeNumeric("3")
 #' CanBeNumeric("5 ")
 #' CanBeNumeric(c("1a", "abc"))
+#' @export
 CanBeNumeric <- function(string) !is.na(suppressWarnings(as.numeric(string)))
 
 #' Remove back-to-back duplicates of a pattern in a string.
@@ -25,6 +26,7 @@ CanBeNumeric <- function(string) !is.na(suppressWarnings(as.numeric(string)))
 #' @examples
 #' DuplicatesToSingles("abc//def", "/")
 #' DuplicatesToSingles("abababcabab", "ab")
+#' @export
 DuplicatesToSingles <- function(string, pattern) {
   old <- string
   double <- str_c(pattern, pattern)
@@ -58,6 +60,7 @@ DuplicatesToSingles <- function(string, pattern) {
 #'
 #' \dontrun{
 #' NiceNums(c("abc9def55", "abc10xyz9"))}
+#' @export
 NiceNums <- function(str.vec) {
   if (!is.character(str.vec)) stop("str.vec must be a vector of strings")
   strings <- lapply(str.vec, ExtractNonNumerics)
@@ -134,6 +137,7 @@ NiceNums <- function(str.vec) {
 #' NthNumber("abc1.23abc456", 2, decimals = TRUE)
 #' NthNumber("-123abc456", -2, negs = TRUE)
 #' ExtractNonNumerics("--123abc456", negs = TRUE)
+#' @export
 ExtractNumbers <- function(string, leave.as.string = FALSE, decimals = FALSE,
                            leading.decimals = FALSE, negs = FALSE) {
   if (leading.decimals == TRUE && decimals == FALSE) {
@@ -163,6 +167,7 @@ ExtractNumbers <- function(string, leave.as.string = FALSE, decimals = FALSE,
 }
 
 #' @rdname ExtractNumbers
+#' @export
 ExtractNonNumerics <- function(string, decimals = FALSE,
                                leading.decimals = FALSE, negs = FALSE) {
   stopifnot(is.character(string) && length(string) == 1)
@@ -186,6 +191,7 @@ ExtractNonNumerics <- function(string, decimals = FALSE,
 #'   whereas \code{n = -1} will give you the last number (or non-numeric), \code{n = -2} will
 #'   give you the second last number and so on.
 #' @rdname ExtractNumbers
+#' @export
 NthNumber <- function(string, n, leave.as.string = FALSE, decimals = FALSE,
                       leading.decimals = FALSE, negs = FALSE) {
   # this function doesn't work for strings with decimal numbers
@@ -204,6 +210,7 @@ NthNumber <- function(string, n, leave.as.string = FALSE, decimals = FALSE,
 }
 
 #' @rdname ExtractNumbers
+#' @export
 NthNonNumeric <- function(string, n, leave.as.string = FALSE, decimals = FALSE,
                       leading.decimals = FALSE, negs = FALSE) {
   # this function doesn't work for strings with decimal numbers
@@ -227,6 +234,7 @@ NthNonNumeric <- function(string, n, leave.as.string = FALSE, decimals = FALSE,
 #' @param string A string.
 #' @examples
 #' StrSplitByNums("abc123def456.789gh")
+#' @export
 StrSplitByNums <- function(string, decimals = FALSE, leading.decimals = FALSE,
                            negs = FALSE) {
   nums <- ExtractNumbers(string, leave.as.string = TRUE, decimals = decimals,
@@ -249,6 +257,7 @@ StrSplitByNums <- function(string, decimals = FALSE, leading.decimals = FALSE,
 #' @return A one-character string.
 #' @examples
 #' StrElem("abcd", 3)
+#' @export
 StrElem <- function(string, index) {
   if (!is.character(string)) stop("string must be of character type")
   str_sub(string, index, index)
@@ -262,6 +271,7 @@ StrElem <- function(string, index) {
 #' @return A string.
 #' @examples
 #' StrElemsPasted("abcdef", c(2, 5:6))
+#' @export
 StrElemsPasted <- function(string, elem.indices) {
   if (!is.character(string)) stop("string must be of character type")
   elems <- sapply(elem.indices, StrElem, string = string)
@@ -276,6 +286,7 @@ StrElemsPasted <- function(string, elem.indices) {
 #' @return A character vector.
 #' @examples
 #' StringToVec("abcdef")
+#' @export
 StringToVec <- function(string) {
   if (!is.character(string)) stop("string must be of character type")
   strsplit(string, NULL)[[1]]
@@ -294,6 +305,7 @@ StringToVec <- function(string) {
 #' @examples
 #' StringsWithPatterns(c("abc", "bcd", "cde"), c("b", "c"))
 #' StringsWithPatterns(c("abc", "bcd", "cde"), c("b", "c"), any = TRUE)
+#' @export
 StringsWithPatterns <- function(strings, patterns, ignore.case = FALSE, any = FALSE) {
   if (!is.character(strings)) stop("strings must be of character type")
   strings.orig <- strings
@@ -317,6 +329,7 @@ StringsWithPatterns <- function(strings, patterns, ignore.case = FALSE, any = FA
 #' @return A string.
 #' @examples
 #' StrReverse("abcdef")
+#' @export
 StrReverse <- function(string) {
   if (!is.character(string)) stop("string must be of character type")
   char.vec <- StringToVec(string)
@@ -342,6 +355,7 @@ StrReverse <- function(string) {
 #' string <- "ab..cd..de..fg..h"
 #' StrAfterNth(string, "\\.\\.", 3)
 #' StrBeforeNth(string, "e", 1)
+#' @export
 StrAfterNth <- function(strings, pattern, n) {
   instances.indices <- gregexpr(pattern, strings)
   instances.lengths <- lapply(instances.indices, function(x) attr(x, "match.length"))
@@ -359,6 +373,7 @@ StrAfterNth <- function(strings, pattern, n) {
 }
 
 #' @rdname StrAfterNth
+#' @export
 StrBeforeNth <- function(strings, pattern, n) {
   instances.indices <- gregexpr(pattern, strings)
   if (is.character(n)) {
@@ -387,6 +402,7 @@ StrBeforeNth <- function(strings, pattern, n) {
 #' @examples
 #' ExtendCharVec(1:5, extend.by = 2)
 #' ExtendCharVec(c("a", "b"), length.out = 10)
+#' @export
 ExtendCharVec <- function(char.vec, extend.by = NA, length.out = NA) {
   if (length(extend.by) != 1) stop("extend.by must have length 1.")
   if (length(extend.by) != 1) stop("extend.by must have length 1.")
@@ -427,6 +443,7 @@ ExtendCharVec <- function(char.vec, extend.by = NA, length.out = NA) {
 #' writeLines(as.character(1:4), "PasteDifferentLengths2.txt")
 #' PasteDifferentLengths(list.files(pattern = "PasteDifferentLengths"), sep = "sSsepPp")
 #' file.remove(list.files(pattern = "PasteDifferentLengths"))  # run this to clean up your working directory from the teporary files that were created for these examples
+#' @export
 PasteDifferentLengths <- function(files, sep = "") {
   if (is.character(files)) {
     files <- lapply(files, readLines)
@@ -454,6 +471,7 @@ PasteDifferentLengths <- function(files, sep = "") {
 #' @examples
 #' PutInPos(1:3, c(1, 8, 9))
 #' PutInPos(c("Apple", "Orange", "County"), c(5, 7, 8))
+#' @export
 PutInPos <- function(strings, positions) {
   strings <- as.character(strings)
   stopifnot(length(strings) == length(positions))
@@ -470,8 +488,8 @@ PutInPos <- function(strings, positions) {
 #' side(s).
 #'
 #' @param string A string.
-#' @param char A single charachter, \emph{not} in regular expression. So to trim
-#'   a period, use \code{char = "."} and not \code{char = "\\\\."}.
+#' @param char A single charachter (\emph{not} in regular expression. So to trim
+#'   a period, use \code{char = "."} and not \code{char = "\\\\."}).
 #' @param side Which side do you want to trim from? \code{"both"} is the
 #'   default, but you can also have just either \code{"left"} or \code{"right"}
 #'   (or optionally the shorthands \code{"b"}, \code{"l"} and \code{"r"}).
@@ -479,6 +497,7 @@ PutInPos <- function(strings, positions) {
 #' @examples
 #' TrimAnything("..abcd.", ".", "left")
 #' TrimAnything("-ghi--", "-")
+#' @export
 TrimAnything <- function(string, char, side = "both") {
   stopifnot(nchar(string) > 0)
   stopifnot(nchar(char) == 1)
