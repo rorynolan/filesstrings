@@ -36,64 +36,6 @@ DuplicatesToSingles <- function(string, pattern) {
   new
 }
 
-#' The first number within a string
-#'
-#' Extract the first (or last) contiguous sequence of \emph{numeric characters}
-#' from a string (where only the digits 0-9 are considered to be numeric
-#' characters and hence "." and "-" are not). Please view the examples at the
-#' bottom of this page to ensure that you understand how this function works,
-#' and its limitations.
-#'
-#' @param string The String from which to extract the first number.
-#' @param leave.as.string Do you want to return the number as a string
-#'   (\code{TRUE}) or as numeric (\code{FALSE}, the default)?
-#' @param err.na If no first number is found (because there isn't one), should
-#'   the function return \code{NA} (\code{TRUE}, the default), or should it spit
-#'   out an error?
-#' @return The first number in \code{string}, or \code{NA} if no number is found
-#'   and \code{err.na} is \code{TRUE}.
-#' @examples
-#' FirstNumber("abc123abc456")  # returns 123
-#' FirstNumber("abc1.23abc456")  # returns 1, not 1.23
-#' FirstNumber("-123abc456")  # returns 123, not -123
-FirstNumber <- function(string, leave.as.string = FALSE, err.na = TRUE) {
-  if (!is.character(string)) stop("string must be of character type.")
-  char.vec <- StringToVec(string)
-  first.numeric <- match(T, CanBeNumeric(char.vec))
-  if (is.na(first.numeric)) {
-    if (err.na) {
-      return(NA)
-    } else {
-      stop("No number found.")
-    }
-  }
-  non.numeric.start.gone <- substr(string, first.numeric, nchar(string))
-  char.vec <- StringToVec(non.numeric.start.gone)
-  first.nonnumeric <- match(F, CanBeNumeric(char.vec))
-  if (!is.na(first.nonnumeric)) {
-    char.vec <- char.vec[-(first.nonnumeric:length(char.vec))]
-  }
-  first.number <- paste(char.vec, collapse = "")
-  if (!leave.as.string) first.number <- as.numeric(first.number)
-  first.number
-}
-
-#' @rdname FirstNumber
-LastNumber <- function(string, leave.as.string = FALSE, err.na = FALSE) {
-  if (err.na) if (!is.character(string)) return(NA)
-  string.reversed <- StrReverse(string)
-  last.num.backwards.string <- FirstNumber(string.reversed,
-                                           leave.as.string = TRUE, err.na = err.na)
-  if (is.na(last.num.backwards.string)) return(NA)
-  last.num.string <- StrReverse(last.num.backwards.string)
-  if (leave.as.string) {
-    return(last.num.string)
-  } else {
-    last.num <- as.numeric(last.num.string)
-    return(last.num)
-  }
-}
-
 #' Make string numbers comply with alphabetical order
 #'
 #' If strings are numbered, their numbers may not \emph{comply} with
@@ -140,54 +82,24 @@ NiceNums <- function(str.vec) {
   } else {
     interleaves <- mapply(Interleave, strings, numbers)
   }
-  new.names <- apply(interleaves, 2, function(x) paste(x, collapse = ""))
+  new.names <- apply(interleaves, 2, str_c, collapse = "")
   return(new.names)
-}
-
-#' Extract the \eqn{n}th number from a string.
-#'
-#' Extract the \eqn{n}th number from a string, where a \emph{number} is defined
-#' as a contiguous sequence of \emph{numeric characters} from a string (where
-#' only the digits 0-9 are considered to be numeric characters and hence "."
-#' and "-" are not). Please view the examples at the bottom of this page to
-#' ensure that you understand how this function works, and its limitations.
-#'
-#' @param string The string from which to extract the \eqn{n}th number.
-#' @param n A natural number, the index of the number we wish to extract from
-#'   \code{string}
-#' @param err.na If there is an error (most likely due to there not being a
-#'   \eqn{n}th number), if you would like to return NA instead of giving an
-#'   error (the default), set this to \code{TRUE}.
-#' @param leave.as.string Do you want to return the number as a string
-#'   (\code{TRUE}) or as numeric (\code{FALSE}, the default)?
-#' @return A number.
-#' @examples
-#' NthNumber("abc123def456ghi789jkl", 2)
-#' NthNumber("abc1.23abc456", 1)
-#' NthNumber("-123abc456", 1)
-NthNumber <- function(string, n, err.na = FALSE, leave.as.string = FALSE) {
-  # this function doesn't work for strings with decimal numbers
-  if (n < 1) stop("n must be a positive integer.")
-  for (i in 1:n) {
-    fn <- FirstNumber(string, leave.as.string = TRUE, err.na = TRUE)
-    if (is.na(fn)) break
-    string <- str_split_fixed(string, fn, 2)[2]  # only replaces the first instance, which is what we want
-  }
-  if (is.na(fn)) {
-    if (err.na) {
-      return(NA)
-    } else {
-      stop(paste0("There aren't n numbers in string", " (n = ", n, ")."))
-    }
-  }
-  ifelse(leave.as.string, fn, as.numeric(fn))
 }
 
 #' Extract numbers (or non-numbers) from a string.
 #'
-#' Extract the numbers (or non-numbers) from a string where decimals are
-#' optionally allowed. Please view the examples at the bottom of this page to
-#' ensure that you understand how this function works, and its limitations.
+#' \code{ExtractNumbers} extracts the numbers (or non-numbers) from a string
+#' where decimals are optionally allowed. \code{ExtractNonNumerics} extracts the
+#' bits of the string that aren't extracted by \code{ExtractNumbers}.
+#' \code{NthNumber} is a convenient wrapper for \code{ExtractNumbers}, allowing
+#' you to choose which number you want. Please view the examples at the bottom
+#' of this page to ensure that you understand how these functions work, and
+#' their limitations.
+#'
+#' \code{ExtractNonNumerics} uses \code{ExtractNumerics} to tell it what the
+#' numbers in the string are and then it extracts the bits in between those
+#' numbers. For this reason, errors you see whilst using
+#' \code{ExtractNonNumerics} might be errors from \code{ExtractNumerics}.
 #'
 #' @param string A string.
 #' @param leave.as.string Do you want to return the number as a string
@@ -198,9 +110,6 @@ NthNumber <- function(string, n, err.na = FALSE, leave.as.string = FALSE) {
 #'   the start of a number?
 #' @param negs Do you want to allow negative numbers? Note that double negatives
 #'   are not handled here (see the examples).
-#' @param err.na If the function can't find what you're looking for, if
-#'   \code{err.na = FALSE} (the default), the function wil stop with an error,
-#'   whereas if \code{err.na = TRUE}, the function will return \code{NA}.
 #' @examples
 #' ExtractNumbers("abc123abc456")
 #' ExtractNumbers("abc1.23abc456")
@@ -219,75 +128,49 @@ NthNumber <- function(string, n, err.na = FALSE, leave.as.string = FALSE) {
 #' ExtractNonNumerics("-123abc456")
 #' ExtractNonNumerics("-123abc456", negs = TRUE)
 #' ExtractNonNumerics("--123abc456", negs = TRUE)
-#' \dontrun{
-#' ExtractNumbers("abc1.2.3", decimals = TRUE)}
+#' ExtractNumbers("abc1.2.3", decimals = TRUE)
+#' ExtractNumbers("ab.1.2", decimals = TRUE, leading.decimals = TRUE)
+#' NthNumber("abc1.23abc456", 2)
+#' NthNumber("abc1.23abc456", 2, decimals = TRUE)
+#' NthNumber("-123abc456", -2, negs = TRUE)
+#' ExtractNonNumerics("--123abc456", negs = TRUE)
 ExtractNumbers <- function(string, leave.as.string = FALSE, decimals = FALSE,
-                           leading.decimals = FALSE, negs = FALSE, err.na = FALSE) {
+                           leading.decimals = FALSE, negs = FALSE) {
   if (leading.decimals == TRUE && decimals == FALSE) {
     stop("To allow leading decimals, you need to first allow decimals.")
   }
   stopifnot(length(string) == 1)
-  string <- as.character(string)  # allow passing in numbers
-  vec <- StringToVec(string)
-  numeric.indices <- which(CanBeNumeric(vec))
-  if (!length(numeric.indices)) return(StopOrNA(!err.na,
-                                                "In ExtractNumbers, string has no numbers in it."))
-  if (!(decimals || negs)) {
-    numeric.groups <- GroupClose(numeric.indices)
-    numerics <- sapply(numeric.groups, function(i) paste(vec[i], collapse = ""))  # these will not be of numeric type, just of the type that will come out of as.numeric as numbers and not NAs
+  stopifnot(is.character(string))
+  if (decimals) {
+    pattern <- "([0-9]+(\\.?[0-9]+)*)+"
+    if (leading.decimals) pattern <- str_c("\\.?", pattern)
   } else {
-    candidates <- ExtractNumbers(string, leave.as.string = FALSE, decimals = FALSE,
-                                 leading.decimals = FALSE, negs = FALSE, err.na = FALSE)
-    if (decimals) {
-      string.space.dec <- string  # This variable will below become string with spaces inserted between consecutive periods
-      while (grepl("\\.\\.", string.space.dec)) {
-        string.space.dec <- str_replace_all(string.space.dec, "\\.\\.", "\\. \\.")
-      }
-      vec.space.dec <- StringToVec(string.space.dec)
-      indices.of.interest <- sort(c(which(CanBeNumeric(vec.space.dec)),
-                                    which(vec.space.dec == ".")))
-      index.groups <- GroupClose(indices.of.interest)
-      groups <- lapply(index.groups, function(i) vec.space.dec[i])
-      candidates <- sapply(groups, paste, collapse = "")
-      for (i in seq_along(candidates)) {
-        if (StrElem(candidates[i], -1) == ".") {  # remove trailing periods
-          candidates[i] <- str_sub(candidates[i], 1, -2)
-        }
-      }
-      candidates <- candidates[as.logical(nchar(candidates))]  # remove empty strings
-      if (!leading.decimals) candidates <- sapply(candidates, TrimAnything, ".", "l")
-    }
-    if (negs) {
-      for (i in seq_along(candidates)) {
-        match.pos <- regexpr(candidates[i], string)
-        if (match.pos > 1) {
-          if (StrElem(string, match.pos - 1) == "-") {
-            candidates[i] <- paste0("-", candidates[i])
-          }
-        }
-        string <- str_split_fixed(string, candidates[i], 2)[2]
-      }
-    }
-    if (all(CanBeNumeric(candidates))) {
-      numerics <- candidates
-    } else {
-      numerics <- StopOrNA(!err.na, "Ambiguities whilst trying to ExtractNumbers with decimals.")
-    }
+    pattern <- "[0-9]+"
   }
-  if (!leave.as.string) numerics <- as.numeric(numerics)
-  numerics
+  if (negs) pattern <- str_c("-?", pattern)
+  numbers <- str_extract_all(string, pattern)[[1]]
+  n.periods <- sapply(str_extract_all(numbers, "\\."), length)
+  if (any(n.periods > 1)) {
+    bad.num <- numbers[match(T, n.periods > 1)]
+    warning.message <- str_c("There was at least one ambiguity, the first of which was '",
+                             bad.num,
+                             "' so returning NA.")
+    warning(warning.message)
+    return(NA)
+  }
+  if (!leave.as.string) numbers <- as.numeric(numbers)
+  numbers
 }
 
 #' @rdname ExtractNumbers
 ExtractNonNumerics <- function(string, decimals = FALSE,
-                               leading.decimals = FALSE, negs = FALSE, err.na = FALSE) {
-  string <- as.character(string)  # allow to pass in numbers
+                               leading.decimals = FALSE, negs = FALSE) {
+  stopifnot(is.character(string) && length(string) == 1)
   if (!any(CanBeNumeric(StringToVec(string)))) return(string)
   numerics <- ExtractNumbers(string, leave.as.string = TRUE,
-                             decimals = decimals, leading.decimals = leading.decimals, negs = negs,
-                             err.na = TRUE)
-  if (is.na(numerics[1])) StopOrNA(!err.na,
-                                "Couldn't identify the numbers in the string.")
+                             decimals = decimals, leading.decimals = leading.decimals,
+                             negs = negs)
+  if (is.na(numerics[1])) return(NA)
   if (string == numerics[1]) return(StopOrNA(!err.na, "No non-numerics for ExtractNonNumerics to find."))
   non.numerics <- string  # this non.numerics will eventually be at the value we want, but here it is not
   for (n in numerics) {
@@ -296,6 +179,45 @@ ExtractNonNumerics <- function(string, decimals = FALSE,
   }
   non.numerics <- non.numerics[as.logical(nchar(non.numerics))]  # remove empty strings (str_split can produce those)
   return(non.numerics)
+}
+
+#' @param n The index of the number (or non-numeric) that you seek. Negative
+#'   indexing is allowed i.e. \code{n = 1} will give you the first number (or non-numeric)
+#'   whereas \code{n = -1} will give you the last number (or non-numeric), \code{n = -2} will
+#'   give you the second last number and so on.
+#' @rdname ExtractNumbers
+NthNumber <- function(string, n, leave.as.string = FALSE, decimals = FALSE,
+                      leading.decimals = FALSE, negs = FALSE) {
+  # this function doesn't work for strings with decimal numbers
+  if (n == 0) stop("n must be a nonzero integer.")
+  numbers <- ExtractNumbers(string, leave.as.string = leave.as.string,
+                            decimals = decimals, leading.decimals = leading.decimals,
+                            negs = negs)
+  l <- length(numbers)
+  if (n > l) stop("There aren't |n| numbers in string.")
+  if (n > 0) {
+    nth.number <- numbers[n]
+  } else {
+    nth.number <- numbers[l + n + 1]
+  }
+  nth.number
+}
+
+#' @rdname ExtractNumbers
+NthNonNumeric <- function(string, n, leave.as.string = FALSE, decimals = FALSE,
+                      leading.decimals = FALSE, negs = FALSE) {
+  # this function doesn't work for strings with decimal numbers
+  if (n == 0) stop("n must be a nonzero integer.")
+  non.numerics <- ExtractNonNumerics(string, decimals = decimals, negs = negs,
+                                     leading.decimals = leading.decimals)
+  l <- length(non.numerics)
+  if (n > l) stop("There aren't |n| non-numerics in string.")
+  if (n > 0) {
+    nth.non.numeric <- non.numerics[n]
+  } else {
+    nth.non.numeric <- non.numerics[l + n + 1]
+  }
+  nth.non.numeric
 }
 
 #' Split a string by its numeric charachters.
@@ -538,12 +460,21 @@ PutInPos <- function(strings, positions) {
 
 #' Trim something other than whitespace
 #'
-#' The \code{stringi} and \code{stringr} packages let you trim whitespace, but what if you want to trim something else from either (or both) side(s) of a string? This function lets you select which charachter to trim and from which side(s).
+#' The \code{stringi} and \code{stringr} packages let you trim whitespace, but
+#' what if you want to trim something else from either (or both) side(s) of a
+#' string? This function lets you select which charachter to trim and from which
+#' side(s).
 #'
 #' @param string A string.
-#' @param char A single charachter, \emph{not} in regular expression. So to trim a period, use \code{char = "."} and not \code{char = "\\\\."}.
-#' @param side Which side do you want to trim from? \code{"both"} is the default, but you can also have just either \code{"left"} or \code{"right"} (or optionally the shorthands \code{"b"}, \code{"l"} and \code{"r"}).
+#' @param char A single charachter, \emph{not} in regular expression. So to trim
+#'   a period, use \code{char = "."} and not \code{char = "\\\\."}.
+#' @param side Which side do you want to trim from? \code{"both"} is the
+#'   default, but you can also have just either \code{"left"} or \code{"right"}
+#'   (or optionally the shorthands \code{"b"}, \code{"l"} and \code{"r"}).
 #' @return A string.
+#' @examples
+#' TrimAnything("..abcd.", ".", "left")
+#' TrimAnything("-ghi--", "-")
 TrimAnything <- function(string, char, side = "both") {
   stopifnot(nchar(string) > 0)
   stopifnot(nchar(char) == 1)
@@ -565,4 +496,3 @@ TrimAnything <- function(string, char, side = "both") {
   }
   return(paste(vec, collapse = ""))
 }
-

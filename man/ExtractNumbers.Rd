@@ -3,13 +3,21 @@
 \name{ExtractNumbers}
 \alias{ExtractNonNumerics}
 \alias{ExtractNumbers}
+\alias{NthNonNumeric}
+\alias{NthNumber}
 \title{Extract numbers (or non-numbers) from a string.}
 \usage{
 ExtractNumbers(string, leave.as.string = FALSE, decimals = FALSE,
-  leading.decimals = FALSE, negs = FALSE, err.na = FALSE)
+  leading.decimals = FALSE, negs = FALSE)
 
 ExtractNonNumerics(string, decimals = FALSE, leading.decimals = FALSE,
-  negs = FALSE, err.na = FALSE)
+  negs = FALSE)
+
+NthNumber(string, n, leave.as.string = FALSE, decimals = FALSE,
+  leading.decimals = FALSE, negs = FALSE)
+
+NthNonNumeric(string, n, leave.as.string = FALSE, decimals = FALSE,
+  leading.decimals = FALSE, negs = FALSE)
 }
 \arguments{
 \item{string}{A string.}
@@ -26,14 +34,25 @@ the start of a number?}
 \item{negs}{Do you want to allow negative numbers? Note that double negatives
 are not handled here (see the examples).}
 
-\item{err.na}{If the function can't find what you're looking for, if
-\code{err.na = FALSE} (the default), the function wil stop with an error,
-whereas if \code{err.na = TRUE}, the function will return \code{NA}.}
+\item{n}{The index of the number (or non-numeric) that you seek. Negative
+indexing is allowed i.e. \code{n = 1} will give you the first number (or non-numeric)
+whereas \code{n = -1} will give you the last number (or non-numeric), \code{n = -2} will
+give you the second last number and so on.}
 }
 \description{
-Extract the numbers (or non-numbers) from a string where decimals are
-optionally allowed. Please view the examples at the bottom of this page to
-ensure that you understand how this function works, and its limitations.
+\code{ExtractNumbers} extracts the numbers (or non-numbers) from a string
+where decimals are optionally allowed. \code{ExtractNonNumerics} extracts the
+bits of the string that aren't extracted by \code{ExtractNumbers}.
+\code{NthNumber} is a convenient wrapper for \code{ExtractNumbers}, allowing
+you to choose which number you want. Please view the examples at the bottom
+of this page to ensure that you understand how these functions work, and
+their limitations.
+}
+\details{
+\code{ExtractNonNumerics} uses \code{ExtractNumerics} to tell it what the
+numbers in the string are and then it extracts the bits in between those
+numbers. For this reason, errors you see whilst using
+\code{ExtractNonNumerics} might be errors from \code{ExtractNumerics}.
 }
 \examples{
 ExtractNumbers("abc123abc456")
@@ -53,7 +72,11 @@ ExtractNonNumerics("abc1..23abc456", decimals = TRUE, leading.decimals = TRUE)
 ExtractNonNumerics("-123abc456")
 ExtractNonNumerics("-123abc456", negs = TRUE)
 ExtractNonNumerics("--123abc456", negs = TRUE)
-\dontrun{
-ExtractNumbers("abc1.2.3", decimals = TRUE)}
+ExtractNumbers("abc1.2.3", decimals = TRUE)
+ExtractNumbers("ab.1.2", decimals = TRUE, leading.decimals = TRUE)
+NthNumber("abc1.23abc456", 2)
+NthNumber("abc1.23abc456", 2, decimals = TRUE)
+NthNumber("-123abc456", -2, negs = TRUE)
+ExtractNonNumerics("--123abc456", negs = TRUE)
 }
 
