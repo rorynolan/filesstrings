@@ -92,9 +92,9 @@ NiceNums <- function(str.vec) {
 #' where decimals are optionally allowed. \code{ExtractNonNumerics} extracts the
 #' bits of the string that aren't extracted by \code{ExtractNumbers}.
 #' \code{NthNumber} is a convenient wrapper for \code{ExtractNumbers}, allowing
-#' you to choose which number you want. Please view the examples at the bottom
-#' of this page to ensure that you understand how these functions work, and
-#' their limitations.
+#' you to choose which number you want. Similarly \code{NthNonNumeric}. Please
+#' view the examples at the bottom of this page to ensure that you understand
+#' how these functions work, and their limitations.
 #'
 #' \code{ExtractNonNumerics} uses \code{ExtractNumerics} to tell it what the
 #' numbers in the string are and then it extracts the bits in between those
@@ -226,11 +226,14 @@ NthNonNumeric <- function(string, n, leave.as.string = FALSE, decimals = FALSE,
 #' vice-versa.
 #' @param string A string.
 #' @examples
-#' StrSplitByNumerics("abc123def456.789gh")
-StrSplitByNums <- function(string) {
-  nums <- ExtractNumbers(string, leave.as.string = TRUE, err.na = TRUE)
+#' StrSplitByNums("abc123def456.789gh")
+StrSplitByNums <- function(string, decimals = FALSE, leading.decimals = FALSE,
+                           negs = FALSE) {
+  nums <- ExtractNumbers(string, leave.as.string = TRUE, decimals = decimals,
+                         leading.decimals = leading.decimals, negs = negs)
   if (is.na(nums[1])) return(string)
-  non.nums <- ExtractNonNumerics(string)
+  non.nums <- ExtractNonNumerics(string, decimals = decimals, negs = negs,
+                                 leading.decimals = leading.decimals)
   if (CanBeNumeric(StrElem(string, 1))) {
     split <- Interleave(nums, non.nums)
   } else {
@@ -285,7 +288,8 @@ StringToVec <- function(string) {
 #' @param strings A character vector.
 #' @param patterns Regular expressions.
 #' @param ignore.case Do we want to ignore case when matching patterns?
-#' @param any Set this to \code{TRUE} if you want to see which strings match \emph{any} of the patterns and not \emph{all} (all is the default).
+#' @param any Set this to \code{TRUE} if you want to see which strings match
+#'   \emph{any} of the patterns and not \emph{all} (all is the default).
 #' @return A character vector of strings matching the patterns.
 #' @examples
 #' StringsWithPatterns(c("abc", "bcd", "cde"), c("b", "c"))

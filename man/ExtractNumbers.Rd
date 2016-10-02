@@ -44,9 +44,9 @@ give you the second last number and so on.}
 where decimals are optionally allowed. \code{ExtractNonNumerics} extracts the
 bits of the string that aren't extracted by \code{ExtractNumbers}.
 \code{NthNumber} is a convenient wrapper for \code{ExtractNumbers}, allowing
-you to choose which number you want. Please view the examples at the bottom
-of this page to ensure that you understand how these functions work, and
-their limitations.
+you to choose which number you want. Similarly \code{NthNonNumeric}. Please
+view the examples at the bottom of this page to ensure that you understand
+how these functions work, and their limitations.
 }
 \details{
 \code{ExtractNonNumerics} uses \code{ExtractNumerics} to tell it what the

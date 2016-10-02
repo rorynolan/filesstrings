@@ -13,7 +13,8 @@ StringsWithPatterns(strings, patterns, ignore.case = FALSE, any = FALSE)
 
 \item{ignore.case}{Do we want to ignore case when matching patterns?}
 
-\item{any}{Set this to \code{TRUE} if you want to see which strings match \emph{any} of the patterns and not \emph{all} (all is the default).}
+\item{any}{Set this to \code{TRUE} if you want to see which strings match
+\emph{any} of the patterns and not \emph{all} (all is the default).}
 }
 \value{
 A character vector of strings matching the patterns.

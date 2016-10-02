@@ -4,7 +4,8 @@
 \alias{StrSplitByNums}
 \title{Split a string by its numeric charachters.}
 \usage{
-StrSplitByNums(string)
+StrSplitByNums(string, decimals = FALSE, leading.decimals = FALSE,
+  negs = FALSE)
 }
 \arguments{
 \item{string}{A string.}
@@ -14,6 +15,6 @@ Break a string wherever you go from a numeric charachter to a non-numeric or
 vice-versa.
 }
 \examples{
-StrSplitByNumerics("abc123def456.789gh")
+StrSplitByNums("abc123def456.789gh")
 }
 
