@@ -276,10 +276,20 @@ StrSplitByNums <- function(string, decimals = FALSE, leading.decimals = FALSE,
   if (is.na(nums[1])) return(string)
   non.nums <- ExtractNonNumerics(string, decimals = decimals, negs = negs,
                                  leading.decimals = leading.decimals)
-  if (CanBeNumeric(StrElem(string, 1))) {
-    split <- Interleave(nums, non.nums)
-  } else {
-    split <- Interleave(non.nums, nums)
+  split <- rep("", length(nums) + length(non.nums))
+  i <- 1
+  while (length(nums) > 0 || length(non.nums) > 0) {
+    if (isTRUE(str_locate(string, coll(nums[1]))[1] == 1)) {
+      split[i] <- nums[1]
+      string <- str_sub(string, 1 + str_length(nums[1]), -1)
+      nums <- nums[-1]
+    } else {
+      split[i] <- non.nums[1]
+      string <- str_sub(string, 1 + str_length(non.nums[1]), -1)
+      non.nums <- non.nums[-1]
+    }
+    print(string)
+    i <- i + 1
   }
   split
 }
