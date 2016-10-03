@@ -313,7 +313,7 @@ StringsWithPatterns <- function(strings, patterns, ignore.case = FALSE, any = FA
     strings <- tolower(strings)
     patterns <- tolower(patterns)
   }
-  matches <- sapply(strings, str_detect, patterns)
+  matches <- as.matrix(sapply(strings, str_detect, patterns))
   if (any) {
     keeps <- apply(matches, 2, any)
   } else {
@@ -466,13 +466,18 @@ PasteDifferentLengths <- function(files, sep = "") {
 #' @param strings A charachter vector of the strings to put in positions
 #'   (coerced by as.characher if not charachter already).
 #' @param positions The indices of the charachter vector to be occupied by the
-#'   elements of strings. Must be the same length as strings.
+#'   elements of strings. Must be the same length as strings or of length 1.
 #' @return A charachter vector.
 #' @examples
 #' PutInPos(1:3, c(1, 8, 9))
 #' PutInPos(c("Apple", "Orange", "County"), c(5, 7, 8))
+#' PutInPos(1:2, 5)
 #' @export
 PutInPos <- function(strings, positions) {
+  ls <- length(strings)
+  if (ls > 1 && length(positions) == 1) {
+    positions <- positions:(positions + ls - 1)
+  }
   strings <- as.character(strings)
   stopifnot(length(strings) == length(positions))
   out <- rep("", max(positions))
