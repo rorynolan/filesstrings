@@ -38,8 +38,9 @@ GetCurrencies <- function(string) {
     currencies <- c("", ssbn[seq(2, l, 2)] %>% StrElem(-1))
   } else {
     numbers <- ssbn[seq(2, l, 2)] %>% as.numeric
-    currencies <- ssbn[seq(1, l, 2)] %>% StrElem(-1)
+    currencies <- ssbn[seq(1, l - 1, 2)] %>% StrElem(-1)
   }
+  if (length(cu))
   data.frame(currency = currencies, amount = numbers)
 }
 
