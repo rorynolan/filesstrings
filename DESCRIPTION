@@ -15,6 +15,7 @@ Encoding: UTF-8
 LazyData: true
 Imports:
     stringr,
-    readr
+    readr,
+    tibble
 RoxygenNote: 5.0.1
 Suggests: testthat

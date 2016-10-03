@@ -32,13 +32,13 @@ GetCurrencies <- function(string) {
   stopifnot(is.character(string) && length(string) == 1)
   ssbn <- StrSplitByNums(string, decimals = T, negs = T)
   num.indices <- which(CanBeNumeric(ssbn))
-  numbers <- ssbn[num.indices]
+  numbers <- as.numeric(ssbn[num.indices])
   before.num.indices <- num.indices - 1
   before.num.strings <- sapply(before.num.indices, function(x) {
     ifelse(x %in% num.indices || x < 1, "", ssbn[x])
   })
   currencies <- StrElem(before.num.strings, -1)
-  data.frame(currency = currencies, amount = numbers)
+  tibble::tibble(currency = currencies, amount = numbers)
 }
 
 #' Remove back-to-back duplicates of a pattern in a string.
