@@ -9,7 +9,8 @@ StrElem(string, index)
 \arguments{
 \item{string}{A string.}
 
-\item{index}{A positive integer.}
+\item{index}{An integer. Negative indexing is allowed as in
+\code{\link[stringr]{str_sub}}.}
 }
 \value{
 A one-character string.
@@ -19,5 +20,6 @@ Extract a single character of a string, using its index.
 }
 \examples{
 StrElem("abcd", 3)
+StrElem("abcd", -2)
 }
 

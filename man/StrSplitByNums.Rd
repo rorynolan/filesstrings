@@ -16,5 +16,6 @@ vice-versa.
 }
 \examples{
 StrSplitByNums("abc123def456.789gh")
+StrSplitByNums("abc123def456.789gh", decimals = TRUE)
 }
 

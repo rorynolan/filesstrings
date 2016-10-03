@@ -13,6 +13,36 @@
 #' @export
 CanBeNumeric <- function(string) !is.na(suppressWarnings(as.numeric(string)))
 
+#' Get the currencies of numbers within a string.
+#'
+#' The currency is defined as the character coming before the number in the
+#' string. If nothing comes before (i.e. if the number is the first thing in the
+#' string), the currency can be the empty string, similarly the currency can be
+#' a space, comma or any manner of thing. This function does not allow for
+#' leading decimal points.
+#'
+#' @param string
+#'
+#' @return A data frame with one column for the currency symbol and one for the
+#'   amount.
+#' @examples
+#' GetCurrencies("35.00 $1.14 abc5 £3.8 77")
+#' @export
+GetCurrencies <- function(string) {
+  stopifnot(is.character(string) && length(string) == 1)
+  ssbn <- StrSplitByNums(string, decimals = T, negs = T)
+  l <- length(ssbn)
+  num.first <- CanBeNumeric(ssbn[1])
+  if (num.first) {
+    numbers <- ssbn[seq(1, l, 2)] %>% as.numeric
+    currencies <- c("", ssbn[seq(2, l, 2)] %>% StrElem(-1))
+  } else {
+    numbers <- ssbn[seq(2, l, 2)] %>% as.numeric
+    currencies <- ssbn[seq(1, l, 2)] %>% StrElem(-1)
+  }
+  data.frame(currency = currencies, amount = numbers)
+}
+
 #' Remove back-to-back duplicates of a pattern in a string.
 #'
 #' If a string contains a given pattern duplicated back-to-back a number of
@@ -176,10 +206,13 @@ ExtractNonNumerics <- function(string, decimals = FALSE,
                              decimals = decimals, leading.decimals = leading.decimals,
                              negs = negs)
   if (is.na(numerics[1])) return(NA)
-  if (string == numerics[1]) return(StopOrNA(!err.na, "No non-numerics for ExtractNonNumerics to find."))
+  if (string == numerics[1]) {
+    return(StopOrNA(!err.na, "No non-numerics for ExtractNonNumerics to find."))
+  }
   non.numerics <- string  # this non.numerics will eventually be at the value we want, but here it is not
-  for (n in numerics) {
-    split <- str_split_fixed(Last(non.numerics), n, 2)
+  for (num in numerics) {
+    split <- stringi::stri_split_fixed(Last(non.numerics), num, n = 2,
+                                       simplify = TRUE)
     non.numerics <- c(non.numerics[-length(non.numerics)], split)
   }
   non.numerics <- non.numerics[as.logical(nchar(non.numerics))]  # remove empty strings (str_split can produce those)
@@ -234,6 +267,7 @@ NthNonNumeric <- function(string, n, leave.as.string = FALSE, decimals = FALSE,
 #' @param string A string.
 #' @examples
 #' StrSplitByNums("abc123def456.789gh")
+#' StrSplitByNums("abc123def456.789gh", decimals = TRUE)
 #' @export
 StrSplitByNums <- function(string, decimals = FALSE, leading.decimals = FALSE,
                            negs = FALSE) {
@@ -253,10 +287,12 @@ StrSplitByNums <- function(string, decimals = FALSE, leading.decimals = FALSE,
 #' Extract a single character of a string, using its index.
 #'
 #' @param string A string.
-#' @param index A positive integer.
+#' @param index An integer. Negative indexing is allowed as in
+#'   \code{\link[stringr]{str_sub}}.
 #' @return A one-character string.
 #' @examples
 #' StrElem("abcd", 3)
+#' StrElem("abcd", -2)
 #' @export
 StrElem <- function(string, index) {
   if (!is.character(string)) stop("string must be of character type")
