@@ -31,15 +31,13 @@ CanBeNumeric <- function(string) !is.na(suppressWarnings(as.numeric(string)))
 GetCurrencies <- function(string) {
   stopifnot(is.character(string) && length(string) == 1)
   ssbn <- StrSplitByNums(string, decimals = T, negs = T)
-  l <- length(ssbn)
-  num.first <- CanBeNumeric(ssbn[1])
-  if (num.first) {
-    numbers <- ssbn[seq(1, l, 2)] %>% as.numeric
-    currencies <- c("", ssbn[seq(2, l, 2)] %>% StrElem(-1))
-  } else {
-    numbers <- ssbn[seq(2, l, 2)] %>% as.numeric
-    currencies <- ssbn[seq(1, l - 1, 2)] %>% StrElem(-1)
-  }
+  num.indices <- which(CanBeNumeric(ssbn))
+  numbers <- ssbn[num.indices]
+  before.num.indices <- num.indices - 1
+  before.num.strings <- sapply(before.num.indices, function(x) {
+    ifelse(x %in% num.indices || x < 1, "", ssbn[x])
+  })
+  currencies <- StrElem(before.num.strings, -1)
   data.frame(currency = currencies, amount = numbers)
 }
 
@@ -288,7 +286,6 @@ StrSplitByNums <- function(string, decimals = FALSE, leading.decimals = FALSE,
       string <- str_sub(string, 1 + str_length(non.nums[1]), -1)
       non.nums <- non.nums[-1]
     }
-    print(string)
     i <- i + 1
   }
   split
