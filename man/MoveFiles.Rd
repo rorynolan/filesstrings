@@ -21,10 +21,9 @@ A logical vector with a \code{TRUE} for each time the operation
 Move specified files into specified directories.
 }
 \details{
-If there are \eqn{n} files,
-there must be either \eqn{1} or \eqn{n} directories. If there is one
-directory, then all \eqn{n} files are moved there. If there are \eqn{n}
-directories, then each file is put into its respective directory. This
-function also works for directories.
+If there are \eqn{n} files, there must be either \eqn{1} or \eqn{n}
+directories. If there is one directory, then all \eqn{n} files are moved
+there. If there are \eqn{n} directories, then each file is put into its
+respective directory. This function also works for directories.
 }
 

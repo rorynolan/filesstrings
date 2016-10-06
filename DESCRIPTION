@@ -1,9 +1,9 @@
 Package: filesstrings
 Type: Package
 Title: Handy String and File Manipulation
-Version: 0.0.0.9000
+Version: 0.0.0.9002
 Authors@R: person("Rory", "Nolan", email = "rorynoolan@gmail.com", role = c("aut", "cre"))
-Maintainer: The package maintainer <yourself@somewhere.net>
+Maintainer: Rory Nolan <rorynoolan@gmail.com>
 Description: This package is built upon the functionalities of stringr and
     readr. It uses these to create further handy string and file processing
     and manipulation tools, such as a function to reverse a string, a function

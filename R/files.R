@@ -39,18 +39,29 @@ RemoveDirs <- function(dirs) {
   success
 }
 
-MergeCSVs <- function(out.name = "Merged_CSVs", header = T) {
-  ext <- ".csv"
-  lcsvs <- list.files(pattern = ext)
-  if (str_sub(out.name, -4, -1) != ext) {
-    out.name <- paste0(out.name, ext)
-  }
-  tables <- lapply(lcsvs, readr::read_csv, col_names = header)
+#' Merge Tables.
+#'
+#' Merge tables saved on disk as delimited files.
+#'
+#' @param file.names The paths to the files to merge.
+#' @param delim Delimeter used to separate values.
+#' @param out.name The path to the output file containing the merged tables.
+#' @param header Do the tables to be merged have headers?
+#' @export
+MergeTables <- function(file.names, delim, out.name, header = T) {
+  tables <- lapply(file.names, readr::read_delim, delim, col_names = header)
   ncs <- sapply(tables, ncol)
-  if (!AllEqual(ncs)) stop("The csvs have different numbers of columns.")
+  if (!AllEqual(ncs)) stop("The tables have different numbers of columns.")
+  if (header) {
+    namess <- sapply(tables, names)
+    if (!all(apply(namess, 1, AllEqual))) {
+      stop("Tables have different colnames.")
+    }
+  }
   merged <- Reduce(rbind, tables)
-  readr::write_csv(merged, file = out.name)
+  readr::write_delim(merged, file = out.name, delim = delim, col_names = header)
 }
+
 MoveFile <- function(file, destination) {
   # This also works for directories
   file <- normalizePath(file)  # get full path
@@ -64,11 +75,10 @@ MoveFile <- function(file, destination) {
 #'
 #' Move specified files into specified directories.
 #'
-#' If there are \eqn{n} files,
-#' there must be either \eqn{1} or \eqn{n} directories. If there is one
-#' directory, then all \eqn{n} files are moved there. If there are \eqn{n}
-#' directories, then each file is put into its respective directory. This
-#' function also works for directories.
+#' If there are \eqn{n} files, there must be either \eqn{1} or \eqn{n}
+#' directories. If there is one directory, then all \eqn{n} files are moved
+#' there. If there are \eqn{n} directories, then each file is put into its
+#' respective directory. This function also works for directories.
 #' @param files A character vector of files to move (relative or absolute
 #'   paths).
 #' @param destinations A character vector of the destination directories into
