@@ -14,22 +14,26 @@ StrBeforeNth(strings, pattern, n)
 
 \item{pattern}{A regular expression.}
 
-\item{n}{A natural number to identify the \eqn{n}th occurrence, or, if you
-wish to select the \emph{last} occurrence, you need \code{n = "last"} (or
-the abbreviated \code{n = "l"}).}
+\item{n}{A natural number to identify the \eqn{n}th occurrence This can be
+negatively indexed, so if you wish to select the \emph{last} occurrence,
+you need \code{n = -1}, for the second-last, you need \code{n = -2} and so
+on.}
 }
 \value{
 A character vector of the desired strings.
 }
 \description{
-Extract the part of a string which is before or after the \eqn{n}th occurrence
-of a specified pattern, vectorised over the string. One can also choose
-\eqn{n} to be the \emph{last} occurrence of the pattern. See argument
+Extract the part of a string which is before or after the \eqn{n}th
+occurrence of a specified pattern, vectorised over the string. One can also
+choose \eqn{n} to be the \emph{last} occurrence of the pattern. See argument
 \code{n}.
 }
 \examples{
 string <- "ab..cd..de..fg..h"
 StrAfterNth(string, "\\\\.\\\\.", 3)
 StrBeforeNth(string, "e", 1)
+StrBeforeNth(string, "\\\\.", -3)
+StrBeforeNth(string, ".", -3)
+StrBeforeNth(rep(string, 2), fixed("."), -3)
 }
 

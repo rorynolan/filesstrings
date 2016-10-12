@@ -381,53 +381,50 @@ StrReverse <- function(string) {
   return(string.reversed)
 }
 
+StrNthInstanceIndices <- function(strings, pattern, n) {
+  instances <- str_locate_all(strings, pattern)
+  instances %>% sapply(function(x, n) {
+    l <- length(x)
+    if (n < 0) n <- nrow(x) + n + 1
+    if (n < 1 || n > l) {
+      stop("There aren't n instances of pattern in one or more of the strings.")
+    }
+    x[n, ]
+  }, n) %>% t
+}
+
 #' Text before or after \eqn{n}th occurrence of pattern.
 #'
-#' Extract the part of a string which is before or after the \eqn{n}th occurrence
-#' of a specified pattern, vectorised over the string. One can also choose
-#' \eqn{n} to be the \emph{last} occurrence of the pattern. See argument
+#' Extract the part of a string which is before or after the \eqn{n}th
+#' occurrence of a specified pattern, vectorised over the string. One can also
+#' choose \eqn{n} to be the \emph{last} occurrence of the pattern. See argument
 #' \code{n}.
 #'
 #' @param strings A character vector.
 #' @param pattern A regular expression.
-#' @param n A natural number to identify the \eqn{n}th occurrence, or, if you
-#'   wish to select the \emph{last} occurrence, you need \code{n = "last"} (or
-#'   the abbreviated \code{n = "l"}).
+#' @param n A natural number to identify the \eqn{n}th occurrence This can be
+#'   negatively indexed, so if you wish to select the \emph{last} occurrence,
+#'   you need \code{n = -1}, for the second-last, you need \code{n = -2} and so
+#'   on.
 #' @return A character vector of the desired strings.
 #' @examples
 #' string <- "ab..cd..de..fg..h"
 #' StrAfterNth(string, "\\.\\.", 3)
 #' StrBeforeNth(string, "e", 1)
+#' StrBeforeNth(string, "\\.", -3)
+#' StrBeforeNth(string, ".", -3)
+#' StrBeforeNth(rep(string, 2), fixed("."), -3)
 #' @export
 StrAfterNth <- function(strings, pattern, n) {
-  instances.indices <- gregexpr(pattern, strings)
-  instances.lengths <- lapply(instances.indices, function(x) attr(x, "match.length"))
-  if (is.character(n)) {
-    if (! n %in% c("l", "last")) {
-      stop("If n is of character type, it must be either 'l' or 'last'.")
-    }
-    nth.instance.indices <- sapply(instances.indices, Last)
-    nth.lengths <- sapply(instances.lengths, Last)
-  } else {
-    nth.instance.indices <- sapply(instances.indices, function(x) x[n])
-    nth.lengths <- sapply(instances.lengths, function(x) x[n])
-  }
-  mapply(str_sub, strings, nth.instance.indices + nth.lengths, nchar(strings))
+  nth.instance.indices <- StrNthInstanceIndices(strings, pattern, n)
+  mapply(str_sub, strings, nth.instance.indices[, "end"] + 1, nchar(strings))
 }
 
 #' @rdname StrAfterNth
 #' @export
 StrBeforeNth <- function(strings, pattern, n) {
-  instances.indices <- gregexpr(pattern, strings)
-  if (is.character(n)) {
-    if (! n %in% c("l", "last")) {
-      stop("If n is of character type, it must be either 'l' or 'last'.")
-    }
-    nth.instance.indices <- sapply(instances.indices, Last)
-  } else {
-    nth.instance.indices <- sapply(instances.indices, function(x) x[n])
-  }
-  mapply(substr, strings, 1, nth.instance.indices - 1)
+  nth.instance.indices <- StrNthInstanceIndices(strings, pattern, n)
+  mapply(str_sub, strings, 1, nth.instance.indices[, "start"] - 1)
 }
 
 #' Pad a character vector with empty strings.
