@@ -564,3 +564,51 @@ TrimAnything <- function(string, char, side = "both") {
   }
   return(paste(vec, collapse = ""))
 }
+
+#' Count the number of the matches of a pattern in a string.
+#'
+#' Vectorised over \code{string} and pattern.
+#'
+#' @param string A character vector.
+#' @param pattern A character vector. Pattern(s) specified like the pattern(s) in the stringr package (e.g. look at \code{\link[stringr]{str_locate}}). If this has length >1 its length must be the same as that of \code{string}.
+#'
+#' @return A numeric vector giving the number of matches in each string.
+#' @examples
+#' CountMatches("abacad", "a")
+#' CountMatches("2.1.0.13", ".")
+#' CountMatches("2.1.0.13", coll("."))
+#' @export
+CountMatches <- function(string, pattern) {
+  lp <- length(pattern)
+  ls <- length(string)
+  if (lp > 1) {
+    if (lp != ls) {
+      stop("If pattern has length greater than 1, it must have the same length as string.")
+    }
+  }
+  if (lp == 1) pattern <- rep(pattern, ls)
+  locations <- str_locate_all(string, pattern)
+  n_matches <- sapply(locations, nrow) %>% sum
+  n_matches
+}
+
+#' Locate the braces in a string.
+#'
+#' Give the positions of (, ), [, ], \{, and \} within a string.
+#'
+#' @param string A character vector
+#'
+#' @return A list of data frames (\link[tibble]{tibble}s), one for each member of the string character
+#'   vector. Each data frame has a "position" and "brace" column which give the
+#'   positions and types of braces in the given string.
+#'
+#' @examples
+#' LocateBraces(c("a{](kkj)})", "ab(]c{}"))
+#' @export
+LocateBraces <- function(string) {
+  locations <- str_locate_all(string, "[\\(\\)\\[\\]\\{\\}]") %>% lapply(function(x) x[, 1])
+  braces <- mapply(StrElem, string, locations, SIMPLIFY = FALSE)
+  dfs <- mapply(function(x, y) tibble::tibble(position = x, brace = y),
+                locations, braces, SIMPLIFY = FALSE)
+  dfs
+}
