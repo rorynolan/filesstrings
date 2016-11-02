@@ -224,7 +224,7 @@ UnitDirs <- function(unit, pattern = NULL, dir = ".") {
     stop(paste0("The file names must all contain the word", unit ,"."))
   }
   up.to.first.units <- StrBeforeNth(lf, unit, 1)
-  nums <- sapply(up.to.first.units, LastNumber)
+  nums <- sapply(up.to.first.units, NthNumber, -1, decimals = TRUE)
   un <- unique(nums)
   for (i in un) {
     print(lf)
