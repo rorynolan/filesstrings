@@ -122,7 +122,7 @@ MoveFiles <- function(files, destinations) {
 NiceFileNums <- function(dir = ".", pattern = NA) {
   init.dir <- getwd()
   setwd(dir)
-  if (is.na(patt)) {
+  if (is.na(pattern)) {
     lf <- list.files()
   } else {
     lf <- list.files(pattern = pattern)
