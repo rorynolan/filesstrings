@@ -427,6 +427,22 @@ StrBeforeNth <- function(strings, pattern, n) {
   mapply(str_sub, strings, 1, nth.instance.indices[, "start"] - 1)
 }
 
+#' Get the part of a string before the last period.
+#'
+#' This is usually used to get the part of a file name that doesn't include the file extension.
+#'
+#' @param strings A character vector.
+#'
+#' @return A string.
+#'
+#' @examples
+#' BeforeLastDot(c("spreadsheet1.csv", "doc2.doc"))
+#'
+#' @export
+BeforeLastDot <- function(strings) {
+  StrBeforeNth(strings, stringr::coll("."), -1)
+}
+
 #' Pad a character vector with empty strings.
 #'
 #' Extend a character vector by appending empty strings at the end.
