@@ -16,8 +16,8 @@ ExtractNonNumerics(string, decimals = FALSE, leading.decimals = FALSE,
 NthNumber(string, n, leave.as.string = FALSE, decimals = FALSE,
   leading.decimals = FALSE, negs = FALSE)
 
-NthNonNumeric(string, n, leave.as.string = FALSE, decimals = FALSE,
-  leading.decimals = FALSE, negs = FALSE)
+NthNonNumeric(string, n, decimals = FALSE, leading.decimals = FALSE,
+  negs = FALSE)
 }
 \arguments{
 \item{string}{A string.}

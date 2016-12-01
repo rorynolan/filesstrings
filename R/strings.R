@@ -242,9 +242,8 @@ NthNumber <- function(string, n, leave.as.string = FALSE, decimals = FALSE,
 
 #' @rdname ExtractNumbers
 #' @export
-NthNonNumeric <- function(string, n, leave.as.string = FALSE, decimals = FALSE,
-                      leading.decimals = FALSE, negs = FALSE) {
-  # this function doesn't work for strings with decimal numbers
+NthNonNumeric <- function(string, n, decimals = FALSE,
+                          leading.decimals = FALSE, negs = FALSE) {
   if (n == 0) stop("n must be a nonzero integer.")
   non.numerics <- ExtractNonNumerics(string, decimals = decimals, negs = negs,
                                      leading.decimals = leading.decimals)
