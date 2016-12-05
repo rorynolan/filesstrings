@@ -39,6 +39,13 @@ indexing is allowed i.e. \code{n = 1} will give you the first number (or non-num
 whereas \code{n = -1} will give you the last number (or non-numeric), \code{n = -2} will
 give you the second last number and so on.}
 }
+\value{
+For \code{ExtractNumbers} and \code{ExtractNonNumerics}, a list of
+numeric or character vectors, one list element for each element of
+\code{string}. For \code{NthNumber} and \code{NthNonNumeric}, a vector the
+same length as \code{string} (as in \code{length(string)}, not
+\code{nchar(string)}..
+}
 \description{
 \code{ExtractNumbers} extracts the numbers (or non-numbers) from a string
 where decimals are optionally allowed. \code{ExtractNonNumerics} extracts the
@@ -46,7 +53,8 @@ bits of the string that aren't extracted by \code{ExtractNumbers}.
 \code{NthNumber} is a convenient wrapper for \code{ExtractNumbers}, allowing
 you to choose which number you want. Similarly \code{NthNonNumeric}. Please
 view the examples at the bottom of this page to ensure that you understand
-how these functions work, and their limitations.
+how these functions work, and their limitations. These functions are
+vectorised over \code{string}.
 }
 \details{
 \code{ExtractNonNumerics} uses \code{ExtractNumerics} to tell it what the
@@ -55,21 +63,20 @@ numbers. For this reason, errors you see whilst using
 \code{ExtractNonNumerics} might be errors from \code{ExtractNumerics}.
 }
 \examples{
-ExtractNumbers("abc123abc456")
-ExtractNumbers("abc1.23abc456")
-ExtractNumbers("abc1.23abc456", decimals = TRUE)
+ExtractNumbers(c("abc123abc456", "abc1.23abc456"))
+ExtractNumbers(c("abc1.23abc456", "abc1..23abc456"), decimals = TRUE)
 ExtractNumbers("abc1..23abc456", decimals = TRUE)
 ExtractNumbers("abc1..23abc456", decimals = TRUE, leading.decimals = TRUE)
+ExtractNumbers("abc1..23abc456", decimals = TRUE, leading.decimals = TRUE, leave.as.string = TRUE)
 ExtractNumbers("-123abc456")
 ExtractNumbers("-123abc456", negs = TRUE)
 ExtractNumbers("--123abc456", negs = TRUE)
-ExtractNumbers("abc1.2.3", decimals = TRUE, err.na = TRUE)
 ExtractNonNumerics("abc123abc456")
 ExtractNonNumerics("abc1.23abc456")
 ExtractNonNumerics("abc1.23abc456", decimals = TRUE)
 ExtractNonNumerics("abc1..23abc456", decimals = TRUE)
 ExtractNonNumerics("abc1..23abc456", decimals = TRUE, leading.decimals = TRUE)
-ExtractNonNumerics("-123abc456")
+ExtractNonNumerics(c("-123abc456", "ab1c"))
 ExtractNonNumerics("-123abc456", negs = TRUE)
 ExtractNonNumerics("--123abc456", negs = TRUE)
 ExtractNumbers("abc1.2.3", decimals = TRUE)

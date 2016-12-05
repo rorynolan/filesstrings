@@ -46,24 +46,21 @@ GetCurrencies <- function(string) {
 #' If a string contains a given pattern duplicated back-to-back a number of
 #' times, remove that duplication, leaving the pattern appearing once in that
 #' position (works if the pattern is duplicated in different parts of a string,
-#' removing all instances of duplication).
-#' @param string The string to be purged of duplicates.
-#' @param pattern A regular expression of the pattern that we wish not to be
-#'   duplicated.
+#' removing all instances of duplication). This is vectorised over string and
+#' pattern.
+#' @param string A character vector. The string(s) to be purged of duplicates.
+#' @param pattern A character vector. Tegular expression(s) of the pattern(s)
+#'   that we wish not to be duplicated.
 #' @return The string with the duplicates fixed.
 #' @examples
 #' DuplicatesToSingles("abc//def", "/")
 #' DuplicatesToSingles("abababcabab", "ab")
+#' DuplicatesToSingles(c("abab", "cdcd"), "cd")
+#' DuplicatesToSingles(c("abab", "cdcd"), c("ab", "cd"))
 #' @export
 DuplicatesToSingles <- function(string, pattern) {
-  old <- string
-  double <- str_c(pattern, pattern)
-  new <- str_replace_all(string, double, pattern)
-  while (!AllEqual(new, old)) {
-    old <- new
-    new <- str_replace_all(new, double, pattern)
-  }
-  new
+  dup.patt <- str_c("(", pattern, ")+")
+  str_replace_all(string, dup.patt, pattern)
 }
 
 #' Make string numbers comply with alphabetical order
@@ -125,7 +122,8 @@ NiceNums <- function(str.vec) {
 #' \code{NthNumber} is a convenient wrapper for \code{ExtractNumbers}, allowing
 #' you to choose which number you want. Similarly \code{NthNonNumeric}. Please
 #' view the examples at the bottom of this page to ensure that you understand
-#' how these functions work, and their limitations.
+#' how these functions work, and their limitations. These functions are
+#' vectorised over \code{string}.
 #'
 #' \code{ExtractNonNumerics} uses \code{ExtractNumerics} to tell it what the
 #' numbers in the string are and then it extracts the bits in between those
@@ -141,22 +139,26 @@ NiceNums <- function(str.vec) {
 #'   the start of a number?
 #' @param negs Do you want to allow negative numbers? Note that double negatives
 #'   are not handled here (see the examples).
+#' @return For \code{ExtractNumbers} and \code{ExtractNonNumerics}, a list of
+#' numeric or character vectors, one list element for each element of
+#' \code{string}. For \code{NthNumber} and \code{NthNonNumeric}, a vector the
+#' same length as \code{string} (as in \code{length(string)}, not
+#' \code{nchar(string)}..
 #' @examples
-#' ExtractNumbers("abc123abc456")
-#' ExtractNumbers("abc1.23abc456")
-#' ExtractNumbers("abc1.23abc456", decimals = TRUE)
+#' ExtractNumbers(c("abc123abc456", "abc1.23abc456"))
+#' ExtractNumbers(c("abc1.23abc456", "abc1..23abc456"), decimals = TRUE)
 #' ExtractNumbers("abc1..23abc456", decimals = TRUE)
 #' ExtractNumbers("abc1..23abc456", decimals = TRUE, leading.decimals = TRUE)
+#' ExtractNumbers("abc1..23abc456", decimals = TRUE, leading.decimals = TRUE, leave.as.string = TRUE)
 #' ExtractNumbers("-123abc456")
 #' ExtractNumbers("-123abc456", negs = TRUE)
 #' ExtractNumbers("--123abc456", negs = TRUE)
-#' ExtractNumbers("abc1.2.3", decimals = TRUE, err.na = TRUE)
 #' ExtractNonNumerics("abc123abc456")
 #' ExtractNonNumerics("abc1.23abc456")
 #' ExtractNonNumerics("abc1.23abc456", decimals = TRUE)
 #' ExtractNonNumerics("abc1..23abc456", decimals = TRUE)
 #' ExtractNonNumerics("abc1..23abc456", decimals = TRUE, leading.decimals = TRUE)
-#' ExtractNonNumerics("-123abc456")
+#' ExtractNonNumerics(c("-123abc456", "ab1c"))
 #' ExtractNonNumerics("-123abc456", negs = TRUE)
 #' ExtractNonNumerics("--123abc456", negs = TRUE)
 #' ExtractNumbers("abc1.2.3", decimals = TRUE)
@@ -171,26 +173,16 @@ ExtractNumbers <- function(string, leave.as.string = FALSE, decimals = FALSE,
   if (leading.decimals == TRUE && decimals == FALSE) {
     stop("To allow leading decimals, you need to first allow decimals.")
   }
-  stopifnot(length(string) == 1)
   stopifnot(is.character(string))
   if (decimals) {
-    pattern <- "([0-9]+(\\.?[0-9]+)*)+"
+    pattern <- "(?:[0-9]+(?:\\.?[0-9]+)*)+"
     if (leading.decimals) pattern <- str_c("\\.?", pattern)
   } else {
     pattern <- "[0-9]+"
   }
   if (negs) pattern <- str_c("-?", pattern)
-  numbers <- str_extract_all(string, pattern)[[1]]
-  n.periods <- sapply(str_extract_all(numbers, "\\."), length)
-  if (any(n.periods > 1)) {
-    bad.num <- numbers[match(T, n.periods > 1)]
-    warning.message <- str_c("There was at least one ambiguity, the first of which was '",
-                             bad.num,
-                             "' so returning NA.")
-    warning(warning.message)
-    return(NA)
-  }
-  if (!leave.as.string) numbers <- as.numeric(numbers)
+  numbers <- str_extract_all(string, pattern)
+  if (!leave.as.string) numbers <- lapply(numbers, as.numeric)
   numbers
 }
 
@@ -198,23 +190,15 @@ ExtractNumbers <- function(string, leave.as.string = FALSE, decimals = FALSE,
 #' @export
 ExtractNonNumerics <- function(string, decimals = FALSE,
                                leading.decimals = FALSE, negs = FALSE) {
-  stopifnot(is.character(string) && length(string) == 1)
-  if (!any(CanBeNumeric(StringToVec(string)))) return(string)
+  stopifnot(is.character(string))
+  if (!any(str_detect(string, "[0-9]"))) return(as.list(string))
   numerics <- ExtractNumbers(string, leave.as.string = TRUE,
-                             decimals = decimals, leading.decimals = leading.decimals,
-                             negs = negs)
-  if (is.na(numerics[1])) return(NA)
-  if (string == numerics[1]) {
-    return(StopOrNA(!err.na, "No non-numerics for ExtractNonNumerics to find."))
-  }
-  non.numerics <- string  # this non.numerics will eventually be at the value we want, but here it is not
-  for (num in numerics) {
-    split <- stringi::stri_split_fixed(Last(non.numerics), num, n = 2,
-                                       simplify = TRUE)
-    non.numerics <- c(non.numerics[-length(non.numerics)], split)
-  }
-  non.numerics <- non.numerics[as.logical(nchar(non.numerics))]  # remove empty strings (str_split can produce those)
-  return(non.numerics)
+                             decimals = decimals, negs = negs,
+                             leading.decimals = leading.decimals)
+  if (all(CanBeNumeric(string))) return(list(character(0))[rep(1, length(string))])
+  pattern <- PasteListElems(numerics, "|") %>% str_c("(?:", ., ")") %>%
+    str_replace_all("\\.", "\\\\.")
+  str_split(string, pattern) %>% StrListRemoveEmpties
 }
 
 #' @param n The index of the number (or non-numeric) that you seek. Negative
@@ -227,17 +211,15 @@ NthNumber <- function(string, n, leave.as.string = FALSE, decimals = FALSE,
                       leading.decimals = FALSE, negs = FALSE) {
   # this function doesn't work for strings with decimal numbers
   if (n == 0) stop("n must be a nonzero integer.")
-  numbers <- ExtractNumbers(string, leave.as.string = leave.as.string,
+  numbers <- ExtractNumbers(string, leave.as.string = TRUE,
                             decimals = decimals, leading.decimals = leading.decimals,
                             negs = negs)
-  l <- length(numbers)
-  if (n > l) stop("There aren't |n| numbers in string.")
-  if (n > 0) {
-    nth.number <- numbers[n]
+  nth.numbers <- CharListElemsNthElem(numbers, n)
+  if (leave.as.string) {
+    nth.numbers
   } else {
-    nth.number <- numbers[l + n + 1]
+    as.numeric(nth.numbers)
   }
-  nth.number
 }
 
 #' @rdname ExtractNumbers
@@ -247,14 +229,7 @@ NthNonNumeric <- function(string, n, decimals = FALSE,
   if (n == 0) stop("n must be a nonzero integer.")
   non.numerics <- ExtractNonNumerics(string, decimals = decimals, negs = negs,
                                      leading.decimals = leading.decimals)
-  l <- length(non.numerics)
-  if (n > l) stop("There aren't |n| non-numerics in string.")
-  if (n > 0) {
-    nth.non.numeric <- non.numerics[n]
-  } else {
-    nth.non.numeric <- non.numerics[l + n + 1]
-  }
-  nth.non.numeric
+  CharListElemsNthElem(non.numerics, n)
 }
 
 #' Split a string by its numeric charachters.

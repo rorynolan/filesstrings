@@ -7,10 +7,10 @@
 DuplicatesToSingles(string, pattern)
 }
 \arguments{
-\item{string}{The string to be purged of duplicates.}
+\item{string}{A character vector. The string(s) to be purged of duplicates.}
 
-\item{pattern}{A regular expression of the pattern that we wish not to be
-duplicated.}
+\item{pattern}{A character vector. Tegular expression(s) of the pattern(s)
+that we wish not to be duplicated.}
 }
 \value{
 The string with the duplicates fixed.
@@ -19,10 +19,13 @@ The string with the duplicates fixed.
 If a string contains a given pattern duplicated back-to-back a number of
 times, remove that duplication, leaving the pattern appearing once in that
 position (works if the pattern is duplicated in different parts of a string,
-removing all instances of duplication).
+removing all instances of duplication). This is vectorised over string and
+pattern.
 }
 \examples{
 DuplicatesToSingles("abc//def", "/")
 DuplicatesToSingles("abababcabab", "ab")
+DuplicatesToSingles(c("abab", "cdcd"), "cd")
+DuplicatesToSingles(c("abab", "cdcd"), c("ab", "cd"))
 }
 
