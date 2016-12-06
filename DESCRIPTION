@@ -18,7 +18,8 @@ Imports:
     readr,
     tibble,
     stringi,
-    Rcpp
+    Rcpp,
+    BH
 RoxygenNote: 5.0.1
 Suggests: testthat
 LinkingTo: Rcpp

@@ -75,42 +75,39 @@ DuplicatesToSingles <- function(string, pattern) {
 #' must have the same number of numbers, and the non-number bits must be the
 #' same.
 #'
-#' @param str.vec A vector of strings.
+#' @param strings A vector of strings.
 #' @examples
 #' strings <- paste0("abc", 1:12)
 #' strings
 #' NiceNums(strings)
 #'
-#' NiceNums(c("abc9def55", "abc10def9"))
+#' NiceNums(c("abc9def55", "abc10def7"))
 #'
 #' \dontrun{
-#' NiceNums(c("abc9def55", "abc10xyz9"))}
+#' NiceNums(c("abc9def55", "abc10xyz7"))}
 #' @export
-NiceNums <- function(str.vec) {
-  if (!is.character(str.vec)) stop("str.vec must be a vector of strings")
-  strings <- lapply(str.vec, ExtractNonNumerics)
-  if (!AllEqual(strings)) stop("The non-number bits of the strings are different.")
-  nums <- lapply(str.vec, ExtractNumbers)
+NiceNums <- function(strings) {
+  if (!is.character(strings)) stop("str.vec must be a vector of strings")
+  non.nums <- ExtractNonNumerics(strings)
+  if (!AllEqual(non.nums)) stop("The non-number bits of the strings are different.")
+  nums <- ExtractNumbers(strings, leave.as.string = TRUE)
   if (!AllEqual(sapply(nums, length))) stop("some of the strings contain different numbers of numbers")
-  nums <- simplify2array(nums)
-  if (is.vector(nums)) nums <- t(as.matrix(nums))
-  max.lengths <- apply(nums, 1, function(x) max(nchar(x)))
-  for (i in 1:nrow(nums)) {  # add leading zeroes to numbers as necessary
-    for (j in 1:ncol(nums)) {
-      while(nchar(nums[i, j]) < max.lengths[i]) {
-        nums[i, j] <- paste0(0, nums[i, j])
+  max.lengths <- lapply(nums, function(x) max(nchar(x)))
+  for (i in seq_along(nums)) {  # add leading zeroes to numbers as necessary
+    for (j in seq_along(nums[[i]])) {
+      while(nchar(nums[[i]][j]) < max.lengths[i]) {
+        nums[[i]][j] <- paste0(0, nums[[i]][j])
       }
     }
   }
-  num.first <- sapply(str.vec, function(x) CanBeNumeric(StrElem(x, 1)))
+  num.first <- sapply(strings, StrElem, 1) %>% CanBeNumeric
   if (!AllEqual(num.first)) stop("some file names start with numbers and some don't")
-  numbers <- Mat2ColList(nums)
   if (num.first[1]) {
-    interleaves <- mapply(Interleave, numbers, strings)
+    interleaves <- InterleaveStringList(nums, non.nums)
   } else {
-    interleaves <- mapply(Interleave, strings, numbers)
+    interleaves <- InterleaveStringList(non.nums, nums)
   }
-  new.names <- apply(interleaves, 2, str_c, collapse = "")
+  new.names <- PasteListElems(interleaves)
   return(new.names)
 }
 
@@ -140,16 +137,17 @@ NiceNums <- function(str.vec) {
 #' @param negs Do you want to allow negative numbers? Note that double negatives
 #'   are not handled here (see the examples).
 #' @return For \code{ExtractNumbers} and \code{ExtractNonNumerics}, a list of
-#' numeric or character vectors, one list element for each element of
-#' \code{string}. For \code{NthNumber} and \code{NthNonNumeric}, a vector the
-#' same length as \code{string} (as in \code{length(string)}, not
-#' \code{nchar(string)}..
+#'   numeric or character vectors, one list element for each element of
+#'   \code{string}. For \code{NthNumber} and \code{NthNonNumeric}, a vector the
+#'   same length as \code{string} (as in \code{length(string)}, not
+#'   \code{nchar(string)}..
 #' @examples
 #' ExtractNumbers(c("abc123abc456", "abc1.23abc456"))
 #' ExtractNumbers(c("abc1.23abc456", "abc1..23abc456"), decimals = TRUE)
 #' ExtractNumbers("abc1..23abc456", decimals = TRUE)
 #' ExtractNumbers("abc1..23abc456", decimals = TRUE, leading.decimals = TRUE)
-#' ExtractNumbers("abc1..23abc456", decimals = TRUE, leading.decimals = TRUE, leave.as.string = TRUE)
+#' ExtractNumbers("abc1..23abc456", decimals = TRUE, leading.decimals = TRUE,
+#' leave.as.string = TRUE)
 #' ExtractNumbers("-123abc456")
 #' ExtractNumbers("-123abc456", negs = TRUE)
 #' ExtractNumbers("--123abc456", negs = TRUE)
@@ -157,7 +155,8 @@ NiceNums <- function(str.vec) {
 #' ExtractNonNumerics("abc1.23abc456")
 #' ExtractNonNumerics("abc1.23abc456", decimals = TRUE)
 #' ExtractNonNumerics("abc1..23abc456", decimals = TRUE)
-#' ExtractNonNumerics("abc1..23abc456", decimals = TRUE, leading.decimals = TRUE)
+#' ExtractNonNumerics("abc1..23abc456", decimals = TRUE,
+#' leading.decimals = TRUE)
 #' ExtractNonNumerics(c("-123abc456", "ab1c"))
 #' ExtractNonNumerics("-123abc456", negs = TRUE)
 #' ExtractNonNumerics("--123abc456", negs = TRUE)
@@ -236,34 +235,25 @@ NthNonNumeric <- function(string, n, decimals = FALSE,
 #'
 #' Break a string wherever you go from a numeric charachter to a non-numeric or
 #' vice-versa.
-#' @param string A string.
+#' @param string A character vector.
 #' @examples
-#' StrSplitByNums("abc123def456.789gh")
+#' StrSplitByNums(c("abc123def456.789gh", "a1b2c344"))
 #' StrSplitByNums("abc123def456.789gh", decimals = TRUE)
 #' @export
 StrSplitByNums <- function(string, decimals = FALSE, leading.decimals = FALSE,
                            negs = FALSE) {
   nums <- ExtractNumbers(string, leave.as.string = TRUE, decimals = decimals,
                          leading.decimals = leading.decimals, negs = negs)
-  if (is.na(nums[1])) return(string)
-  non.nums <- ExtractNonNumerics(string, decimals = decimals, negs = negs,
-                                 leading.decimals = leading.decimals)
-  split <- rep("", length(nums) + length(non.nums))
-  i <- 1
-  while (length(nums) > 0 || length(non.nums) > 0) {
-    if (isTRUE(str_locate(string, coll(nums[1]))[1] == 1)) {
-      split[i] <- nums[1]
-      string <- str_sub(string, 1 + str_length(nums[1]), -1)
-      nums <- nums[-1]
-    } else {
-      split[i] <- non.nums[1]
-      string <- str_sub(string, 1 + str_length(non.nums[1]), -1)
-      non.nums <- non.nums[-1]
-    }
-    i <- i + 1
+  if (all(CanBeNumeric(string))) {
+    non.nums <- list(character(0))[rep(1, length(string))]
+  } else {
+    pattern <- PasteListElems(nums, "|") %>% str_c("(?:", ., ")") %>%
+      str_replace_all("\\.", "\\\\.")
+    non.nums <- str_split(string, pattern) %>% StrListRemoveEmpties
   }
-  split
+  CorrectInterleave(string, non.nums, nums)
 }
+
 
 #' Extract a single character of a string, using its index.
 #'
@@ -291,7 +281,8 @@ StrElem <- function(string, index) {
 #' @export
 StrElemsPasted <- function(string, elem.indices) {
   if (!is.character(string)) stop("string must be of character type")
-  elems <- sapply(elem.indices, StrElem, string = string)
+  stopifnot(length(string) == 1)
+  elems <- StrElem(string, elem.indices)
   pasted <- paste(elems, collapse = "")
   return(pasted)
 }
@@ -435,8 +426,9 @@ BeforeLastDot <- function(strings) {
 #' @export
 ExtendCharVec <- function(char.vec, extend.by = NA, length.out = NA) {
   if (length(extend.by) != 1) stop("extend.by must have length 1.")
-  if (length(extend.by) != 1) stop("extend.by must have length 1.")
-  if (is.na(extend.by) && is.na(length.out)) stop("One of extend.by or length.out must be specified.")
+  if (is.na(extend.by) && is.na(length.out)) {
+    stop("One of extend.by or length.out must be specified.")
+  }
   if (is.numeric(char.vec)) char.vec <- as.character(char.vec)
   if (!is.character(char.vec)) stop("char.vec must be of numeric or character type.")
   if (!is.na(extend.by)) {

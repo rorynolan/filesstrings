@@ -64,3 +64,65 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// IsPrefix
+bool IsPrefix(std::string pre, std::string whole);
+RcppExport SEXP filesstrings_IsPrefix(SEXP preSEXP, SEXP wholeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::string >::type pre(preSEXP);
+    Rcpp::traits::input_parameter< std::string >::type whole(wholeSEXP);
+    rcpp_result_gen = Rcpp::wrap(IsPrefix(pre, whole));
+    return rcpp_result_gen;
+END_RCPP
+}
+// InterleaveStrings
+CharacterVector InterleaveStrings(CharacterVector strings1, CharacterVector strings2);
+RcppExport SEXP filesstrings_InterleaveStrings(SEXP strings1SEXP, SEXP strings2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< CharacterVector >::type strings1(strings1SEXP);
+    Rcpp::traits::input_parameter< CharacterVector >::type strings2(strings2SEXP);
+    rcpp_result_gen = Rcpp::wrap(InterleaveStrings(strings1, strings2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// CorrectInterleave0
+CharacterVector CorrectInterleave0(std::string orig, CharacterVector strings1, CharacterVector strings2);
+RcppExport SEXP filesstrings_CorrectInterleave0(SEXP origSEXP, SEXP strings1SEXP, SEXP strings2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::string >::type orig(origSEXP);
+    Rcpp::traits::input_parameter< CharacterVector >::type strings1(strings1SEXP);
+    Rcpp::traits::input_parameter< CharacterVector >::type strings2(strings2SEXP);
+    rcpp_result_gen = Rcpp::wrap(CorrectInterleave0(orig, strings1, strings2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// CorrectInterleave
+List CorrectInterleave(CharacterVector orig, List strings1, List strings2);
+RcppExport SEXP filesstrings_CorrectInterleave(SEXP origSEXP, SEXP strings1SEXP, SEXP strings2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< CharacterVector >::type orig(origSEXP);
+    Rcpp::traits::input_parameter< List >::type strings1(strings1SEXP);
+    Rcpp::traits::input_parameter< List >::type strings2(strings2SEXP);
+    rcpp_result_gen = Rcpp::wrap(CorrectInterleave(orig, strings1, strings2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// InterleaveStringList
+List InterleaveStringList(List strings1, List strings2);
+RcppExport SEXP filesstrings_InterleaveStringList(SEXP strings1SEXP, SEXP strings2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type strings1(strings1SEXP);
+    Rcpp::traits::input_parameter< List >::type strings2(strings2SEXP);
+    rcpp_result_gen = Rcpp::wrap(InterleaveStringList(strings1, strings2));
+    return rcpp_result_gen;
+END_RCPP
+}

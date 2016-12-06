@@ -6,7 +6,7 @@ PasteCollapse <- function(strings, collapse) {
 }
 
 #' @export
-PasteListElems <- function(string_list, collapse) {
+PasteListElems <- function(string_list, collapse = "") {
     .Call('filesstrings_PasteListElems', PACKAGE = 'filesstrings', string_list, collapse)
 }
 
@@ -23,5 +23,25 @@ CharListElemsNthElem <- function(string_list, n) {
 #' @export
 NumListElemsNthElem <- function(num_list, n) {
     .Call('filesstrings_NumListElemsNthElem', PACKAGE = 'filesstrings', num_list, n)
+}
+
+IsPrefix <- function(pre, whole) {
+    .Call('filesstrings_IsPrefix', PACKAGE = 'filesstrings', pre, whole)
+}
+
+InterleaveStrings <- function(strings1, strings2) {
+    .Call('filesstrings_InterleaveStrings', PACKAGE = 'filesstrings', strings1, strings2)
+}
+
+CorrectInterleave0 <- function(orig, strings1, strings2) {
+    .Call('filesstrings_CorrectInterleave0', PACKAGE = 'filesstrings', orig, strings1, strings2)
+}
+
+CorrectInterleave <- function(orig, strings1, strings2) {
+    .Call('filesstrings_CorrectInterleave', PACKAGE = 'filesstrings', orig, strings1, strings2)
+}
+
+InterleaveStringList <- function(strings1, strings2) {
+    .Call('filesstrings_InterleaveStringList', PACKAGE = 'filesstrings', strings1, strings2)
 }
 
