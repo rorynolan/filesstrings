@@ -4,10 +4,10 @@
 \alias{NiceNums}
 \title{Make string numbers comply with alphabetical order}
 \usage{
-NiceNums(str.vec)
+NiceNums(strings)
 }
 \arguments{
-\item{str.vec}{A vector of strings.}
+\item{strings}{A vector of strings.}
 }
 \description{
 If strings are numbered, their numbers may not \emph{comply} with
@@ -25,9 +25,9 @@ strings <- paste0("abc", 1:12)
 strings
 NiceNums(strings)
 
-NiceNums(c("abc9def55", "abc10def9"))
+NiceNums(c("abc9def55", "abc10def7"))
 
 \dontrun{
-NiceNums(c("abc9def55", "abc10xyz9"))}
+NiceNums(c("abc9def55", "abc10xyz7"))}
 }
 

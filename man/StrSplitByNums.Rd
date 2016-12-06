@@ -8,14 +8,14 @@ StrSplitByNums(string, decimals = FALSE, leading.decimals = FALSE,
   negs = FALSE)
 }
 \arguments{
-\item{string}{A string.}
+\item{string}{A character vector.}
 }
 \description{
 Break a string wherever you go from a numeric charachter to a non-numeric or
 vice-versa.
 }
 \examples{
-StrSplitByNums("abc123def456.789gh")
+StrSplitByNums(c("abc123def456.789gh", "a1b2c344"))
 StrSplitByNums("abc123def456.789gh", decimals = TRUE)
 }
 

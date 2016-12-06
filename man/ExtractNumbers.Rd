@@ -41,10 +41,10 @@ give you the second last number and so on.}
 }
 \value{
 For \code{ExtractNumbers} and \code{ExtractNonNumerics}, a list of
-numeric or character vectors, one list element for each element of
-\code{string}. For \code{NthNumber} and \code{NthNonNumeric}, a vector the
-same length as \code{string} (as in \code{length(string)}, not
-\code{nchar(string)}..
+  numeric or character vectors, one list element for each element of
+  \code{string}. For \code{NthNumber} and \code{NthNonNumeric}, a vector the
+  same length as \code{string} (as in \code{length(string)}, not
+  \code{nchar(string)}..
 }
 \description{
 \code{ExtractNumbers} extracts the numbers (or non-numbers) from a string
@@ -67,7 +67,8 @@ ExtractNumbers(c("abc123abc456", "abc1.23abc456"))
 ExtractNumbers(c("abc1.23abc456", "abc1..23abc456"), decimals = TRUE)
 ExtractNumbers("abc1..23abc456", decimals = TRUE)
 ExtractNumbers("abc1..23abc456", decimals = TRUE, leading.decimals = TRUE)
-ExtractNumbers("abc1..23abc456", decimals = TRUE, leading.decimals = TRUE, leave.as.string = TRUE)
+ExtractNumbers("abc1..23abc456", decimals = TRUE, leading.decimals = TRUE,
+leave.as.string = TRUE)
 ExtractNumbers("-123abc456")
 ExtractNumbers("-123abc456", negs = TRUE)
 ExtractNumbers("--123abc456", negs = TRUE)
@@ -75,7 +76,8 @@ ExtractNonNumerics("abc123abc456")
 ExtractNonNumerics("abc1.23abc456")
 ExtractNonNumerics("abc1.23abc456", decimals = TRUE)
 ExtractNonNumerics("abc1..23abc456", decimals = TRUE)
-ExtractNonNumerics("abc1..23abc456", decimals = TRUE, leading.decimals = TRUE)
+ExtractNonNumerics("abc1..23abc456", decimals = TRUE,
+leading.decimals = TRUE)
 ExtractNonNumerics(c("-123abc456", "ab1c"))
 ExtractNonNumerics("-123abc456", negs = TRUE)
 ExtractNonNumerics("--123abc456", negs = TRUE)

@@ -145,25 +145,3 @@ StopOrNA <- function(stop, message = "") {
   if (stop) stop(message, call. = FALSE)
   NA
 }
-
-#' Ensure a file name has the intended extension
-#'
-#' Say you want to ensure a name is fit to be the name of a csv file. Then, if
-#' the input doesn't end with ".csv", this function will tack ".csv" onto the
-#' end of it.
-#'
-#' @param file.name The intended file name
-#' @param ext The intended file extension (with or without the ".")
-#'
-#' @return A string: the file name in your intended form.
-#'
-#' @examples
-#' MakeExtName("abc.csv", "csv")
-#' MakeExtName("abc", "csv")
-#' @export
-MakeExtName <- function(string, ext) {
-  stopifnot(is.character(string) && length(string) == 1)
-  without.dot <- TrimAnything(ext, ".", side = "left")
-  end.pattern <- str_c("\\.", without.dot, "$")
-  ifelse(grepl(end.pattern, string), string, str_c(string, ".", without.dot))
-}

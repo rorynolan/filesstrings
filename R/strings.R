@@ -611,3 +611,33 @@ RemoveQuoted <- function(string) {
   string <- str_replace_all(string, "(?:\'.*?\')", "")
   string
 }
+
+#' Ensure a file name has the intended extension.
+#'
+#' Say you want to ensure a name is fit to be the name of a csv file. Then, if
+#' the input doesn't end with ".csv", this function will tack ".csv" onto the
+#' end of it.
+#'
+#' @param file.name The intended file name
+#' @param ext The intended file extension (with or without the ".")
+#' @param replace If the file has an extension already, replace it (or append
+#'   the new extension name)?
+#'
+#' @return A string: the file name in your intended form.
+#'
+#' @examples
+#' MakeExtName("abc.csv", "csv")
+#' MakeExtName("abc", "csv")
+#' MakeExtName("abc.csv", "pdf")
+#' MakeExtName("abc.csv", "pdf", replace = TRUE)
+#' @export
+MakeExtName <- function(string, ext, replace = FALSE) {
+  stopifnot(is.character(string) && length(string) == 1)
+  has.dot <- str_detect(string, coll("."))
+  if (has.dot) {
+    orig.ext <- StrAfterNth(string, coll("."), -1)
+    if (orig.ext == ext) return(string)
+    if (replace) string <- BeforeLastDot(string)
+  }
+  str_c(string, ".", ext)
+}
