@@ -641,3 +641,25 @@ MakeExtName <- function(string, ext, replace = FALSE) {
   }
   str_c(string, ".", ext)
 }
+
+#' Split a string based on camelcase
+#'
+#' Vectorised over \code{string}.
+#'
+#' @param string A character vector.
+#' @param lower Do you want the output to be all lower case (or as is)?
+#'
+#' @return A list of character vectors, one list element for each element of \code{string}.
+#'
+#' @references
+#' Adapted from Ramnath Vaidyanathan's answer at http://stackoverflow.com/questions/8406974/splitting-camelcase-in-r.
+#'
+#' @examples
+#' split_camelcase(c("RoryNolan", "NaomiFlagg", "DepartmentOfSillyHats"))
+#' @export
+SplitCamelcase <- function(string, lower = FALSE) {
+  string <- gsub("^[^[:alnum:]]+|[^[:alnum:]]+$", "", string)
+  string <- gsub("(?!^)(?=[[:upper:]])", " ", string, perl = TRUE)
+  if (tl) string <- tolower(string)
+  str_split(string, " ")
+}
