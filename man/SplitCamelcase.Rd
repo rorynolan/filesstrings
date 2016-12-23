@@ -18,7 +18,7 @@ A list of character vectors, one list element for each element of \code{string}.
 Vectorised over \code{string}.
 }
 \examples{
-split_camelcase(c("RoryNolan", "NaomiFlagg", "DepartmentOfSillyHats"))
+SplitCamelcase(c("RoryNolan", "NaomiFlagg", "DepartmentOfSillyHats"))
 }
 \references{
 Adapted from Ramnath Vaidyanathan's answer at http://stackoverflow.com/questions/8406974/splitting-camelcase-in-r.

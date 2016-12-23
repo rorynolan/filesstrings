@@ -655,11 +655,11 @@ MakeExtName <- function(string, ext, replace = FALSE) {
 #' Adapted from Ramnath Vaidyanathan's answer at http://stackoverflow.com/questions/8406974/splitting-camelcase-in-r.
 #'
 #' @examples
-#' split_camelcase(c("RoryNolan", "NaomiFlagg", "DepartmentOfSillyHats"))
+#' SplitCamelcase(c("RoryNolan", "NaomiFlagg", "DepartmentOfSillyHats"))
 #' @export
 SplitCamelcase <- function(string, lower = FALSE) {
   string <- gsub("^[^[:alnum:]]+|[^[:alnum:]]+$", "", string)
   string <- gsub("(?!^)(?=[[:upper:]])", " ", string, perl = TRUE)
-  if (tl) string <- tolower(string)
+  if (lower) string <- tolower(string)
   str_split(string, " ")
 }
