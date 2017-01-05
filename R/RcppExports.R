@@ -5,21 +5,53 @@ PasteCollapse <- function(strings, collapse) {
     .Call('filesstrings_PasteCollapse', PACKAGE = 'filesstrings', strings, collapse)
 }
 
+#' Apply paste collapse to each element of a list.
+#'
+#' This is the same as doing
+#' \code{sapply(char.list, paste, collapse = collapse)}, it's just faster.
+#'
+#' @param char_list A list of character vectors.
+#' @param collapse See \code{\link{paste}}.
+#'
+#' @return A list of character vectors.
+#'
+#' @examples
+#' PasteCollapseListElems(list(1:3, c("a", 5, "rory")), collapse = "R")
 #' @export
-PasteListElems <- function(string_list, collapse = "") {
-    .Call('filesstrings_PasteListElems', PACKAGE = 'filesstrings', string_list, collapse)
+PasteCollapseListElems <- function(char_list, collapse = "") {
+    .Call('filesstrings_PasteCollapseListElems', PACKAGE = 'filesstrings', char_list, collapse)
 }
 
+#' Remove empty strings from a character list.
+#'
+#' @param char_list A list of character vectors.
+#'
+#' @return A list of character vectors.
+#'
+#' @examples
+#' StrListRemoveEmpties(list(c("a", "", "b"), "gg", c("", 1, "")))
 #' @export
-StrListRemoveEmpties <- function(string_list) {
-    .Call('filesstrings_StrListRemoveEmpties', PACKAGE = 'filesstrings', string_list)
+StrListRemoveEmpties <- function(char_list) {
+    .Call('filesstrings_StrListRemoveEmpties', PACKAGE = 'filesstrings', char_list)
 }
 
+#' Get the nth element of each vector in a list.
+#'
+#' @param char_list A list of character vectors.
+#' @param n The index of the element that you want from each vector.
+#'
+#' @return A list.
+#'
+#' @examples
+#' CharListElemsNthElem(list(c("a", "b", "c"), c("d", "f", "a")), 2)
+#' NumListElemsNthElem(list(1:5, 0:2), 4)
 #' @export
-CharListElemsNthElem <- function(string_list, n) {
-    .Call('filesstrings_CharListElemsNthElem', PACKAGE = 'filesstrings', string_list, n)
+CharListElemsNthElem <- function(char_list, n) {
+    .Call('filesstrings_CharListElemsNthElem', PACKAGE = 'filesstrings', char_list, n)
 }
 
+#' @rdname CharListElemsNthElem
+#' @param num_list A list of numeric vectors.
 #' @export
 NumListElemsNthElem <- function(num_list, n) {
     .Call('filesstrings_NumListElemsNthElem', PACKAGE = 'filesstrings', num_list, n)

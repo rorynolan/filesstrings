@@ -6,34 +6,52 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-String PasteCollapse(CharacterVector strings, std::string collapse) {
-  std::string out;
-  out = strings[0];
+std::string PasteCollapse(CharacterVector strings, std::string collapse) {
+  std::string out = as<std::string>(strings[0]);
   for (int i = 1; i < strings.size(); i++) {
     out += collapse;
     out += strings[i];
   }
   return out;
 }
-
+//' Apply paste collapse to each element of a list.
+//'
+//' This is the same as doing
+//' \code{sapply(char.list, paste, collapse = collapse)}, it's just faster.
+//'
+//' @param char_list A list of character vectors.
+//' @param collapse See \code{\link{paste}}.
+//'
+//' @return A list of character vectors.
+//'
+//' @examples
+//' PasteCollapseListElems(list(1:3, c("a", 5, "rory")), collapse = "R")
 //' @export
 // [[Rcpp::export]]
-CharacterVector PasteListElems(List string_list, std::string collapse = "") {
-  int list_len = string_list.size();
+CharacterVector PasteCollapseListElems(List char_list, std::string collapse = "") {
+  int list_len = char_list.size();
   CharacterVector pasted(list_len);
   for (int i = 0; i < list_len; i++) {
-    CharacterVector strings = as<CharacterVector>(string_list[i]);
+    CharacterVector strings = as<CharacterVector>(char_list[i]);
     pasted[i] = PasteCollapse(strings, collapse);
   }
   return(pasted);
 }
 
+//' Remove empty strings from a character list.
+//'
+//' @param char_list A list of character vectors.
+//'
+//' @return A list of character vectors.
+//'
+//' @examples
+//' StrListRemoveEmpties(list(c("a", "", "b"), "gg", c("", 1, "")))
 //' @export
 // [[Rcpp::export]]
-List StrListRemoveEmpties(List string_list) {
-  List no_empties = clone(string_list);
-  for (int i = 0; i < string_list.length(); i++) {
-    CharacterVector strings = as<CharacterVector>(string_list[i]);
+List StrListRemoveEmpties(List char_list) {
+  List no_empties = clone(char_list);
+  for (int i = 0; i < char_list.length(); i++) {
+    CharacterVector strings = as<CharacterVector>(char_list[i]);
     int j = 0;
     while (j < strings.size()) {
       if (strings[j] == "")
@@ -46,18 +64,32 @@ List StrListRemoveEmpties(List string_list) {
   return(no_empties);
 }
 
+//' Get the nth element of each vector in a list.
+//'
+//' @param char_list A list of character vectors.
+//' @param n The index of the element that you want from each vector.
+//'
+//' @return A list.
+//'
+//' @examples
+//' CharListElemsNthElem(list(c("a", "b", "c"), c("d", "f", "a")), 2)
+//' NumListElemsNthElem(list(1:5, 0:2), 4)
 //' @export
 // [[Rcpp::export]]
-CharacterVector CharListElemsNthElem(List string_list, int n) {
-  int sls = string_list.size();
+CharacterVector CharListElemsNthElem(List char_list, int n) {
+  int sls = char_list.size();
   CharacterVector nths(sls);
   for (int i = 0; i < sls; i++) {
-    CharacterVector strings = as<CharacterVector>(string_list[i]);
-    nths[i] = ((n > strings.size()) ? NA_STRING : strings[n - 1]);
+    CharacterVector strings = as<CharacterVector>(char_list[i]);
+    if (n < 0)
+      n = strings.size() + 1 + n;
+    nths[i] = ((n > strings.size() | n <= 0) ? NA_STRING : strings[n - 1]);
   }
   return(nths);
 }
 
+//' @rdname CharListElemsNthElem
+//' @param num_list A list of numeric vectors.
 //' @export
 // [[Rcpp::export]]
 NumericVector NumListElemsNthElem(List num_list, int n) {
@@ -117,12 +149,18 @@ CharacterVector CorrectInterleave0(std::string orig,
                                   CharacterVector strings1,
                                   CharacterVector strings2) {
   CharacterVector interleave;
-  if (IsPrefix(as<std::string>(strings1[0]), orig))
-    interleave = InterleaveStrings(strings1, strings2);
-  else if (IsPrefix(as<std::string>(strings2[0]), orig))
-    interleave = InterleaveStrings(strings2, strings1);
-  else
-    return(NA_STRING);
+  if (strings1.size() == 0)
+    interleave = strings2;
+  else if (strings2.size() == 0)
+    interleave = strings1;
+  else {
+    if (IsPrefix(as<std::string>(strings1[0]), orig))
+      interleave = InterleaveStrings(strings1, strings2);
+    else if (IsPrefix(as<std::string>(strings2[0]), orig))
+      interleave = InterleaveStrings(strings2, strings1);
+    else
+      return(NA_STRING);
+  }
   if (PasteCollapse(interleave, "") == orig)
     return(interleave);
   else

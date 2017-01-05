@@ -7,12 +7,12 @@
 MakeExtName(string, ext, replace = FALSE)
 }
 \arguments{
-\item{ext}{The intended file extension (with or without the ".")}
+\item{string}{The intended file name.}
+
+\item{ext}{The intended file extension (with or without the ".").}
 
 \item{replace}{If the file has an extension already, replace it (or append
 the new extension name)?}
-
-\item{file.name}{The intended file name}
 }
 \value{
 A string: the file name in your intended form.

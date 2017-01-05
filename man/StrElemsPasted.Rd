@@ -4,7 +4,7 @@
 \alias{StrElemsPasted}
 \title{Extract bits of a string and paste them together}
 \usage{
-StrElemsPasted(string, elem.indices)
+StrElemsPasted(string, indices)
 }
 \arguments{
 \item{string}{A string.}

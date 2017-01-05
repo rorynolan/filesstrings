@@ -2,8 +2,8 @@
 #'
 #' Given the name of a (potential) directory, if that directory does not already
 #' exist, create it.
-#' @param dir.name The name of the directory, specified via relative or absolute
-#'   path.
+#' @param dir.names The name of the directories, specified via relative or
+#'   absolute paths.
 #' @return Invisibly, a vector with a \code{TRUE} for each time a directory was
 #'   actually created and a \code{FALSE} otherwise.
 #' @examples
@@ -26,17 +26,16 @@ CreateDirsIfNotThere <- function(dir.names) {
 #' Remove directories.
 #'
 #' Delete directories and all of their contents (can just be one directory).
-#' @param dir.names The names of the directories, specified via relative or
-#'   absolute paths.
-#' @return Logical vector with \code{TRUE} for each success and \code{FALSE} for
-#'   failures.
+#' @param dirs The names of the directories, specified via relative or absolute
+#'   paths.
+#' @return Invisibly, a logical vector with \code{TRUE} for each success and
+#'   \code{FALSE} for failures.
 #' @examples
-#' RemoveDirs("mydir1", "mydir2")
-#' RemoveDirs("/home/mydir")
+#' sapply(c("mydir1", "mydir2"), dir.create)
+#' RemoveDirs(c("mydir1", "mydir2"))
 #' @export
 RemoveDirs <- function(dirs) {
-  success <- !sapply(dirs, function(dir) unlink(dir, recursive = T))
-  success
+  !sapply(dirs, function(dir) unlink(dir, recursive = T)) %>% invisible
 }
 
 #' Merge Tables.
@@ -155,6 +154,8 @@ PutFilesInDir <- function(file.names, dir.name) {
 #' @param dir The directory in which to perform the operation.
 #' @param pattern A regular expression. If specified, only files matching this
 #'   pattern wil be treated.
+#' @param replace.with What do you want to replace the spaces with? This
+#'   defaults to nothing, another sensible choice would be an underscore.
 #' @return A logical vector indicating which operation succeeded for each of the
 #'   files attempted. Using a missing value for a file or path name will always
 #'   be regarded as a failure.
@@ -181,14 +182,20 @@ RemoveFileSpaces <- function(dir = ".", pattern = "", replace.with = "") {
 RenameWithNums <- function(dir = ".", pattern = NULL) {
   init.dir <- getwd()
   setwd(dir)
+  on.exit(setwd(init.dir))
   lf <- list.files(pattern = pattern)
+  ext <- unique(tools::file_ext(lf))
+  if (length(ext != 1)) {
+    stop("Files matching pattern have different extensions.")
+  }
   l <- length(lf)
   if (l == 0) stop("No files found to rename.")
-  new.names <- NiceNums(paste0(1:l, ext))
-  if (any(new.names %in% lf)) stop("Some of the names are already in the desired format, unable to proceed as renaming may result in deletion.")
-  success <- file.rename(lf, new.names)
-  setwd(init.dir)
-  success
+  new.names <- NiceNums(paste0(seq_len(l), ext))
+  if (any(new.names %in% lf)) {
+    stop("Some of the names are already in the desired format, ",
+         "unable to proceed as renaming may result in deletion.")
+  }
+  file.rename(lf, new.names)
 }
 
 #' Put files with the same unit measurements into directories.
@@ -199,12 +206,14 @@ RenameWithNums <- function(dir = ".", pattern = NULL) {
 #' on. This function does this, but not just for the unit "min", for any unit.
 #'
 #' This function takes the number to be the last number (as defined in
-#' \code{\link{LastNumber}}) before the first occurrence of the unit name. There
+#' \code{\link{NthNumber}}) before the first occurrence of the unit name. There
 #' is the option to only treat files matching a certain pattern.
 #'
 #' @param unit The unit upon which to base the categorising.
 #' @param pattern If set, only files with names matching this pattern will be
 #'   treated.
+#' @param dir In which directory do you want to perform this action (defaults
+#'   to current)?
 #' @return \code{TRUE} if the operation is successful, if not there will be an
 #'   error.
 #' @examples

@@ -7,7 +7,7 @@
 CanBeNumeric(string)
 }
 \arguments{
-\item{A}{character vector of any length}
+\item{string}{A character vector.}
 }
 \value{
 \code{TRUE} if the argument can be considered to be numeric or

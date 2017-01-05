@@ -8,7 +8,16 @@ StrSplitByNums(string, decimals = FALSE, leading.decimals = FALSE,
   negs = FALSE)
 }
 \arguments{
-\item{string}{A character vector.}
+\item{string}{A string.}
+
+\item{decimals}{Do you want to include the possibility of decimal numbers
+(\code{TRUE}) or not (\code{FALSE}, the default).}
+
+\item{leading.decimals}{Do you want to allow a leading decimal point to be
+the start of a number?}
+
+\item{negs}{Do you want to allow negative numbers? Note that double negatives
+are not handled here (see the examples).}
 }
 \description{
 Break a string wherever you go from a numeric charachter to a non-numeric or

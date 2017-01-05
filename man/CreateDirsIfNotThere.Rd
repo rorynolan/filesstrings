@@ -7,8 +7,8 @@
 CreateDirsIfNotThere(dir.names)
 }
 \arguments{
-\item{dir.name}{The name of the directory, specified via relative or absolute
-path.}
+\item{dir.names}{The name of the directories, specified via relative or
+absolute paths.}
 }
 \value{
 Invisibly, a vector with a \code{TRUE} for each time a directory was

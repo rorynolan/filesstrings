@@ -7,7 +7,7 @@
 GroupClose(vec.ascending, max.gap = 1)
 }
 \arguments{
-\item{vec.ascending}{A strictly increasing numeric vector}
+\item{vec.ascending}{A strictly increasing numeric vector.}
 
 \item{max.gap}{The biggest allowable gap between adjacent elements for them
 to be considered part of the same \emph{group}.}

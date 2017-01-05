@@ -11,6 +11,9 @@ UnitDirs(unit, pattern = NULL, dir = ".")
 
 \item{pattern}{If set, only files with names matching this pattern will be
 treated.}
+
+\item{dir}{In which directory do you want to perform this action (defaults
+to current)?}
 }
 \value{
 \code{TRUE} if the operation is successful, if not there will be an
@@ -24,7 +27,7 @@ on. This function does this, but not just for the unit "min", for any unit.
 }
 \details{
 This function takes the number to be the last number (as defined in
-\code{\link{LastNumber}}) before the first occurrence of the unit name. There
+\code{\link{NthNumber}}) before the first occurrence of the unit name. There
 is the option to only treat files matching a certain pattern.
 }
 \examples{

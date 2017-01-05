@@ -17,6 +17,7 @@
 #' AllEqual(1:4, c(1, 2, 3, 3))
 #' AllEqual(rep(1, 10))
 #' AllEqual(c(1, 88))
+#' @export
 AllEqual <- function(a, b = NA) {
   if (is.na(b[1])) {
     return(length(unique(a)) == 1)
@@ -36,7 +37,7 @@ AllEqual <- function(a, b = NA) {
 #' separeted by at most some specified distance. Hence, each element in each
 #' group has at least one other element in that group that is \emph{close} to
 #' it. See the examples.
-#' @param vec.ascending A strictly increasing numeric vector
+#' @param vec.ascending A strictly increasing numeric vector.
 #' @param max.gap The biggest allowable gap between adjacent elements for them
 #'   to be considered part of the same \emph{group}.
 #' @return A where each element is one group, as a numeric vector.
@@ -44,6 +45,7 @@ AllEqual <- function(a, b = NA) {
 #' GroupClose(1:10, 1)
 #' GroupClose(1:10, 0.5)
 #' GroupClose(c(1, 2, 4, 10, 11, 14, 20, 25, 27), 3)
+#' @export
 GroupClose <- function(vec.ascending, max.gap = 1) {
   lv <- length(vec.ascending)
   if (lv == 0) stop("vec.ascending must have length greater than zero.")
@@ -89,6 +91,7 @@ GroupClose <- function(vec.ascending, max.gap = 1) {
 #' @examples
 #' Interleave(c("a", "b", "c"), c("x", "y", "z"))
 #' Interleave(c("a", "b", "c", "d"), c("x", "y", "z"))
+#' @export
 Interleave <- function(vec1, vec2) {
   l1 <- length(vec1)
   l2 <- length(vec2)
@@ -100,48 +103,3 @@ Interleave <- function(vec1, vec2) {
   return(ans)
 }
 
-#' Get the last element of a list or vector.
-#'
-#' A shortcut for having to do \code{ll[[length(ll)]]} or \code{vv[length(vv)]}
-#' where \code{ll} is a list and \code{vv} is a vector.
-#'
-#' @param listorvec A list or a vector.
-#' @return The last element of \code{listorvec}
-#' @examples
-#' Last(1:8)
-#' Last(list(1:3, 5, 6:2))
-Last <- function(listorvec) {
-  l <- length(listorvec)
-  if (is.list(listorvec)) {
-    return(listorvec[[l]])
-  } else {
-    return(listorvec[l])
-  }
-}
-
-#' List of matrix rows or columns.
-#'
-#' From a matrix, create a list whose \eqn{i}th element is the \eqn{i}th row or
-#' column of the matrix.
-#' @param mat A matrix.
-#' @examples
-#' m <- matrix(1:6, nrow = 2)
-#' print(m)
-#' Mat2RowList(m)
-#' Mat2ColList(m)
-Mat2RowList <- function(mat) {
-  Mat2ColList(t(mat))
-}
-#' @rdname Mat2RowList
-Mat2ColList <- function(mat) {
-  lapply(seq_len(ncol(mat)), function(i) mat[, i])
-}
-
-#' Stop or return NA
-#'
-#' @param stop \code{TRUE} if you want to stop with an error message, \code{FALSE} if you want to return NA
-#' @param message The error message to display if \code{stop = TRUE}
-StopOrNA <- function(stop, message = "") {
-  if (stop) stop(message, call. = FALSE)
-  NA
-}

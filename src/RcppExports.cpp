@@ -6,7 +6,7 @@
 using namespace Rcpp;
 
 // PasteCollapse
-String PasteCollapse(CharacterVector strings, std::string collapse);
+std::string PasteCollapse(CharacterVector strings, std::string collapse);
 RcppExport SEXP filesstrings_PasteCollapse(SEXP stringsSEXP, SEXP collapseSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -17,38 +17,38 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// PasteListElems
-CharacterVector PasteListElems(List string_list, std::string collapse);
-RcppExport SEXP filesstrings_PasteListElems(SEXP string_listSEXP, SEXP collapseSEXP) {
+// PasteCollapseListElems
+CharacterVector PasteCollapseListElems(List char_list, std::string collapse);
+RcppExport SEXP filesstrings_PasteCollapseListElems(SEXP char_listSEXP, SEXP collapseSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< List >::type string_list(string_listSEXP);
+    Rcpp::traits::input_parameter< List >::type char_list(char_listSEXP);
     Rcpp::traits::input_parameter< std::string >::type collapse(collapseSEXP);
-    rcpp_result_gen = Rcpp::wrap(PasteListElems(string_list, collapse));
+    rcpp_result_gen = Rcpp::wrap(PasteCollapseListElems(char_list, collapse));
     return rcpp_result_gen;
 END_RCPP
 }
 // StrListRemoveEmpties
-List StrListRemoveEmpties(List string_list);
-RcppExport SEXP filesstrings_StrListRemoveEmpties(SEXP string_listSEXP) {
+List StrListRemoveEmpties(List char_list);
+RcppExport SEXP filesstrings_StrListRemoveEmpties(SEXP char_listSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< List >::type string_list(string_listSEXP);
-    rcpp_result_gen = Rcpp::wrap(StrListRemoveEmpties(string_list));
+    Rcpp::traits::input_parameter< List >::type char_list(char_listSEXP);
+    rcpp_result_gen = Rcpp::wrap(StrListRemoveEmpties(char_list));
     return rcpp_result_gen;
 END_RCPP
 }
 // CharListElemsNthElem
-CharacterVector CharListElemsNthElem(List string_list, int n);
-RcppExport SEXP filesstrings_CharListElemsNthElem(SEXP string_listSEXP, SEXP nSEXP) {
+CharacterVector CharListElemsNthElem(List char_list, int n);
+RcppExport SEXP filesstrings_CharListElemsNthElem(SEXP char_listSEXP, SEXP nSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< List >::type string_list(string_listSEXP);
+    Rcpp::traits::input_parameter< List >::type char_list(char_listSEXP);
     Rcpp::traits::input_parameter< int >::type n(nSEXP);
-    rcpp_result_gen = Rcpp::wrap(CharListElemsNthElem(string_list, n));
+    rcpp_result_gen = Rcpp::wrap(CharListElemsNthElem(char_list, n));
     return rcpp_result_gen;
 END_RCPP
 }

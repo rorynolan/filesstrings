@@ -11,6 +11,9 @@ RemoveFileSpaces(dir = ".", pattern = "", replace.with = "")
 
 \item{pattern}{A regular expression. If specified, only files matching this
 pattern wil be treated.}
+
+\item{replace.with}{What do you want to replace the spaces with? This
+defaults to nothing, another sensible choice would be an underscore.}
 }
 \value{
 A logical vector indicating which operation succeeded for each of the

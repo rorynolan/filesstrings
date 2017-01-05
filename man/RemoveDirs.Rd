@@ -7,18 +7,18 @@
 RemoveDirs(dirs)
 }
 \arguments{
-\item{dir.names}{The names of the directories, specified via relative or
-absolute paths.}
+\item{dirs}{The names of the directories, specified via relative or absolute
+paths.}
 }
 \value{
-Logical vector with \code{TRUE} for each success and \code{FALSE} for
-  failures.
+Invisibly, a logical vector with \code{TRUE} for each success and
+  \code{FALSE} for failures.
 }
 \description{
 Delete directories and all of their contents (can just be one directory).
 }
 \examples{
-RemoveDirs("mydir1", "mydir2")
-RemoveDirs("/home/mydir")
+sapply(c("mydir1", "mydir2"), dir.create)
+RemoveDirs(c("mydir1", "mydir2"))
 }
 

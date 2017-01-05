@@ -3,7 +3,7 @@
 #' After padding is removed, could the input string be considered to be numeric,
 #' i.e. could it be constructed via \code{toString(num)} where \code{num} is
 #' numeric. This function is vectorised over its one argument.
-#' @param A character vector of any length
+#' @param string A character vector.
 #' @return \code{TRUE} if the argument can be considered to be numeric or
 #'   \code{FALSE} otherwise.
 #' @examples
@@ -15,22 +15,34 @@ CanBeNumeric <- function(string) !is.na(suppressWarnings(as.numeric(string)))
 
 #' Get the currencies of numbers within a string.
 #'
-#' The currency is defined as the character coming before the number in the
-#' string. If nothing comes before (i.e. if the number is the first thing in the
-#' string), the currency can be the empty string, similarly the currency can be
-#' a space, comma or any manner of thing. This function does not allow for
-#' leading decimal points.
+#' The currency of a number is defined as the character coming before the number
+#' in the string. If nothing comes before (i.e. if the number is the first thing
+#' in the string), the currency is the empty string, similarly the currency can
+#' be a space, comma or any manner of thing.
+#' \itemize{
+#'   \item \code{GetCurrency}
+#' takes a string and returns the currency of the first number therein. It is
+#' vectorised over string.
+#'   \item \code{GetCurrencies} takes a string and returns
+#' the currencies of all of the numbers within that string. It is not
+#' vectorised. }
 #'
-#' @param string
+#' These functions do not allow for leading decimal points.
 #'
-#' @return A data frame with one column for the currency symbol and one for the
-#'   amount.
+#' @param string A character vector.
+#'
+#' @return
+#' \itemize{
+#' \item \code{GetCurrency} returns a character vector.
+#' \item \code{GetCurrencies} returns a data frame with one column for the
+#' currency symbol and one for the amount.
+#' }
 #' @examples
 #' GetCurrencies("35.00 $1.14 abc5 £3.8 77")
 #' @export
 GetCurrencies <- function(string) {
   stopifnot(is.character(string) && length(string) == 1)
-  ssbn <- StrSplitByNums(string, decimals = T, negs = T)
+  ssbn <- StrSplitByNums(string, decimals = TRUE, negs = TRUE)[[1]]
   num.indices <- which(CanBeNumeric(ssbn))
   numbers <- as.numeric(ssbn[num.indices])
   before.num.indices <- num.indices - 1
@@ -41,6 +53,13 @@ GetCurrencies <- function(string) {
   tibble::tibble(currency = currencies, amount = numbers)
 }
 
+#' @rdname GetCurrencies
+#' @examples
+#' GetCurrency(c("ab3 13", "£1"))
+#' @export
+GetCurrency <- function(string) {
+
+}
 #' Remove back-to-back duplicates of a pattern in a string.
 #'
 #' If a string contains a given pattern duplicated back-to-back a number of
@@ -107,7 +126,7 @@ NiceNums <- function(strings) {
   } else {
     interleaves <- InterleaveStringList(non.nums, nums)
   }
-  new.names <- PasteListElems(interleaves)
+  new.names <- PasteCollapseListElems(interleaves)
   return(new.names)
 }
 
@@ -195,7 +214,7 @@ ExtractNonNumerics <- function(string, decimals = FALSE,
                              decimals = decimals, negs = negs,
                              leading.decimals = leading.decimals)
   if (all(CanBeNumeric(string))) return(list(character(0))[rep(1, length(string))])
-  pattern <- PasteListElems(numerics, "|") %>% str_c("(?:", ., ")") %>%
+  pattern <- PasteCollapseListElems(numerics, "|") %>% str_c("(?:", ., ")") %>%
     str_replace_all("\\.", "\\\\.")
   str_split(string, pattern) %>% StrListRemoveEmpties
 }
@@ -235,7 +254,7 @@ NthNonNumeric <- function(string, n, decimals = FALSE,
 #'
 #' Break a string wherever you go from a numeric charachter to a non-numeric or
 #' vice-versa.
-#' @param string A character vector.
+#' @inheritParams ExtractNumbers
 #' @examples
 #' StrSplitByNums(c("abc123def456.789gh", "a1b2c344"))
 #' StrSplitByNums("abc123def456.789gh", decimals = TRUE)
@@ -247,9 +266,11 @@ StrSplitByNums <- function(string, decimals = FALSE, leading.decimals = FALSE,
   if (all(CanBeNumeric(string))) {
     non.nums <- list(character(0))[rep(1, length(string))]
   } else {
-    pattern <- PasteListElems(nums, "|") %>% str_c("(?:", ., ")") %>%
+    pattern <- PasteCollapseListElems(nums, "|") %>% str_c("(?:", ., ")") %>%
       str_replace_all("\\.", "\\\\.")
     non.nums <- str_split(string, pattern) %>% StrListRemoveEmpties
+    no.nums <- pattern == "(?:)"
+    if (any(no.nums)) non.nums[no.nums] <- string[no.nums]
   }
   CorrectInterleave(string, non.nums, nums)
 }
@@ -279,10 +300,10 @@ StrElem <- function(string, index) {
 #' @examples
 #' StrElemsPasted("abcdef", c(2, 5:6))
 #' @export
-StrElemsPasted <- function(string, elem.indices) {
+StrElemsPasted <- function(string, indices) {
   if (!is.character(string)) stop("string must be of character type")
   stopifnot(length(string) == 1)
-  elems <- StrElem(string, elem.indices)
+  elems <- StrElem(string, indices)
   pasted <- paste(elems, collapse = "")
   return(pasted)
 }
@@ -464,7 +485,8 @@ ExtendCharVec <- function(char.vec, extend.by = NA, length.out = NA) {
 #' writeLines(as.character(1:3), "PasteDifferentLengths1.txt")
 #' writeLines(as.character(1:4), "PasteDifferentLengths2.txt")
 #' PasteDifferentLengths(list.files(pattern = "PasteDifferentLengths"), sep = "sSsepPp")
-#' file.remove(list.files(pattern = "PasteDifferentLengths"))  # run this to clean up your working directory from the teporary files that were created for these examples
+#' # clean up working directory
+#' file.remove(list.files(pattern = "PasteDifferentLengths"))
 #' @export
 PasteDifferentLengths <- function(files, sep = "") {
   if (is.character(files)) {
@@ -511,12 +533,13 @@ PutInPos <- function(strings, positions) {
 #'
 #' The \code{stringi} and \code{stringr} packages let you trim whitespace, but
 #' what if you want to trim something else from either (or both) side(s) of a
-#' string? This function lets you select which charachter to trim and from which
+#' string? This function lets you select which pattern to trim and from which
 #' side(s).
 #'
 #' @param string A string.
-#' @param char A single charachter (\emph{not} in regular expression. So to trim
-#'   a period, use \code{char = "."} and not \code{char = "\\\\."}).
+#' @param pattern A string. The pattern to be trimmed (\emph{not} interpreted as
+#'   regular expression). So to trim a period, use \code{char = "."} and not
+#'   \code{char = "\\\\."}).
 #' @param side Which side do you want to trim from? \code{"both"} is the
 #'   default, but you can also have just either \code{"left"} or \code{"right"}
 #'   (or optionally the shorthands \code{"b"}, \code{"l"} and \code{"r"}).
@@ -524,27 +547,20 @@ PutInPos <- function(strings, positions) {
 #' @examples
 #' TrimAnything("..abcd.", ".", "left")
 #' TrimAnything("-ghi--", "-")
+#' TrimAnything("-ghi--", "--")
 #' @export
-TrimAnything <- function(string, char, side = "both") {
+TrimAnything <- function(string, pattern, side = "both") {
   stopifnot(nchar(string) > 0)
-  stopifnot(nchar(char) == 1)
   side <- tolower(side)  # give side some case lenience
-  stopifnot(side %in% c("both", "b", "left", "l", "right", "r"))
-  vec <- StringToVec(string)
-  if (AllEqual(vec, char)) return("")
-  occurrences <- which(vec == char)
-  if (!length(occurrences)) return(string)
-  groups <- GroupClose(occurrences)
-  side <- StrElem(side, 1)
-  if (side %in% c("b", "r")) {
-    last.occurrences <- Last(groups)
-    if (nchar(string) %in% last.occurrences) vec <- vec[-last.occurrences]
-  }
-  if (side %in% c("b", "l")) {
-    first.occurrences <- groups[[1]]
-    if (1 %in% first.occurrences) vec <- vec[-first.occurrences]
-  }
-  return(paste(vec, collapse = ""))
+  side <- match.arg(side, c("both", "left", "right"))
+  pattern <- ore::ore.escape(pattern) %>%
+    str_c("(?:", ., ")")
+  switch(side,
+         both = str_replace(string, str_c("^", pattern, "*"), "") %>%
+           str_replace(str_c(pattern, "*$"), ""),
+         left = str_replace(string, str_c("^", pattern, "*"), ""),
+         right = str_replace(string, str_c(pattern, "*$"), "")
+  )
 }
 
 #' Count the number of the matches of a pattern in a string.
@@ -558,7 +574,7 @@ TrimAnything <- function(string, char, side = "both") {
 #' @examples
 #' CountMatches("abacad", "a")
 #' CountMatches("2.1.0.13", ".")
-#' CountMatches("2.1.0.13", coll("."))
+#' CountMatches("2.1.0.13", stringr::coll("."))
 #' @export
 CountMatches <- function(string, pattern) {
   lp <- length(pattern)
@@ -606,6 +622,7 @@ LocateBraces <- function(string) {
 #' string <- "\"abc\"67a\'dk\'f"
 #' cat(string)
 #' RemoveQuoted(string)
+#' @export
 RemoveQuoted <- function(string) {
   string <- str_replace_all(string, "(?:\".*?\")", "")
   string <- str_replace_all(string, "(?:\'.*?\')", "")
@@ -618,8 +635,8 @@ RemoveQuoted <- function(string) {
 #' the input doesn't end with ".csv", this function will tack ".csv" onto the
 #' end of it.
 #'
-#' @param file.name The intended file name
-#' @param ext The intended file extension (with or without the ".")
+#' @param string The intended file name.
+#' @param ext The intended file extension (with or without the ".").
 #' @param replace If the file has an extension already, replace it (or append
 #'   the new extension name)?
 #'
