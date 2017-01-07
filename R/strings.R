@@ -101,6 +101,7 @@ DuplicatesToSingles <- function(string, pattern) {
 #' NiceNums(strings)
 #'
 #' NiceNums(c("abc9def55", "abc10def7"))
+#' NiceNums(c("abc9def55", "abc10def777", "abc4def4"))
 #'
 #' \dontrun{
 #' NiceNums(c("abc9def55", "abc10xyz7"))}
@@ -108,26 +109,33 @@ DuplicatesToSingles <- function(string, pattern) {
 NiceNums <- function(strings) {
   if (!is.character(strings)) stop("str.vec must be a vector of strings")
   non.nums <- ExtractNonNumerics(strings)
-  if (!AllEqual(non.nums)) stop("The non-number bits of the strings are different.")
-  nums <- ExtractNumbers(strings, leave.as.string = TRUE)
-  if (!AllEqual(sapply(nums, length))) stop("some of the strings contain different numbers of numbers")
-  max.lengths <- lapply(nums, function(x) max(nchar(x)))
-  for (i in seq_along(nums)) {  # add leading zeroes to numbers as necessary
-    for (j in seq_along(nums[[i]])) {
-      while(nchar(nums[[i]][j]) < max.lengths[i]) {
-        nums[[i]][j] <- paste0(0, nums[[i]][j])
-      }
-    }
+  if (!AllEqual(non.nums)) {
+    stop("The non-number bits of the strings are different.")
   }
-  num.first <- sapply(strings, StrElem, 1) %>% CanBeNumeric
-  if (!AllEqual(num.first)) stop("some file names start with numbers and some don't")
+  nums <- ExtractNumbers(strings, leave.as.string = TRUE)
+  if (!AllEqual(lengths(nums))) {
+    stop("Some of the strings contain different numbers of numbers")
+  }
+  nums <- simplify2array(nums)
+  if (!is.matrix(nums)) nums <- t(nums)
+  ncn <- nchar(nums)
+  max.lengths <- matrixStats::rowMaxs(ncn)
+  min.length <- min(ncn)
+  to.prefix <- rep("0", max(max.lengths) - min.length) %>% str_c(collapse = "")
+  nums <- str_c(to.prefix, nums)
+  starts <- -rep(max.lengths, ncol(ncn))
+  nums <- str_sub(nums, starts, -1) %>%
+    split(rep(seq_len(ncol(ncn)), each = nrow(ncn)))
+  num.first <- StrElem(strings, 1) %>% CanBeNumeric
+  if (!AllEqual(num.first)) {
+    stop("some file names start with numbers and some don't")
+  }
   if (num.first[1]) {
     interleaves <- InterleaveStringList(nums, non.nums)
   } else {
     interleaves <- InterleaveStringList(non.nums, nums)
   }
-  new.names <- PasteCollapseListElems(interleaves)
-  return(new.names)
+  PasteCollapseListElems(interleaves)
 }
 
 #' Extract numbers (or non-numbers) from a string.
