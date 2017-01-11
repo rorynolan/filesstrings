@@ -1,7 +1,6 @@
 // [[Rcpp::depends(BH)]]
 
 #include <Rcpp.h>
-#include <boost/algorithm/string/predicate.hpp>
 
 using namespace Rcpp;
 
@@ -103,11 +102,6 @@ NumericVector NumListElemsNthElem(List num_list, int n) {
 }
 
 // [[Rcpp::export]]
-bool IsPrefix(std::string pre, std::string whole) {
-  return(boost::starts_with(whole, pre));
-}
-
-// [[Rcpp::export]]
 CharacterVector InterleaveStrings(CharacterVector strings1,
                                   CharacterVector strings2) {
   int s1l = strings1.size();
@@ -142,6 +136,12 @@ CharacterVector InterleaveStrings(CharacterVector strings1,
     }
   return(interleaved);
   }
+}
+
+// [[Rcpp::export]]
+bool IsPrefix(std::string whole, std::string pre)
+{
+  return (std::strncmp(whole.c_str(), pre.c_str(), pre.size()) == 0);
 }
 
 // [[Rcpp::export]]
@@ -202,3 +202,4 @@ List InterleaveStringList(List strings1, List strings2) {
   }
   return(interleaved);
 }
+

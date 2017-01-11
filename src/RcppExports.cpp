@@ -64,18 +64,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// IsPrefix
-bool IsPrefix(std::string pre, std::string whole);
-RcppExport SEXP filesstrings_IsPrefix(SEXP preSEXP, SEXP wholeSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< std::string >::type pre(preSEXP);
-    Rcpp::traits::input_parameter< std::string >::type whole(wholeSEXP);
-    rcpp_result_gen = Rcpp::wrap(IsPrefix(pre, whole));
-    return rcpp_result_gen;
-END_RCPP
-}
 // InterleaveStrings
 CharacterVector InterleaveStrings(CharacterVector strings1, CharacterVector strings2);
 RcppExport SEXP filesstrings_InterleaveStrings(SEXP strings1SEXP, SEXP strings2SEXP) {
@@ -85,6 +73,18 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< CharacterVector >::type strings1(strings1SEXP);
     Rcpp::traits::input_parameter< CharacterVector >::type strings2(strings2SEXP);
     rcpp_result_gen = Rcpp::wrap(InterleaveStrings(strings1, strings2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// IsPrefix
+bool IsPrefix(std::string whole, std::string pre);
+RcppExport SEXP filesstrings_IsPrefix(SEXP wholeSEXP, SEXP preSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::string >::type whole(wholeSEXP);
+    Rcpp::traits::input_parameter< std::string >::type pre(preSEXP);
+    rcpp_result_gen = Rcpp::wrap(IsPrefix(whole, pre));
     return rcpp_result_gen;
 END_RCPP
 }

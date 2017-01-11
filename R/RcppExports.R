@@ -57,12 +57,12 @@ NumListElemsNthElem <- function(num_list, n) {
     .Call('filesstrings_NumListElemsNthElem', PACKAGE = 'filesstrings', num_list, n)
 }
 
-IsPrefix <- function(pre, whole) {
-    .Call('filesstrings_IsPrefix', PACKAGE = 'filesstrings', pre, whole)
-}
-
 InterleaveStrings <- function(strings1, strings2) {
     .Call('filesstrings_InterleaveStrings', PACKAGE = 'filesstrings', strings1, strings2)
+}
+
+IsPrefix <- function(whole, pre) {
+    .Call('filesstrings_IsPrefix', PACKAGE = 'filesstrings', whole, pre)
 }
 
 CorrectInterleave0 <- function(orig, strings1, strings2) {
