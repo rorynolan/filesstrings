@@ -9,7 +9,9 @@ CountMatches(string, pattern)
 \arguments{
 \item{string}{A character vector.}
 
-\item{pattern}{A character vector. Pattern(s) specified like the pattern(s) in the stringr package (e.g. look at \code{\link[stringr]{str_locate}}). If this has length >1 its length must be the same as that of \code{string}.}
+\item{pattern}{A character vector. Pattern(s) specified like the pattern(s)
+in the stringr package (e.g. look at \code{\link[stringr]{str_locate}}). If
+this has length >1 its length must be the same as that of \code{string}.}
 }
 \value{
 A numeric vector giving the number of matches in each string.

@@ -30,7 +30,8 @@ PasteDifferentLengths(list(1:3, 1:4))
 PasteDifferentLengths(list(1:3, 1:4), sep = "sSs")
 writeLines(as.character(1:3), "PasteDifferentLengths1.txt")
 writeLines(as.character(1:4), "PasteDifferentLengths2.txt")
-PasteDifferentLengths(list.files(pattern = "PasteDifferentLengths"), sep = "sSsepPp")
+PasteDifferentLengths(list.files(pattern = "PasteDifferentLengths"),
+sep = "sSsepPp")
 # clean up working directory
 file.remove(list.files(pattern = "PasteDifferentLengths"))
 }

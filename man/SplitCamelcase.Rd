@@ -12,7 +12,8 @@ SplitCamelcase(string, lower = FALSE)
 \item{lower}{Do you want the output to be all lower case (or as is)?}
 }
 \value{
-A list of character vectors, one list element for each element of \code{string}.
+A list of character vectors, one list element for each element of
+  \code{string}.
 }
 \description{
 Vectorised over \code{string}.
@@ -21,6 +22,7 @@ Vectorised over \code{string}.
 SplitCamelcase(c("RoryNolan", "NaomiFlagg", "DepartmentOfSillyHats"))
 }
 \references{
-Adapted from Ramnath Vaidyanathan's answer at http://stackoverflow.com/questions/8406974/splitting-camelcase-in-r.
+Adapted from Ramnath Vaidyanathan's answer at
+http://stackoverflow.com/questions/8406974/splitting-camelcase-in-r.
 }
 

@@ -11,7 +11,7 @@
 #' CreateDirsIfNotThere("/home/mydir")
 #' @export
 CreateDirsIfNotThere <- function(dir.names) {
-  created <- sapply(dir.names,
+  created <- vapply(dir.names,
                     function(dir.name) {
                       if (!dir.exists(dir.name)) {
                         dir.create(dir.name)
@@ -20,7 +20,7 @@ CreateDirsIfNotThere <- function(dir.names) {
                         FALSE
                       }
                     }
-  )
+  , logical(1))
 }
 
 #' Remove directories.
@@ -35,7 +35,8 @@ CreateDirsIfNotThere <- function(dir.names) {
 #' RemoveDirs(c("mydir1", "mydir2"))
 #' @export
 RemoveDirs <- function(dirs) {
-  !sapply(dirs, function(dir) unlink(dir, recursive = T)) %>% invisible
+  !vapply(dirs, function(dir) unlink(dir, recursive = TRUE), integer(1)) %>%
+    invisible
 }
 
 #' Merge Tables.
@@ -47,12 +48,12 @@ RemoveDirs <- function(dirs) {
 #' @param out.name The path to the output file containing the merged tables.
 #' @param header Do the tables to be merged have headers?
 #' @export
-MergeTables <- function(file.names, delim, out.name, header = T) {
+MergeTables <- function(file.names, delim, out.name, header = TRUE) {
   tables <- lapply(file.names, readr::read_delim, delim, col_names = header)
-  ncs <- sapply(tables, ncol)
+  ncs <- vapply(tables, ncol, integer(1))
   if (!AllEqual(ncs)) stop("The tables have different numbers of columns.")
   if (header) {
-    namess <- sapply(tables, names)
+    namess <- vapply(tables, names, character(1))
     if (!all(apply(namess, 1, AllEqual))) {
       stop("Tables have different colnames.")
     }
@@ -89,9 +90,10 @@ MoveFiles <- function(files, destinations) {
   if(length(destinations) == length(files)) {
     mapply(MoveFile, files, destinations)
   } else if (length(destinations) == 1) {
-    sapply(files, MoveFile, destinations)
+    vapply(files, MoveFile, logical(1), destinations)
   } else {
-    stop("the number of destinations must be equal to 1 or equal to the number of files to be moved")
+    stop("the number of destinations must be equal to 1 or equal to the ",
+         "number of files to be moved")
   }
 }
 
@@ -120,6 +122,7 @@ MoveFiles <- function(files, destinations) {
 #' @export
 NiceFileNums <- function(dir = ".", pattern = NA) {
   init.dir <- getwd()
+  on.exit(setwd(init.dir))
   setwd(dir)
   if (is.na(pattern)) {
     lf <- list.files()
@@ -127,7 +130,6 @@ NiceFileNums <- function(dir = ".", pattern = NA) {
     lf <- list.files(pattern = pattern)
   }
   renamed <- file.rename(lf, NiceNums(lf))
-  setwd(init.dir)
   renamed
 }
 
@@ -162,11 +164,11 @@ PutFilesInDir <- function(file.names, dir.name) {
 #' @export
 RemoveFileSpaces <- function(dir = ".", pattern = "", replace.with = "") {
   init.dir <- getwd()
+  on.exit(setwd(init.dir))
   setwd(dir)
   lf <- list.files(pattern = pattern)
   new.names <- str_replace_all(lf, " ", replace.with)
   success <- file.rename(lf, new.names)
-  setwd(init.dir)
   success
 }
 
@@ -181,8 +183,8 @@ RemoveFileSpaces <- function(dir = ".", pattern = "", replace.with = "") {
 #' @export
 RenameWithNums <- function(dir = ".", pattern = NULL) {
   init.dir <- getwd()
-  setwd(dir)
   on.exit(setwd(init.dir))
+  setwd(dir)
   lf <- list.files(pattern = pattern)
   ext <- unique(tools::file_ext(lf))
   if (length(ext != 1)) {
@@ -233,7 +235,7 @@ UnitDirs <- function(unit, pattern = NULL, dir = ".") {
     stop(paste0("The file names must all contain the word", unit ,"."))
   }
   up.to.first.units <- StrBeforeNth(lf, unit, 1)
-  nums <- sapply(up.to.first.units, NthNumber, -1, decimals = TRUE)
+  nums <- vapply(up.to.first.units, NthNumber, numeric(1), -1, decimals = TRUE)
   un <- unique(nums)
   for (i in un) {
     print(lf)

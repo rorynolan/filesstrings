@@ -13,7 +13,9 @@ RemoveQuoted(string)
 A character vector.
 }
 \description{
-If any parts of a string are quoted (between quotation marks), remove those parts of the string, including the quotes. Run the examples and you'll know exactly how this function works.
+If any parts of a string are quoted (between quotation marks), remove those
+parts of the string, including the quotes. Run the examples and you'll know
+exactly how this function works.
 }
 \examples{
 string <- "\\"abc\\"67a\\'dk\\'f"

@@ -96,7 +96,8 @@ Interleave <- function(vec1, vec2) {
   l1 <- length(vec1)
   l2 <- length(vec2)
   if (l1 < 1 || l2 < 1) stop("Both vectors must have positive lengths.")
-  if (! (l1 - l2) %in% 0:1) stop("vec1 must be either the same length as vec2 or one longer than it")
+  if (! (l1 - l2) %in% 0:1)
+    stop("vec1 must be either the same length as vec2 or one longer than it")
   ans <- 1:(l1 + l2)
   ans[seq(1, 2 * l1 - 1, 2)] <- vec1
   ans[seq(2, 2 * l2, 2)] <- vec2

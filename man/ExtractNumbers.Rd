@@ -35,9 +35,9 @@ the start of a number?}
 are not handled here (see the examples).}
 
 \item{n}{The index of the number (or non-numeric) that you seek. Negative
-indexing is allowed i.e. \code{n = 1} will give you the first number (or non-numeric)
-whereas \code{n = -1} will give you the last number (or non-numeric), \code{n = -2} will
-give you the second last number and so on.}
+indexing is allowed i.e. \code{n = 1} will give you the first number (or
+non-numeric) whereas \code{n = -1} will give you the last number (or
+non-numeric), \code{n = -2} will give you the second last number and so on.}
 }
 \value{
 For \code{ExtractNumbers} and \code{ExtractNonNumerics}, a list of

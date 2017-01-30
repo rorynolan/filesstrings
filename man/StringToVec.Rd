@@ -13,7 +13,8 @@ StringToVec(string)
 A character vector.
 }
 \description{
-Go from a string to a vector whose \eqn{i}th element is the \eqn{i}th character in the string.
+Go from a string to a vector whose \eqn{i}th element is the \eqn{i}th
+character in the string.
 }
 \examples{
 StringToVec("abcdef")

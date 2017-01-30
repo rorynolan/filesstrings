@@ -4,7 +4,7 @@
 \alias{MergeTables}
 \title{Merge Tables.}
 \usage{
-MergeTables(file.names, delim, out.name, header = T)
+MergeTables(file.names, delim, out.name, header = TRUE)
 }
 \arguments{
 \item{file.names}{The paths to the files to merge.}

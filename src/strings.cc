@@ -1,5 +1,3 @@
-// [[Rcpp::depends(BH)]]
-
 #include <Rcpp.h>
 
 using namespace Rcpp;
@@ -148,23 +146,22 @@ bool IsPrefix(std::string whole, std::string pre)
 CharacterVector CorrectInterleave0(std::string orig,
                                   CharacterVector strings1,
                                   CharacterVector strings2) {
-  CharacterVector interleave;
+  CharacterVector interleave = NA_STRING;
   if (strings1.size() == 0)
     interleave = strings2;
   else if (strings2.size() == 0)
     interleave = strings1;
   else {
-    if (IsPrefix(as<std::string>(strings1[0]), orig))
-      interleave = InterleaveStrings(strings1, strings2);
-    else if (IsPrefix(as<std::string>(strings2[0]), orig))
-      interleave = InterleaveStrings(strings2, strings1);
-    else
-      return(NA_STRING);
+    CharacterVector onetwo = InterleaveStrings(strings1, strings2);
+    if (PasteCollapse(onetwo, "") == orig)
+      interleave = onetwo;
+    else {
+      CharacterVector twoone = InterleaveStrings(strings2, strings1);
+      if (PasteCollapse(twoone, "") == orig)
+        interleave = twoone;
+    }
   }
-  if (PasteCollapse(interleave, "") == orig)
-    return(interleave);
-  else
-    return(NA_STRING);
+  return(interleave);
 }
 
 // [[Rcpp::export]]

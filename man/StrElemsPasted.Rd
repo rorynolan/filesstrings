@@ -9,13 +9,15 @@ StrElemsPasted(string, indices)
 \arguments{
 \item{string}{A string.}
 
-\item{indices}{A numeric vector of positive integers detailing the indices of the characters of \code{string} that we wish to paste together.}
+\item{indices}{A numeric vector of positive integers detailing the indices of
+the characters of \code{string} that we wish to paste together.}
 }
 \value{
 A string.
 }
 \description{
-Extract characters - specified by their indices - from a string and paste them together
+Extract characters - specified by their indices - from a string and paste
+them together
 }
 \examples{
 StrElemsPasted("abcdef", c(2, 5:6))

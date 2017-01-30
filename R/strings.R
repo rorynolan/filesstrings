@@ -29,7 +29,8 @@ CanBeNumeric <- function(string) !is.na(suppressWarnings(as.numeric(string)))
 #'
 #' These functions do not allow for leading decimal points.
 #'
-#' @param string A character vector.
+#' @param string A string.
+#' @param strings A character vector.
 #'
 #' @return
 #' \itemize{
@@ -46,9 +47,9 @@ GetCurrencies <- function(string) {
   num.indices <- which(CanBeNumeric(ssbn))
   numbers <- as.numeric(ssbn[num.indices])
   before.num.indices <- num.indices - 1
-  before.num.strings <- sapply(before.num.indices, function(x) {
+  before.num.strings <- vapply(before.num.indices, function(x) {
     ifelse(x %in% num.indices || x < 1, "", ssbn[x])
-  })
+  }, character(1))
   currencies <- StrElem(before.num.strings, -1)
   tibble::tibble(currency = currencies, amount = numbers)
 }
@@ -57,9 +58,10 @@ GetCurrencies <- function(string) {
 #' @examples
 #' GetCurrency(c("ab3 13", "£1"))
 #' @export
-GetCurrency <- function(string) {
+GetCurrency <- function(strings) {
 
 }
+
 #' Remove back-to-back duplicates of a pattern in a string.
 #'
 #' If a string contains a given pattern duplicated back-to-back a number of
@@ -216,30 +218,32 @@ ExtractNumbers <- function(string, leave.as.string = FALSE, decimals = FALSE,
 #' @export
 ExtractNonNumerics <- function(string, decimals = FALSE,
                                leading.decimals = FALSE, negs = FALSE) {
+  if (leading.decimals == TRUE && decimals == FALSE) {
+    stop("To allow leading decimals, you need to first allow decimals.")
+  }
   stopifnot(is.character(string))
-  if (!any(str_detect(string, "[0-9]"))) return(as.list(string))
-  numerics <- ExtractNumbers(string, leave.as.string = TRUE,
-                             decimals = decimals, negs = negs,
-                             leading.decimals = leading.decimals)
-  if (all(CanBeNumeric(string))) return(list(character(0))[rep(1, length(string))])
-  pattern <- PasteCollapseListElems(numerics, "|") %>% str_c("(?:", ., ")") %>%
-    str_replace_all("\\.", "\\\\.")
+  if (decimals) {
+    pattern <- "(?:[0-9]+(?:\\.?[0-9]+)*)+"
+    if (leading.decimals) pattern <- str_c("\\.?", pattern)
+  } else {
+    pattern <- "[0-9]+"
+  }
+  if (negs) pattern <- str_c("-?", pattern)
   str_split(string, pattern) %>% StrListRemoveEmpties
 }
 
 #' @param n The index of the number (or non-numeric) that you seek. Negative
-#'   indexing is allowed i.e. \code{n = 1} will give you the first number (or non-numeric)
-#'   whereas \code{n = -1} will give you the last number (or non-numeric), \code{n = -2} will
-#'   give you the second last number and so on.
+#'   indexing is allowed i.e. \code{n = 1} will give you the first number (or
+#'   non-numeric) whereas \code{n = -1} will give you the last number (or
+#'   non-numeric), \code{n = -2} will give you the second last number and so on.
 #' @rdname ExtractNumbers
 #' @export
 NthNumber <- function(string, n, leave.as.string = FALSE, decimals = FALSE,
                       leading.decimals = FALSE, negs = FALSE) {
   # this function doesn't work for strings with decimal numbers
   if (n == 0) stop("n must be a nonzero integer.")
-  numbers <- ExtractNumbers(string, leave.as.string = TRUE,
-                            decimals = decimals, leading.decimals = leading.decimals,
-                            negs = negs)
+  numbers <- ExtractNumbers(string, leave.as.string = TRUE, negs = negs,
+                      decimals = decimals, leading.decimals = leading.decimals)
   nth.numbers <- CharListElemsNthElem(numbers, n)
   if (leave.as.string) {
     nth.numbers
@@ -274,11 +278,8 @@ StrSplitByNums <- function(string, decimals = FALSE, leading.decimals = FALSE,
   if (all(CanBeNumeric(string))) {
     non.nums <- list(character(0))[rep(1, length(string))]
   } else {
-    pattern <- PasteCollapseListElems(nums, "|") %>% str_c("(?:", ., ")") %>%
-      str_replace_all("\\.", "\\\\.")
-    non.nums <- str_split(string, pattern) %>% StrListRemoveEmpties
-    no.nums <- pattern == "(?:)"
-    if (any(no.nums)) non.nums[no.nums] <- string[no.nums]
+    non.nums <- ExtractNonNumerics(string, decimals = decimals, negs = negs,
+                                   leading.decimals = leading.decimals)
   }
   CorrectInterleave(string, non.nums, nums)
 }
@@ -301,9 +302,11 @@ StrElem <- function(string, index) {
 
 #' Extract bits of a string and paste them together
 #'
-#' Extract characters - specified by their indices - from a string and paste them together
+#' Extract characters - specified by their indices - from a string and paste
+#' them together
 #' @param string A string.
-#' @param indices A numeric vector of positive integers detailing the indices of the characters of \code{string} that we wish to paste together.
+#' @param indices A numeric vector of positive integers detailing the indices of
+#'   the characters of \code{string} that we wish to paste together.
 #' @return A string.
 #' @examples
 #' StrElemsPasted("abcdef", c(2, 5:6))
@@ -318,7 +321,8 @@ StrElemsPasted <- function(string, indices) {
 
 #' Convert a string to a vector of characters
 #'
-#' Go from a string to a vector whose \eqn{i}th element is the \eqn{i}th character in the string.
+#' Go from a string to a vector whose \eqn{i}th element is the \eqn{i}th
+#' character in the string.
 #' @param string A string.
 #' @return A character vector.
 #' @examples
@@ -343,14 +347,16 @@ StringToVec <- function(string) {
 #' StringsWithPatterns(c("abc", "bcd", "cde"), c("b", "c"))
 #' StringsWithPatterns(c("abc", "bcd", "cde"), c("b", "c"), any = TRUE)
 #' @export
-StringsWithPatterns <- function(strings, patterns, ignore.case = FALSE, any = FALSE) {
+StringsWithPatterns <- function(strings, patterns, ignore.case = FALSE,
+                                any = FALSE) {
   if (!is.character(strings)) stop("strings must be of character type")
   strings.orig <- strings
   if (ignore.case) {
     strings <- tolower(strings)
     patterns <- tolower(patterns)
   }
-  matches <- as.matrix(sapply(strings, str_detect, patterns))
+  matches <- as.matrix(vapply(strings, str_detect, logical(length(patterns)),
+                              patterns))
   if (any) {
     keeps <- apply(matches, 2, any)
   } else {
@@ -373,18 +379,6 @@ StrReverse <- function(string) {
   char.vec.reversed <- rev(char.vec)
   string.reversed <- paste(char.vec.reversed, collapse = "")
   return(string.reversed)
-}
-
-StrNthInstanceIndices <- function(strings, pattern, n) {
-  instances <- str_locate_all(strings, pattern)
-  instances %>% sapply(function(x, n) {
-    l <- length(x)
-    if (n < 0) n <- nrow(x) + n + 1
-    if (n < 1 || n > l) {
-      stop("There aren't n instances of pattern in one or more of the strings.")
-    }
-    x[n, ]
-  }, n) %>% t
 }
 
 #' Text before or after \eqn{n}th occurrence of pattern.
@@ -459,14 +453,16 @@ ExtendCharVec <- function(char.vec, extend.by = NA, length.out = NA) {
     stop("One of extend.by or length.out must be specified.")
   }
   if (is.numeric(char.vec)) char.vec <- as.character(char.vec)
-  if (!is.character(char.vec)) stop("char.vec must be of numeric or character type.")
+  if (!is.character(char.vec))
+    stop("char.vec must be of numeric or character type.")
   if (!is.na(extend.by)) {
     if (!is.numeric(extend.by)) stop("If specified, extend.by must be numeric.")
     return(c(char.vec, rep("", extend.by)))
   }
   if (!is.na(length.out)) {
     if (!(is.numeric(length.out) && length.out >= length(char.vec))) {
-      stop("If specified, length.out must be numeric and at least equal to the length of char.vec.")
+      stop("If specified, length.out must be numeric and at least equal to ",
+           "the length of char.vec.")
     }
     c(char.vec, rep("", length.out - length(char.vec)))
   }
@@ -492,7 +488,8 @@ ExtendCharVec <- function(char.vec, extend.by = NA, length.out = NA) {
 #' PasteDifferentLengths(list(1:3, 1:4), sep = "sSs")
 #' writeLines(as.character(1:3), "PasteDifferentLengths1.txt")
 #' writeLines(as.character(1:4), "PasteDifferentLengths2.txt")
-#' PasteDifferentLengths(list.files(pattern = "PasteDifferentLengths"), sep = "sSsepPp")
+#' PasteDifferentLengths(list.files(pattern = "PasteDifferentLengths"),
+#' sep = "sSsepPp")
 #' # clean up working directory
 #' file.remove(list.files(pattern = "PasteDifferentLengths"))
 #' @export
@@ -500,9 +497,11 @@ PasteDifferentLengths <- function(files, sep = "") {
   if (is.character(files)) {
     files <- lapply(files, readLines)
   }
-  if (!is.list(files)) stop("files must be either a character vector or a list of objects.")
-  max.length <- max(sapply(files, length))
-  files <- sapply(files, ExtendCharVec, length.out = max.length)
+  if (!is.list(files)) stop("files must be either a character vector or ",
+                            "a list of objects.")
+  max.length <- max(vapply(files, length, integer(1)))
+  files <- vapply(files, ExtendCharVec, character(max.length),
+                  length.out = max.length)
   if (length(sep) != 1) stop("sep must have length 1.")
   if (sep == "") {
     apply(files, 1, paste, collapse = "")
@@ -576,7 +575,9 @@ TrimAnything <- function(string, pattern, side = "both") {
 #' Vectorised over \code{string} and pattern.
 #'
 #' @param string A character vector.
-#' @param pattern A character vector. Pattern(s) specified like the pattern(s) in the stringr package (e.g. look at \code{\link[stringr]{str_locate}}). If this has length >1 its length must be the same as that of \code{string}.
+#' @param pattern A character vector. Pattern(s) specified like the pattern(s)
+#'   in the stringr package (e.g. look at \code{\link[stringr]{str_locate}}). If
+#'   this has length >1 its length must be the same as that of \code{string}.
 #'
 #' @return A numeric vector giving the number of matches in each string.
 #' @examples
@@ -589,12 +590,13 @@ CountMatches <- function(string, pattern) {
   ls <- length(string)
   if (lp > 1) {
     if (lp != ls) {
-      stop("If pattern has length greater than 1, it must have the same length as string.")
+      stop("If pattern has length greater than 1, ",
+           "it must have the same length as string.")
     }
   }
   if (lp == 1) pattern <- rep(pattern, ls)
   locations <- str_locate_all(string, pattern)
-  n_matches <- sapply(locations, nrow) %>% sum
+  n_matches <- vapply(locations, nrow, integer(1)) %>% sum
   n_matches
 }
 
@@ -604,15 +606,17 @@ CountMatches <- function(string, pattern) {
 #'
 #' @param string A character vector
 #'
-#' @return A list of data frames (\link[tibble]{tibble}s), one for each member of the string character
-#'   vector. Each data frame has a "position" and "brace" column which give the
-#'   positions and types of braces in the given string.
+#' @return A list of data frames (\link[tibble]{tibble}s), one for each member
+#'   of the string character vector. Each data frame has a "position" and
+#'   "brace" column which give the positions and types of braces in the given
+#'   string.
 #'
 #' @examples
 #' LocateBraces(c("a{](kkj)})", "ab(]c{}"))
 #' @export
 LocateBraces <- function(string) {
-  locations <- str_locate_all(string, "[\\(\\)\\[\\]\\{\\}]") %>% lapply(function(x) x[, 1])
+  locations <- str_locate_all(string, "[\\(\\)\\[\\]\\{\\}]") %>%
+    lapply(function(x) x[, 1])
   braces <- mapply(StrElem, string, locations, SIMPLIFY = FALSE)
   dfs <- mapply(function(x, y) tibble::tibble(position = x, brace = y),
                 locations, braces, SIMPLIFY = FALSE)
@@ -621,7 +625,9 @@ LocateBraces <- function(string) {
 
 #' Remove the quoted parts of a string.
 #'
-#' If any parts of a string are quoted (between quotation marks), remove those parts of the string, including the quotes. Run the examples and you'll know exactly how this function works.
+#' If any parts of a string are quoted (between quotation marks), remove those
+#' parts of the string, including the quotes. Run the examples and you'll know
+#' exactly how this function works.
 #'
 #' @param string A character vector.
 #'
@@ -674,10 +680,11 @@ MakeExtName <- function(string, ext, replace = FALSE) {
 #' @param string A character vector.
 #' @param lower Do you want the output to be all lower case (or as is)?
 #'
-#' @return A list of character vectors, one list element for each element of \code{string}.
+#' @return A list of character vectors, one list element for each element of
+#'   \code{string}.
 #'
-#' @references
-#' Adapted from Ramnath Vaidyanathan's answer at http://stackoverflow.com/questions/8406974/splitting-camelcase-in-r.
+#' @references Adapted from Ramnath Vaidyanathan's answer at
+#' http://stackoverflow.com/questions/8406974/splitting-camelcase-in-r.
 #'
 #' @examples
 #' SplitCamelcase(c("RoryNolan", "NaomiFlagg", "DepartmentOfSillyHats"))
@@ -687,4 +694,16 @@ SplitCamelcase <- function(string, lower = FALSE) {
   string <- gsub("(?!^)(?=[[:upper:]])", " ", string, perl = TRUE)
   if (lower) string <- tolower(string)
   str_split(string, " ")
+}
+
+StrNthInstanceIndices <- function(strings, pattern, n) {
+  instances <- str_locate_all(strings, pattern)
+  instances %>% vapply(function(x, n) {
+    l <- length(x)
+    if (n < 0) n <- nrow(x) + n + 1
+    if (n < 1 || n > l) {
+      stop("There aren't n instances of pattern in one or more of the strings.")
+    }
+    x[n, ]
+  }, integer(2), n) %>% t
 }

@@ -7,10 +7,12 @@
 \usage{
 GetCurrencies(string)
 
-GetCurrency(string)
+GetCurrency(strings)
 }
 \arguments{
-\item{string}{A character vector.}
+\item{string}{A string.}
+
+\item{strings}{A character vector.}
 }
 \value{
 \itemize{
