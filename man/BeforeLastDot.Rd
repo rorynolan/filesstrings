@@ -19,4 +19,3 @@ This is usually used to get the part of a file name that doesn't include the fil
 BeforeLastDot(c("spreadsheet1.csv", "doc2.doc"))
 
 }
-

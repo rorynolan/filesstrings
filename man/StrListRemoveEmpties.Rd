@@ -18,4 +18,3 @@ Remove empty strings from a character list.
 \examples{
 StrListRemoveEmpties(list(c("a", "", "b"), "gg", c("", 1, "")))
 }
-

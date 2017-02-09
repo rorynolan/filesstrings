@@ -21,4 +21,3 @@ Give the positions of (, ), [, ], \{, and \} within a string.
 \examples{
 LocateBraces(c("a{](kkj)})", "ab(]c{}"))
 }
-

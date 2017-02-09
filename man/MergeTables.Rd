@@ -18,4 +18,3 @@ MergeTables(file.names, delim, out.name, header = TRUE)
 \description{
 Merge tables saved on disk as delimited files.
 }
-

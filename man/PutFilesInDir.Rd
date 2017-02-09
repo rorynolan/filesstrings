@@ -20,4 +20,3 @@ A logical vector with a \code{TRUE} for each successful file move and
 Move files to a directory, creating the directory if it does not already
 exist.
 }
-

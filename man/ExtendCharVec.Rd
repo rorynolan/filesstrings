@@ -25,4 +25,3 @@ Extend a character vector by appending empty strings at the end.
 ExtendCharVec(1:5, extend.by = 2)
 ExtendCharVec(c("a", "b"), length.out = 10)
 }
-

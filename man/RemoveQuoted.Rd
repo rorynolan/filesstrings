@@ -22,4 +22,3 @@ string <- "\\"abc\\"67a\\'dk\\'f"
 cat(string)
 RemoveQuoted(string)
 }
-

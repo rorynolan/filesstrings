@@ -18,4 +18,3 @@ Reverse the order of a string; put it backwards.
 \examples{
 StrReverse("abcdef")
 }
-

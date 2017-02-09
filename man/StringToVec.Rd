@@ -19,4 +19,3 @@ character in the string.
 \examples{
 StringToVec("abcdef")
 }
-

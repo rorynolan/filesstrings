@@ -21,4 +21,3 @@ This is the same as doing
 \examples{
 PasteCollapseListElems(list(1:3, c("a", 5, "rory")), collapse = "R")
 }
-

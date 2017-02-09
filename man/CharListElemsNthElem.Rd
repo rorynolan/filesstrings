@@ -26,4 +26,3 @@ Get the nth element of each vector in a list.
 CharListElemsNthElem(list(c("a", "b", "c"), c("d", "f", "a")), 2)
 NumListElemsNthElem(list(1:5, 0:2), 4)
 }
-

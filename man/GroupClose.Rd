@@ -27,4 +27,3 @@ GroupClose(1:10, 1)
 GroupClose(1:10, 0.5)
 GroupClose(c(1, 2, 4, 10, 11, 14, 20, 25, 27), 3)
 }
-

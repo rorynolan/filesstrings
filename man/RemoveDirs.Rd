@@ -21,4 +21,3 @@ Delete directories and all of their contents (can just be one directory).
 sapply(c("mydir1", "mydir2"), dir.create)
 RemoveDirs(c("mydir1", "mydir2"))
 }
-

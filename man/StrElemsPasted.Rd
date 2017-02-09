@@ -22,4 +22,3 @@ them together
 \examples{
 StrElemsPasted("abcdef", c(2, 5:6))
 }
-

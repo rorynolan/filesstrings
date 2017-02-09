@@ -22,4 +22,3 @@ exist, create it.
 CreateDirsIfNotThere("mydir")
 CreateDirsIfNotThere("/home/mydir")
 }
-

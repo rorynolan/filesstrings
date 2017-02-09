@@ -26,4 +26,3 @@ directories. If there is one directory, then all \eqn{n} files are moved
 there. If there are \eqn{n} directories, then each file is put into its
 respective directory. This function also works for directories.
 }
-

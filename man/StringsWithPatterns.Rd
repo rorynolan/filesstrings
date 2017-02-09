@@ -27,4 +27,3 @@ expression), which of the strings match all (or any) of the patterns.
 StringsWithPatterns(c("abc", "bcd", "cde"), c("b", "c"))
 StringsWithPatterns(c("abc", "bcd", "cde"), c("b", "c"), any = TRUE)
 }
-

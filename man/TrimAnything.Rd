@@ -31,4 +31,3 @@ TrimAnything("..abcd.", ".", "left")
 TrimAnything("-ghi--", "-")
 TrimAnything("-ghi--", "--")
 }
-

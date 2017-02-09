@@ -35,4 +35,3 @@ sep = "sSsepPp")
 # clean up working directory
 file.remove(list.files(pattern = "PasteDifferentLengths"))
 }
-

@@ -33,4 +33,3 @@ function wraps \code{\link{NiceNums}}, which does the string operations, but
 not the renaming. To see examples of how this function works, see the
 examples in that function's documentation.
 }
-

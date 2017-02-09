@@ -24,4 +24,3 @@ A logical vector indicating which operation succeeded for each of the
 Remove spaces in file names in a specified directory, replacing them with
 whatever you want, default nothing.
 }
-

@@ -30,4 +30,3 @@ AllEqual(1:4, c(1, 2, 3, 3))
 AllEqual(rep(1, 10))
 AllEqual(c(1, 88))
 }
-

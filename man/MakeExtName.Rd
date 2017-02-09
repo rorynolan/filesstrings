@@ -28,4 +28,3 @@ MakeExtName("abc", "csv")
 MakeExtName("abc.csv", "pdf")
 MakeExtName("abc.csv", "pdf", replace = TRUE)
 }
-

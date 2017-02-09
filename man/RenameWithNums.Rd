@@ -19,4 +19,3 @@ A logical vector with a \code{TRUE} for each successful renaming.
 \description{
 Rename the files in the directory, replacing file names with numbers only.
 }
-

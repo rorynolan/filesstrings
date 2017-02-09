@@ -26,4 +26,3 @@ done in the natural order.
 Interleave(c("a", "b", "c"), c("x", "y", "z"))
 Interleave(c("a", "b", "c", "d"), c("x", "y", "z"))
 }
-

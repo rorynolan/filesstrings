@@ -41,4 +41,3 @@ UnitDirs("litres", "\\\\.txt")
 setwd("..")
 RemoveDirs("UnitDirs_test")
 }
-

@@ -23,4 +23,3 @@ CanBeNumeric("3")
 CanBeNumeric("5 ")
 CanBeNumeric(c("1a", "abc"))
 }
-

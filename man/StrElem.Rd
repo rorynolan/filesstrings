@@ -22,4 +22,3 @@ Extract a single character of a string, using its index.
 StrElem("abcd", 3)
 StrElem("abcd", -2)
 }
-

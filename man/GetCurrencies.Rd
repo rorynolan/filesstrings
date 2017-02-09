@@ -41,4 +41,3 @@ These functions do not allow for leading decimal points.
 GetCurrencies("35.00 $1.14 abc5 £3.8 77")
 GetCurrency(c("ab3 13", "£1"))
 }
-

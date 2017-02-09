@@ -80,7 +80,7 @@ CharacterVector CharListElemsNthElem(List char_list, int n) {
     CharacterVector strings = as<CharacterVector>(char_list[i]);
     if (n < 0)
       n = strings.size() + 1 + n;
-    nths[i] = ((n > strings.size() | n <= 0) ? NA_STRING : strings[n - 1]);
+    nths[i] = (((n > strings.size()) | (n <= 0)) ? NA_STRING : strings[n - 1]);
   }
   return(nths);
 }

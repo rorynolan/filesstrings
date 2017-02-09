@@ -28,4 +28,3 @@ DuplicatesToSingles("abababcabab", "ab")
 DuplicatesToSingles(c("abab", "cdcd"), "cd")
 DuplicatesToSingles(c("abab", "cdcd"), c("ab", "cd"))
 }
-

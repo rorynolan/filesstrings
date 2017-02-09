@@ -31,4 +31,3 @@ NiceNums(c("abc9def55", "abc10def777", "abc4def4"))
 \dontrun{
 NiceNums(c("abc9def55", "abc10xyz7"))}
 }
-

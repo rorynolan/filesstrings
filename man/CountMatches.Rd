@@ -24,4 +24,3 @@ CountMatches("abacad", "a")
 CountMatches("2.1.0.13", ".")
 CountMatches("2.1.0.13", stringr::coll("."))
 }
-

@@ -36,4 +36,3 @@ StrBeforeNth(string, "\\\\.", -3)
 StrBeforeNth(string, ".", -3)
 StrBeforeNth(rep(string, 2), fixed("."), -3)
 }
-

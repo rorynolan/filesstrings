@@ -25,4 +25,3 @@ SplitCamelcase(c("RoryNolan", "NaomiFlagg", "DepartmentOfSillyHats"))
 Adapted from Ramnath Vaidyanathan's answer at
 http://stackoverflow.com/questions/8406974/splitting-camelcase-in-r.
 }
-
