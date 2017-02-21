@@ -170,7 +170,7 @@ List CorrectInterleave(CharacterVector orig, List strings1, List strings2) {
   List interleaved(l);
   if (strings1.size() != l || strings2.size() != l) {
     for (int i = 0; i < l; i++) {
-      interleaved[i] = NA_STRING;
+      interleaved[i] = CharacterVector::create(NA_STRING);
     }
   }
   else {
@@ -188,7 +188,7 @@ List InterleaveStringList(List strings1, List strings2) {
   List interleaved(l);
   if (l != strings2.size()) {
     for (int i = 0; i < l; i++) {
-      interleaved[i] = NA_STRING;
+      interleaved[i] = CharacterVector::create(NA_STRING);
     }
   }
   else {

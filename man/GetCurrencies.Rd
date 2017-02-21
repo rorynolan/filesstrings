@@ -27,10 +27,10 @@ in the string. If nothing comes before (i.e. if the number is the first thing
 in the string), the currency is the empty string, similarly the currency can
 be a space, comma or any manner of thing.
 \itemize{
-  \item \code{GetCurrency}
+\item \code{GetCurrency}
 takes a string and returns the currency of the first number therein. It is
 vectorised over string.
-  \item \code{GetCurrencies} takes a string and returns
+\item \code{GetCurrencies} takes a string and returns
 the currencies of all of the numbers within that string. It is not
 vectorised. }
 }
@@ -38,6 +38,6 @@ vectorised. }
 These functions do not allow for leading decimal points.
 }
 \examples{
-GetCurrencies("35.00 $1.14 abc5 £3.8 77")
-GetCurrency(c("ab3 13", "£1"))
+GetCurrencies("35.00 $1.14 abc5 $3.8 77")
+GetCurrency(c("ab3 13", "$1"))
 }

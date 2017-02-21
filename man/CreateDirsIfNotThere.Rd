@@ -12,13 +12,13 @@ absolute paths.}
 }
 \value{
 Invisibly, a vector with a \code{TRUE} for each time a directory was
-  actually created and a \code{FALSE} otherwise.
+actually created and a \code{FALSE} otherwise.
 }
 \description{
 Given the name of a (potential) directory, if that directory does not already
 exist, create it.
 }
 \examples{
-CreateDirsIfNotThere("mydir")
-CreateDirsIfNotThere("/home/mydir")
+CreateDirsIfNotThere(c("mydir", "yourdir"))
+RemoveDirs(c("mydir", "yourdir"))
 }

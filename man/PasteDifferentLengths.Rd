@@ -22,7 +22,7 @@ A character vector.
 Paste character vectors of different lengths, optionally inputting the
 vectors as file names, which become character vectors via \code{readLines}.
 Vectors are first extended to all be the same length via
-\code{\link{ExtendCharVec}} and are then pasted together, with no separator
+\code{\link[=ExtendCharVec]{ExtendCharVec()}} and are then pasted together, with no separator
 put in when pasting empty strings. See the examples if you don't understand.
 }
 \examples{

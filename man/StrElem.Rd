@@ -10,7 +10,7 @@ StrElem(string, index)
 \item{string}{A string.}
 
 \item{index}{An integer. Negative indexing is allowed as in
-\code{\link[stringr]{str_sub}}.}
+\code{\link[stringr:str_sub]{stringr::str_sub()}}.}
 }
 \value{
 A one-character string.

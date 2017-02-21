@@ -10,7 +10,7 @@ CountMatches(string, pattern)
 \item{string}{A character vector.}
 
 \item{pattern}{A character vector. Pattern(s) specified like the pattern(s)
-in the stringr package (e.g. look at \code{\link[stringr]{str_locate}}). If
+in the stringr package (e.g. look at \code{\link[stringr:str_locate]{stringr::str_locate()}}). If
 this has length >1 its length must be the same as that of \code{string}.}
 }
 \value{

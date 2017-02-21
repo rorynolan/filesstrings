@@ -15,7 +15,7 @@ which to move the files.}
 }
 \value{
 A logical vector with a \code{TRUE} for each time the operation
-  succeeded and a \code{FALSE} for every fail.
+succeeded and a \code{FALSE} for every fail.
 }
 \description{
 Move specified files into specified directories.

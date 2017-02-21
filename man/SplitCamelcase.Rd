@@ -13,7 +13,7 @@ SplitCamelcase(string, lower = FALSE)
 }
 \value{
 A list of character vectors, one list element for each element of
-  \code{string}.
+\code{string}.
 }
 \description{
 Vectorised over \code{string}.

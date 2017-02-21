@@ -12,7 +12,7 @@ paths.}
 }
 \value{
 Invisibly, a logical vector with \code{TRUE} for each success and
-  \code{FALSE} for failures.
+\code{FALSE} for failures. See \link[base:unlink]{base::unlink}.
 }
 \description{
 Delete directories and all of their contents (can just be one directory).

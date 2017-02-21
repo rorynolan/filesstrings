@@ -13,7 +13,7 @@ AllEqual(a, b = NA)
 }
 \value{
 \code{TRUE} if "equality of all" is satisfied (as detailed in
-  "Description" above) and \code{FALSE} otherwise.
+"Description" above) and \code{FALSE} otherwise.
 }
 \description{
 If one argument is specified, check that all elements of that argument are

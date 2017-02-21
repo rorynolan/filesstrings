@@ -16,8 +16,8 @@ treated.}
 to current)?}
 }
 \value{
-\code{TRUE} if the operation is successful, if not there will be an
-  error.
+Invisibly \code{TRUE} if the operation is successful, if not there will be an
+error.
 }
 \description{
 Say you have a number of files with "5min" in their names, number with
@@ -27,7 +27,7 @@ on. This function does this, but not just for the unit "min", for any unit.
 }
 \details{
 This function takes the number to be the last number (as defined in
-\code{\link{NthNumber}}) before the first occurrence of the unit name. There
+\code{\link[=NthNumber]{NthNumber()}}) before the first occurrence of the unit name. There
 is the option to only treat files matching a certain pattern.
 }
 \examples{

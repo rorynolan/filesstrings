@@ -26,7 +26,7 @@ strings
 NiceNums(strings)
 
 NiceNums(c("abc9def55", "abc10def7"))
-NiceNums(c("abc9def55", "abc10def777", "abc4def4"))
+NiceNums(c("01abc9def55", "5abc10def777", "99abc4def4"))
 
 \dontrun{
 NiceNums(c("abc9def55", "abc10xyz7"))}

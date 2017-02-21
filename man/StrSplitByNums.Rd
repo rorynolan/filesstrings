@@ -26,4 +26,5 @@ vice-versa.
 \examples{
 StrSplitByNums(c("abc123def456.789gh", "a1b2c344"))
 StrSplitByNums("abc123def456.789gh", decimals = TRUE)
+StrSplitByNums("22")
 }

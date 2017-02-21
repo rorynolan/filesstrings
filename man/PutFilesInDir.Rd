@@ -14,7 +14,7 @@ relative or absolute path}
 }
 \value{
 A logical vector with a \code{TRUE} for each successful file move and
-  a \code{FALSE} otherwise.
+a \code{FALSE} otherwise.
 }
 \description{
 Move files to a directory, creating the directory if it does not already

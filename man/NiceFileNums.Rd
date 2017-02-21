@@ -15,7 +15,7 @@ restricted to ones matching this pattern (in their name).}
 }
 \value{
 A logical vector with a \code{TRUE} for each successful rename
-  (should be all TRUEs) and \code{FALSE}s otherwise.
+(should be all TRUEs) and \code{FALSE}s otherwise.
 }
 \description{
 If files are numbered, their numbers may not \emph{comply} with alphabetical
@@ -29,7 +29,17 @@ It works on file names with more than one number in them e.g.
 "file01part3.ext" (a file with 2 numbers). All the file names that it works
 on must have the same number of numbers, and the non-number bits must be the
 same. One can limit the renaming to files matching a certain pattern. This
-function wraps \code{\link{NiceNums}}, which does the string operations, but
+function wraps \code{\link[=NiceNums]{NiceNums()}}, which does the string operations, but
 not the renaming. To see examples of how this function works, see the
 examples in that function's documentation.
+}
+\examples{
+dir.create("NiceFileNums_test")
+setwd("NiceFileNums_test")
+files <- c("1litres_1.txt", "1litres_30.txt", "3litres_5.txt")
+file.create(files)
+NiceFileNums()
+NiceFileNums(pattern = "\\\\.txt$")
+setwd("..")
+RemoveDirs("NiceFileNums_test")
 }

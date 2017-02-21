@@ -1,11 +1,11 @@
 #' Check if a string could be considered as numeric.
 #'
 #' After padding is removed, could the input string be considered to be numeric,
-#' i.e. could it be constructed via \code{toString(num)} where \code{num} is
+#' i.e. could it be constructed via `toString(num)` where `num` is
 #' numeric. This function is vectorised over its one argument.
 #' @param string A character vector.
-#' @return \code{TRUE} if the argument can be considered to be numeric or
-#'   \code{FALSE} otherwise.
+#' @return `TRUE` if the argument can be considered to be numeric or
+#'   `FALSE` otherwise.
 #' @examples
 #' CanBeNumeric("3")
 #' CanBeNumeric("5 ")
@@ -20,10 +20,10 @@ CanBeNumeric <- function(string) !is.na(suppressWarnings(as.numeric(string)))
 #' in the string), the currency is the empty string, similarly the currency can
 #' be a space, comma or any manner of thing.
 #' \itemize{
-#'   \item \code{GetCurrency}
+#'   \item `GetCurrency`
 #' takes a string and returns the currency of the first number therein. It is
 #' vectorised over string.
-#'   \item \code{GetCurrencies} takes a string and returns
+#'   \item `GetCurrencies` takes a string and returns
 #' the currencies of all of the numbers within that string. It is not
 #' vectorised. }
 #'
@@ -34,12 +34,12 @@ CanBeNumeric <- function(string) !is.na(suppressWarnings(as.numeric(string)))
 #'
 #' @return
 #' \itemize{
-#' \item \code{GetCurrency} returns a character vector.
-#' \item \code{GetCurrencies} returns a data frame with one column for the
+#' \item `GetCurrency` returns a character vector.
+#' \item `GetCurrencies` returns a data frame with one column for the
 #' currency symbol and one for the amount.
 #' }
 #' @examples
-#' GetCurrencies("35.00 $1.14 abc5 £3.8 77")
+#' GetCurrencies("35.00 $1.14 abc5 $3.8 77")
 #' @export
 GetCurrencies <- function(string) {
   stopifnot(is.character(string) && length(string) == 1)
@@ -56,10 +56,12 @@ GetCurrencies <- function(string) {
 
 #' @rdname GetCurrencies
 #' @examples
-#' GetCurrency(c("ab3 13", "£1"))
+#' GetCurrency(c("ab3 13", "$1"))
 #' @export
 GetCurrency <- function(strings) {
-
+  num.starts <- str_locate(strings, "[0-9]")[, "start"]
+  before.indices <- num.starts - 1
+  StrElem(strings, before.indices)
 }
 
 #' Remove back-to-back duplicates of a pattern in a string.
@@ -103,7 +105,7 @@ DuplicatesToSingles <- function(string, pattern) {
 #' NiceNums(strings)
 #'
 #' NiceNums(c("abc9def55", "abc10def7"))
-#' NiceNums(c("abc9def55", "abc10def777", "abc4def4"))
+#' NiceNums(c("01abc9def55", "5abc10def777", "99abc4def4"))
 #'
 #' \dontrun{
 #' NiceNums(c("abc9def55", "abc10xyz7"))}
@@ -130,7 +132,7 @@ NiceNums <- function(strings) {
     split(rep(seq_len(ncol(ncn)), each = nrow(ncn)))
   num.first <- StrElem(strings, 1) %>% CanBeNumeric
   if (!AllEqual(num.first)) {
-    stop("some file names start with numbers and some don't")
+    stop("Some strings start with numbers and some don't")
   }
   if (num.first[1]) {
     interleaves <- InterleaveStringList(nums, non.nums)
@@ -142,34 +144,34 @@ NiceNums <- function(strings) {
 
 #' Extract numbers (or non-numbers) from a string.
 #'
-#' \code{ExtractNumbers} extracts the numbers (or non-numbers) from a string
-#' where decimals are optionally allowed. \code{ExtractNonNumerics} extracts the
-#' bits of the string that aren't extracted by \code{ExtractNumbers}.
-#' \code{NthNumber} is a convenient wrapper for \code{ExtractNumbers}, allowing
-#' you to choose which number you want. Similarly \code{NthNonNumeric}. Please
+#' `ExtractNumbers` extracts the numbers (or non-numbers) from a string
+#' where decimals are optionally allowed. `ExtractNonNumerics` extracts the
+#' bits of the string that aren't extracted by `ExtractNumbers`.
+#' `NthNumber` is a convenient wrapper for `ExtractNumbers`, allowing
+#' you to choose which number you want. Similarly `NthNonNumeric`. Please
 #' view the examples at the bottom of this page to ensure that you understand
 #' how these functions work, and their limitations. These functions are
-#' vectorised over \code{string}.
+#' vectorised over `string`.
 #'
-#' \code{ExtractNonNumerics} uses \code{ExtractNumerics} to tell it what the
+#' `ExtractNonNumerics` uses `ExtractNumerics` to tell it what the
 #' numbers in the string are and then it extracts the bits in between those
 #' numbers. For this reason, errors you see whilst using
-#' \code{ExtractNonNumerics} might be errors from \code{ExtractNumerics}.
+#' `ExtractNonNumerics` might be errors from `ExtractNumerics`.
 #'
 #' @param string A string.
 #' @param leave.as.string Do you want to return the number as a string
-#'   (\code{TRUE}) or as numeric (\code{FALSE}, the default)?
+#'   (`TRUE`) or as numeric (`FALSE`, the default)?
 #' @param decimals Do you want to include the possibility of decimal numbers
-#'   (\code{TRUE}) or not (\code{FALSE}, the default).
+#'   (`TRUE`) or not (`FALSE`, the default).
 #' @param leading.decimals Do you want to allow a leading decimal point to be
 #'   the start of a number?
 #' @param negs Do you want to allow negative numbers? Note that double negatives
 #'   are not handled here (see the examples).
-#' @return For \code{ExtractNumbers} and \code{ExtractNonNumerics}, a list of
+#' @return For `ExtractNumbers` and `ExtractNonNumerics`, a list of
 #'   numeric or character vectors, one list element for each element of
-#'   \code{string}. For \code{NthNumber} and \code{NthNonNumeric}, a vector the
-#'   same length as \code{string} (as in \code{length(string)}, not
-#'   \code{nchar(string)}..
+#'   `string`. For `NthNumber` and `NthNonNumeric`, a vector the
+#'   same length as `string` (as in `length(string)`, not
+#'   `nchar(string)`..
 #' @examples
 #' ExtractNumbers(c("abc123abc456", "abc1.23abc456"))
 #' ExtractNumbers(c("abc1.23abc456", "abc1..23abc456"), decimals = TRUE)
@@ -195,6 +197,8 @@ NiceNums <- function(strings) {
 #' NthNumber("abc1.23abc456", 2, decimals = TRUE)
 #' NthNumber("-123abc456", -2, negs = TRUE)
 #' ExtractNonNumerics("--123abc456", negs = TRUE)
+#' NthNonNumeric("--123abc456", 1)
+#' NthNonNumeric("--123abc456", -2)
 #' @export
 ExtractNumbers <- function(string, leave.as.string = FALSE, decimals = FALSE,
                            leading.decimals = FALSE, negs = FALSE) {
@@ -233,9 +237,9 @@ ExtractNonNumerics <- function(string, decimals = FALSE,
 }
 
 #' @param n The index of the number (or non-numeric) that you seek. Negative
-#'   indexing is allowed i.e. \code{n = 1} will give you the first number (or
-#'   non-numeric) whereas \code{n = -1} will give you the last number (or
-#'   non-numeric), \code{n = -2} will give you the second last number and so on.
+#'   indexing is allowed i.e. `n = 1` will give you the first number (or
+#'   non-numeric) whereas `n = -1` will give you the last number (or
+#'   non-numeric), `n = -2` will give you the second last number and so on.
 #' @rdname ExtractNumbers
 #' @export
 NthNumber <- function(string, n, leave.as.string = FALSE, decimals = FALSE,
@@ -270,6 +274,7 @@ NthNonNumeric <- function(string, n, decimals = FALSE,
 #' @examples
 #' StrSplitByNums(c("abc123def456.789gh", "a1b2c344"))
 #' StrSplitByNums("abc123def456.789gh", decimals = TRUE)
+#' StrSplitByNums("22")
 #' @export
 StrSplitByNums <- function(string, decimals = FALSE, leading.decimals = FALSE,
                            negs = FALSE) {
@@ -289,7 +294,7 @@ StrSplitByNums <- function(string, decimals = FALSE, leading.decimals = FALSE,
 #'
 #' @param string A string.
 #' @param index An integer. Negative indexing is allowed as in
-#'   \code{\link[stringr]{str_sub}}.
+#'   [stringr::str_sub()].
 #' @return A one-character string.
 #' @examples
 #' StrElem("abcd", 3)
@@ -306,7 +311,7 @@ StrElem <- function(string, index) {
 #' them together
 #' @param string A string.
 #' @param indices A numeric vector of positive integers detailing the indices of
-#'   the characters of \code{string} that we wish to paste together.
+#'   the characters of `string` that we wish to paste together.
 #' @return A string.
 #' @examples
 #' StrElemsPasted("abcdef", c(2, 5:6))
@@ -340,12 +345,15 @@ StringToVec <- function(string) {
 #' @param strings A character vector.
 #' @param patterns Regular expressions.
 #' @param ignore.case Do we want to ignore case when matching patterns?
-#' @param any Set this to \code{TRUE} if you want to see which strings match
+#' @param any Set this to `TRUE` if you want to see which strings match
 #'   \emph{any} of the patterns and not \emph{all} (all is the default).
 #' @return A character vector of strings matching the patterns.
 #' @examples
 #' StringsWithPatterns(c("abc", "bcd", "cde"), c("b", "c"))
 #' StringsWithPatterns(c("abc", "bcd", "cde"), c("b", "c"), any = TRUE)
+#' StringsWithPatterns(toupper(c("abc", "bcd", "cde")), c("b", "c"), any = TRUE)
+#' StringsWithPatterns(toupper(c("abc", "bcd", "cde")), c("b", "c"), any = TRUE,
+#' ignore.case = TRUE)
 #' @export
 StringsWithPatterns <- function(strings, patterns, ignore.case = FALSE,
                                 any = FALSE) {
@@ -386,13 +394,13 @@ StrReverse <- function(string) {
 #' Extract the part of a string which is before or after the \eqn{n}th
 #' occurrence of a specified pattern, vectorised over the string. One can also
 #' choose \eqn{n} to be the \emph{last} occurrence of the pattern. See argument
-#' \code{n}.
+#' `n`.
 #'
 #' @param strings A character vector.
 #' @param pattern A regular expression.
 #' @param n A natural number to identify the \eqn{n}th occurrence This can be
 #'   negatively indexed, so if you wish to select the \emph{last} occurrence,
-#'   you need \code{n = -1}, for the second-last, you need \code{n = -2} and so
+#'   you need `n = -1`, for the second-last, you need `n = -2` and so
 #'   on.
 #' @return A character vector of the desired strings.
 #' @examples
@@ -471,12 +479,12 @@ ExtendCharVec <- function(char.vec, extend.by = NA, length.out = NA) {
 #' Paste vectors/files with different lengths/numbers of lines.
 #'
 #' Paste character vectors of different lengths, optionally inputting the
-#' vectors as file names, which become character vectors via \code{readLines}.
+#' vectors as file names, which become character vectors via `readLines`.
 #' Vectors are first extended to all be the same length via
-#' \code{\link{ExtendCharVec}} and are then pasted together, with no separator
+#' [ExtendCharVec()] and are then pasted together, with no separator
 #' put in when pasting empty strings. See the examples if you don't understand.
 #'
-#' @param files A character vector of files to be read in via \code{readLines}
+#' @param files A character vector of files to be read in via `readLines`
 #'   to be pasted. If you would like to use this function on vectors already in
 #'   the environment (without reading in files), pass them into this argument as
 #'   a list (see the examples).
@@ -538,18 +546,18 @@ PutInPos <- function(strings, positions) {
 
 #' Trim something other than whitespace
 #'
-#' The \code{stringi} and \code{stringr} packages let you trim whitespace, but
+#' The `stringi` and `stringr` packages let you trim whitespace, but
 #' what if you want to trim something else from either (or both) side(s) of a
 #' string? This function lets you select which pattern to trim and from which
 #' side(s).
 #'
 #' @param string A string.
 #' @param pattern A string. The pattern to be trimmed (\emph{not} interpreted as
-#'   regular expression). So to trim a period, use \code{char = "."} and not
-#'   \code{char = "\\\\."}).
-#' @param side Which side do you want to trim from? \code{"both"} is the
-#'   default, but you can also have just either \code{"left"} or \code{"right"}
-#'   (or optionally the shorthands \code{"b"}, \code{"l"} and \code{"r"}).
+#'   regular expression). So to trim a period, use `char = "."` and not
+#'   `char = "\\\\."`).
+#' @param side Which side do you want to trim from? `"both"` is the
+#'   default, but you can also have just either `"left"` or `"right"`
+#'   (or optionally the shorthands `"b"`, `"l"` and `"r"`).
 #' @return A string.
 #' @examples
 #' TrimAnything("..abcd.", ".", "left")
@@ -572,12 +580,12 @@ TrimAnything <- function(string, pattern, side = "both") {
 
 #' Count the number of the matches of a pattern in a string.
 #'
-#' Vectorised over \code{string} and pattern.
+#' Vectorised over `string` and pattern.
 #'
 #' @param string A character vector.
 #' @param pattern A character vector. Pattern(s) specified like the pattern(s)
-#'   in the stringr package (e.g. look at \code{\link[stringr]{str_locate}}). If
-#'   this has length >1 its length must be the same as that of \code{string}.
+#'   in the stringr package (e.g. look at [stringr::str_locate()]). If
+#'   this has length >1 its length must be the same as that of `string`.
 #'
 #' @return A numeric vector giving the number of matches in each string.
 #' @examples
@@ -594,7 +602,6 @@ CountMatches <- function(string, pattern) {
            "it must have the same length as string.")
     }
   }
-  if (lp == 1) pattern <- rep(pattern, ls)
   locations <- str_locate_all(string, pattern)
   n_matches <- vapply(locations, nrow, integer(1)) %>% sum
   n_matches
@@ -602,11 +609,11 @@ CountMatches <- function(string, pattern) {
 
 #' Locate the braces in a string.
 #'
-#' Give the positions of (, ), [, ], \{, and \} within a string.
+#' Give the positions of (, ), \[, \], \{, and \} within a string.
 #'
 #' @param string A character vector
 #'
-#' @return A list of data frames (\link[tibble]{tibble}s), one for each member
+#' @return A list of data frames ([tibble][tibble::tibble]s), one for each member
 #'   of the string character vector. Each data frame has a "position" and
 #'   "brace" column which give the positions and types of braces in the given
 #'   string.
@@ -675,13 +682,13 @@ MakeExtName <- function(string, ext, replace = FALSE) {
 
 #' Split a string based on camelcase
 #'
-#' Vectorised over \code{string}.
+#' Vectorised over `string`.
 #'
 #' @param string A character vector.
 #' @param lower Do you want the output to be all lower case (or as is)?
 #'
 #' @return A list of character vectors, one list element for each element of
-#'   \code{string}.
+#'   `string`.
 #'
 #' @references Adapted from Ramnath Vaidyanathan's answer at
 #' http://stackoverflow.com/questions/8406974/splitting-camelcase-in-r.

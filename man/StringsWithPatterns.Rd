@@ -26,4 +26,7 @@ expression), which of the strings match all (or any) of the patterns.
 \examples{
 StringsWithPatterns(c("abc", "bcd", "cde"), c("b", "c"))
 StringsWithPatterns(c("abc", "bcd", "cde"), c("b", "c"), any = TRUE)
+StringsWithPatterns(toupper(c("abc", "bcd", "cde")), c("b", "c"), any = TRUE)
+StringsWithPatterns(toupper(c("abc", "bcd", "cde")), c("b", "c"), any = TRUE,
+ignore.case = TRUE)
 }

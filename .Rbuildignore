@@ -4,3 +4,5 @@
 ^README\.Rmd$
 ^README-.*\.png$
 ^appveyor\.yml$
+^PossibleJunk$
+^codecov\.yml$

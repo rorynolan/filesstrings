@@ -41,10 +41,10 @@ non-numeric), \code{n = -2} will give you the second last number and so on.}
 }
 \value{
 For \code{ExtractNumbers} and \code{ExtractNonNumerics}, a list of
-  numeric or character vectors, one list element for each element of
-  \code{string}. For \code{NthNumber} and \code{NthNonNumeric}, a vector the
-  same length as \code{string} (as in \code{length(string)}, not
-  \code{nchar(string)}..
+numeric or character vectors, one list element for each element of
+\code{string}. For \code{NthNumber} and \code{NthNonNumeric}, a vector the
+same length as \code{string} (as in \code{length(string)}, not
+\code{nchar(string)}..
 }
 \description{
 \code{ExtractNumbers} extracts the numbers (or non-numbers) from a string
@@ -87,4 +87,6 @@ NthNumber("abc1.23abc456", 2)
 NthNumber("abc1.23abc456", 2, decimals = TRUE)
 NthNumber("-123abc456", -2, negs = TRUE)
 ExtractNonNumerics("--123abc456", negs = TRUE)
+NthNonNumeric("--123abc456", 1)
+NthNonNumeric("--123abc456", -2)
 }

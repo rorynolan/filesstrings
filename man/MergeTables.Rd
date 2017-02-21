@@ -16,5 +16,18 @@ MergeTables(file.names, delim, out.name, header = TRUE)
 \item{header}{Do the tables to be merged have headers?}
 }
 \description{
-Merge tables saved on disk as delimited files.
+Merge tables saved on disk as delimited files. The merging is done lengthways
+so they need to have the same number of columns and the same column names (if
+they have column names).
+}
+\examples{
+dir.create("MergeTables_test")
+setwd("MergeTables_test")
+tab1 <- tibble::tibble(x = 1, y = 2)
+tab2 <- tibble::tibble(x = 1, y = 29)
+mapply(readr::write_csv, list(tab1, tab2), paste0(c("tab1", "tab2"), ".csv"))
+MergeTables(c("tab1.csv", "tab2.csv"), ",", "merged.csv")
+readr::read_csv("merged.csv")
+setwd("..")
+RemoveDirs("MergeTables_test")
 }

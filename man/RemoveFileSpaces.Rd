@@ -17,10 +17,20 @@ defaults to nothing, another sensible choice would be an underscore.}
 }
 \value{
 A logical vector indicating which operation succeeded for each of the
-  files attempted. Using a missing value for a file or path name will always
-  be regarded as a failure.
+files attempted. Using a missing value for a file or path name will always
+be regarded as a failure.
 }
 \description{
 Remove spaces in file names in a specified directory, replacing them with
 whatever you want, default nothing.
+}
+\examples{
+dir.create("RemoveFileSpaces_test")
+setwd("RemoveFileSpaces_test")
+files <- c("1litres 1.txt", "1litres 30.txt", "3litres 5.txt")
+file.create(files)
+RemoveFileSpaces()
+list.files()
+setwd("..")
+RemoveDirs("RemoveFileSpaces_test")
 }

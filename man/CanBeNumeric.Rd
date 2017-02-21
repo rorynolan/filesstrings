@@ -11,7 +11,7 @@ CanBeNumeric(string)
 }
 \value{
 \code{TRUE} if the argument can be considered to be numeric or
-  \code{FALSE} otherwise.
+\code{FALSE} otherwise.
 }
 \description{
 After padding is removed, could the input string be considered to be numeric,

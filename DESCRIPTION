@@ -1,7 +1,7 @@
 Package: filesstrings
 Type: Package
 Title: Handy String and File Manipulation
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: person("Rory", "Nolan", email = "rorynoolan@gmail.com", role = c("aut", "cre"))
 Maintainer: Rory Nolan <rorynoolan@gmail.com>
 Description: This package is built upon the functionalities of stringr and
@@ -23,8 +23,10 @@ Imports:
     ore,
     matrixStats
 RoxygenNote: 6.0.1
-Suggests: testthat
+Suggests: testthat,
+    covr
 LinkingTo: Rcpp
 Depends: stringr
 URL: https://www.github.com/rorynolan/filesstrings
 BugReports: https://www.github.com/rorynolan/filesstrings/issues
+Roxygen: list(markdown = TRUE)

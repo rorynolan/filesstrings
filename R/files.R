@@ -4,11 +4,11 @@
 #' exist, create it.
 #' @param dir.names The name of the directories, specified via relative or
 #'   absolute paths.
-#' @return Invisibly, a vector with a \code{TRUE} for each time a directory was
-#'   actually created and a \code{FALSE} otherwise.
+#' @return Invisibly, a vector with a `TRUE` for each time a directory was
+#'   actually created and a `FALSE` otherwise.
 #' @examples
-#' CreateDirsIfNotThere("mydir")
-#' CreateDirsIfNotThere("/home/mydir")
+#' CreateDirsIfNotThere(c("mydir", "yourdir"))
+#' RemoveDirs(c("mydir", "yourdir"))
 #' @export
 CreateDirsIfNotThere <- function(dir.names) {
   created <- vapply(dir.names,
@@ -28,8 +28,8 @@ CreateDirsIfNotThere <- function(dir.names) {
 #' Delete directories and all of their contents (can just be one directory).
 #' @param dirs The names of the directories, specified via relative or absolute
 #'   paths.
-#' @return Invisibly, a logical vector with \code{TRUE} for each success and
-#'   \code{FALSE} for failures.
+#' @return Invisibly, a logical vector with `TRUE` for each success and
+#'   `FALSE` for failures. See [base::unlink].
 #' @examples
 #' sapply(c("mydir1", "mydir2"), dir.create)
 #' RemoveDirs(c("mydir1", "mydir2"))
@@ -41,25 +41,37 @@ RemoveDirs <- function(dirs) {
 
 #' Merge Tables.
 #'
-#' Merge tables saved on disk as delimited files.
+#' Merge tables saved on disk as delimited files. The merging is done lengthways
+#' so they need to have the same number of columns and the same column names (if
+#' they have column names).
 #'
 #' @param file.names The paths to the files to merge.
 #' @param delim Delimeter used to separate values.
 #' @param out.name The path to the output file containing the merged tables.
 #' @param header Do the tables to be merged have headers?
+#' @examples
+#' dir.create("MergeTables_test")
+#' setwd("MergeTables_test")
+#' tab1 <- tibble::tibble(x = 1, y = 2)
+#' tab2 <- tibble::tibble(x = 1, y = 29)
+#' mapply(readr::write_csv, list(tab1, tab2), paste0(c("tab1", "tab2"), ".csv"))
+#' MergeTables(c("tab1.csv", "tab2.csv"), ",", "merged.csv")
+#' readr::read_csv("merged.csv")
+#' setwd("..")
+#' RemoveDirs("MergeTables_test")
 #' @export
 MergeTables <- function(file.names, delim, out.name, header = TRUE) {
   tables <- lapply(file.names, readr::read_delim, delim, col_names = header)
   ncs <- vapply(tables, ncol, integer(1))
   if (!AllEqual(ncs)) stop("The tables have different numbers of columns.")
   if (header) {
-    namess <- vapply(tables, names, character(1))
+    namess <- vapply(tables, names, character(ncs[1]))
     if (!all(apply(namess, 1, AllEqual))) {
       stop("Tables have different colnames.")
     }
   }
   merged <- Reduce(rbind, tables)
-  readr::write_delim(merged, file = out.name, delim = delim, col_names = header)
+  readr::write_delim(merged, out.name, delim = delim, col_names = header)
 }
 
 MoveFile <- function(file, destination) {
@@ -83,8 +95,8 @@ MoveFile <- function(file, destination) {
 #'   paths).
 #' @param destinations A character vector of the destination directories into
 #'   which to move the files.
-#' @return A logical vector with a \code{TRUE} for each time the operation
-#'   succeeded and a \code{FALSE} for every fail.
+#' @return A logical vector with a `TRUE` for each time the operation
+#'   succeeded and a `FALSE` for every fail.
 #' @export
 MoveFiles <- function(files, destinations) {
   if(length(destinations) == length(files)) {
@@ -109,7 +121,7 @@ MoveFiles <- function(files, destinations) {
 #' "file01part3.ext" (a file with 2 numbers). All the file names that it works
 #' on must have the same number of numbers, and the non-number bits must be the
 #' same. One can limit the renaming to files matching a certain pattern. This
-#' function wraps \code{\link{NiceNums}}, which does the string operations, but
+#' function wraps [NiceNums()], which does the string operations, but
 #' not the renaming. To see examples of how this function works, see the
 #' examples in that function's documentation.
 #'
@@ -117,8 +129,18 @@ MoveFiles <- function(files, destinations) {
 #'   renaming (default is current working directory).
 #' @param pattern A regular expression. If specified, files to be renamed are
 #'   restricted to ones matching this pattern (in their name).
-#' @return A logical vector with a \code{TRUE} for each successful rename
-#'   (should be all TRUEs) and \code{FALSE}s otherwise.
+#' @return A logical vector with a `TRUE` for each successful rename
+#'   (should be all TRUEs) and `FALSE`s otherwise.
+#'
+#' @examples
+#' dir.create("NiceFileNums_test")
+#' setwd("NiceFileNums_test")
+#' files <- c("1litres_1.txt", "1litres_30.txt", "3litres_5.txt")
+#' file.create(files)
+#' NiceFileNums()
+#' NiceFileNums(pattern = "\\.txt$")
+#' setwd("..")
+#' RemoveDirs("NiceFileNums_test")
 #' @export
 NiceFileNums <- function(dir = ".", pattern = NA) {
   init.dir <- getwd()
@@ -140,8 +162,8 @@ NiceFileNums <- function(dir = ".", pattern = NA) {
 #' @param file.names character vector of file names, relative or absolute paths
 #' @param dir.name The name of the directory into which to move the files,
 #'   relative or absolute path
-#' @return A logical vector with a \code{TRUE} for each successful file move and
-#'   a \code{FALSE} otherwise.
+#' @return A logical vector with a `TRUE` for each successful file move and
+#'   a `FALSE` otherwise.
 #' @export
 PutFilesInDir <- function(file.names, dir.name) {
   CreateDirsIfNotThere(dir.name)
@@ -161,6 +183,15 @@ PutFilesInDir <- function(file.names, dir.name) {
 #' @return A logical vector indicating which operation succeeded for each of the
 #'   files attempted. Using a missing value for a file or path name will always
 #'   be regarded as a failure.
+#' @examples
+#' dir.create("RemoveFileSpaces_test")
+#' setwd("RemoveFileSpaces_test")
+#' files <- c("1litres 1.txt", "1litres 30.txt", "3litres 5.txt")
+#' file.create(files)
+#' RemoveFileSpaces()
+#' list.files()
+#' setwd("..")
+#' RemoveDirs("RemoveFileSpaces_test")
 #' @export
 RemoveFileSpaces <- function(dir = ".", pattern = "", replace.with = "") {
   init.dir <- getwd()
@@ -179,7 +210,16 @@ RemoveFileSpaces <- function(dir = ".", pattern = "", replace.with = "") {
 #'   path). Defaults to current working directory.
 #' @param pattern A regular expression. If specified, only files with names
 #'   matching this pattern will be treated.
-#' @return A logical vector with a \code{TRUE} for each successful renaming.
+#' @return A logical vector with a `TRUE` for each successful renaming.
+#' @examples
+#' dir.create("RenameWithNums_test")
+#' setwd("RenameWithNums_test")
+#' files <- c("1litres 1.txt", "1litres 30.txt", "3litres 5.txt")
+#' file.create(files)
+#' RenameWithNums()
+#' list.files()
+#' setwd("..")
+#' RemoveDirs("RenameWithNums_test")
 #' @export
 RenameWithNums <- function(dir = ".", pattern = NULL) {
   init.dir <- getwd()
@@ -187,12 +227,12 @@ RenameWithNums <- function(dir = ".", pattern = NULL) {
   setwd(dir)
   lf <- list.files(pattern = pattern)
   ext <- unique(tools::file_ext(lf))
-  if (length(ext != 1)) {
+  if (length(ext) != 1) {
     stop("Files matching pattern have different extensions.")
   }
   l <- length(lf)
   if (l == 0) stop("No files found to rename.")
-  new.names <- NiceNums(paste0(seq_len(l), ext))
+  new.names <- NiceNums(paste0(seq_len(l), ".", ext))
   if (any(new.names %in% lf)) {
     stop("Some of the names are already in the desired format, ",
          "unable to proceed as renaming may result in deletion.")
@@ -208,7 +248,7 @@ RenameWithNums <- function(dir = ".", pattern = NULL) {
 #' on. This function does this, but not just for the unit "min", for any unit.
 #'
 #' This function takes the number to be the last number (as defined in
-#' \code{\link{NthNumber}}) before the first occurrence of the unit name. There
+#' [NthNumber()]) before the first occurrence of the unit name. There
 #' is the option to only treat files matching a certain pattern.
 #'
 #' @param unit The unit upon which to base the categorising.
@@ -216,7 +256,7 @@ RenameWithNums <- function(dir = ".", pattern = NULL) {
 #'   treated.
 #' @param dir In which directory do you want to perform this action (defaults
 #'   to current)?
-#' @return \code{TRUE} if the operation is successful, if not there will be an
+#' @return Invisibly `TRUE` if the operation is successful, if not there will be an
 #'   error.
 #' @examples
 #' # Keep an eye on your current working directory and the
@@ -238,10 +278,8 @@ UnitDirs <- function(unit, pattern = NULL, dir = ".") {
   nums <- vapply(up.to.first.units, NthNumber, numeric(1), -1, decimals = TRUE)
   un <- unique(nums)
   for (i in un) {
-    print(lf)
     files <- lf[nums == i]
-    print(files)
     PutFilesInDir(files, paste0(i, unit))
   }
-  TRUE
+  invisible(TRUE)
 }
