@@ -53,17 +53,17 @@ RemoveDirs <- function(dirs) {
 #' @param header Do the tables to be merged have headers?
 #' @examples
 #' setwd(tempdir())
-#' dir.create("MergeTables_test")
-#' setwd("MergeTables_test")
+#' dir.create("MergeTablesOnDisk_test")
+#' setwd("MergeTablesOnDisk_test")
 #' tab1 <- tibble::tibble(x = 1, y = 2)
 #' tab2 <- tibble::tibble(x = 1, y = 29)
 #' mapply(readr::write_csv, list(tab1, tab2), paste0(c("tab1", "tab2"), ".csv"))
-#' MergeTables(c("tab1.csv", "tab2.csv"), ",", "merged.csv")
+#' MergeTablesOnDisk(c("tab1.csv", "tab2.csv"), ",", "merged.csv")
 #' readr::read_csv("merged.csv")
 #' setwd("..")
-#' RemoveDirs("MergeTables_test")
+#' RemoveDirs("MergeTablesOnDisk_test")
 #' @export
-MergeTables <- function(file.names, delim, out.name, header = TRUE) {
+MergeTablesOnDisk <- function(file.names, delim, out.name, header = TRUE) {
   tables <- lapply(file.names, readr::read_delim, delim, col_names = header)
   ncs <- vapply(tables, ncol, integer(1))
   if (!AllEqual(ncs)) stop("The tables have different numbers of columns.")

@@ -67,22 +67,22 @@ test_that("MoveFiles errors correctly", {
   expect_error(MoveFiles("tmpfile0.R", c("tmpdir0", "tmpdir0")))
 })
 
-test_that("MergeTables works", {
+test_that("MergeTablesOnDisk works", {
   setwd(tempdir())
-  expect_true(dir.create("MergeTables_test"))
-  setwd("MergeTables_test")
+  expect_true(dir.create("MergeTablesOnDisk_test"))
+  setwd("MergeTablesOnDisk_test")
   tab1 <- tibble::tibble(x = 1, y = 2)
   tab2 <- tibble::tibble(x = 1, y = 29)
   tab3 <- tibble::tibble(x = 1, z = 29)
   tab4 <- tibble::tibble(x = 1, y = 29, z = 0)
   mapply(readr::write_csv, list(tab1, tab2, tab3, tab4),
          paste0(c("tab1", "tab2", "tab3", "tab4"), ".csv"))
-  expect_equal(MergeTables(c("tab1.csv", "tab2.csv"), ",", "merged.csv"),
+  expect_equal(MergeTablesOnDisk(c("tab1.csv", "tab2.csv"), ",", "merged.csv"),
                tibble::tibble(x = c(1, 1), y = c(2, 29)))
   expect_equal(readr::read_csv("merged.csv"),
                tibble::tibble(x = c(1, 1), y = c(2, 29)))
-  expect_error(MergeTables(c("tab1.csv", "tab3.csv"), ",", "merged.csv"))
-  expect_error(MergeTables(c("tab1.csv", "tab4.csv"), ",", "merged.csv"))
+  expect_error(MergeTablesOnDisk(c("tab1.csv", "tab3.csv"), ",", "merged.csv"))
+  expect_error(MergeTablesOnDisk(c("tab1.csv", "tab4.csv"), ",", "merged.csv"))
   setwd("..")
-  expect_true(RemoveDirs("MergeTables_test"))
+  expect_true(RemoveDirs("MergeTablesOnDisk_test"))
 })
