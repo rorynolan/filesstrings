@@ -31,8 +31,7 @@ This function takes the number to be the last number (as defined in
 is the option to only treat files matching a certain pattern.
 }
 \examples{
-# Keep an eye on your current working directory and the
-# directory "UnitDirs_test" as you run the following code
+setwd(tempdir())
 dir.create("UnitDirs_test")
 setwd("UnitDirs_test")
 files <- c("1litres_1.txt", "1litres_3.txt", "3litres.txt", "5litres_1.txt")

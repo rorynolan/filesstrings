@@ -1,0 +1,59 @@
+---
+title: "Files"
+author: "Rory Nolan"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Files}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = "#>")
+```
+
+# Please Read the Manual
+This package is one for which the functions are largely simple enough such that the function names well describe their purpose, so the manual is an excellent way to acquaint yourself with the package. But I made a couple of vignettes anyway.
+
+First let's load the library: 
+```{r load}
+library(filesstrings)
+```
+
+Here are some file operations that I wished were easier in R.
+
+## Move files around
+I find it bizarre that base R has no `file.move`. To move a file, you have to cleverly rename it. Well, no more.
+```{r, move files}
+setwd(tempdir())
+dir.create("tmp_00")
+file.create("tmp000.txt")
+list.files()
+PutFilesInDir("tmp000.txt", "tmp_00")
+list.files()
+list.files("tmp_00")
+unlink("tmp_00", recursive = TRUE)
+```
+
+## Delete Directories
+That `unlink` above with `recursive = TRUE` was a cryptic way to delete a directory right? I give you `RemoveDirs()`.
+```{r, delete directory}
+setwd(tempdir())
+dir.create("tmp_00")
+list.files()
+RemoveDirs("tmp_00")
+list.files()
+```
+
+## Remove spaces from file names
+Surely I don't have to convince anyone that spaces in file names are a bad idea? Let's get rid of some!
+```{r, RemoveFileNameSpaces}
+setwd(tempdir())
+file.create(c("file 1.txt", "file 2.txt"))
+list.files()
+RemoveFileNameSpaces(replace.with = "_")
+list.files()
+file.remove(list.files())
+```
+

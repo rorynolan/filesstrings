@@ -1,4 +1,5 @@
 test_that("NiceFileNums works", {
+  setwd(tempdir())
   expect_true(dir.create("NiceFileNums_test"))
   setwd("NiceFileNums_test")
   files <- c("1litres_1.txt", "1litres_30.txt", "3litres_5.txt")
@@ -9,18 +10,20 @@ test_that("NiceFileNums works", {
   expect_true(RemoveDirs("NiceFileNums_test"))
 })
 
-test_that("RemoveFileSpaces works", {
-  expect_true(dir.create("RemoveFileSpaces_test"))
-  setwd("RemoveFileSpaces_test")
+test_that("RemoveFileNameSpaces works", {
+  setwd(tempdir())
+  expect_true(dir.create("RemoveFileNameSpaces_test"))
+  setwd("RemoveFileNameSpaces_test")
   files <- c("1litres 1.txt", "1litres 30.txt", "3litres 5.txt")
   expect_equal(file.create(files), rep(TRUE, 3))
-  expect_equal(RemoveFileSpaces(), rep(TRUE, 3))
+  expect_equal(RemoveFileNameSpaces(), rep(TRUE, 3))
   expect_equal(list.files(), c("1litres1.txt", "1litres30.txt", "3litres5.txt"))
   setwd("..")
-  expect_true(RemoveDirs("RemoveFileSpaces_test"))
+  expect_true(RemoveDirs("RemoveFileNameSpaces_test"))
 })
 
 test_that("RenameWithNums works", {
+  setwd(tempdir())
   expect_true(dir.create("RenameWithNums_test"))
   setwd("RenameWithNums_test")
   files <- c("1litres 1.txt", "1litres 30.txt", "3litres 5.txt")
@@ -35,6 +38,7 @@ test_that("RenameWithNums works", {
 })
 
 test_that("CreateDirsIfNotThere works", {
+  setwd(tempdir())
   expect_equal(CreateDirsIfNotThere(c("mydir", "yourdir")), rep(TRUE, 2),
                check.names = FALSE)
   expect_equal(CreateDirsIfNotThere(c("mydir", "yourdir")), rep(FALSE, 2),
@@ -44,8 +48,7 @@ test_that("CreateDirsIfNotThere works", {
 })
 
 test_that("UnitDirs works", {
-  # Keep an eye on your current working directory and the
-  # directory "UnitDirs_test" as you run the following code
+  setwd(tempdir())
   expect_equal(dir.create("UnitDirs_test"), TRUE)
   setwd("UnitDirs_test")
   files <- c("1litres_1.txt", "1litres_3.txt", "3litres.txt", "5litres_1.txt")
@@ -58,12 +61,14 @@ test_that("UnitDirs works", {
 })
 
 test_that("MoveFiles errors correctly", {
+  setwd(tempdir())
   dir.create("tmpdir0")
   file.create("tmpfile0.R")
   expect_error(MoveFiles("tmpfile0.R", c("tmpdir0", "tmpdir0")))
 })
 
 test_that("MergeTables works", {
+  setwd(tempdir())
   expect_true(dir.create("MergeTables_test"))
   setwd("MergeTables_test")
   tab1 <- tibble::tibble(x = 1, y = 2)

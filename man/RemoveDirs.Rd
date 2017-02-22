@@ -18,6 +18,7 @@ Invisibly, a logical vector with \code{TRUE} for each success and
 Delete directories and all of their contents (can just be one directory).
 }
 \examples{
+setwd(tempdir())
 sapply(c("mydir1", "mydir2"), dir.create)
 RemoveDirs(c("mydir1", "mydir2"))
 }

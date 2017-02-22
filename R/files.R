@@ -7,6 +7,7 @@
 #' @return Invisibly, a vector with a `TRUE` for each time a directory was
 #'   actually created and a `FALSE` otherwise.
 #' @examples
+#' setwd(tempdir())
 #' CreateDirsIfNotThere(c("mydir", "yourdir"))
 #' RemoveDirs(c("mydir", "yourdir"))
 #' @export
@@ -31,6 +32,7 @@ CreateDirsIfNotThere <- function(dir.names) {
 #' @return Invisibly, a logical vector with `TRUE` for each success and
 #'   `FALSE` for failures. See [base::unlink].
 #' @examples
+#' setwd(tempdir())
 #' sapply(c("mydir1", "mydir2"), dir.create)
 #' RemoveDirs(c("mydir1", "mydir2"))
 #' @export
@@ -50,6 +52,7 @@ RemoveDirs <- function(dirs) {
 #' @param out.name The path to the output file containing the merged tables.
 #' @param header Do the tables to be merged have headers?
 #' @examples
+#' setwd(tempdir())
 #' dir.create("MergeTables_test")
 #' setwd("MergeTables_test")
 #' tab1 <- tibble::tibble(x = 1, y = 2)
@@ -133,6 +136,7 @@ MoveFiles <- function(files, destinations) {
 #'   (should be all TRUEs) and `FALSE`s otherwise.
 #'
 #' @examples
+#' setwd(tempdir())
 #' dir.create("NiceFileNums_test")
 #' setwd("NiceFileNums_test")
 #' files <- c("1litres_1.txt", "1litres_30.txt", "3litres_5.txt")
@@ -184,16 +188,17 @@ PutFilesInDir <- function(file.names, dir.name) {
 #'   files attempted. Using a missing value for a file or path name will always
 #'   be regarded as a failure.
 #' @examples
-#' dir.create("RemoveFileSpaces_test")
-#' setwd("RemoveFileSpaces_test")
+#' setwd(tempdir())
+#' dir.create("RemoveFileNameSpaces_test")
+#' setwd("RemoveFileNameSpaces_test")
 #' files <- c("1litres 1.txt", "1litres 30.txt", "3litres 5.txt")
 #' file.create(files)
-#' RemoveFileSpaces()
+#' RemoveFileNameSpaces()
 #' list.files()
 #' setwd("..")
-#' RemoveDirs("RemoveFileSpaces_test")
+#' RemoveDirs("RemoveFileNameSpaces_test")
 #' @export
-RemoveFileSpaces <- function(dir = ".", pattern = "", replace.with = "") {
+RemoveFileNameSpaces <- function(dir = ".", pattern = "", replace.with = "") {
   init.dir <- getwd()
   on.exit(setwd(init.dir))
   setwd(dir)
@@ -212,6 +217,7 @@ RemoveFileSpaces <- function(dir = ".", pattern = "", replace.with = "") {
 #'   matching this pattern will be treated.
 #' @return A logical vector with a `TRUE` for each successful renaming.
 #' @examples
+#' setwd(tempdir())
 #' dir.create("RenameWithNums_test")
 #' setwd("RenameWithNums_test")
 #' files <- c("1litres 1.txt", "1litres 30.txt", "3litres 5.txt")
@@ -259,8 +265,7 @@ RenameWithNums <- function(dir = ".", pattern = NULL) {
 #' @return Invisibly `TRUE` if the operation is successful, if not there will be an
 #'   error.
 #' @examples
-#' # Keep an eye on your current working directory and the
-#' # directory "UnitDirs_test" as you run the following code
+#' setwd(tempdir())
 #' dir.create("UnitDirs_test")
 #' setwd("UnitDirs_test")
 #' files <- c("1litres_1.txt", "1litres_3.txt", "3litres.txt", "5litres_1.txt")

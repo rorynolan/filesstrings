@@ -19,6 +19,7 @@ Given the name of a (potential) directory, if that directory does not already
 exist, create it.
 }
 \examples{
+setwd(tempdir())
 CreateDirsIfNotThere(c("mydir", "yourdir"))
 RemoveDirs(c("mydir", "yourdir"))
 }

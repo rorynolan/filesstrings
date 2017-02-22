@@ -21,6 +21,7 @@ so they need to have the same number of columns and the same column names (if
 they have column names).
 }
 \examples{
+setwd(tempdir())
 dir.create("MergeTables_test")
 setwd("MergeTables_test")
 tab1 <- tibble::tibble(x = 1, y = 2)
