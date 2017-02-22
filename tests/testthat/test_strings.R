@@ -154,7 +154,8 @@ test_that("PasteDifferentLengths works", {
                c("1S1", "2S2", "3S3", 4))
   writeLines(as.character(1:3), "PasteDifferentLengths1.txt")
   writeLines(as.character(1:4), "PasteDifferentLengths2.txt")
-  expect_equal(PasteDifferentLengths(list.files(pattern = "PasteDifferentLengths"),
+  expect_equal(PasteDifferentLengths(
+    list.files(pattern = "PasteDifferentLengths"),
   sep = "S"), c("1S1", "2S2", "3S3", 4))
   # clean up working directory
   file.remove(list.files(pattern = "PasteDifferentLengths"))
