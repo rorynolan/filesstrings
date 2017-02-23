@@ -5,7 +5,7 @@ Version: 0.3.0
 Authors@R: person("Rory", "Nolan", email = "rorynoolan@gmail.com", role = c("aut", "cre"))
 Maintainer: Rory Nolan <rorynoolan@gmail.com>
 Description: Handy string and file processing and manipulation tools. Built on 
-    top of the functionality of base and stringr. Good for those who like to do
+    top of the functionality of base and 'stringr'. Good for those who like to do
     all of their file and string manipulation from within R.
 License: GPL-3
 Encoding: UTF-8

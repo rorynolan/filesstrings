@@ -1,11 +1,11 @@
 #' Check if a string could be considered as numeric.
 #'
 #' After padding is removed, could the input string be considered to be numeric,
-#' i.e. could it be constructed via `toString(num)` where `num` is
-#' numeric. This function is vectorised over its one argument.
+#' i.e. could it be coerced to numeric. This function is vectorised over its one
+#' argument.
 #' @param string A character vector.
-#' @return `TRUE` if the argument can be considered to be numeric or
-#'   `FALSE` otherwise.
+#' @return `TRUE` if the argument can be considered to be numeric or `FALSE`
+#'   otherwise.
 #' @examples
 #' CanBeNumeric("3")
 #' CanBeNumeric("5 ")

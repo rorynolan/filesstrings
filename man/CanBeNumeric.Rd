@@ -10,13 +10,13 @@ CanBeNumeric(string)
 \item{string}{A character vector.}
 }
 \value{
-\code{TRUE} if the argument can be considered to be numeric or
-\code{FALSE} otherwise.
+\code{TRUE} if the argument can be considered to be numeric or \code{FALSE}
+otherwise.
 }
 \description{
 After padding is removed, could the input string be considered to be numeric,
-i.e. could it be constructed via \code{toString(num)} where \code{num} is
-numeric. This function is vectorised over its one argument.
+i.e. could it be coerced to numeric. This function is vectorised over its one
+argument.
 }
 \examples{
 CanBeNumeric("3")
