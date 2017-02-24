@@ -11,8 +11,7 @@ Installation
 In R, enter
 
 ``` r
-install.packages("devtools")
-devtools::install_github("rorynolan/filesstrings")
+install.packages("filesstrings")
 ```
 
 and you're done!
