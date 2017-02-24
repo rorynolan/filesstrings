@@ -2,7 +2,10 @@ Package: filesstrings
 Type: Package
 Title: Handy String and File Manipulation
 Version: 0.3.1.9000
-Authors@R: person("Rory", "Nolan", email = "rorynoolan@gmail.com", role = c("aut", "cre"))
+Authors@R: c(person("Rory", "Nolan", email = "rorynoolan@gmail.com", 
+                    role = c("aut", "cre", "cph")),
+             person("Sergi", "Padilla-Parra", email = "spadilla@well.ox.ac.uk", 
+                    role = "ths"))
 Maintainer: Rory Nolan <rorynoolan@gmail.com>
 Description: Handy string and file processing and manipulation tools. Built on 
     top of the functionality of 'stringr'. Good for those who like to do

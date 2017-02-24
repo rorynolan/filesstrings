@@ -7,3 +7,4 @@
 ^PossibleJunk$
 ^codecov\.yml$
 ^cran-comments\.md$
+^LICENSE$
