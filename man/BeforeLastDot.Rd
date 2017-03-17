@@ -4,16 +4,17 @@
 \alias{BeforeLastDot}
 \title{Get the part of a string before the last period.}
 \usage{
-BeforeLastDot(strings)
+BeforeLastDot(string)
 }
 \arguments{
-\item{strings}{A character vector.}
+\item{string}{A character vector.}
 }
 \value{
-A string.
+A character vector.
 }
 \description{
-This is usually used to get the part of a file name that doesn't include the file extension.
+This is usually used to get the part of a file name that doesn't include the
+file extension. It is vectorised over \code{string}.
 }
 \examples{
 BeforeLastDot(c("spreadsheet1.csv", "doc2.doc"))

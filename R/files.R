@@ -1,7 +1,7 @@
-#' Create a directory if it doesn't already exist.
+#' Create directories if they don't already exist.
 #'
-#' Given the name of a (potential) directory, if that directory does not already
-#' exist, create it.
+#' Given the names of (potential) directories, create the ones that do not
+#' already exist.
 #' @param dir.names The name of the directories, specified via relative or
 #'   absolute paths.
 #' @return Invisibly, a vector with a `TRUE` for each time a directory was
@@ -26,7 +26,7 @@ CreateDirsIfNotThere <- function(dir.names) {
 
 #' Remove directories.
 #'
-#' Delete directories and all of their contents (can just be one directory).
+#' Delete directories and all of their contents.
 #' @param dirs The names of the directories, specified via relative or absolute
 #'   paths.
 #' @return Invisibly, a logical vector with `TRUE` for each success and

@@ -10,7 +10,7 @@ CanBeNumeric(string)
 \item{string}{A character vector.}
 }
 \value{
-\code{TRUE} if the argument can be considered to be numeric or \code{FALSE}
+A character vector. \code{TRUE} if the argument can be considered to be numeric or \code{FALSE}
 otherwise.
 }
 \description{

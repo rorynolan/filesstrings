@@ -61,7 +61,11 @@ List StrListRemoveEmpties(List char_list) {
   return(no_empties);
 }
 
-//' Get the nth element of each vector in a list.
+//' Get the nth element of each vector in a list of numeric or character
+//' vectors.
+//'
+//' These are faster implementations of procedures that could very easily be
+//' done with [base::sapply].
 //'
 //' @param char_list A list of character vectors.
 //' @param n The index of the element that you want from each vector.

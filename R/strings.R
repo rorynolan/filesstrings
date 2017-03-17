@@ -4,7 +4,7 @@
 #' i.e. could it be coerced to numeric. This function is vectorised over its one
 #' argument.
 #' @param string A character vector.
-#' @return `TRUE` if the argument can be considered to be numeric or `FALSE`
+#' @return A character vector. `TRUE` if the argument can be considered to be numeric or `FALSE`
 #'   otherwise.
 #' @examples
 #' CanBeNumeric("3")
@@ -171,7 +171,7 @@ NiceNums <- function(strings) {
 #'   numeric or character vectors, one list element for each element of
 #'   `string`. For `NthNumber` and `NthNonNumeric`, a vector the
 #'   same length as `string` (as in `length(string)`, not
-#'   `nchar(string)`..
+#'   `nchar(string)`).
 #' @examples
 #' ExtractNumbers(c("abc123abc456", "abc1.23abc456"))
 #' ExtractNumbers(c("abc1.23abc456", "abc1..23abc456"), decimals = TRUE)
@@ -375,18 +375,17 @@ StringsWithPatterns <- function(strings, patterns, ignore.case = FALSE,
 
 #' Reverse a string.
 #'
-#' Reverse the order of a string; put it backwards.
+#' Reverse the order of a string; put it backwards. Vectorised.
+#'
+#' This is a thin wrapper around [IRanges::reverse].
+#'
 #' @param string A string.
 #' @return A string.
 #' @examples
 #' StrReverse("abcdef")
 #' @export
 StrReverse <- function(string) {
-  if (!is.character(string)) stop("string must be of character type")
-  char.vec <- StringToVec(string)
-  char.vec.reversed <- rev(char.vec)
-  string.reversed <- paste(char.vec.reversed, collapse = "")
-  return(string.reversed)
+  IRanges::reverse(string)
 }
 
 #' Text before or after \eqn{n}th occurrence of pattern.
@@ -425,18 +424,19 @@ StrBeforeNth <- function(strings, pattern, n) {
 
 #' Get the part of a string before the last period.
 #'
-#' This is usually used to get the part of a file name that doesn't include the file extension.
+#' This is usually used to get the part of a file name that doesn't include the
+#' file extension. It is vectorised over `string`.
 #'
-#' @param strings A character vector.
+#' @param string A character vector.
 #'
-#' @return A string.
+#' @return A character vector.
 #'
 #' @examples
 #' BeforeLastDot(c("spreadsheet1.csv", "doc2.doc"))
 #'
 #' @export
-BeforeLastDot <- function(strings) {
-  StrBeforeNth(strings, stringr::coll("."), -1)
+BeforeLastDot <- function(string) {
+  StrBeforeNth(string, coll("."), -1)
 }
 
 #' Pad a character vector with empty strings.
@@ -523,7 +523,7 @@ PasteDifferentLengths <- function(files, sep = "") {
 #' Create a charachter vector with a set of strings at specified positions in
 #' that charachter vector, with the rest of it taken up by empty strings.
 #' @param strings A charachter vector of the strings to put in positions
-#'   (coerced by as.characher if not charachter already).
+#'   (coerced by [as.character] if not charachter already).
 #' @param positions The indices of the charachter vector to be occupied by the
 #'   elements of strings. Must be the same length as strings or of length 1.
 #' @return A charachter vector.
@@ -609,7 +609,7 @@ CountMatches <- function(string, pattern) {
 
 #' Locate the braces in a string.
 #'
-#' Give the positions of (, ), \[, \], \{, and \} within a string.
+#' Give the positions of `(`, `)`, `[`, `]`, `\{`, `\}` within a string.
 #'
 #' @param string A character vector
 #'
@@ -664,12 +664,12 @@ RemoveQuoted <- function(string) {
 #' @return A string: the file name in your intended form.
 #'
 #' @examples
-#' MakeExtName("abc.csv", "csv")
-#' MakeExtName("abc", "csv")
-#' MakeExtName("abc.csv", "pdf")
-#' MakeExtName("abc.csv", "pdf", replace = TRUE)
+#' GiveExt("abc.csv", "csv")
+#' GiveExt("abc", "csv")
+#' GiveExt("abc.csv", "pdf")
+#' GiveExt("abc.csv", "pdf", replace = TRUE)
 #' @export
-MakeExtName <- function(string, ext, replace = FALSE) {
+GiveExt <- function(string, ext, replace = FALSE) {
   stopifnot(is.character(string) && length(string) == 1)
   has.dot <- str_detect(string, coll("."))
   if (has.dot) {

@@ -15,6 +15,9 @@ A string.
 \description{
 Reverse the order of a string; put it backwards.
 }
+\details{
+This is a thin wrapper around \link[IRanges:reverse]{IRanges::reverse}.
+}
 \examples{
 StrReverse("abcdef")
 }

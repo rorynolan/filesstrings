@@ -16,9 +16,7 @@ of the string character vector. Each data frame has a "position" and
 string.
 }
 \description{
-Give the positions of (, ), [, ], {, and } within a string.
-
-[, ]: R:,%20%5C
+Give the positions of \code{(}, \code{)}, \code{[}, \code{]}, \code{\{}, \code{\}} within a string.
 }
 \examples{
 LocateBraces(c("a{](kkj)})", "ab(]c{}"))

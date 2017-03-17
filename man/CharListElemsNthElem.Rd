@@ -3,7 +3,8 @@
 \name{CharListElemsNthElem}
 \alias{CharListElemsNthElem}
 \alias{NumListElemsNthElem}
-\title{Get the nth element of each vector in a list.}
+\title{Get the nth element of each vector in a list of numeric or character
+vectors.}
 \usage{
 CharListElemsNthElem(char_list, n)
 
@@ -20,7 +21,8 @@ NumListElemsNthElem(num_list, n)
 A list.
 }
 \description{
-Get the nth element of each vector in a list.
+These are faster implementations of procedures that could very easily be
+done with \link[base:sapply]{base::sapply}.
 }
 \examples{
 CharListElemsNthElem(list(c("a", "b", "c"), c("d", "f", "a")), 2)

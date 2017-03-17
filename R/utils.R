@@ -6,8 +6,8 @@
 #' length 1 and `b` of length greater than 1, check that all elements of
 #' \emph{b} are equal to the element in a.
 #'
-#' @param a A vector
-#' @param b A vector of length either 0, 1 or `length(a)`
+#' @param a A vector.
+#' @param b Either `NULL`` or a vector of length either 1 or `length(a)`
 #' @return `TRUE` if "equality of all" is satisfied (as detailed in
 #'   "Description" above) and `FALSE` otherwise.
 #' @examples
@@ -18,12 +18,10 @@
 #' AllEqual(rep(1, 10))
 #' AllEqual(c(1, 88))
 #' @export
-AllEqual <- function(a, b = NA) {
-  if (is.na(b[1])) {
+AllEqual <- function(a, b = NULL) {
+  if (is.null(b[1])) {
     return(length(unique(a)) == 1)
   } else {
-    # if (is.list(a) && !is.list(b)) b <- list(b)
-    # if (is.list(b) && !is.list(a)) a <- list(a)
     if (length(a) == 1) a <- rep(a, length(b))
     if (length(b) == 1) b <- rep(b, length(a))
     return(isTRUE(all.equal(a, b)))

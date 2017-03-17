@@ -8,7 +8,7 @@ PutInPos(strings, positions)
 }
 \arguments{
 \item{strings}{A charachter vector of the strings to put in positions
-(coerced by as.characher if not charachter already).}
+(coerced by \link{as.character} if not charachter already).}
 
 \item{positions}{The indices of the charachter vector to be occupied by the
 elements of strings. Must be the same length as strings or of length 1.}

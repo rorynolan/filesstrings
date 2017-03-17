@@ -44,7 +44,7 @@ For \code{ExtractNumbers} and \code{ExtractNonNumerics}, a list of
 numeric or character vectors, one list element for each element of
 \code{string}. For \code{NthNumber} and \code{NthNonNumeric}, a vector the
 same length as \code{string} (as in \code{length(string)}, not
-\code{nchar(string)}..
+\code{nchar(string)}).
 }
 \description{
 \code{ExtractNumbers} extracts the numbers (or non-numbers) from a string

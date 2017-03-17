@@ -194,11 +194,11 @@ test_that("RemoveQuoted works", {
   expect_equal(RemoveQuoted(string), "67af")
 })
 
-test_that("MakeExtName works", {
-  expect_equal(MakeExtName("abc.csv", "csv"), "abc.csv")
-  expect_equal(MakeExtName("abc", "csv"), "abc.csv")
-  expect_equal(MakeExtName("abc.csv", "pdf"), "abc.csv.pdf")
-  expect_equal(MakeExtName("abc.csv", "pdf", replace = TRUE), "abc.pdf")
+test_that("GiveExt works", {
+  expect_equal(GiveExt("abc.csv", "csv"), "abc.csv")
+  expect_equal(GiveExt("abc", "csv"), "abc.csv")
+  expect_equal(GiveExt("abc.csv", "pdf"), "abc.csv.pdf")
+  expect_equal(GiveExt("abc.csv", "pdf", replace = TRUE), "abc.pdf")
 })
 
 test_that("SplitCamelcase works", {

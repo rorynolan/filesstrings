@@ -4,12 +4,12 @@
 \alias{AllEqual}
 \title{Check if all elements are equal.}
 \usage{
-AllEqual(a, b = NA)
+AllEqual(a, b = NULL)
 }
 \arguments{
-\item{a}{A vector}
+\item{a}{A vector.}
 
-\item{b}{A vector of length either 0, 1 or \code{length(a)}}
+\item{b}{Either \code{NULL`` or a vector of length either 1 or}length(a)`}
 }
 \value{
 \code{TRUE} if "equality of all" is satisfied (as detailed in

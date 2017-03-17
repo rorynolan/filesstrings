@@ -2,7 +2,7 @@
 % Please edit documentation in R/files.R
 \name{CreateDirsIfNotThere}
 \alias{CreateDirsIfNotThere}
-\title{Create a directory if it doesn't already exist.}
+\title{Create directories if they don't already exist.}
 \usage{
 CreateDirsIfNotThere(dir.names)
 }
@@ -15,8 +15,8 @@ Invisibly, a vector with a \code{TRUE} for each time a directory was
 actually created and a \code{FALSE} otherwise.
 }
 \description{
-Given the name of a (potential) directory, if that directory does not already
-exist, create it.
+Given the names of (potential) directories, create the ones that do not
+already exist.
 }
 \examples{
 setwd(tempdir())
