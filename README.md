@@ -22,7 +22,7 @@ Files
 Please Read the Manual
 ----------------------
 
-This package is one for which the functions are largely simple enough such that the function names well describe their purpose, so the manual is an excellent way to acquaint yourself with the package. But I made a couple of vignettes anyway.
+This package is one for which the functions are largely simple enough such that the function names well describe their purpose, so the manual is an excellent way to acquaint yourself with the package. However, I made a couple of vignettes anyway.
 
 First let's load the library:
 

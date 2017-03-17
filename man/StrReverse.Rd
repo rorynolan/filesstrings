@@ -13,7 +13,7 @@ StrReverse(string)
 A string.
 }
 \description{
-Reverse the order of a string; put it backwards.
+Reverse the order of a string; put it backwards. Vectorised.
 }
 \details{
 This is a thin wrapper around \link[IRanges:reverse]{IRanges::reverse}.

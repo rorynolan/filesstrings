@@ -1,6 +1,5 @@
 #' @import stringr
 #' @importFrom magrittr "%>%"
-#' @importFrom purrr "%||%"
 #' @useDynLib filesstrings
 #' @importFrom Rcpp sourceCpp
 NULL

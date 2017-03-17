@@ -22,7 +22,6 @@ Imports:
     dplyr,
     ore,
     matrixStats,
-    purrr,
     IRanges
 RoxygenNote: 6.0.1
 Suggests: testthat,
