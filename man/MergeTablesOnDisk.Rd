@@ -4,7 +4,7 @@
 \alias{MergeTablesOnDisk}
 \title{Merge Tables.}
 \usage{
-MergeTablesOnDisk(file.names, delim, out.name, header = TRUE)
+MergeTablesOnDisk(file.names, delim, out.name, header = TRUE, ...)
 }
 \arguments{
 \item{file.names}{The paths to the files to merge.}
@@ -14,6 +14,8 @@ MergeTablesOnDisk(file.names, delim, out.name, header = TRUE)
 \item{out.name}{The path to the output file containing the merged tables.}
 
 \item{header}{Do the tables to be merged have headers?}
+
+\item{...}{Additional arguments passed to \link[readr:read_delim]{readr::read_delim}}
 }
 \description{
 Merge tables saved on disk as delimited files. The merging is done lengthways

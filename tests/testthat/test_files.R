@@ -71,16 +71,16 @@ test_that("MergeTablesOnDisk works", {
   setwd(tempdir())
   expect_true(dir.create("MergeTablesOnDisk_test"))
   setwd("MergeTablesOnDisk_test")
-  tab1 <- tibble::tibble(x = 1, y = 2)
-  tab2 <- tibble::tibble(x = 1, y = 29)
-  tab3 <- tibble::tibble(x = 1, z = 29)
-  tab4 <- tibble::tibble(x = 1, y = 29, z = 0)
+  tab1 <- tibble::tibble(x = 1.5, y = 2.5)
+  tab2 <- tibble::tibble(x = 1.5, y = 29.5)
+  tab3 <- tibble::tibble(x = 1.5, z = 29.5)
+  tab4 <- tibble::tibble(x = 1.5, y = 29.5, z = 0.5)
   mapply(readr::write_csv, list(tab1, tab2, tab3, tab4),
          paste0(c("tab1", "tab2", "tab3", "tab4"), ".csv"))
   expect_equal(MergeTablesOnDisk(c("tab1.csv", "tab2.csv"), ",", "merged.csv"),
-               tibble::tibble(x = c(1, 1), y = c(2, 29)))
+               tibble::tibble(x = c(1.5, 1.5), y = c(2.5, 29.5)))
   expect_equal(readr::read_csv("merged.csv"),
-               tibble::tibble(x = c(1, 1), y = c(2, 29)))
+               tibble::tibble(x = c(1.5, 1.5), y = c(2.5, 29.5)))
   expect_error(MergeTablesOnDisk(c("tab1.csv", "tab3.csv"), ",", "merged.csv"))
   expect_error(MergeTablesOnDisk(c("tab1.csv", "tab4.csv"), ",", "merged.csv"))
   setwd("..")

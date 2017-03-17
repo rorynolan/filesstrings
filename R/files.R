@@ -51,6 +51,7 @@ RemoveDirs <- function(dirs) {
 #' @param delim Delimeter used to separate values.
 #' @param out.name The path to the output file containing the merged tables.
 #' @param header Do the tables to be merged have headers?
+#' @param ... Additional arguments passed to [readr::read_delim]
 #' @examples
 #' setwd(tempdir())
 #' dir.create("MergeTablesOnDisk_test")
@@ -63,8 +64,8 @@ RemoveDirs <- function(dirs) {
 #' setwd("..")
 #' RemoveDirs("MergeTablesOnDisk_test")
 #' @export
-MergeTablesOnDisk <- function(file.names, delim, out.name, header = TRUE) {
-  tables <- lapply(file.names, readr::read_delim, delim, col_names = header)
+MergeTablesOnDisk <- function(file.names, delim, out.name, header = TRUE, ...) {
+  tables <- lapply(file.names, readr::read_delim, delim, col_names = header, ...)
   ncs <- vapply(tables, ncol, integer(1))
   if (!AllEqual(ncs)) stop("The tables have different numbers of columns.")
   if (header) {
