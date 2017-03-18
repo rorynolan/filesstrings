@@ -8,4 +8,4 @@
 There were no ERRORs, WARNINGs or NOTEs.
 
 ## Compatibility with readr
-This is primarily a fix to make the package work with the new version of 'readr' (1.1.0).
+This is primarily a fix to make the package work with the coming version of 'readr' (1.1.0).
