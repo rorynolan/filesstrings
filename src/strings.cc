@@ -141,12 +141,6 @@ CharacterVector InterleaveStrings(CharacterVector strings1,
 }
 
 // [[Rcpp::export]]
-bool IsPrefix(std::string whole, std::string pre)
-{
-  return (std::strncmp(whole.c_str(), pre.c_str(), pre.size()) == 0);
-}
-
-// [[Rcpp::export]]
 CharacterVector CorrectInterleave0(std::string orig,
                                   CharacterVector strings1,
                                   CharacterVector strings2) {
