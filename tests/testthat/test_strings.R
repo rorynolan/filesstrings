@@ -115,11 +115,6 @@ test_that("StringsWithPatterns works", {
   ignore.case = TRUE), toupper(c("abc", "bcd", "cde")))
 })
 
-test_that("StrReverse works", {
-  expect_equal(StrReverse("abcdef"),
-               paste(rev(c("a", "b", "c", "d", "e", "f")), collapse = ""))
-})
-
 test_that("StrAfterNth works", {
   string <- "ab..cd..de..fg..h"
   expect_equal(StrAfterNth(string, "\\.\\.", 3), "fg..h",

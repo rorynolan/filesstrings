@@ -373,21 +373,6 @@ StringsWithPatterns <- function(strings, patterns, ignore.case = FALSE,
   return(strings.orig[keeps])
 }
 
-#' Reverse a string.
-#'
-#' Reverse the order of a string; put it backwards. Vectorised.
-#'
-#' This is a thin wrapper around [IRanges::reverse].
-#'
-#' @param string A string.
-#' @return A string.
-#' @examples
-#' StrReverse("abcdef")
-#' @export
-StrReverse <- function(string) {
-  IRanges::reverse(string)
-}
-
 #' Text before or after \eqn{n}th occurrence of pattern.
 #'
 #' Extract the part of a string which is before or after the \eqn{n}th
