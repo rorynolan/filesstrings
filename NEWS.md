@@ -10,4 +10,5 @@ http://stackoverflow.com/questions/42313373/r-cmd-check-note-found-no-calls-to-r
 # 0.3.2
 A fix to make the package compatible with the new version of 'readr' courtest of Jim Hester.
 Minor documentation improvements.
+StrReverse() is removed. Use stringi::stri_reverse() instead.
 
