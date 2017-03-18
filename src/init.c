@@ -13,7 +13,6 @@ extern SEXP filesstrings_CorrectInterleave(SEXP, SEXP, SEXP);
 extern SEXP filesstrings_CorrectInterleave0(SEXP, SEXP, SEXP);
 extern SEXP filesstrings_InterleaveStringList(SEXP, SEXP);
 extern SEXP filesstrings_InterleaveStrings(SEXP, SEXP);
-extern SEXP filesstrings_IsPrefix(SEXP, SEXP);
 extern SEXP filesstrings_NumListElemsNthElem(SEXP, SEXP);
 extern SEXP filesstrings_PasteCollapse(SEXP, SEXP);
 extern SEXP filesstrings_PasteCollapseListElems(SEXP, SEXP);
@@ -25,7 +24,6 @@ static const R_CallMethodDef CallEntries[] = {
   {"filesstrings_CorrectInterleave0",     (DL_FUNC) &filesstrings_CorrectInterleave0,     3},
   {"filesstrings_InterleaveStringList",   (DL_FUNC) &filesstrings_InterleaveStringList,   2},
   {"filesstrings_InterleaveStrings",      (DL_FUNC) &filesstrings_InterleaveStrings,      2},
-  {"filesstrings_IsPrefix",               (DL_FUNC) &filesstrings_IsPrefix,               2},
   {"filesstrings_NumListElemsNthElem",    (DL_FUNC) &filesstrings_NumListElemsNthElem,    2},
   {"filesstrings_PasteCollapse",          (DL_FUNC) &filesstrings_PasteCollapse,          2},
   {"filesstrings_PasteCollapseListElems", (DL_FUNC) &filesstrings_PasteCollapseListElems, 2},

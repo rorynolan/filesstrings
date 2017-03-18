@@ -19,8 +19,6 @@ test_that("CharListElemsNthElem works", {
 test_that("Random Rcpp stuff works",{
   expect_equal(filesstrings:::InterleaveStrings(c("a", "b", "v"), "a"),
                NA_character_)
-  expect_true(filesstrings:::IsPrefix("abc", "a"))
-  expect_false(filesstrings:::IsPrefix("abc", "aa"))
   expect_equal(filesstrings:::CorrectInterleave0("a", character(0), "a"), "a")
   expect_equal(filesstrings:::CorrectInterleave0("a", "a", character(0)), "a")
   expect_equal(filesstrings:::CorrectInterleave0("ab", "b", "a"), c("a", "b"))

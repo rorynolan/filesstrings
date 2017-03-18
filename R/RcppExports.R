@@ -65,10 +65,6 @@ InterleaveStrings <- function(strings1, strings2) {
     .Call('filesstrings_InterleaveStrings', PACKAGE = 'filesstrings', strings1, strings2)
 }
 
-IsPrefix <- function(whole, pre) {
-    .Call('filesstrings_IsPrefix', PACKAGE = 'filesstrings', whole, pre)
-}
-
 CorrectInterleave0 <- function(orig, strings1, strings2) {
     .Call('filesstrings_CorrectInterleave0', PACKAGE = 'filesstrings', orig, strings1, strings2)
 }
