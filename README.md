@@ -16,9 +16,6 @@ install.packages("filesstrings")
 
 and you're done!
 
-Files
-=====
-
 Please Read the Manual
 ----------------------
 
@@ -31,6 +28,9 @@ library(filesstrings)
 ```
 
     #> Loading required package: stringr
+
+Files
+=====
 
 Here are some file operations that I wished were easier in R.
 
