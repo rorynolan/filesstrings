@@ -9,7 +9,7 @@ AllEqual(a, b = NULL)
 \arguments{
 \item{a}{A vector.}
 
-\item{b}{Either \code{NULL`` or a vector of length either 1 or}length(a)`}
+\item{b}{Either \code{NULL} or a vector of length either 1 or \code{length(a)}}
 }
 \value{
 \code{TRUE} if "equality of all" is satisfied (as detailed in

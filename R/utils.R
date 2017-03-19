@@ -7,7 +7,7 @@
 #' \emph{b} are equal to the element in a.
 #'
 #' @param a A vector.
-#' @param b Either `NULL`` or a vector of length either 1 or `length(a)`
+#' @param b Either `NULL` or a vector of length either 1 or `length(a)`
 #' @return `TRUE` if "equality of all" is satisfied (as detailed in
 #'   "Description" above) and `FALSE` otherwise.
 #' @examples
