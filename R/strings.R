@@ -153,11 +153,6 @@ NiceNums <- function(strings) {
 #' how these functions work, and their limitations. These functions are
 #' vectorised over `string`.
 #'
-#' `ExtractNonNumerics` uses `ExtractNumerics` to tell it what the
-#' numbers in the string are and then it extracts the bits in between those
-#' numbers. For this reason, errors you see whilst using
-#' `ExtractNonNumerics` might be errors from `ExtractNumerics`.
-#'
 #' @param string A string.
 #' @param leave.as.string Do you want to return the number as a string
 #'   (`TRUE`) or as numeric (`FALSE`, the default)?
@@ -214,7 +209,13 @@ ExtractNumbers <- function(string, leave.as.string = FALSE, decimals = FALSE,
   }
   if (negs) pattern <- str_c("-?", pattern)
   numbers <- str_extract_all(string, pattern)
-  if (!leave.as.string) numbers <- lapply(numbers, as.numeric)
+  numerics <- suppressWarnings(lapply(numbers, as.numeric))
+  if (leave.as.string) {
+    na.pos <- vapply(numerics, anyNA, logical(1))
+    numbers[na.pos] <- NA_character_
+  } else {
+    numbers <- numerics
+  }
   numbers
 }
 
@@ -233,7 +234,12 @@ ExtractNonNumerics <- function(string, decimals = FALSE,
     pattern <- "[0-9]+"
   }
   if (negs) pattern <- str_c("-?", pattern)
-  str_split(string, pattern) %>% StrListRemoveEmpties
+  non.numerics <- str_split(string, pattern) %>% StrListRemoveEmpties
+  numerics <- ExtractNumbers(string, decimals = decimals,
+                             leading.decimals = leading.decimals, negs = negs)
+  na.pos <- vapply(numerics, anyNA, logical(1))
+  non.numerics[na.pos] <- NA_character_
+  non.numerics
 }
 
 #' @param n The index of the number (or non-numeric) that you seek. Negative
@@ -639,7 +645,7 @@ RemoveQuoted <- function(string) {
 #'
 #' Say you want to ensure a name is fit to be the name of a csv file. Then, if
 #' the input doesn't end with ".csv", this function will tack ".csv" onto the
-#' end of it.
+#' end of it. This is vectorised over the first argument.
 #'
 #' @param string The intended file name.
 #' @param ext The intended file extension (with or without the ".").
@@ -649,18 +655,18 @@ RemoveQuoted <- function(string) {
 #' @return A string: the file name in your intended form.
 #'
 #' @examples
-#' GiveExt("abc.csv", "csv")
-#' GiveExt("abc", "csv")
+#' GiveExt(c("abc", "abc.csv"), "csv")
 #' GiveExt("abc.csv", "pdf")
 #' GiveExt("abc.csv", "pdf", replace = TRUE)
 #' @export
 GiveExt <- function(string, ext, replace = FALSE) {
-  stopifnot(is.character(string) && length(string) == 1)
-  has.dot <- str_detect(string, coll("."))
-  if (has.dot) {
-    orig.ext <- StrAfterNth(string, coll("."), -1)
-    if (orig.ext == ext) return(string)
-    if (replace) string <- BeforeLastDot(string)
+  stopifnot(is.character(string), length(ext) == 1)
+  ext <- str_match(ext, "^\\.*(.*)")[, 2]
+  if (replace) {
+    string <- tools::file_path_sans_ext(string)
+  } else {
+    correct.ext <- str_detect(string, str_c("\\.", ext, "$"))
+    string[correct.ext] <- tools::file_path_sans_ext(string[correct.ext])
   }
   str_c(string, ".", ext)
 }

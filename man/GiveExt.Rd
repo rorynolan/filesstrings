@@ -20,11 +20,10 @@ A string: the file name in your intended form.
 \description{
 Say you want to ensure a name is fit to be the name of a csv file. Then, if
 the input doesn't end with ".csv", this function will tack ".csv" onto the
-end of it.
+end of it. This is vectorised over the first argument.
 }
 \examples{
-GiveExt("abc.csv", "csv")
-GiveExt("abc", "csv")
+GiveExt(c("abc", "abc.csv"), "csv")
 GiveExt("abc.csv", "pdf")
 GiveExt("abc.csv", "pdf", replace = TRUE)
 }

@@ -56,12 +56,6 @@ view the examples at the bottom of this page to ensure that you understand
 how these functions work, and their limitations. These functions are
 vectorised over \code{string}.
 }
-\details{
-\code{ExtractNonNumerics} uses \code{ExtractNumerics} to tell it what the
-numbers in the string are and then it extracts the bits in between those
-numbers. For this reason, errors you see whilst using
-\code{ExtractNonNumerics} might be errors from \code{ExtractNumerics}.
-}
 \examples{
 ExtractNumbers(c("abc123abc456", "abc1.23abc456"))
 ExtractNumbers(c("abc1.23abc456", "abc1..23abc456"), decimals = TRUE)
