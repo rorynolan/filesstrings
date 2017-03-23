@@ -4,7 +4,9 @@
 #' equal. If two arguments of equal length are specified, check equality of all
 #' of their corresponding elements. If two arguments are specified, `a` of
 #' length 1 and `b` of length greater than 1, check that all elements of
-#' \emph{b} are equal to the element in a.
+#' `b` are equal to the element in a. If two arguments are specified, `a` of
+#' length greater than 1 and `b` of 1, check that all elements of
+#' `a` are equal to the element in `b`.
 #'
 #' @param a A vector.
 #' @param b Either `NULL` or a vector of length either 1 or `length(a)`
@@ -22,8 +24,14 @@ AllEqual <- function(a, b = NULL) {
   if (is.null(b[1])) {
     return(length(unique(a)) == 1)
   } else {
-    if (length(a) == 1) a <- rep(a, length(b))
-    if (length(b) == 1) b <- rep(b, length(a))
+    if (length(a) == 1) {
+      if (length(b) == 0) return(FALSE)
+      a <- rep(a, length(b))
+    }
+    if (length(b) == 1) {
+      if (length(a) == 0) return(FALSE)
+      b <- rep(b, length(a))
+    }
     return(isTRUE(all.equal(a, b)))
   }
 }
