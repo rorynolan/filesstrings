@@ -22,8 +22,8 @@ NthNonNumeric(string, n, decimals = FALSE, leading.decimals = FALSE,
 \arguments{
 \item{string}{A string.}
 
-\item{leave.as.string}{Do you want to return the number as a string
-(\code{TRUE}) or as numeric (\code{FALSE}, the default)?}
+\item{leave.as.string}{Do you want to return the number as a string (\code{TRUE})
+or as numeric (\code{FALSE}, the default)?}
 
 \item{decimals}{Do you want to include the possibility of decimal numbers
 (\code{TRUE}) or not (\code{FALSE}, the default).}
@@ -40,21 +40,25 @@ non-numeric) whereas \code{n = -1} will give you the last number (or
 non-numeric), \code{n = -2} will give you the second last number and so on.}
 }
 \value{
-For \code{ExtractNumbers} and \code{ExtractNonNumerics}, a list of
-numeric or character vectors, one list element for each element of
-\code{string}. For \code{NthNumber} and \code{NthNonNumeric}, a vector the
-same length as \code{string} (as in \code{length(string)}, not
-\code{nchar(string)}).
+For \code{ExtractNumbers} and \code{ExtractNonNumerics}, a list of numeric or
+character vectors, one list element for each element of \code{string}. For
+\code{NthNumber} and \code{NthNonNumeric}, a vector the same length as \code{string} (as
+in \code{length(string)}, not \code{nchar(string)}).
 }
 \description{
-\code{ExtractNumbers} extracts the numbers (or non-numbers) from a string
-where decimals are optionally allowed. \code{ExtractNonNumerics} extracts the
-bits of the string that aren't extracted by \code{ExtractNumbers}.
-\code{NthNumber} is a convenient wrapper for \code{ExtractNumbers}, allowing
-you to choose which number you want. Similarly \code{NthNonNumeric}. Please
-view the examples at the bottom of this page to ensure that you understand
-how these functions work, and their limitations. These functions are
-vectorised over \code{string}.
+\code{ExtractNumbers} extracts the numbers (or non-numbers) from a string where
+decimals are optionally allowed. \code{ExtractNonNumerics} extracts the bits of
+the string that aren't extracted by \code{ExtractNumbers}. \code{NthNumber} is a
+convenient wrapper for \code{ExtractNumbers}, allowing you to choose which number
+you want. Similarly \code{NthNonNumeric}. Please view the examples at the bottom
+of this page to ensure that you understand how these functions work, and
+their limitations. These functions are vectorised over \code{string}.
+}
+\details{
+If any part of a string contains an ambiguous number (e.g. \code{1.2.3} would be
+ambiguous if \code{decimals = TRUE} (but not otherwise)), the value returned for
+that string will be \code{NA}. Note that these functions do not know about
+scientific notation (e.g. \code{1e6} for 1000000).
 }
 \examples{
 ExtractNumbers(c("abc123abc456", "abc1.23abc456"))
@@ -75,7 +79,7 @@ leading.decimals = TRUE)
 ExtractNonNumerics(c("-123abc456", "ab1c"))
 ExtractNonNumerics("-123abc456", negs = TRUE)
 ExtractNonNumerics("--123abc456", negs = TRUE)
-ExtractNumbers("abc1.2.3", decimals = TRUE)
+ExtractNumbers(c(rep("abc1.2.3", 2), "a1b2.2.3", "e5r6"), decimals = TRUE)
 ExtractNumbers("ab.1.2", decimals = TRUE, leading.decimals = TRUE)
 NthNumber("abc1.23abc456", 2)
 NthNumber("abc1.23abc456", 2, decimals = TRUE)

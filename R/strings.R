@@ -144,29 +144,32 @@ NiceNums <- function(strings) {
 
 #' Extract numbers (or non-numbers) from a string.
 #'
-#' `ExtractNumbers` extracts the numbers (or non-numbers) from a string
-#' where decimals are optionally allowed. `ExtractNonNumerics` extracts the
-#' bits of the string that aren't extracted by `ExtractNumbers`.
-#' `NthNumber` is a convenient wrapper for `ExtractNumbers`, allowing
-#' you to choose which number you want. Similarly `NthNonNumeric`. Please
-#' view the examples at the bottom of this page to ensure that you understand
-#' how these functions work, and their limitations. These functions are
-#' vectorised over `string`.
+#' `ExtractNumbers` extracts the numbers (or non-numbers) from a string where
+#' decimals are optionally allowed. `ExtractNonNumerics` extracts the bits of
+#' the string that aren't extracted by `ExtractNumbers`. `NthNumber` is a
+#' convenient wrapper for `ExtractNumbers`, allowing you to choose which number
+#' you want. Similarly `NthNonNumeric`. Please view the examples at the bottom
+#' of this page to ensure that you understand how these functions work, and
+#' their limitations. These functions are vectorised over `string`.
+#'
+#' If any part of a string contains an ambiguous number (e.g. `1.2.3` would be
+#' ambiguous if `decimals = TRUE` (but not otherwise)), the value returned for
+#' that string will be `NA`. Note that these functions do not know about
+#' scientific notation (e.g. `1e6` for 1000000).
 #'
 #' @param string A string.
-#' @param leave.as.string Do you want to return the number as a string
-#'   (`TRUE`) or as numeric (`FALSE`, the default)?
+#' @param leave.as.string Do you want to return the number as a string (`TRUE`)
+#'   or as numeric (`FALSE`, the default)?
 #' @param decimals Do you want to include the possibility of decimal numbers
 #'   (`TRUE`) or not (`FALSE`, the default).
 #' @param leading.decimals Do you want to allow a leading decimal point to be
 #'   the start of a number?
 #' @param negs Do you want to allow negative numbers? Note that double negatives
 #'   are not handled here (see the examples).
-#' @return For `ExtractNumbers` and `ExtractNonNumerics`, a list of
-#'   numeric or character vectors, one list element for each element of
-#'   `string`. For `NthNumber` and `NthNonNumeric`, a vector the
-#'   same length as `string` (as in `length(string)`, not
-#'   `nchar(string)`).
+#' @return For `ExtractNumbers` and `ExtractNonNumerics`, a list of numeric or
+#'   character vectors, one list element for each element of `string`. For
+#'   `NthNumber` and `NthNonNumeric`, a vector the same length as `string` (as
+#'   in `length(string)`, not `nchar(string)`).
 #' @examples
 #' ExtractNumbers(c("abc123abc456", "abc1.23abc456"))
 #' ExtractNumbers(c("abc1.23abc456", "abc1..23abc456"), decimals = TRUE)
@@ -186,7 +189,7 @@ NiceNums <- function(strings) {
 #' ExtractNonNumerics(c("-123abc456", "ab1c"))
 #' ExtractNonNumerics("-123abc456", negs = TRUE)
 #' ExtractNonNumerics("--123abc456", negs = TRUE)
-#' ExtractNumbers("abc1.2.3", decimals = TRUE)
+#' ExtractNumbers(c(rep("abc1.2.3", 2), "a1b2.2.3", "e5r6"), decimals = TRUE)
 #' ExtractNumbers("ab.1.2", decimals = TRUE, leading.decimals = TRUE)
 #' NthNumber("abc1.23abc456", 2)
 #' NthNumber("abc1.23abc456", 2, decimals = TRUE)
@@ -210,11 +213,12 @@ ExtractNumbers <- function(string, leave.as.string = FALSE, decimals = FALSE,
   if (negs) pattern <- str_c("-?", pattern)
   numbers <- str_extract_all(string, pattern)
   numerics <- suppressWarnings(lapply(numbers, as.numeric))
+  na.pos <- vapply(numerics, anyNA, logical(1))
   if (leave.as.string) {
-    na.pos <- vapply(numerics, anyNA, logical(1))
     numbers[na.pos] <- NA_character_
   } else {
     numbers <- numerics
+    numbers[na.pos] <- NA_real_
   }
   numbers
 }

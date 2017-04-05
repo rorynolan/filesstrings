@@ -68,6 +68,9 @@ test_that("ExtractNumbers works", {
   expect_equal(ExtractNumbers("abc1.2.3", decimals = TRUE), list(NA_real_))
   expect_equal(ExtractNumbers("ab.1.2", decimals = TRUE,
                               leading.decimals = TRUE), list(NA_real_))
+  expect_equal(ExtractNumbers(c(rep("abc1.2.3", 2), "a1b2.2.3", "e5r6"),
+                              decimals = TRUE),
+               c(as.list(rep(NA_real_, 3)), list(c(5, 6))))
   expect_equal(NthNumber("abc1.23abc456", 2), 23)
   expect_equal(NthNumber("abc1.23abc456", 2, leave.as.string = TRUE), "23")
   expect_equal(NthNumber("abc1.23abc456", 2, decimals = TRUE), 456)
