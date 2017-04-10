@@ -1,5 +1,8 @@
 # 0.4.0
-
+* Fix bug in AllEqual and improve its documentation
+* Vectorize GiveExt
+* Improve NA handling of ExtractNumerics and its documentation
+* Improve README and vignette
 
 # 0.3.2
 * A fix to make the package compatible with the new version of 'readr' courtesy of Jim Hester.

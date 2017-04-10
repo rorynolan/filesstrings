@@ -42,19 +42,19 @@ I find it bizarre that base R has no `file.move`. To move a file, you have to cl
 ``` r
 setwd(tempdir())
 dir.create("tmp_00")
-file.create("tmp000.txt")
+file.create("tmp000.txt", "tmp001.txt")
 ```
 
-    #> [1] TRUE
+    #> [1] TRUE TRUE
 
 ``` r
 list.files()
 ```
 
-    #> [1] "tmp_00"     "tmp000.txt"
+    #> [1] "tmp_00"     "tmp000.txt" "tmp001.txt"
 
 ``` r
-PutFilesInDir("tmp000.txt", "tmp_00")
+MoveFiles("tmp000.txt", "tmp_00")
 ```
 
     #> tmp000.txt 
@@ -64,7 +64,7 @@ PutFilesInDir("tmp000.txt", "tmp_00")
 list.files()
 ```
 
-    #> [1] "tmp_00"
+    #> [1] "tmp_00"     "tmp001.txt"
 
 ``` r
 list.files("tmp_00")
@@ -73,7 +73,20 @@ list.files("tmp_00")
     #> [1] "tmp000.txt"
 
 ``` r
-unlink("tmp_00", recursive = TRUE)
+PutFilesInDir("tmp001.txt", "new_dir")  # This function creates the directory new_dir and then puts the files in the first argument in there
+```
+
+    #> tmp001.txt 
+    #>       TRUE
+
+``` r
+list.files()
+```
+
+    #> [1] "new_dir" "tmp_00"
+
+``` r
+unlink(c("tmp_00", "new_dir"), recursive = TRUE)
 ```
 
 Delete Directories
