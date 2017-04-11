@@ -42,7 +42,7 @@ CanBeNumeric <- function(string) !is.na(suppressWarnings(as.numeric(string)))
 #' GetCurrencies("35.00 $1.14 abc5 $3.8 77")
 #' @export
 GetCurrencies <- function(string) {
-  stopifnot(is.character(string) && length(string) == 1)
+  stopifnot(is.character(string), length(string) == 1)
   ssbn <- StrSplitByNums(string, decimals = TRUE, negs = TRUE)[[1]]
   num.indices <- which(CanBeNumeric(ssbn))
   numbers <- as.numeric(ssbn[num.indices])
