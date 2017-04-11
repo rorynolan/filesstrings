@@ -6,3 +6,7 @@
 
 ## R CMD check results
 There were no ERRORs, WARNINGs or NOTEs.
+
+## Reverse Dependencies
+devtools::revdep_check() was run and found no problems.
+Results at https::github.com/rorynolan/filesstrings/tree/master/revdep
