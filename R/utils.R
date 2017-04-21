@@ -21,6 +21,7 @@
 #' AllEqual(c(1, 88))
 #' @export
 AllEqual <- function(a, b = NULL) {
+  if (is.null(a) && (!is.null(b))) return(FALSE)
   if (is.null(b[1])) {
     return(length(unique(a)) == 1)
   } else {

@@ -6,6 +6,9 @@ test_that("AllEqual works", {
   expect_false(AllEqual(1:4, c(1, 2, 3, 3)))
   expect_true(AllEqual(rep(1, 10)))
   expect_false(AllEqual(c(1, 88)))
+  expect_false(AllEqual(character(0), NA))
+  expect_false(AllEqual(NA, character(0)))
+  expect_false(AllEqual(NULL, NA))
 })
 
 test_that("GroupClose works", {

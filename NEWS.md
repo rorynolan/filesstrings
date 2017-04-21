@@ -1,3 +1,6 @@
+# 0.4.1
+* Minor fix to AllEqual
+
 # 0.4.0
 * Fix bug in AllEqual and improve its documentation
 * Vectorize GiveExt
@@ -9,7 +12,7 @@
 * Minor documentation improvements.
 * StrReverse() is removed. Use stringi::stri_reverse() instead.
 
-## 0.3.1
+# 0.3.1
 * Fix problem of
 Found no calls to: ‘R_registerRoutines’, ‘R_useDynamicSymbols’
 by following Giorgio Spedicato's answer at
