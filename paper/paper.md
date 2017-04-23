@@ -5,17 +5,17 @@ tags:
   - file
   - string
 authors:
- - name: Rory Nolan
-   orcid: 0000-0002-5239-4043
-   affiliation: 1
- - name: Sergi Padilla-Parra
-   orcid: 0000-0002-8010-9481
-   affiliation: 1, 2
+  - name: Rory Nolan
+    orcid: 0000-0002-5239-4043
+    affiliation: 1
+  - name: Sergi Padilla-Parra
+    orcid: 0000-0002-8010-9481
+    affiliation: 1, 2
 affiliations:
- - name: Wellcome Trust Centre for Human Genetics, University of Oxford
-   index: 1
- - name: Department of Structural Biology, University of Oxford
-   index: 2
+  - name: Wellcome Trust Centre for Human Genetics, University of Oxford
+    index: 1
+  - name: Department of Structural Biology, University of Oxford
+    index: 2
 date: 11 April 2017
 bibliography: paper.bib
 ---
