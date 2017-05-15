@@ -56,8 +56,8 @@ AllEqual <- function(a, b = NULL) {
 GroupClose <- function(vec.ascending, max.gap = 1) {
   lv <- length(vec.ascending)
   if (lv == 0) stop("vec.ascending must have length greater than zero.")
-  test <- all(vec.ascending > dplyr::lag(vec.ascending), na.rm = TRUE)
-  if (!test) stop("vec.ascending must be strictly increasing.")
+  test <- all(diff(vec.ascending) > 0)
+  if (is.na(test) || !test) stop("vec.ascending must be strictly increasing.")
   if (lv == 1) {
     return(list(vec.ascending))
   } else {

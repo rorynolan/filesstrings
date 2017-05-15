@@ -20,7 +20,6 @@ Imports:
     Rcpp,
     magrittr,
     tools,
-    dplyr,
     ore,
     matrixStats
 RoxygenNote: 6.0.1
