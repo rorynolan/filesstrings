@@ -1,6 +1,6 @@
 #' @import stringr
 #' @importFrom magrittr "%>%"
-#' @useDynLib filesstrings
+#' @useDynLib filesstrings, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
 NULL
 

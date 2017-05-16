@@ -78,9 +78,11 @@ test_that("MergeTablesOnDisk works", {
   mapply(readr::write_csv, list(tab1, tab2, tab3, tab4),
          paste0(c("tab1", "tab2", "tab3", "tab4"), ".csv"))
   expect_equal(MergeTablesOnDisk(c("tab1.csv", "tab2.csv"), ",", "merged.csv"),
-               tibble::tibble(x = c(1.5, 1.5), y = c(2.5, 29.5)))
+               tibble::tibble(x = c(1.5, 1.5), y = c(2.5, 29.5)),
+               check.attributes = FALSE)
   expect_equal(readr::read_csv("merged.csv"),
-               tibble::tibble(x = c(1.5, 1.5), y = c(2.5, 29.5)))
+               tibble::tibble(x = c(1.5, 1.5), y = c(2.5, 29.5)),
+               check.attributes = FALSE)
   expect_error(MergeTablesOnDisk(c("tab1.csv", "tab3.csv"), ",", "merged.csv"))
   expect_error(MergeTablesOnDisk(c("tab1.csv", "tab4.csv"), ",", "merged.csv"))
   setwd("..")
