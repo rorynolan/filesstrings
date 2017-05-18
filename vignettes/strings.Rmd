@@ -87,13 +87,13 @@ box.infos <- c("Box 1 has weight 23kg and volume 0.3 cubic metres.",
 ```
 We can get (for example) the weights of the boxes by taking the first number that appears after the word "weight".
 ```{r after weight}
+library(magrittr)
 StrAfterNth(box.infos, "weight", 1)  # the bit of the string after 1st "weight"
 StrAfterNth(box.infos, "weight", 1) %>% NthNumber(1)  # 1st number after 1st "weight"
 ```
 We'd like to put all of the box information into a nice data frame. Here's how.
 ```{r box df, message=FALSE}
-library(dplyr)
-tibble(box = NthNumber(box.infos, 1),
+tibble::tibble(box = NthNumber(box.infos, 1),
         weight = StrAfterNth(box.infos, "weight", 1) %>% 
           NthNumber(1, decimals = TRUE),
         volume = StrAfterNth(box.infos, "volume", 1) %>% 
