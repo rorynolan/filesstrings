@@ -37,9 +37,16 @@ CreateDirsIfNotThere <- function(dir.names) {
 #' RemoveDirs(c("mydir1", "mydir2"))
 #' @export
 RemoveDirs <- function(dirs) {
-  !vapply(dirs, function(dir) unlink(dir, recursive = TRUE), integer(1)) %>%
-    invisible
+  outcome <- !vapply(dirs, function(dir) unlink(dir, recursive = TRUE),
+                     integer(1))
+  message(sum(outcome), " directories deleted. ", sum(!outcome),
+          " failed to delete.")
+  invisible(outcome)
 }
+
+#' @rdname RemoveDirs
+#' @export
+dir.remove <- RemoveDirs
 
 #' Merge Tables.
 #'
@@ -95,23 +102,35 @@ MoveFile <- function(file, destination) {
 #' directories. If there is one directory, then all \eqn{n} files are moved
 #' there. If there are \eqn{n} directories, then each file is put into its
 #' respective directory. This function also works for directories.
+#'
+#' If you try to move files to a directory that doesn't exist, the directory is
+#' first created and then the files are put inside.
+#'
 #' @param files A character vector of files to move (relative or absolute
 #'   paths).
 #' @param destinations A character vector of the destination directories into
 #'   which to move the files.
-#' @return A logical vector with a `TRUE` for each time the operation
+#' @return Invisibly, a logical vector with a `TRUE` for each time the operation
 #'   succeeded and a `FALSE` for every fail.
 #' @export
 MoveFiles <- function(files, destinations) {
+  CreateDirsIfNotThere(destinations)
   if(length(destinations) == length(files)) {
-    mapply(MoveFile, files, destinations)
+    outcome <- mapply(MoveFile, files, destinations)
   } else if (length(destinations) == 1) {
-    vapply(files, MoveFile, logical(1), destinations)
+    outcome <- vapply(files, MoveFile, logical(1), destinations)
   } else {
     stop("the number of destinations must be equal to 1 or equal to the ",
          "number of files to be moved")
   }
+  message(sum(outcome), " files moved. ", sum(!outcome),
+          " failed to move.")
+  invisible(outcome)
 }
+
+#' @rdname MoveFiles
+#' @export
+file.move <- MoveFiles
 
 #' Make file numbers comply with alphabetical order
 #'
@@ -157,22 +176,9 @@ NiceFileNums <- function(dir = ".", pattern = NA) {
     lf <- list.files(pattern = pattern)
   }
   renamed <- file.rename(lf, NiceNums(lf))
-  renamed
-}
-
-#' Put files in a directory
-#'
-#' Move files to a directory, creating the directory if it does not already
-#' exist.
-#' @param file.names character vector of file names, relative or absolute paths
-#' @param dir.name The name of the directory into which to move the files,
-#'   relative or absolute path
-#' @return A logical vector with a `TRUE` for each successful file move and
-#'   a `FALSE` otherwise.
-#' @export
-PutFilesInDir <- function(file.names, dir.name) {
-  CreateDirsIfNotThere(dir.name)
-  MoveFiles(file.names, dir.name)
+  message(sum(renamed), " files renamed into the desired format. ",
+          sum(!renamed), " failed.")
+  invisible(renamed)
 }
 
 #' Remove spaces in file names
@@ -205,8 +211,10 @@ RemoveFileNameSpaces <- function(dir = ".", pattern = "", replace.with = "") {
   setwd(dir)
   lf <- list.files(pattern = pattern)
   new.names <- str_replace_all(lf, " ", replace.with)
-  success <- file.rename(lf, new.names)
-  success
+  outcome <- file.rename(lf, new.names)
+  message(sum(outcome), " files renamed. ", sum(!outcome),
+          " failed to rename.")
+  invisible(outcome)
 }
 
 #' Replace file names with numbers.
@@ -285,7 +293,7 @@ UnitDirs <- function(unit, pattern = NULL, dir = ".") {
   un <- unique(nums)
   for (i in un) {
     files <- lf[nums == i]
-    PutFilesInDir(files, paste0(i, unit))
+    MoveFiles(files, paste0(i, unit))
   }
   invisible(TRUE)
 }

@@ -1,25 +1,27 @@
 filesstrings
 ================
 
-An R package for string and file manipulation inspired by struggles with microscopy filenames.
+Convenient functions for moving files, deleting directories, and a variety of string operations that facilitate manipulating file names and extracting information from strings.
 
 [![Travis-CI Build Status](https://travis-ci.org/rorynolan/filesstrings.svg?branch=master)](https://travis-ci.org/rorynolan/filesstrings) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/rorynolan/filesstrings?branch=master&svg=true)](https://ci.appveyor.com/project/rorynolan/filesstrings) [![codecov](https://codecov.io/gh/rorynolan/filesstrings/branch/master/graph/badge.svg)](https://codecov.io/gh/rorynolan/filesstrings) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/filesstrings)](https://cran.r-project.org/package=filesstrings) ![RStudio CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/filesstrings) [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 
 Installation
-------------
+============
 
-In R, enter
+To install the release version (recommended) from CRAN, in R, enter
 
 ``` r
 install.packages("filesstrings")
 ```
 
-and you're done!
+To install the development version, in R, first install `devtools` via `install.packages("devtools")`. Then enter
 
-Please Read the Manual
-----------------------
+``` r
+devtools::install_github("rorynolan/filesstrings")
+```
 
-This package is one for which the functions are largely simple enough such that the function names well describe their purpose, so the manual is an excellent way to acquaint yourself with the package. However, I made a couple of vignettes anyway.
+Use
+===
 
 First let's load the library:
 
@@ -30,247 +32,117 @@ library(filesstrings)
     #> Loading required package: stringr
 
 Files
-=====
+-----
 
-Here are some file operations that I wished were easier in R.
+### Move files around
 
-Move files around
------------------
-
-I find it bizarre that base R has no `file.move`. To move a file, you have to cleverly rename it. Well, no more.
+I find it bizarre that base R has no `file.move`. To move a file, you have to unintuitively rename it. `filesstrings` provides `file.move(files, destinations)`. This function has the nice feature that if you try to move files to a directory that doesn't exist, it creates the directory first and then puts the files inside. Let's create a directory and a file:
 
 ``` r
-setwd(tempdir())
-dir.create("tmp_00")
-file.create("tmp000.txt", "tmp001.txt")
+dir.create("tmp_dir")
+file.create("tmp.txt")
 ```
 
-    #> [1] TRUE TRUE
+    #> [1] TRUE
+
+Now let's put the file into the directory:
 
 ``` r
-list.files()
+file.move("tmp.txt", "tmp_dir")
 ```
 
-    #> [1] "tmp_00"     "tmp000.txt" "tmp001.txt"
+    #> 1 files moved. 0 failed to move.
+
+### Delete Directories
+
+To delete directories with base R, one has to use `unlink(..., recursive = TRUE)`. The `filesstrings` package gives you `dir.remove()` which does the same job.
 
 ``` r
-MoveFiles("tmp000.txt", "tmp_00")
+dir.remove("tmp_dir")
 ```
 
-    #> tmp000.txt 
-    #>       TRUE
+    #> 1 directories deleted. 0 failed to delete.
+
+### Remove spaces from file names
+
+"A space in your file name is a hole in your soul." - Jenny Bryan
+
+`RemoveFileNameSpaces(replace.with = "_")` replaces them all with underscores for all files in a directory. By default, they are replaced with nothing.
 
 ``` r
-list.files()
-```
-
-    #> [1] "tmp_00"     "tmp001.txt"
-
-``` r
-list.files("tmp_00")
-```
-
-    #> [1] "tmp000.txt"
-
-``` r
-PutFilesInDir("tmp001.txt", "new_dir")  # This function creates the directory new_dir and then puts the files in the first argument in there
-```
-
-    #> tmp001.txt 
-    #>       TRUE
-
-``` r
-list.files()
-```
-
-    #> [1] "new_dir" "tmp_00"
-
-``` r
-unlink(c("tmp_00", "new_dir"), recursive = TRUE)
-```
-
-Delete Directories
-------------------
-
-That `unlink` above with `recursive = TRUE` was a cryptic way to delete a directory right? I give you `RemoveDirs()`.
-
-``` r
-setwd(tempdir())
-dir.create("tmp_00")
-list.files()
-```
-
-    #> [1] "tmp_00"
-
-``` r
-RemoveDirs("tmp_00")
-```
-
-    #> tmp_00 
-    #>   TRUE
-
-``` r
-list.files()
-```
-
-    #> character(0)
-
-Remove spaces from file names
------------------------------
-
-Surely I don't have to convince anyone that spaces in file names are a bad idea? Let's get rid of some!
-
-``` r
-setwd(tempdir())
 file.create(c("file 1.txt", "file 2.txt"))
 ```
 
     #> [1] TRUE TRUE
 
 ``` r
-list.files()
+RemoveFileNameSpaces(pattern = "txt$", replace.with = "_")
 ```
 
-    #> [1] "file 1.txt" "file 2.txt"
+    #> 2 files renamed. 0 failed to rename.
 
 ``` r
-RemoveFileNameSpaces(replace.with = "_")
-```
-
-    #> [1] TRUE TRUE
-
-``` r
-list.files()
+list.files(pattern = "txt$")
 ```
 
     #> [1] "file_1.txt" "file_2.txt"
 
 ``` r
-file.remove(list.files())
+file.remove(list.files(pattern = "txt$"))  # clean up
 ```
 
     #> [1] TRUE TRUE
 
 Strings
-=======
+-------
 
-Here are some string operations that I wished were easier in R.
-
-The *n*<sup>th</sup> number in a string
----------------------------------------
+### The *n*<sup>th</sup> number in a string
 
 I often want to get the first, last or *n*<sup>th</sup> number in a string.
 
 ``` r
-request <- "I want the $35 scarf."
-NthNumber(request, 1)
+pop <- "A population of 1000 comprised of 488 dogs and 512 cats."
+NthNumber(pop, 1)
 ```
 
-    #> [1] 35
+    #> [1] 1000
 
 ``` r
-NthNumber("20 people want the $12 scarf.", -1)  # last number
+NthNumber(pop, -1)  # last number
 ```
 
-    #> [1] 12
+    #> [1] 512
+
+### All the numbers in a string
 
 ``` r
-GetCurrency(request)
-```
-
-    #> [1] "$"
-
-Messed up file numbering
-------------------------
-
-The microscope I use numbers files with 3 numbers by default, i.e. `file001.tif`, `file002.tif` and so on. This is a problem when the automatic numbering passes 1000, whereby we have `file999.tif`, `file1000.tif`. What's the problem with this? Well, sometimes you need alphabetical order to reflect the true order of your files. These file numbers don't satisfy this requirement:
-
-``` r
-file.names <- c("file999.tif", "file1000.tif")
-sort(file.names)
-```
-
-    #> [1] "file1000.tif" "file999.tif"
-
-so `file1000.tif` comes before `file999.tif` in alphabetical order. We want them to be like
-
-``` r
-NiceNums(file.names)
-```
-
-    #> [1] "file0999.tif" "file1000.tif"
-
-The function `NiceFileNums` renames all the files in an entire directory to be as we would like. It wraps `NiceNums`.
-
-Could that be interpreted as numeric?
--------------------------------------
-
-Sometimes we don't want to know is something *is* numeric, we want to know if it could be considered to be numeric (or could be coerced to numeric).
-
-``` r
-is.numeric(23)
-```
-
-    #> [1] TRUE
-
-``` r
-is.numeric("23")
-```
-
-    #> [1] FALSE
-
-``` r
-CanBeNumeric(23)
-```
-
-    #> [1] TRUE
-
-``` r
-CanBeNumeric("23")
-```
-
-    #> [1] TRUE
-
-``` r
-CanBeNumeric("23a")
-```
-
-    #> [1] FALSE
-
-``` r
-StrSplitByNums("23a")
+ExtractNumbers(pop)
 ```
 
     #> [[1]]
-    #> [1] "23" "a"
+    #> [1] 1000  488  512
+
+### All the non-numbers in a string
 
 ``` r
-CanBeNumeric(StrSplitByNums("23a")[[1]])
+ExtractNonNumerics(pop)
 ```
 
-    #> [1]  TRUE FALSE
+    #> [[1]]
+    #> [1] "A population of " " comprised of "   " dogs and "      
+    #> [4] " cats."
 
-The name of a file without the extension
-----------------------------------------
+### Trim anything (not just whitespace)
+
+`stringr`'s `str_trim` just trims whitespace. What if you want to trim something else? Now you can `TrimAnything()`.
 
 ``` r
-BeforeLastDot("spreadsheet_92.csv")
+TrimAnything("__rmarkdown_", "_")
 ```
 
-    #> spreadsheet_92.csv 
-    #>   "spreadsheet_92"
+    #> [1] "rmarkdown"
 
-Get the *n*<sup>th</sup> element of a string
---------------------------------------------
+Contribution
+============
 
-``` r
-StrElem("abc", 2)
-```
-
-    #> [1] "b"
-
-``` r
-StrElem("abcdefz", -1)
-```
-
-    #> [1] "z"
+Contributions to this package are welcome. The preferred method of contribution is through a github pull request. Feel free to contact me by creating an issue. Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.

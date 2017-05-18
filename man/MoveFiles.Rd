@@ -2,9 +2,12 @@
 % Please edit documentation in R/files.R
 \name{MoveFiles}
 \alias{MoveFiles}
+\alias{file.move}
 \title{Move files around.}
 \usage{
 MoveFiles(files, destinations)
+
+file.move(files, destinations)
 }
 \arguments{
 \item{files}{A character vector of files to move (relative or absolute
@@ -14,7 +17,7 @@ paths).}
 which to move the files.}
 }
 \value{
-A logical vector with a \code{TRUE} for each time the operation
+Invisibly, a logical vector with a \code{TRUE} for each time the operation
 succeeded and a \code{FALSE} for every fail.
 }
 \description{
@@ -25,4 +28,7 @@ If there are \eqn{n} files, there must be either \eqn{1} or \eqn{n}
 directories. If there is one directory, then all \eqn{n} files are moved
 there. If there are \eqn{n} directories, then each file is put into its
 respective directory. This function also works for directories.
+
+If you try to move files to a directory that doesn't exist, the directory is
+first created and then the files are put inside.
 }

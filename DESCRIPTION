@@ -1,16 +1,19 @@
 Package: filesstrings
 Type: Package
 Title: Handy String and File Manipulation
-Version: 0.4.1
+Version: 0.4.1.9000
 Authors@R: c(person("Rory", "Nolan", email = "rorynoolan@gmail.com", 
                     role = c("aut", "cre", "cph")),
-             person("Jim", "Hester", , "jim.hester@rstudio.com", "ctb"),
+             person("Jim", "Hester", email = "jim.hester@rstudio.com", 
+                    role = "ctb"),
+             person("Kirill", "Muller", email = "krlmlr+r@mailbox.org", 
+                    role = "ctb"),
              person("Sergi", "Padilla-Parra", email = "spadilla@well.ox.ac.uk", 
                     role = "ths"))
 Maintainer: Rory Nolan <rorynoolan@gmail.com>
-Description: Handy string and file processing and manipulation tools. Built on 
-    top of the functionality of 'stringr'. Good for those who like to do
-    all of their file and string manipulation from within R.
+Description: Convenient functions for moving files, deleting directories, 
+    and a variety of string operations that facilitate manipulating file names 
+    and extracting information from strings.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

@@ -13,58 +13,101 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE, comment = "#>")
 ```
 
-# Please Read the Manual
-This package is one for which the functions are largely simple enough such that the function names well describe their purpose, so the manual is an excellent way to acquaint yourself with the package. But I made a couple of vignettes anyway.
-
 First let's load the library: 
 ```{r load}
 library(filesstrings)
 ```
 
-Here are some string operations that I wished were easier in R.
-
 ## The *n*^th^ number in a string
 I often want to get the first, last or *n*^th^ number in a string.
 ```{r nth number}
-request <- "I want the $35 scarf."
-NthNumber(request, 1)
-NthNumber("20 people want the $12 scarf.", -1)  # last number
-GetCurrency(request)
+pop <- "A population of 1000 comprised of 488 dogs and 512 cats."
+NthNumber(pop, 1)
+NthNumber(pop, -1)  # last number
 ```
 
-## Messed up file numbering
-The microscope I use numbers files with 3 numbers by default, i.e. `file001.tif`, `file002.tif` and so on. This is a problem when the automatic numbering passes 1000, whereby we have `file999.tif`, `file1000.tif`. What's the problem with this? Well, sometimes you need alphabetical order to reflect the true order of your files. These file numbers don't satisfy this requirement:
-```{r NiceNums setup}
-file.names <- c("file999.tif", "file1000.tif")
-sort(file.names)
+## All the numbers in a string
+```{r all the numbers}
+ExtractNumbers(pop)
 ```
-so `file1000.tif` comes before `file999.tif` in alphabetical order. We want them to be like
-```{r NiceNums}
-NiceNums(file.names)
+
+## All the non-numbers in a string
+```{r all the non-numbers}
+ExtractNonNumerics(pop)
 ```
-The function `NiceFileNums` renames all the files in an entire directory to be as we would like. It wraps `NiceNums`.
+
+## Split strings by numbers
+```{r split by nums}
+StrSplitByNums(pop)
+```
 
 ## Could that be interpreted as numeric?
-Sometimes we don't want to know is something *is* numeric, we want to know if it could be considered to be numeric (or could be coerced to numeric).
+Sometimes we don't want to know is something *is* numeric, we want to know if it could be considered to be numeric (or could be coerced to numeric). For this, there's `CanBeNumeric()`.
 ```{r CanBeNumeric}
 is.numeric(23)
 is.numeric("23")
 CanBeNumeric(23)
 CanBeNumeric("23")
 CanBeNumeric("23a")
-StrSplitByNums("23a")
-CanBeNumeric(StrSplitByNums("23a")[[1]])
-```
-
-## The name of a file without the extension
-```{r BeforeLastDot}
-BeforeLastDot("spreadsheet_92.csv")
 ```
 
 ## Get the *n*^th^ element of a string
 ```{r}
 StrElem("abc", 2)
-StrElem("abcdefz", -1)
+StrElem("abcdefz", -1)  # last element
 ```
 
+## Trim anything (not just whitespace)
+`stringr`'s `str_trim` just trims whitespace. What if you want to trim something else? Now you can `TrimAnything()`.
+```{r trim anything}
+TrimAnything("__rmarkdown_", "_")
+```
 
+## Count the number of matches of a pattern in a string
+```{r count matches}
+CountMatches(pop, " ")  # count the spaces in pop
+CountMatches("Bob and Joe went to see Bob's mother.", "Bob")
+```
+
+## Turn duplicates of a pattern into singles
+Suppose we want to remove double spacing:
+```{r dups to sings}
+double__spaced <- "Hello  world,  pretend  it's  Saturday  :-)"
+CountMatches(double__spaced, " ")  # count the spaces
+single_spaced <- DuplicatesToSingles(double__spaced, pattern = " ")
+single_spaced
+CountMatches(single_spaced, " ")  # half the spaces are gone
+```
+
+## The bit of a string after the *n*^th^ appearance of a pattern
+Suppose we have sentences telling us about a couple of boxes:
+```{r about a box}
+box.infos <- c("Box 1 has weight 23kg and volume 0.3 cubic metres.",
+               "Box 2 has weight 20kg and volume 0.33 cubic metres.")
+```
+We can get (for example) the weights of the boxes by taking the first number that appears after the word "weight".
+```{r after weight}
+StrAfterNth(box.infos, "weight", 1)  # the bit of the string after 1st "weight"
+StrAfterNth(box.infos, "weight", 1) %>% NthNumber(1)  # 1st number after 1st "weight"
+```
+We'd like to put all of the box information into a nice data frame. Here's how.
+```{r box df, message=FALSE}
+library(dplyr)
+tibble(box = NthNumber(box.infos, 1),
+        weight = StrAfterNth(box.infos, "weight", 1) %>% 
+          NthNumber(1, decimals = TRUE),
+        volume = StrAfterNth(box.infos, "volume", 1) %>% 
+          NthNumber(1, decimals = TRUE)
+)
+```
+
+## Split camel case
+Sometimes people use camel case (CamelCase) to avoid using spaces. What if we want to put the spaces back in?
+```{r camel case}
+camel.names <- c("JoeBloggs", "JaneyMac")
+SplitCamelCase(camel.names)
+```
+Now we have a list where each list element is a vector of a person's names. To put them together with spaces in between, we can use `PasteCollapseListElems`. This is an efficient way to perform `paste(..., collapse = ...)` on each element of a list.
+```{r PasteCollapseListElems}
+SplitCamelCase(camel.names) %>% PasteCollapseListElems(" ")
+```

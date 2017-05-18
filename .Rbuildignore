@@ -11,3 +11,4 @@
 ^revdep$
 ^codemeta\.json$
 ^paper$
+^CONDUCT\.md$

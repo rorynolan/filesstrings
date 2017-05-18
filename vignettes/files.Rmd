@@ -13,49 +13,68 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE, comment = "#>")
 ```
 
-# Please Read the Manual
-This package is one for which the functions are largely simple enough such that the function names well describe their purpose, so the manual is an excellent way to acquaint yourself with the package. But I made a couple of vignettes anyway.
-
 First let's load the library: 
 ```{r load}
 library(filesstrings)
 ```
 
-Here are some file operations that I wished were easier in R.
-
 ## Move files around
-I find it bizarre that base R has no `file.move`. To move a file, you have to cleverly rename it. Well, no more.
-```{r, move files}
-setwd(tempdir())
-dir.create("tmp_00")
-file.create("tmp000.txt", "tmp001.txt")
-list.files()
-MoveFiles("tmp000.txt", "tmp_00")
-list.files()
-list.files("tmp_00")
-PutFilesInDir("tmp001.txt", "new_dir")  # This function creates the directory new_dir and then puts the files in the first argument in there
-list.files()
-unlink(c("tmp_00", "new_dir"), recursive = TRUE)
+I find it bizarre that base R has no `file.move`. To move a file, you have to unintuitively rename it. `filesstrings` provides `file.move(files, destinations)`. This function has the nice feature that if you try to move files to a directory that doesn't exist, it creates the directory first and then puts the files inside. 
+Let's create a directory and a file:
+```{r create dir}
+dir.create("tmp_dir")
+file.create("tmp.txt")
+```
+Now let's put the file into the directory:
+```{r put a file in a dir}
+file.move("tmp.txt", "tmp_dir")
 ```
 
 ## Delete Directories
-That `unlink` above with `recursive = TRUE` was a cryptic way to delete a directory right? I give you `RemoveDirs()`.
-```{r, delete directory}
-setwd(tempdir())
-dir.create("tmp_00")
-list.files()
-RemoveDirs("tmp_00")
-list.files()
+To delete directories with base R, one has to use `unlink(..., recursive = TRUE)`. The `filesstrings` package gives you `dir.remove()` which does the same job.
+```{r, remove directory}
+dir.remove("tmp_dir")
 ```
 
 ## Remove spaces from file names
-Surely I don't have to convince anyone that spaces in file names are a bad idea? Let's get rid of some!
+"A space in your file name is a hole in your soul." - Jenny Bryan
+
+`RemoveFileNameSpaces(replace.with = "_")` replaces them all with underscores for all files in a directory. By default, they are replaced with nothing.
 ```{r, RemoveFileNameSpaces}
-setwd(tempdir())
 file.create(c("file 1.txt", "file 2.txt"))
-list.files()
-RemoveFileNameSpaces(replace.with = "_")
-list.files()
-file.remove(list.files())
+RemoveFileNameSpaces(pattern = "txt$", replace.with = "_")
+list.files(pattern = "txt$")
+file.remove(list.files(pattern = "txt$"))  # clean up
 ```
 
+## Messed up file numbering
+The microscope I use numbers files with 3 numbers by default, i.e. `file001.tif`, `file002.tif` and so on. This is a problem when the automatic numbering passes 1000, whereby we have `file999.tif`, `file1000.tif`. What's the problem with this? Well, sometimes you need alphabetical order to reflect the true order of your files. These file numbers don't satisfy this requirement:
+```{r NiceNums setup}
+file.names <- c("file999.tif", "file1000.tif")
+sort(file.names)
+```
+so `file1000.tif` comes before `file999.tif` in alphabetical order. The function `NiceNums` returns the names that we'd like them to have:
+```{r NiceNums}
+NiceNums(file.names)
+```
+The function `NiceFileNums` applies such renaming to all the files in an entire directory. It wraps `NiceNums`.
+
+## The name of a file without the extension
+```{r BeforeLastDot}
+BeforeLastDot("spreadsheet_92.csv")
+```
+
+## Ensure that a file name has a given extension
+Add a file extension if needed:
+```{r add file extension 1}
+GiveExt("xyz", "csv")
+```
+If the file name has the correct extension already, it's left alone:
+```{r add file extension 2}
+GiveExt("xyz.csv", "csv")  
+```
+Change a file extension:
+```{r change file extension}
+GiveExt("abc.csv", "txt")  # tack the new extension onto the end
+GiveExt("abc.csv", "txt", replace = TRUE)  # replace the current extension
+```

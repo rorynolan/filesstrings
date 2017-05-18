@@ -2,9 +2,12 @@
 % Please edit documentation in R/files.R
 \name{RemoveDirs}
 \alias{RemoveDirs}
+\alias{dir.remove}
 \title{Remove directories.}
 \usage{
 RemoveDirs(dirs)
+
+dir.remove(dirs)
 }
 \arguments{
 \item{dirs}{The names of the directories, specified via relative or absolute

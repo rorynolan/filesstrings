@@ -1,22 +1,51 @@
-# 0.4.1
-* Minor fix to AllEqual
+### 0.4.2
 
-# 0.4.0
-* Fix bug in AllEqual and improve its documentation
-* Vectorize GiveExt
-* Improve NA handling of ExtractNumerics and its documentation
-* Improve README and vignette
+#### NEW FEATURES
+* The package now has the http://contributor-covenenant.org code of conduct.
 
-# 0.3.2
+#### DEFUNCT
+* `PutFilesInDir()` is gone.
+
+#### MINOR IMPROVEMENTS
+* The functionality that `PutFilesInDir()` had is now default for `MoveFiles()`.
+* The README and vignettes are improved.
+
+
+### 0.4.1
+
+#### BUG FIXES
+* Minor fix to `AllEqual()`.
+
+
+### 0.4.0
+
+#### BUG FIXES
+* Fix bug in `AllEqual()` and improve its documentation.
+* Improve `NA` handling of `ExtractNumerics()` and its documentation.
+
+#### MINOR IMPROVEMENTS
+* Improve README and vignette.
+
+
+### 0.3.2
+
+#### BUG FIXES
 * A fix to make the package compatible with the new version of 'readr' courtesy of Jim Hester.
-* Minor documentation improvements.
-* StrReverse() is removed. Use stringi::stri_reverse() instead.
 
-# 0.3.1
-* Fix problem of
-Found no calls to: ‘R_registerRoutines’, ‘R_useDynamicSymbols’
+#### MINOR IMPROVEMENTS
+* Minor documentation improvements.
+
+#### DEFUNCT
+* `StrReverse()` is removed. Use `stringi::stri_reverse()` instead.
+
+
+### 0.3.1
+#### BUG FIXES
+* Fixed problem of
+`Found no calls to: ‘R_registerRoutines’, ‘R_useDynamicSymbols’`
 by following Giorgio Spedicato's answer at
 http://stackoverflow.com/questions/42313373/r-cmd-check-note-found-no-calls-to-r-registerroutines-r-usedynamicsymbols
 
-# filesstrings 0.3.0
+
+### filesstrings 0.3.0
 * The first edition that I think may be CRAN-worthy.

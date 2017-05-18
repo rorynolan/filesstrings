@@ -5,19 +5,19 @@
 \alias{StrBeforeNth}
 \title{Text before or after \eqn{n}th occurrence of pattern.}
 \usage{
-StrAfterNth(strings, pattern, n)
+StrAfterNth(strings, pattern, n = 1)
 
-StrBeforeNth(strings, pattern, n)
+StrBeforeNth(strings, pattern, n = 1)
 }
 \arguments{
 \item{strings}{A character vector.}
 
 \item{pattern}{A regular expression.}
 
-\item{n}{A natural number to identify the \eqn{n}th occurrence This can be
-negatively indexed, so if you wish to select the \emph{last} occurrence,
-you need \code{n = -1}, for the second-last, you need \code{n = -2} and so
-on.}
+\item{n}{A natural number to identify the \eqn{n}th occurrence (defaults to
+first (\code{n = 1})). This can be negatively indexed, so if you wish to select
+the \emph{last} occurrence, you need \code{n = -1}, for the second-last, you
+need \code{n = -2} and so on.}
 }
 \value{
 A character vector of the desired strings.

@@ -199,8 +199,8 @@ test_that("GiveExt works", {
   expect_equal(GiveExt("abc.csv", "pdf", replace = TRUE), "abc.pdf")
 })
 
-test_that("SplitCamelcase works", {
-  expect_equal(SplitCamelcase(c("RoryNolan", "NaomiFlagg",
+test_that("SplitCamelCase works", {
+  expect_equal(SplitCamelCase(c("RoryNolan", "NaomiFlagg",
                                 "DepartmentOfSillyHats")),
                list(c("Rory", "Nolan"), c("Naomi", "Flagg"),
                     c("Department", "Of", "Silly", "Hats")))
