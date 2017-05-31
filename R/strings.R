@@ -212,13 +212,21 @@ ExtractNumbers <- function(string, leave.as.string = FALSE, decimals = FALSE,
   }
   if (negs) pattern <- str_c("-?", pattern)
   numbers <- str_extract_all(string, pattern)
-  numerics <- suppressWarnings(lapply(numbers, as.numeric))
+  if (decimals) {
+    numerics <- suppressWarnings(lapply(numbers, as.numeric))
+  } else {
+    numerics <- suppressWarnings(lapply(numbers, as.integer))
+  }
   na.pos <- vapply(numerics, anyNA, logical(1))
   if (leave.as.string) {
     numbers[na.pos] <- NA_character_
   } else {
     numbers <- numerics
-    numbers[na.pos] <- NA_real_
+    if (decimals) {
+      numbers[na.pos] <- NA_real_
+    } else {
+      numbers[na.pos] <- NA_integer_
+    }
   }
   numbers
 }
@@ -262,7 +270,11 @@ NthNumber <- function(string, n = 1, leave.as.string = FALSE, decimals = FALSE,
   if (leave.as.string) {
     nth.numbers
   } else {
-    as.numeric(nth.numbers)
+    if (decimals) {
+      as.numeric(nth.numbers)
+    } else {
+      as.integer(nth.numbers)
+    }
   }
 }
 
