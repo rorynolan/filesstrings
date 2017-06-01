@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{AllEqual}
 \alias{AllEqual}
-\title{Check if all elements are equal.}
+\title{A more flexible version of \link{all.equal}.}
 \usage{
 AllEqual(a, b = NULL)
 }

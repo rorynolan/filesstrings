@@ -1,4 +1,4 @@
-#' Check if all elements are equal.
+#' A more flexible version of [all.equal].
 #'
 #' If one argument is specified, check that all elements of that argument are
 #' equal. If two arguments of equal length are specified, check equality of all
