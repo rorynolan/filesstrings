@@ -15,6 +15,7 @@ Convenient functions for moving files, deleting directories, and a variety of st
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/filesstrings)](https://cran.r-project.org/package=filesstrings)
 ![RStudio CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/filesstrings)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![JOSS publication](http://joss.theoj.org/papers/10.21105/joss.00260/status.svg)](https://doi.org/10.21105/joss.00260)
 
 # Installation
 To install the release version (recommended) from CRAN, in R, enter
