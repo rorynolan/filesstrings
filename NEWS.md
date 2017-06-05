@@ -1,7 +1,14 @@
+## 1.0.0
+
+#### NEW FEATURES
+* The package is now peer-reviewed and has an accompanying paper in the journal of open-source software, which can be cited. See `citation("filesstrings")`.
+
+
 ### 0.4.2
 
 #### NEW FEATURES
 * The package now has the http://contributor-covenenant.org code of conduct.
+* The package now has the functions `file.move()` and `dir.delete()` to conform with the `base` naming pattern of such functions.
 
 #### DEFUNCT
 * `PutFilesInDir()` is gone.
