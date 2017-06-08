@@ -17,13 +17,16 @@ test_that("CharListElemsNthElem works", {
 })
 
 test_that("Random Rcpp stuff works",{
-  expect_equal(filesstrings:::InterleaveStrings(c("a", "b", "v"), "a"),
+  expect_equal(filesstrings:::interleave_strings(c("a", "b", "v"), "a"),
                NA_character_)
-  expect_equal(filesstrings:::CorrectInterleave0("a", character(0), "a"), "a")
-  expect_equal(filesstrings:::CorrectInterleave0("a", "a", character(0)), "a")
-  expect_equal(filesstrings:::CorrectInterleave0("ab", "b", "a"), c("a", "b"))
-  expect_equal(filesstrings:::CorrectInterleave("a", list(), list()),
+  expect_equal(filesstrings:::correct_interleave_helper("a", character(0), "a"),
+               "a")
+  expect_equal(filesstrings:::correct_interleave_helper("a", "a", character(0)),
+               "a")
+  expect_equal(filesstrings:::correct_interleave_helper("ab", "b", "a"),
+               c("a", "b"))
+  expect_equal(filesstrings:::correct_interleave("a", list(), list()),
                list(NA_character_))
-  expect_equal(filesstrings:::InterleaveStringList(list("a"), list()),
+  expect_equal(filesstrings:::interleave_char_lists(list("a"), list()),
                list(NA_character_))
 })

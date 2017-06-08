@@ -207,5 +207,5 @@ test_that("SplitCamelCase works", {
 })
 
 test_that("StrNthInstanceIndices errors in the right way", {
-  expect_error(filesstrings:::StrNthInstanceIndices("aba", "a", 9))
+  expect_error(filesstrings:::str_nth_instance_indices("aba", "a", 9), "There")
 })

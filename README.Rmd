@@ -57,10 +57,10 @@ dir.remove("tmp_dir")
 ### Remove spaces from file names
 "A space in your file name is a hole in your soul." - Jenny Bryan
 
-`RemoveFileNameSpaces(replace.with = "_")` replaces them all with underscores for all files in a directory. By default, they are replaced with nothing.
+`remove_filename_spaces(replacement = "_")` replaces them all with underscores for all files in a directory. By default, they are replaced with nothing.
 ```{r, RemoveFileNameSpaces}
 file.create(c("file 1.txt", "file 2.txt"))
-RemoveFileNameSpaces(pattern = "txt$", replace.with = "_")
+remove_filename_spaces(pattern = "txt$", replacement = "_")
 list.files(pattern = "txt$")
 file.remove(list.files(pattern = "txt$"))  # clean up
 ```
@@ -71,25 +71,25 @@ file.remove(list.files(pattern = "txt$"))  # clean up
 I often want to get the first, last or *n*^th^ number in a string.
 ```{r nth number}
 pop <- "A population of 1000 comprised of 488 dogs and 512 cats."
-NthNumber(pop, 1)
-NthNumber(pop, -1)  # last number
+nth_number(pop, 1)
+nth_number(pop, -1)  # last number
 ```
 
 ### All the numbers in a string
 ```{r all the numbers}
-ExtractNumbers(pop)
+extract_numbers(pop)
 ```
 
 ### All the non-numbers in a string
 ```{r all the non-numbers}
-ExtractNonNumerics(pop)
+extract_non_numerics(pop)
 ```
 
 
 ### Trim anything (not just whitespace)
-`stringr`'s `str_trim` just trims whitespace. What if you want to trim something else? Now you can `TrimAnything()`.
+`stringr`'s `str_trim` just trims whitespace. What if you want to trim something else? Now you can `trim_anything()`.
 ```{r trim anything}
-TrimAnything("__rmarkdown_", "_")
+trim_anything("__rmarkdown_", "_")
 ```
 
 # Contribution

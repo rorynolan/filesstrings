@@ -22,23 +22,23 @@ library(filesstrings)
 I often want to get the first, last or *n*^th^ number in a string.
 ```{r nth number}
 pop <- "A population of 1000 comprised of 488 dogs and 512 cats."
-NthNumber(pop, 1)
-NthNumber(pop, -1)  # last number
+nth_number(pop, 1)
+nth_number(pop, -1)  # last number
 ```
 
 ## All the numbers in a string
 ```{r all the numbers}
-ExtractNumbers(pop)
+extract_numbers(pop)
 ```
 
 ## All the non-numbers in a string
 ```{r all the non-numbers}
-ExtractNonNumerics(pop)
+extract_non_numerics(pop)
 ```
 
 ## Split strings by numbers
 ```{r split by nums}
-StrSplitByNums(pop)
+str_split_by_nums(pop)
 ```
 
 ## Could that be interpreted as numeric?
@@ -46,37 +46,37 @@ Sometimes we don't want to know is something *is* numeric, we want to know if it
 ```{r CanBeNumeric}
 is.numeric(23)
 is.numeric("23")
-CanBeNumeric(23)
-CanBeNumeric("23")
-CanBeNumeric("23a")
+can_be_numeric(23)
+can_be_numeric("23")
+can_be_numeric("23a")
 ```
 
 ## Get the *n*^th^ element of a string
 ```{r}
-StrElem("abc", 2)
-StrElem("abcdefz", -1)  # last element
+str_elem("abc", 2)
+str_elem("abcdefz", -1)  # last element
 ```
 
 ## Trim anything (not just whitespace)
 `stringr`'s `str_trim` just trims whitespace. What if you want to trim something else? Now you can `TrimAnything()`.
 ```{r trim anything}
-TrimAnything("__rmarkdown_", "_")
+trim_anything("__rmarkdown_", "_")
 ```
 
 ## Count the number of matches of a pattern in a string
 ```{r count matches}
-CountMatches(pop, " ")  # count the spaces in pop
-CountMatches("Bob and Joe went to see Bob's mother.", "Bob")
+count_matches(pop, " ")  # count the spaces in pop
+count_matches("Bob and Joe went to see Bob's mother.", "Bob")
 ```
 
 ## Turn duplicates of a pattern into singles
 Suppose we want to remove double spacing:
 ```{r dups to sings}
 double__spaced <- "Hello  world,  pretend  it's  Saturday  :-)"
-CountMatches(double__spaced, " ")  # count the spaces
-single_spaced <- DuplicatesToSingles(double__spaced, pattern = " ")
+count_matches(double__spaced, " ")  # count the spaces
+single_spaced <- singleize(double__spaced, pattern = " ")
 single_spaced
-CountMatches(single_spaced, " ")  # half the spaces are gone
+count_matches(single_spaced, " ")  # half the spaces are gone
 ```
 
 ## The bit of a string after the *n*^th^ appearance of a pattern
@@ -88,16 +88,16 @@ box.infos <- c("Box 1 has weight 23kg and volume 0.3 cubic metres.",
 We can get (for example) the weights of the boxes by taking the first number that appears after the word "weight".
 ```{r after weight}
 library(magrittr)
-StrAfterNth(box.infos, "weight", 1)  # the bit of the string after 1st "weight"
-StrAfterNth(box.infos, "weight", 1) %>% NthNumber(1)  # 1st number after 1st "weight"
+str_after_nth(box.infos, "weight", 1)  # the bit of the string after 1st "weight"
+str_after_nth(box.infos, "weight", 1) %>% nth_number(1)  # 1st number after 1st "weight"
 ```
 We'd like to put all of the box information into a nice data frame. Here's how.
 ```{r box df, message=FALSE}
-tibble::tibble(box = NthNumber(box.infos, 1),
-        weight = StrAfterNth(box.infos, "weight", 1) %>% 
-          NthNumber(1, decimals = TRUE),
-        volume = StrAfterNth(box.infos, "volume", 1) %>% 
-          NthNumber(1, decimals = TRUE)
+tibble::tibble(box = nth_number(box.infos, 1),
+        weight = str_after_nth(box.infos, "weight", 1) %>% 
+          nth_number(1, decimals = TRUE),
+        volume = str_after_nth(box.infos, "volume", 1) %>% 
+          nth_number(1, decimals = TRUE)
 )
 ```
 
@@ -105,9 +105,9 @@ tibble::tibble(box = NthNumber(box.infos, 1),
 Sometimes people use camel case (CamelCase) to avoid using spaces. What if we want to put the spaces back in?
 ```{r camel case}
 camel.names <- c("JoeBloggs", "JaneyMac")
-SplitCamelCase(camel.names)
+str_split_camel_case(camel.names)
 ```
-Now we have a list where each list element is a vector of a person's names. To put them together with spaces in between, we can use `PasteCollapseListElems`. This is an efficient way to perform `paste(..., collapse = ...)` on each element of a list.
+Now we have a list where each list element is a vector of a person's names. To put them together with spaces in between, we can use `paste_collapse_list_elems()`. This is an efficient way to perform `paste(..., collapse = ...)` on each element of a list.
 ```{r PasteCollapseListElems}
-SplitCamelCase(camel.names) %>% PasteCollapseListElems(" ")
+str_split_camel_case(camel.names) %>% paste_collapse_list_elems(" ")
 ```

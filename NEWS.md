@@ -1,3 +1,9 @@
+### 1.1.0
+
+#### NEW FEATURES
+* Everything has been redone to conform with the tidyverse style guide.
+
+
 ## 1.0.0
 
 #### NEW FEATURES

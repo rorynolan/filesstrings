@@ -39,42 +39,42 @@ dir.remove("tmp_dir")
 ## Remove spaces from file names
 "A space in your file name is a hole in your soul." - Jenny Bryan
 
-`RemoveFileNameSpaces(replace.with = "_")` replaces them all with underscores for all files in a directory. By default, they are replaced with nothing.
-```{r, RemoveFileNameSpaces}
+`remove_filename_spaces(replacement = "_")` replaces them all with underscores for all files in a directory. By default, they are replaced with nothing.
+```{r, remove_filename_spaces}
 file.create(c("file 1.txt", "file 2.txt"))
-RemoveFileNameSpaces(pattern = "txt$", replace.with = "_")
+remove_filename_spaces(pattern = "txt$", replacement = "_")
 list.files(pattern = "txt$")
 file.remove(list.files(pattern = "txt$"))  # clean up
 ```
 
 ## Messed up file numbering
 The microscope I use numbers files with 3 numbers by default, i.e. `file001.tif`, `file002.tif` and so on. This is a problem when the automatic numbering passes 1000, whereby we have `file999.tif`, `file1000.tif`. What's the problem with this? Well, sometimes you need alphabetical order to reflect the true order of your files. These file numbers don't satisfy this requirement:
-```{r NiceNums setup}
+```{r nice_nums setup}
 file.names <- c("file999.tif", "file1000.tif")
 sort(file.names)
 ```
-so `file1000.tif` comes before `file999.tif` in alphabetical order. The function `NiceNums` returns the names that we'd like them to have:
-```{r NiceNums}
-NiceNums(file.names)
+so `file1000.tif` comes before `file999.tif` in alphabetical order. The function `nice_nums()` returns the names that we'd like them to have:
+```{r nice_nums}
+nice_nums(file.names)
 ```
-The function `NiceFileNums` applies such renaming to all the files in an entire directory. It wraps `NiceNums`.
+The function `nice_file_nums` applies such renaming to all the files in an entire directory. It wraps `nice_nums`.
 
 ## The name of a file without the extension
-```{r BeforeLastDot}
-BeforeLastDot("spreadsheet_92.csv")
+```{r before_last_dot}
+before_last_dot("spreadsheet_92.csv")
 ```
 
 ## Ensure that a file name has a given extension
 Add a file extension if needed:
 ```{r add file extension 1}
-GiveExt("xyz", "csv")
+give_ext("xyz", "csv")
 ```
 If the file name has the correct extension already, it's left alone:
 ```{r add file extension 2}
-GiveExt("xyz.csv", "csv")  
+give_ext("xyz.csv", "csv")  
 ```
 Change a file extension:
 ```{r change file extension}
-GiveExt("abc.csv", "txt")  # tack the new extension onto the end
-GiveExt("abc.csv", "txt", replace = TRUE)  # replace the current extension
+give_ext("abc.csv", "txt")  # tack the new extension onto the end
+give_ext("abc.csv", "txt", replace = TRUE)  # replace the current extension
 ```

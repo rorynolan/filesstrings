@@ -2,20 +2,20 @@
 #'
 #' Given the names of (potential) directories, create the ones that do not
 #' already exist.
-#' @param dir.names The name of the directories, specified via relative or
+#' @param dirs The name of the directories, specified via relative or
 #'   absolute paths.
 #' @return Invisibly, a vector with a `TRUE` for each time a directory was
 #'   actually created and a `FALSE` otherwise.
 #' @examples
 #' setwd(tempdir())
-#' CreateDirsIfNotThere(c("mydir", "yourdir"))
-#' RemoveDirs(c("mydir", "yourdir"))
+#' create_dirs(c("mydir", "yourdir"))
+#' remove_dirs(c("mydir", "yourdir"))
 #' @export
-CreateDirsIfNotThere <- function(dir.names) {
-  created <- vapply(dir.names,
-                    function(dir.name) {
-                      if (!dir.exists(dir.name)) {
-                        dir.create(dir.name)
+create_dirs <- function(dirs) {
+  created <- vapply(dirs,
+                    function(dir) {
+                      if (!dir.exists(dir)) {
+                        dir.create(dir)
                         TRUE
                       } else {
                         FALSE
@@ -34,9 +34,9 @@ CreateDirsIfNotThere <- function(dir.names) {
 #' @examples
 #' setwd(tempdir())
 #' sapply(c("mydir1", "mydir2"), dir.create)
-#' RemoveDirs(c("mydir1", "mydir2"))
+#' remove_dirs(c("mydir1", "mydir2"))
 #' @export
-RemoveDirs <- function(dirs) {
+remove_dirs <- function(dirs) {
   outcome <- !vapply(dirs, function(dir) unlink(dir, recursive = TRUE),
                      integer(1))
   message(sum(outcome), " directories deleted. ", sum(!outcome),
@@ -44,21 +44,21 @@ RemoveDirs <- function(dirs) {
   invisible(outcome)
 }
 
-#' @rdname RemoveDirs
+#' @rdname remove_dirs
 #' @export
-dir.remove <- RemoveDirs
+dir.remove <- remove_dirs
 
-#' Merge Tables.
+#' Merge tables on disk.
 #'
 #' Merge tables saved on disk as delimited files. The merging is done lengthways
 #' so they need to have the same number of columns and the same column names (if
 #' they have column names).
 #'
-#' @param file.names The paths to the files to merge.
+#' @param files The paths to the files to merge.
 #' @param delim Delimeter used to separate values.
-#' @param out.name The path to the output file containing the merged tables.
+#' @param out_name The path to the output file containing the merged tables.
 #' @param header Do the tables to be merged have headers?
-#' @param ... Additional arguments passed to [readr::read_delim]
+#' @param ... Additional arguments passed to [readr::read_delim].
 #' @examples
 #' setwd(tempdir())
 #' dir.create("MergeTablesOnDisk_test")
@@ -66,23 +66,24 @@ dir.remove <- RemoveDirs
 #' tab1 <- tibble::tibble(x = 1, y = 2)
 #' tab2 <- tibble::tibble(x = 1, y = 29)
 #' mapply(readr::write_csv, list(tab1, tab2), paste0(c("tab1", "tab2"), ".csv"))
-#' MergeTablesOnDisk(c("tab1.csv", "tab2.csv"), ",", "merged.csv")
+#' merge_tables_on_disk(c("tab1.csv", "tab2.csv"), ",", "merged.csv")
 #' readr::read_csv("merged.csv")
 #' setwd("..")
-#' RemoveDirs("MergeTablesOnDisk_test")
+#' dir.remove("MergeTablesOnDisk_test")
 #' @export
-MergeTablesOnDisk <- function(file.names, delim, out.name, header = TRUE, ...) {
-  tables <- lapply(file.names, readr::read_delim, delim, col_names = header, ...)
+merge_tables_on_disk <- function(files, delim,
+                                 out_name, header = TRUE, ...) {
+  tables <- lapply(files, readr::read_delim, delim, col_names = header, ...)
   ncs <- vapply(tables, ncol, integer(1))
-  if (!AllEqual(ncs)) stop("The tables have different numbers of columns.")
+  if (!all_equal(ncs)) stop("The tables have different numbers of columns.")
   if (header) {
     namess <- vapply(tables, names, character(ncs[1]))
-    if (!all(apply(namess, 1, AllEqual))) {
+    if (!all(apply(namess, 1, all_equal))) {
       stop("Tables have different colnames.")
     }
   }
   merged <- Reduce(rbind, tables)
-  readr::write_delim(merged, out.name, delim = delim, col_names = header)
+  readr::write_delim(merged, out_name, delim = delim, col_names = header)
 }
 
 MoveFile <- function(file, destination) {
@@ -101,7 +102,7 @@ MoveFile <- function(file, destination) {
 #' If there are \eqn{n} files, there must be either \eqn{1} or \eqn{n}
 #' directories. If there is one directory, then all \eqn{n} files are moved
 #' there. If there are \eqn{n} directories, then each file is put into its
-#' respective directory. This function also works for directories.
+#' respective directory. This function also works to move directories.
 #'
 #' If you try to move files to a directory that doesn't exist, the directory is
 #' first created and then the files are put inside.
@@ -113,8 +114,8 @@ MoveFile <- function(file, destination) {
 #' @return Invisibly, a logical vector with a `TRUE` for each time the operation
 #'   succeeded and a `FALSE` for every fail.
 #' @export
-MoveFiles <- function(files, destinations) {
-  CreateDirsIfNotThere(destinations)
+move_files <- function(files, destinations) {
+  create_dirs(destinations)
   if(length(destinations) == length(files)) {
     outcome <- mapply(MoveFile, files, destinations)
   } else if (length(destinations) == 1) {
@@ -128,9 +129,9 @@ MoveFiles <- function(files, destinations) {
   invisible(outcome)
 }
 
-#' @rdname MoveFiles
+#' @rdname move_files
 #' @export
-file.move <- MoveFiles
+file.move <- move_files
 
 #' Make file numbers comply with alphabetical order
 #'
@@ -144,7 +145,7 @@ file.move <- MoveFiles
 #' "file01part3.ext" (a file with 2 numbers). All the file names that it works
 #' on must have the same number of numbers, and the non-number bits must be the
 #' same. One can limit the renaming to files matching a certain pattern. This
-#' function wraps [NiceNums()], which does the string operations, but
+#' function wraps [nice_nums()], which does the string operations, but
 #' not the renaming. To see examples of how this function works, see the
 #' examples in that function's documentation.
 #'
@@ -161,12 +162,12 @@ file.move <- MoveFiles
 #' setwd("NiceFileNums_test")
 #' files <- c("1litres_1.txt", "1litres_30.txt", "3litres_5.txt")
 #' file.create(files)
-#' NiceFileNums()
-#' NiceFileNums(pattern = "\\.txt$")
+#' nice_file_nums()
+#' nice_file_nums(pattern = "\\.txt$")
 #' setwd("..")
-#' RemoveDirs("NiceFileNums_test")
+#' dir.remove("NiceFileNums_test")
 #' @export
-NiceFileNums <- function(dir = ".", pattern = NA) {
+nice_file_nums <- function(dir = ".", pattern = NA) {
   init.dir <- getwd()
   on.exit(setwd(init.dir))
   setwd(dir)
@@ -175,7 +176,7 @@ NiceFileNums <- function(dir = ".", pattern = NA) {
   } else {
     lf <- list.files(pattern = pattern)
   }
-  renamed <- file.rename(lf, NiceNums(lf))
+  renamed <- file.rename(lf, nice_nums(lf))
   message(sum(renamed), " files renamed into the desired format. ",
           sum(!renamed), " failed.")
   invisible(renamed)
@@ -189,7 +190,7 @@ NiceFileNums <- function(dir = ".", pattern = NA) {
 #' @param dir The directory in which to perform the operation.
 #' @param pattern A regular expression. If specified, only files matching this
 #'   pattern wil be treated.
-#' @param replace.with What do you want to replace the spaces with? This
+#' @param replacement What do you want to replace the spaces with? This
 #'   defaults to nothing, another sensible choice would be an underscore.
 #' @return A logical vector indicating which operation succeeded for each of the
 #'   files attempted. Using a missing value for a file or path name will always
@@ -200,17 +201,17 @@ NiceFileNums <- function(dir = ".", pattern = NA) {
 #' setwd("RemoveFileNameSpaces_test")
 #' files <- c("1litres 1.txt", "1litres 30.txt", "3litres 5.txt")
 #' file.create(files)
-#' RemoveFileNameSpaces()
+#' remove_filename_spaces()
 #' list.files()
 #' setwd("..")
-#' RemoveDirs("RemoveFileNameSpaces_test")
+#' dir.remove("RemoveFileNameSpaces_test")
 #' @export
-RemoveFileNameSpaces <- function(dir = ".", pattern = "", replace.with = "") {
+remove_filename_spaces <- function(dir = ".", pattern = "", replacement = "") {
   init.dir <- getwd()
   on.exit(setwd(init.dir))
   setwd(dir)
   lf <- list.files(pattern = pattern)
-  new.names <- str_replace_all(lf, " ", replace.with)
+  new.names <- str_replace_all(lf, " ", replacement)
   outcome <- file.rename(lf, new.names)
   message(sum(outcome), " files renamed. ", sum(!outcome),
           " failed to rename.")
@@ -231,12 +232,12 @@ RemoveFileNameSpaces <- function(dir = ".", pattern = "", replace.with = "") {
 #' setwd("RenameWithNums_test")
 #' files <- c("1litres 1.txt", "1litres 30.txt", "3litres 5.txt")
 #' file.create(files)
-#' RenameWithNums()
+#' rename_with_nums()
 #' list.files()
 #' setwd("..")
-#' RemoveDirs("RenameWithNums_test")
+#' dir.remove("RenameWithNums_test")
 #' @export
-RenameWithNums <- function(dir = ".", pattern = NULL) {
+rename_with_nums <- function(dir = ".", pattern = NULL) {
   init.dir <- getwd()
   on.exit(setwd(init.dir))
   setwd(dir)
@@ -247,12 +248,12 @@ RenameWithNums <- function(dir = ".", pattern = NULL) {
   }
   l <- length(lf)
   if (l == 0) stop("No files found to rename.")
-  new.names <- NiceNums(paste0(seq_len(l), ".", ext))
-  if (any(new.names %in% lf)) {
+  new_names <- nice_nums(paste0(seq_len(l), ".", ext))
+  if (any(new_names %in% lf)) {
     stop("Some of the names are already in the desired format, ",
          "unable to proceed as renaming may result in deletion.")
   }
-  file.rename(lf, new.names)
+  file.rename(lf, new_names)
 }
 
 #' Put files with the same unit measurements into directories.
@@ -263,7 +264,7 @@ RenameWithNums <- function(dir = ".", pattern = NULL) {
 #' on. This function does this, but not just for the unit "min", for any unit.
 #'
 #' This function takes the number to be the last number (as defined in
-#' [NthNumber()]) before the first occurrence of the unit name. There
+#' [nth_number()]) before the first occurrence of the unit name. There
 #' is the option to only treat files matching a certain pattern.
 #'
 #' @param unit The unit upon which to base the categorising.
@@ -279,21 +280,21 @@ RenameWithNums <- function(dir = ".", pattern = NULL) {
 #' setwd("UnitDirs_test")
 #' files <- c("1litres_1.txt", "1litres_3.txt", "3litres.txt", "5litres_1.txt")
 #' file.create(files)
-#' UnitDirs("litres", "\\.txt")
+#' unitize_dirs("litres", "\\.txt")
 #' setwd("..")
-#' RemoveDirs("UnitDirs_test")
+#' dir.remove("UnitDirs_test")
 #' @export
-UnitDirs <- function(unit, pattern = NULL, dir = ".") {
+unitize_dirs <- function(unit, pattern = NULL, dir = ".") {
   lf <- list.files(pattern = pattern)
   if (!all(str_detect(lf, unit))) {
     stop(paste0("The file names must all contain the word", unit ,"."))
   }
-  up.to.first.units <- StrBeforeNth(lf, unit, 1)
-  nums <- vapply(up.to.first.units, NthNumber, numeric(1), -1, decimals = TRUE)
+  up_to_first_units <- str_before_nth(lf, unit, 1)
+  nums <- vapply(up_to_first_units, nth_number, numeric(1), -1, decimals = TRUE)
   un <- unique(nums)
   for (i in un) {
     files <- lf[nums == i]
-    MoveFiles(files, paste0(i, unit))
+    move_files(files, paste0(i, unit))
   }
   invisible(TRUE)
 }

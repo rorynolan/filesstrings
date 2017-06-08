@@ -5,112 +5,130 @@
 
 using namespace Rcpp;
 
-// PasteCollapse
-std::string PasteCollapse(CharacterVector strings, std::string collapse);
-RcppExport SEXP filesstrings_PasteCollapse(SEXP stringsSEXP, SEXP collapseSEXP) {
+// paste_collapse
+std::string paste_collapse(CharacterVector strings, std::string collapse);
+RcppExport SEXP filesstrings_paste_collapse(SEXP stringsSEXP, SEXP collapseSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< CharacterVector >::type strings(stringsSEXP);
     Rcpp::traits::input_parameter< std::string >::type collapse(collapseSEXP);
-    rcpp_result_gen = Rcpp::wrap(PasteCollapse(strings, collapse));
+    rcpp_result_gen = Rcpp::wrap(paste_collapse(strings, collapse));
     return rcpp_result_gen;
 END_RCPP
 }
-// PasteCollapseListElems
-CharacterVector PasteCollapseListElems(List char_list, std::string collapse);
-RcppExport SEXP filesstrings_PasteCollapseListElems(SEXP char_listSEXP, SEXP collapseSEXP) {
+// paste_collapse_list_elems
+CharacterVector paste_collapse_list_elems(List char_list, std::string collapse);
+RcppExport SEXP filesstrings_paste_collapse_list_elems(SEXP char_listSEXP, SEXP collapseSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type char_list(char_listSEXP);
     Rcpp::traits::input_parameter< std::string >::type collapse(collapseSEXP);
-    rcpp_result_gen = Rcpp::wrap(PasteCollapseListElems(char_list, collapse));
+    rcpp_result_gen = Rcpp::wrap(paste_collapse_list_elems(char_list, collapse));
     return rcpp_result_gen;
 END_RCPP
 }
-// StrListRemoveEmpties
-List StrListRemoveEmpties(List char_list);
-RcppExport SEXP filesstrings_StrListRemoveEmpties(SEXP char_listSEXP) {
+// str_list_remove_empties
+List str_list_remove_empties(List char_list);
+RcppExport SEXP filesstrings_str_list_remove_empties(SEXP char_listSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type char_list(char_listSEXP);
-    rcpp_result_gen = Rcpp::wrap(StrListRemoveEmpties(char_list));
+    rcpp_result_gen = Rcpp::wrap(str_list_remove_empties(char_list));
     return rcpp_result_gen;
 END_RCPP
 }
-// CharListElemsNthElem
-CharacterVector CharListElemsNthElem(List char_list, int n);
-RcppExport SEXP filesstrings_CharListElemsNthElem(SEXP char_listSEXP, SEXP nSEXP) {
+// str_list_nth_elems
+CharacterVector str_list_nth_elems(List char_list, int n);
+RcppExport SEXP filesstrings_str_list_nth_elems(SEXP char_listSEXP, SEXP nSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type char_list(char_listSEXP);
     Rcpp::traits::input_parameter< int >::type n(nSEXP);
-    rcpp_result_gen = Rcpp::wrap(CharListElemsNthElem(char_list, n));
+    rcpp_result_gen = Rcpp::wrap(str_list_nth_elems(char_list, n));
     return rcpp_result_gen;
 END_RCPP
 }
-// NumListElemsNthElem
-NumericVector NumListElemsNthElem(List num_list, int n);
-RcppExport SEXP filesstrings_NumListElemsNthElem(SEXP num_listSEXP, SEXP nSEXP) {
+// num_list_nth_elems
+NumericVector num_list_nth_elems(List num_list, int n);
+RcppExport SEXP filesstrings_num_list_nth_elems(SEXP num_listSEXP, SEXP nSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type num_list(num_listSEXP);
     Rcpp::traits::input_parameter< int >::type n(nSEXP);
-    rcpp_result_gen = Rcpp::wrap(NumListElemsNthElem(num_list, n));
+    rcpp_result_gen = Rcpp::wrap(num_list_nth_elems(num_list, n));
     return rcpp_result_gen;
 END_RCPP
 }
-// InterleaveStrings
-CharacterVector InterleaveStrings(CharacterVector strings1, CharacterVector strings2);
-RcppExport SEXP filesstrings_InterleaveStrings(SEXP strings1SEXP, SEXP strings2SEXP) {
+// interleave_strings
+CharacterVector interleave_strings(CharacterVector strings1, CharacterVector strings2);
+RcppExport SEXP filesstrings_interleave_strings(SEXP strings1SEXP, SEXP strings2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< CharacterVector >::type strings1(strings1SEXP);
     Rcpp::traits::input_parameter< CharacterVector >::type strings2(strings2SEXP);
-    rcpp_result_gen = Rcpp::wrap(InterleaveStrings(strings1, strings2));
+    rcpp_result_gen = Rcpp::wrap(interleave_strings(strings1, strings2));
     return rcpp_result_gen;
 END_RCPP
 }
-// CorrectInterleave0
-CharacterVector CorrectInterleave0(std::string orig, CharacterVector strings1, CharacterVector strings2);
-RcppExport SEXP filesstrings_CorrectInterleave0(SEXP origSEXP, SEXP strings1SEXP, SEXP strings2SEXP) {
+// correct_interleave_helper
+CharacterVector correct_interleave_helper(std::string orig, CharacterVector strings1, CharacterVector strings2);
+RcppExport SEXP filesstrings_correct_interleave_helper(SEXP origSEXP, SEXP strings1SEXP, SEXP strings2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< std::string >::type orig(origSEXP);
     Rcpp::traits::input_parameter< CharacterVector >::type strings1(strings1SEXP);
     Rcpp::traits::input_parameter< CharacterVector >::type strings2(strings2SEXP);
-    rcpp_result_gen = Rcpp::wrap(CorrectInterleave0(orig, strings1, strings2));
+    rcpp_result_gen = Rcpp::wrap(correct_interleave_helper(orig, strings1, strings2));
     return rcpp_result_gen;
 END_RCPP
 }
-// CorrectInterleave
-List CorrectInterleave(CharacterVector orig, List strings1, List strings2);
-RcppExport SEXP filesstrings_CorrectInterleave(SEXP origSEXP, SEXP strings1SEXP, SEXP strings2SEXP) {
+// correct_interleave
+List correct_interleave(CharacterVector orig, List strings1, List strings2);
+RcppExport SEXP filesstrings_correct_interleave(SEXP origSEXP, SEXP strings1SEXP, SEXP strings2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< CharacterVector >::type orig(origSEXP);
     Rcpp::traits::input_parameter< List >::type strings1(strings1SEXP);
     Rcpp::traits::input_parameter< List >::type strings2(strings2SEXP);
-    rcpp_result_gen = Rcpp::wrap(CorrectInterleave(orig, strings1, strings2));
+    rcpp_result_gen = Rcpp::wrap(correct_interleave(orig, strings1, strings2));
     return rcpp_result_gen;
 END_RCPP
 }
-// InterleaveStringList
-List InterleaveStringList(List strings1, List strings2);
-RcppExport SEXP filesstrings_InterleaveStringList(SEXP strings1SEXP, SEXP strings2SEXP) {
+// interleave_char_lists
+List interleave_char_lists(List strings1, List strings2);
+RcppExport SEXP filesstrings_interleave_char_lists(SEXP strings1SEXP, SEXP strings2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type strings1(strings1SEXP);
     Rcpp::traits::input_parameter< List >::type strings2(strings2SEXP);
-    rcpp_result_gen = Rcpp::wrap(InterleaveStringList(strings1, strings2));
+    rcpp_result_gen = Rcpp::wrap(interleave_char_lists(strings1, strings2));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"filesstrings_paste_collapse", (DL_FUNC) &filesstrings_paste_collapse, 2},
+    {"filesstrings_paste_collapse_list_elems", (DL_FUNC) &filesstrings_paste_collapse_list_elems, 2},
+    {"filesstrings_str_list_remove_empties", (DL_FUNC) &filesstrings_str_list_remove_empties, 1},
+    {"filesstrings_str_list_nth_elems", (DL_FUNC) &filesstrings_str_list_nth_elems, 2},
+    {"filesstrings_num_list_nth_elems", (DL_FUNC) &filesstrings_num_list_nth_elems, 2},
+    {"filesstrings_interleave_strings", (DL_FUNC) &filesstrings_interleave_strings, 2},
+    {"filesstrings_correct_interleave_helper", (DL_FUNC) &filesstrings_correct_interleave_helper, 3},
+    {"filesstrings_correct_interleave", (DL_FUNC) &filesstrings_correct_interleave, 3},
+    {"filesstrings_interleave_char_lists", (DL_FUNC) &filesstrings_interleave_char_lists, 2},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_filesstrings(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }
