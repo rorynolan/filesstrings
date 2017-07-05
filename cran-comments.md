@@ -8,5 +8,4 @@
 There were no ERRORs, WARNINGs or NOTEs.
 
 ## Reverse Dependencies
-devtools::revdep_check() was run and found no problems.
-Results at https::github.com/rorynolan/filesstrings/tree/master/revdep
+All of the package which depend on this package are mine and updates to make them compatible with this new version will be submitted immediately after this version of filesstrings is accepted on CRAN.
