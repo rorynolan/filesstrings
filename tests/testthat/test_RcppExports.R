@@ -1,19 +1,19 @@
-test_that("PasteCollapseListElems works", {
-  expect_equal(PasteCollapseListElems(list(1:3, c("a", 5, "rory")),
+test_that("paste_collapse_list_elems works", {
+  expect_equal(paste_collapse_list_elems(list(1:3, c("a", 5, "rory")),
                                       collapse = "R"),
                c("1R2R3", "aR5Rrory"))
 })
 
-test_that("StrListRemoveEmpties works", {
-  expect_equal(StrListRemoveEmpties(list(c("a", "", "b"), "gg", c("", 1, ""))),
+test_that("str_list_remove_empties works", {
+  expect_equal(str_list_remove_empties(list(c("a", "", "b"), "gg", c("", 1, ""))),
                list(c("a", "b"), "gg", "1"))
 })
 
-test_that("CharListElemsNthElem works", {
-  expect_equal(CharListElemsNthElem(list(c("a", "b", "c"),
+test_that("str_list_nth_elems works", {
+  expect_equal(str_list_nth_elems(list(c("a", "b", "c"),
                                          c("d", "f", "a")), 2),
                c("b", "f"))
-  expect_equal(NumListElemsNthElem(list(1:5, 0:2), 4), c(4, NA))
+  expect_equal(num_list_nth_elems(list(1:5, 0:2), 4), c(4, NA))
 })
 
 test_that("Random Rcpp stuff works",{
@@ -30,3 +30,4 @@ test_that("Random Rcpp stuff works",{
   expect_equal(filesstrings:::interleave_char_lists(list("a"), list()),
                list(NA_character_))
 })
+
