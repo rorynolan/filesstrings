@@ -2,7 +2,7 @@
 % Please edit documentation in R/files.R
 \name{merge_tables_on_disk}
 \alias{merge_tables_on_disk}
-\title{Merge tables on disk.}
+\title{Merge tables on disk}
 \usage{
 merge_tables_on_disk(files, delim, out_name, header = TRUE, ...)
 }
@@ -18,9 +18,8 @@ merge_tables_on_disk(files, delim, out_name, header = TRUE, ...)
 \item{...}{Additional arguments passed to \link[readr:read_delim]{readr::read_delim}.}
 }
 \description{
-Merge tables saved on disk as delimited files. The merging is done lengthways
-so they need to have the same number of columns and the same column names (if
-they have column names).
+Merge tables saved on disk as delimited files. They need to have the same
+number of columns and the same column names (if they have column names).
 }
 \examples{
 setwd(tempdir())

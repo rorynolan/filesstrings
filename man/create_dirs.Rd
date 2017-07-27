@@ -2,12 +2,12 @@
 % Please edit documentation in R/files.R
 \name{create_dirs}
 \alias{create_dirs}
-\title{Create directories if they don't already exist.}
+\title{Create directories if they don't already exist}
 \usage{
-create_dirs(dirs)
+create_dirs(...)
 }
 \arguments{
-\item{dirs}{The name of the directories, specified via relative or
+\item{...}{The names of the directories, specified via relative or
 absolute paths.}
 }
 \value{

@@ -8,4 +8,4 @@ bioc_packages:
   - IRanges
 
 after_success:
-  - Rscript -e 'covr::codecov(line_exclusions = "R/filesstrings.R")'
+  - Rscript -e 'covr::codecov(line_exclusions = c("R/strings_deprecated.R", "R/files_deprecated.R", "R/RcppExports_deprecated.R", "R/utils_deprecated.R", "R/filesstrings.R"))'

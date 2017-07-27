@@ -3,19 +3,19 @@
 \name{remove_dirs}
 \alias{remove_dirs}
 \alias{dir.remove}
-\title{Remove directories.}
+\title{Remove directories}
 \usage{
-remove_dirs(dirs)
+remove_dirs(...)
 
-dir.remove(dirs)
+dir.remove(...)
 }
 \arguments{
-\item{dirs}{The names of the directories, specified via relative or absolute
+\item{...}{The names of the directories, specified via relative or absolute
 paths.}
 }
 \value{
 Invisibly, a logical vector with \code{TRUE} for each success and
-\code{FALSE} for failures. See \link[base:unlink]{base::unlink}.
+\code{FALSE} for failures.
 }
 \description{
 Delete directories and all of their contents.

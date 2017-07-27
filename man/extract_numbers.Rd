@@ -4,7 +4,11 @@
 \alias{extract_numbers}
 \alias{extract_non_numerics}
 \alias{nth_number}
+\alias{first_number}
+\alias{last_number}
 \alias{nth_non_numeric}
+\alias{first_non_numeric}
+\alias{last_non_numeric}
 \title{Extract numbers (or non-numbers) from a string.}
 \usage{
 extract_numbers(string, leave_as_string = FALSE, decimals = FALSE,
@@ -13,10 +17,22 @@ extract_numbers(string, leave_as_string = FALSE, decimals = FALSE,
 extract_non_numerics(string, decimals = FALSE, leading_decimals = FALSE,
   negs = FALSE)
 
-nth_number(string, n = 1, leave_as_string = FALSE, decimals = FALSE,
+nth_number(string, n, leave_as_string = FALSE, decimals = FALSE,
   leading_decimals = FALSE, negs = FALSE)
 
-nth_non_numeric(string, n = 1, decimals = FALSE, leading_decimals = FALSE,
+first_number(string, leave_as_string = FALSE, decimals = FALSE,
+  leading_decimals = FALSE, negs = FALSE)
+
+last_number(string, leave_as_string = FALSE, decimals = FALSE,
+  leading_decimals = FALSE, negs = FALSE)
+
+nth_non_numeric(string, n, decimals = FALSE, leading_decimals = FALSE,
+  negs = FALSE)
+
+first_non_numeric(string, decimals = FALSE, leading_decimals = FALSE,
+  negs = FALSE)
+
+last_non_numeric(string, decimals = FALSE, leading_decimals = FALSE,
   negs = FALSE)
 }
 \arguments{
@@ -59,6 +75,13 @@ If any part of a string contains an ambiguous number (e.g. \code{1.2.3} would be
 ambiguous if \code{decimals = TRUE} (but not otherwise)), the value returned for
 that string will be \code{NA}. Note that these functions do not know about
 scientific notation (e.g. \code{1e6} for 1000000).
+
+\itemize{
+\item \code{first_number(...)} is just \code{nth_number(..., n = 1)}.
+\item \code{last_number(...)} is just \code{nth_number(..., n = -1)}.
+\item \code{first_non_numeric(...)} is just \code{nth_non_numeric(..., n = 1)}.
+\item \code{last_non_numeric(...)} is just \code{nth_non_numeric(..., n = -1)}.
+}
 }
 \examples{
 extract_numbers(c("abc123abc456", "abc1.23abc456"))

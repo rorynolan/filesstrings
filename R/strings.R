@@ -159,6 +159,13 @@ nice_nums <- function(strings) {
 #' that string will be `NA`. Note that these functions do not know about
 #' scientific notation (e.g. `1e6` for 1000000).
 #'
+#' \itemize{
+#' \item `first_number(...)` is just `nth_number(..., n = 1)`.
+#' \item `last_number(...)` is just `nth_number(..., n = -1)`.
+#' \item `first_non_numeric(...)` is just `nth_non_numeric(..., n = 1)`.
+#' \item `last_non_numeric(...)` is just `nth_non_numeric(..., n = -1)`.
+#' }
+#'
 #' @param string A string.
 #' @param leave_as_string Do you want to return the number as a string (`TRUE`)
 #'   or as numeric (`FALSE`, the default)?
@@ -262,8 +269,8 @@ extract_non_numerics <- function(string, decimals = FALSE,
 #'   non-numeric), `n = -2` will give you the second last number and so on.
 #' @rdname extract_numbers
 #' @export
-nth_number <- function(string, n = 1, leave_as_string = FALSE, decimals = FALSE,
-                      leading_decimals = FALSE, negs = FALSE) {
+nth_number <- function(string, n, leave_as_string = FALSE, decimals = FALSE,
+                       leading_decimals = FALSE, negs = FALSE) {
   # this function doesn't work for strings with decimal numbers
   if (n == 0) stop("n must be a nonzero integer.")
   numbers <- extract_numbers(string, leave_as_string = TRUE, negs = negs,
@@ -282,12 +289,48 @@ nth_number <- function(string, n = 1, leave_as_string = FALSE, decimals = FALSE,
 
 #' @rdname extract_numbers
 #' @export
-nth_non_numeric <- function(string, n = 1, decimals = FALSE,
-                          leading_decimals = FALSE, negs = FALSE) {
+first_number <- function(string, leave_as_string = FALSE, decimals = FALSE,
+                         leading_decimals = FALSE, negs = FALSE) {
+  nth_number(string, n = 1, leave_as_string = leave_as_string,
+             decimals = decimals, leading_decimals = leading_decimals,
+             negs = negs)
+}
+
+#' @rdname extract_numbers
+#' @export
+last_number <- function(string, leave_as_string = FALSE, decimals = FALSE,
+                         leading_decimals = FALSE, negs = FALSE) {
+  nth_number(string, n = -1, leave_as_string = leave_as_string,
+             decimals = decimals, leading_decimals = leading_decimals,
+             negs = negs)
+}
+
+#' @rdname extract_numbers
+#' @export
+nth_non_numeric <- function(string, n, decimals = FALSE,
+                            leading_decimals = FALSE, negs = FALSE) {
   if (n == 0) stop("n must be a nonzero integer.")
   non.numerics <- extract_non_numerics(string, decimals = decimals, negs = negs,
                                      leading_decimals = leading_decimals)
   str_list_nth_elems(non.numerics, n)
+}
+
+#' @rdname extract_numbers
+#' @export
+first_non_numeric <- function(string, decimals = FALSE,
+                              leading_decimals = FALSE, negs = FALSE) {
+  nth_non_numeric(string, n = 1,
+                  decimals = decimals, leading_decimals = leading_decimals,
+                  negs = negs)
+}
+
+#' @rdname extract_numbers
+#' @export
+last_non_numeric <- function(string, decimals = FALSE,
+                             leading_decimals = FALSE, negs = FALSE) {
+  nth_non_numeric(string, n = -1,
+                  decimals = decimals, leading_decimals = leading_decimals,
+                  negs = negs)
 }
 
 #' Split a string by its numeric charachters.
@@ -399,10 +442,14 @@ str_with_patterns <- function(strings, patterns, ignore_case = FALSE,
 
 #' Text before or after \eqn{n}th occurrence of pattern.
 #'
-#' Extract the part of a string which is before or after the \eqn{n}th
-#' occurrence of a specified pattern, vectorised over the string. One can also
-#' choose \eqn{n} to be the \emph{last} occurrence of the pattern. See argument
-#' `n`.
+#' Extract the part of a string which is before or after the *n*th occurrence of
+#' a specified pattern, vectorised over the string. `n` can be negatively
+#' indexed. See 'Arguments'.
+#'
+#' \itemize{ \item `str_after_first(...)` is just `str_after_nth(..., n = 1)`.
+#' \item `str_after_last(...)` is just `str_after_nth(..., n = -1)`. \item
+#' `str_before_first(...)` is just `str_before_nth(..., n = 1)`. \item
+#' `str_before_last(...)` is just `str_before_nth(..., n = -1)`. }
 #'
 #' @param strings A character vector.
 #' @param pattern A regular expression.
@@ -419,16 +466,40 @@ str_with_patterns <- function(strings, patterns, ignore_case = FALSE,
 #' str_before_nth(string, ".", -3)
 #' str_before_nth(rep(string, 2), fixed("."), -3)
 #' @export
-str_after_nth <- function(strings, pattern, n = 1) {
+str_after_nth <- function(strings, pattern, n) {
   nth.instance.indices <- str_nth_instance_indices(strings, pattern, n)
   mapply(str_sub, strings, nth.instance.indices[, "end"] + 1, nchar(strings))
 }
 
 #' @rdname str_after_nth
 #' @export
-str_before_nth <- function(strings, pattern, n = 1) {
+str_after_first <- function(strings, pattern) {
+  str_after_nth(strings = strings, pattern = pattern, n = 1)
+}
+
+#' @rdname str_after_nth
+#' @export
+str_after_last <- function(strings, pattern) {
+  str_after_nth(strings = strings, pattern = pattern, n = -1)
+}
+
+#' @rdname str_after_nth
+#' @export
+str_before_nth <- function(strings, pattern, n) {
   nth.instance.indices <- str_nth_instance_indices(strings, pattern, n)
   mapply(str_sub, strings, 1, nth.instance.indices[, "start"] - 1)
+}
+
+#' @rdname str_after_nth
+#' @export
+str_before_first <- function(strings, pattern) {
+  str_before_nth(strings = strings, pattern = pattern, n = 1)
+}
+
+#' @rdname str_after_nth
+#' @export
+str_before_last <- function(strings, pattern) {
+  str_before_nth(strings = strings, pattern = pattern, n = -1)
 }
 
 #' Get the part of a string before the last period.
@@ -717,7 +788,12 @@ str_split_camel_case <- function(string, lower = FALSE) {
 #' Get the indices of the \eqn{n}th instance of a pattern.
 #'
 #' The \eqn{n}th instance of an pattern will cover a series of character
-#' indices. This function tells you which indices those are.
+#' indices. These functions tell you which indices those are.
+#'
+#' \itemize{
+#' \item `str_first_instance_indices(...)` is just `str_nth_instance_indices(..., n = 1)`.
+#' \item `str_last_instance_indices(...)` is just `str_nth_instance_indices(..., n = -1)`.
+#' }
 #'
 #' @param strings A character vector.
 #' @param pattern A character vector. Pattern(s) specified like the pattern(s)
@@ -741,4 +817,16 @@ str_nth_instance_indices <- function(strings, pattern, n) {
     }
     x[n, ]
   }, integer(2), n) %>% t
+}
+
+#' @rdname str_nth_instance_indices
+#' @export
+str_first_instance_indices <- function(strings, pattern) {
+  str_nth_instance_indices(strings = strings, pattern = pattern, n = 1)
+}
+
+#' @rdname str_nth_instance_indices
+#' @export
+str_last_instance_indices <- function(strings, pattern) {
+  str_nth_instance_indices(strings = strings, pattern = pattern, n = -1)
 }

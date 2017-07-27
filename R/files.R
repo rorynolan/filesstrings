@@ -1,8 +1,8 @@
-#' Create directories if they don't already exist.
+#' Create directories if they don't already exist
 #'
 #' Given the names of (potential) directories, create the ones that do not
 #' already exist.
-#' @param dirs The name of the directories, specified via relative or
+#' @param ... The names of the directories, specified via relative or
 #'   absolute paths.
 #' @return Invisibly, a vector with a `TRUE` for each time a directory was
 #'   actually created and a `FALSE` otherwise.
@@ -11,34 +11,36 @@
 #' create_dirs(c("mydir", "yourdir"))
 #' remove_dirs(c("mydir", "yourdir"))
 #' @export
-create_dirs <- function(dirs) {
-  created <- vapply(dirs,
-                    function(dir) {
-                      if (!dir.exists(dir)) {
-                        dir.create(dir)
-                        TRUE
-                      } else {
-                        FALSE
-                      }
-                    }
-  , logical(1))
+create_dirs <- function(...) {
+  dirs <- unlist(...)
+  created <- purrr::map_lgl(dirs, function(dir) {
+                                    if (!dir.exists(dir)) {
+                                      dir.create(dir)
+                                      TRUE
+                                    } else {
+                                      FALSE
+                                    }
+                                  })
+  message(sum(created), " directories created.",
+          sum(!created), "not created because they already existed.")
+  created
 }
 
-#' Remove directories.
+#' Remove directories
 #'
 #' Delete directories and all of their contents.
-#' @param dirs The names of the directories, specified via relative or absolute
+#' @param ... The names of the directories, specified via relative or absolute
 #'   paths.
 #' @return Invisibly, a logical vector with `TRUE` for each success and
-#'   `FALSE` for failures. See [base::unlink].
+#'   `FALSE` for failures.
 #' @examples
 #' setwd(tempdir())
 #' sapply(c("mydir1", "mydir2"), dir.create)
 #' remove_dirs(c("mydir1", "mydir2"))
 #' @export
-remove_dirs <- function(dirs) {
-  outcome <- !vapply(dirs, function(dir) unlink(dir, recursive = TRUE),
-                     integer(1))
+remove_dirs <- function(...) {
+  dirs <- unlist(...)
+  outcome <- !as.logical(purrr::map_int(dirs, unlink, recursive = TRUE))
   message(sum(outcome), " directories deleted. ", sum(!outcome),
           " failed to delete.")
   invisible(outcome)
@@ -48,11 +50,10 @@ remove_dirs <- function(dirs) {
 #' @export
 dir.remove <- remove_dirs
 
-#' Merge tables on disk.
+#' Merge tables on disk
 #'
-#' Merge tables saved on disk as delimited files. The merging is done lengthways
-#' so they need to have the same number of columns and the same column names (if
-#' they have column names).
+#' Merge tables saved on disk as delimited files. They need to have the same
+#' number of columns and the same column names (if they have column names).
 #'
 #' @param files The paths to the files to merge.
 #' @param delim Delimeter used to separate values.
@@ -86,7 +87,7 @@ merge_tables_on_disk <- function(files, delim,
   readr::write_delim(merged, out_name, delim = delim, col_names = header)
 }
 
-MoveFile <- function(file, destination) {
+move_file <- function(file, destination) {
   # This also works for directories
   file <- normalizePath(file)  # get full path
   file.name.base <- basename(file)
@@ -97,7 +98,7 @@ MoveFile <- function(file, destination) {
 
 #' Move files around.
 #'
-#' Move specified files into specified directories.
+#' Move specified files into specified directories
 #'
 #' If there are \eqn{n} files, there must be either \eqn{1} or \eqn{n}
 #' directories. If there is one directory, then all \eqn{n} files are moved
@@ -117,9 +118,9 @@ MoveFile <- function(file, destination) {
 move_files <- function(files, destinations) {
   create_dirs(destinations)
   if(length(destinations) == length(files)) {
-    outcome <- mapply(MoveFile, files, destinations)
+    outcome <- mapply(move_file, files, destinations)
   } else if (length(destinations) == 1) {
-    outcome <- vapply(files, MoveFile, logical(1), destinations)
+    outcome <- vapply(files, move_file, logical(1), destinations)
   } else {
     stop("the number of destinations must be equal to 1 or equal to the ",
          "number of files to be moved")
@@ -154,7 +155,7 @@ file.move <- move_files
 #' @param pattern A regular expression. If specified, files to be renamed are
 #'   restricted to ones matching this pattern (in their name).
 #' @return A logical vector with a `TRUE` for each successful rename
-#'   (should be all TRUEs) and `FALSE`s otherwise.
+#'   (should be all `TRUE`s) and a `FALSE` otherwise.
 #'
 #' @examples
 #' setwd(tempdir())
@@ -218,14 +219,16 @@ remove_filename_spaces <- function(dir = ".", pattern = "", replacement = "") {
   invisible(outcome)
 }
 
-#' Replace file names with numbers.
+#' Replace file names with numbers
 #'
 #' Rename the files in the directory, replacing file names with numbers only.
+#'
 #' @param dir The directory in which to rename the files (relative or absolute
 #'   path). Defaults to current working directory.
 #' @param pattern A regular expression. If specified, only files with names
 #'   matching this pattern will be treated.
-#' @return A logical vector with a `TRUE` for each successful renaming.
+#' @return A logical vector with a `TRUE` for each successful renaming and a
+#'   `FALSE` otherwise.
 #' @examples
 #' setwd(tempdir())
 #' dir.create("RenameWithNums_test")
@@ -256,7 +259,7 @@ rename_with_nums <- function(dir = ".", pattern = NULL) {
   file.rename(lf, new_names)
 }
 
-#' Put files with the same unit measurements into directories.
+#' Put files with the same unit measurements into directories
 #'
 #' Say you have a number of files with "5min" in their names, number with
 #' "10min" in the names, a number with "15min" in their names and so on, and

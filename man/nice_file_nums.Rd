@@ -15,7 +15,7 @@ restricted to ones matching this pattern (in their name).}
 }
 \value{
 A logical vector with a \code{TRUE} for each successful rename
-(should be all TRUEs) and \code{FALSE}s otherwise.
+(should be all \code{TRUE}s) and a \code{FALSE} otherwise.
 }
 \description{
 If files are numbered, their numbers may not \emph{comply} with alphabetical

@@ -2,7 +2,7 @@
 % Please edit documentation in R/files.R
 \name{unitize_dirs}
 \alias{unitize_dirs}
-\title{Put files with the same unit measurements into directories.}
+\title{Put files with the same unit measurements into directories}
 \usage{
 unitize_dirs(unit, pattern = NULL, dir = ".")
 }

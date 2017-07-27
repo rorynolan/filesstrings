@@ -2,12 +2,24 @@
 % Please edit documentation in R/strings.R
 \name{str_after_nth}
 \alias{str_after_nth}
+\alias{str_after_first}
+\alias{str_after_last}
 \alias{str_before_nth}
+\alias{str_before_first}
+\alias{str_before_last}
 \title{Text before or after \eqn{n}th occurrence of pattern.}
 \usage{
-str_after_nth(strings, pattern, n = 1)
+str_after_nth(strings, pattern, n)
 
-str_before_nth(strings, pattern, n = 1)
+str_after_first(strings, pattern)
+
+str_after_last(strings, pattern)
+
+str_before_nth(strings, pattern, n)
+
+str_before_first(strings, pattern)
+
+str_before_last(strings, pattern)
 }
 \arguments{
 \item{strings}{A character vector.}
@@ -23,10 +35,15 @@ need \code{n = -2} and so on.}
 A character vector of the desired strings.
 }
 \description{
-Extract the part of a string which is before or after the \eqn{n}th
-occurrence of a specified pattern, vectorised over the string. One can also
-choose \eqn{n} to be the \emph{last} occurrence of the pattern. See argument
-\code{n}.
+Extract the part of a string which is before or after the \emph{n}th occurrence of
+a specified pattern, vectorised over the string. \code{n} can be negatively
+indexed. See 'Arguments'.
+}
+\details{
+\itemize{ \item \code{str_after_first(...)} is just \code{str_after_nth(..., n = 1)}.
+\item \code{str_after_last(...)} is just \code{str_after_nth(..., n = -1)}. \item
+\code{str_before_first(...)} is just \code{str_before_nth(..., n = 1)}. \item
+\code{str_before_last(...)} is just \code{str_before_nth(..., n = -1)}. }
 }
 \examples{
 string <- "ab..cd..de..fg..h"

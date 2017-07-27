@@ -2,7 +2,7 @@
 % Please edit documentation in R/files.R
 \name{rename_with_nums}
 \alias{rename_with_nums}
-\title{Replace file names with numbers.}
+\title{Replace file names with numbers}
 \usage{
 rename_with_nums(dir = ".", pattern = NULL)
 }
@@ -14,7 +14,8 @@ path). Defaults to current working directory.}
 matching this pattern will be treated.}
 }
 \value{
-A logical vector with a \code{TRUE} for each successful renaming.
+A logical vector with a \code{TRUE} for each successful renaming and a
+\code{FALSE} otherwise.
 }
 \description{
 Rename the files in the directory, replacing file names with numbers only.

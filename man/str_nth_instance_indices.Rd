@@ -2,9 +2,15 @@
 % Please edit documentation in R/strings.R
 \name{str_nth_instance_indices}
 \alias{str_nth_instance_indices}
+\alias{str_first_instance_indices}
+\alias{str_last_instance_indices}
 \title{Get the indices of the \eqn{n}th instance of a pattern.}
 \usage{
 str_nth_instance_indices(strings, pattern, n)
+
+str_first_instance_indices(strings, pattern)
+
+str_last_instance_indices(strings, pattern)
 }
 \arguments{
 \item{strings}{A character vector.}
@@ -20,7 +26,13 @@ A two-column matrix. The \eqn{i}th row of this matrix gives the start and end in
 }
 \description{
 The \eqn{n}th instance of an pattern will cover a series of character
-indices. This function tells you which indices those are.
+indices. These functions tell you which indices those are.
+}
+\details{
+\itemize{
+\item \code{str_first_instance_indices(...)} is just \code{str_nth_instance_indices(..., n = 1)}.
+\item \code{str_last_instance_indices(...)} is just \code{str_nth_instance_indices(..., n = -1)}.
+}
 }
 \examples{
 str_nth_instance_indices(c("abcdabcxyz", "abcabc"), "abc", 2)

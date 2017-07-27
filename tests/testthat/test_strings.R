@@ -72,12 +72,15 @@ test_that("extract_numbers works", {
                               decimals = TRUE),
                c(as.list(rep(NA_real_, 3)), list(c(5, 6))))
   expect_equal(nth_number("abc1.23abc456", 2), 23)
+  expect_equal(first_number("abc1a2"), 1)
+  expect_equal(last_number("akd50lkdjf0qukwjfj8"), 8)
   expect_equal(nth_number("abc1.23abc456", 2, leave_as_string = TRUE), "23")
   expect_equal(nth_number("abc1.23abc456", 2, decimals = TRUE), 456)
   expect_equal(nth_number("-123abc456", -2, negs = TRUE), -123)
   expect_equal(extract_non_numerics("--123abc456", negs = TRUE),
                list(c("-", "abc")))
-  expect_equal(nth_non_numeric("--123abc456", 1), "--")
+  expect_equal(first_non_numeric("--123abc456"), "--")
+  expect_equal(last_non_numeric("--123abc456"), "abc")
   expect_equal(nth_non_numeric("--123abc456", -2), "--")
   expect_error(extract_numbers("a.23", leading_decimals = T))
   expect_error(extract_non_numerics("a.23", leading_decimals = T))
@@ -122,7 +125,11 @@ test_that("str_after_nth works", {
   string <- "ab..cd..de..fg..h"
   expect_equal(str_after_nth(string, "\\.\\.", 3), "fg..h",
                check.attributes = FALSE)
-  expect_equal(str_before_nth(string, "e", 1), "ab..cd..d",
+  expect_equal(str_after_first(string, "\\.\\."), "cd..de..fg..h",
+               check.attributes = FALSE)
+  expect_equal(str_after_last(string, "\\.\\."), "h",
+               check.attributes = FALSE)
+  expect_equal(str_before_first(string, "e"), "ab..cd..d",
                check.attributes = FALSE)
   expect_equal(str_before_nth(string, "\\.", -3), "ab..cd..de.",
                check.attributes = FALSE)
@@ -130,6 +137,8 @@ test_that("str_after_nth works", {
                check.attributes = FALSE)
   expect_equal(str_before_nth(rep(string, 2), fixed("."), -3),
                rep("ab..cd..de.", 2), check.attributes = FALSE)
+  expect_equal(str_before_last(rep(string, 2), fixed(".")),
+               rep("ab..cd..de..fg.", 2), check.attributes = FALSE)
 })
 
 test_that("before_last_dot works", {
@@ -208,4 +217,15 @@ test_that("str_split_camel_case works", {
 
 test_that("str_nth_instance_indices errors in the right way", {
   expect_error(filesstrings:::str_nth_instance_indices("aba", "a", 9), "There")
+})
+
+test_that("str_first/last_instance_indices work", {
+  library(magrittr)
+  expect_equal(str_first_instance_indices(c("abcdabcxyz", "abcabc"), "abc"),
+               matrix(c(1, 3), nrow = 2, ncol = 2, byrow = TRUE) %>%
+                 set_colnames(c("start", "end")))
+  expect_equal(str_last_instance_indices(c("abcdabcxyz", "abcabc"), "abc"),
+               matrix(c(5, 7, 4, 6), nrow = 2, ncol = 2, byrow = TRUE) %>%
+                 set_colnames(c("start", "end")))
+
 })

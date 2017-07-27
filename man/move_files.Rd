@@ -21,7 +21,7 @@ Invisibly, a logical vector with a \code{TRUE} for each time the operation
 succeeded and a \code{FALSE} for every fail.
 }
 \description{
-Move specified files into specified directories.
+Move specified files into specified directories
 }
 \details{
 If there are \eqn{n} files, there must be either \eqn{1} or \eqn{n}
