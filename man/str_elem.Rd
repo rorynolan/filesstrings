@@ -2,7 +2,7 @@
 % Please edit documentation in R/strings.R
 \name{str_elem}
 \alias{str_elem}
-\title{Extract a single character of a string, using its index.}
+\title{Extract a single character from a string, using its index.}
 \usage{
 str_elem(string, index)
 }
@@ -16,9 +16,9 @@ str_elem(string, index)
 A one-character string.
 }
 \description{
-Extract a single character of a string, using its index.
+If the element does not exist, this function returns the empty string.
 }
 \examples{
-str_elem("abcd", 3)
+str_elem(c("abcd", "xyz"), 3)
 str_elem("abcd", -2)
 }

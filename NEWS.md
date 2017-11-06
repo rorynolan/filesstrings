@@ -1,7 +1,10 @@
-### 1.1.1
+### 1.2.0
+
+### MINOR IMPROVEMENTS
+* `count_matches()` is much faster.
 
 #### BUG FIXES
-* Make `before_last_dot()` work in the case where the input has no dots.
+* `before_last_dot()` now works in the case where the input has no dots.
 
 
 ### 1.1.0

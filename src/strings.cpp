@@ -62,21 +62,21 @@ List str_list_remove_empties(List char_list) {
   return(no_empties);
 }
 
-//' Get the nth element of each vector in a list of numeric or character
-//' vectors.
-//'
-//' These are faster implementations of procedures that could very easily be
-//' done with [base::sapply].
-//'
-//' @param char_list A list of character vectors.
-//' @param n The index of the element that you want from each vector.
-//'
-//' @return A list.
-//'
-//' @examples
-//' str_list_nth_elems(list(c("a", "b", "c"), c("d", "f", "a")), 2)
-//' num_list_nth_elems(list(1:5, 0:2), 4)
-//' @export
+// Get the nth element of each vector in a list of numeric or character
+// vectors.
+//
+// These are faster implementations of procedures that could very easily be
+// done with [base::sapply].
+//
+// @param char_list A list of character vectors.
+// @param n The index of the element that you want from each vector.
+//
+// @return A list.
+//
+// @examples
+// str_list_nth_elems(list(c("a", "b", "c"), c("d", "f", "a")), 2)
+// num_list_nth_elems(list(1:5, 0:2), 4)
+// @export
 // [[Rcpp::export]]
 CharacterVector str_list_nth_elems(List char_list, int n) {
   int sls = char_list.size();
@@ -90,9 +90,9 @@ CharacterVector str_list_nth_elems(List char_list, int n) {
   return(nths);
 }
 
-//' @rdname str_list_nth_elems
-//' @param num_list A list of numeric vectors.
-//' @export
+// @rdname str_list_nth_elems
+// @param num_list A list of numeric vectors.
+// @export
 // [[Rcpp::export]]
 NumericVector num_list_nth_elems(List num_list, int n) {
   int sls = num_list.size();
@@ -197,4 +197,15 @@ List interleave_char_lists(List strings1, List strings2) {
     }
   }
   return(interleaved);
+}
+
+// [[Rcpp::export]]
+IntegerVector intmat_list_nrows(List intmat_list) {
+  const std::size_t intmat_list_size = intmat_list.size();
+  IntegerVector nrows(intmat_list_size);
+  for (std::size_t i = 0; i != intmat_list_size; ++i) {
+    IntegerMatrix mat_i = as<IntegerMatrix>(intmat_list[i]);
+    nrows[i] = mat_i.nrow();
+  }
+  return nrows;
 }

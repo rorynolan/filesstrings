@@ -1,7 +1,7 @@
 Package: filesstrings
 Type: Package
 Title: Handy String and File Manipulation
-Version: 1.1.1
+Version: 1.2.0
 Authors@R: c(person("Rory", "Nolan", email = "rorynoolan@gmail.com", 
                     role = c("aut", "cre", "cph")),
              person("Jim", "Hester", email = "jim.hester@rstudio.com", 
@@ -12,7 +12,7 @@ Authors@R: c(person("Rory", "Nolan", email = "rorynoolan@gmail.com",
                     role = "ths"))
 Maintainer: Rory Nolan <rorynoolan@gmail.com>
 Description: Convenient functions for moving files, deleting directories, 
-    and a variety of string operations that facilitate manipulating file names 
+    and a variety of string operations that facilitate manipulating files 
     and extracting information from strings.
 License: GPL-3
 Encoding: UTF-8

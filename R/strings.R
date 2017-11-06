@@ -357,14 +357,16 @@ str_split_by_nums <- function(string, decimals = FALSE,
 }
 
 
-#' Extract a single character of a string, using its index.
+#' Extract a single character from a string, using its index.
+#'
+#' If the element does not exist, this function returns the empty string.
 #'
 #' @param string A string.
 #' @param index An integer. Negative indexing is allowed as in
 #'   [stringr::str_sub()].
 #' @return A one-character string.
 #' @examples
-#' str_elem("abcd", 3)
+#' str_elem(c("abcd", "xyz"), 3)
 #' str_elem("abcd", -2)
 #' @export
 str_elem <- function(string, index) {
@@ -513,11 +515,14 @@ str_before_last <- function(strings, pattern) {
 #' @return A character vector.
 #'
 #' @examples
-#' before_last_dot(c("spreadsheet1.csv", "doc2.doc"))
+#' before_last_dot(c("spreadsheet1.csv", "doc2.doc", ".R"))
 #'
 #' @export
 before_last_dot <- function(string) {
-  tools::file_path_sans_ext(string)
+  string %>%
+    tools::file_path_sans_ext() %T>% {
+      .[(string == .) & (str_elem(., 1) == ".")] <- ""
+    }
 }
 
 #' Pad a character vector with empty strings.
@@ -663,16 +668,16 @@ trim_anything <- function(string, pattern, side = "both") {
 
 #' Count the number of the matches of a pattern in a string.
 #'
-#' Vectorised over `string` and pattern.
+#' Vectorised over `string` and `pattern`.
 #'
 #' @param string A character vector.
 #' @param pattern A character vector. Pattern(s) specified like the pattern(s)
 #'   in the stringr package (e.g. look at [stringr::str_locate()]). If
 #'   this has length >1 its length must be the same as that of `string`.
 #'
-#' @return A numeric vector giving the number of matches in each string.
+#' @return An integer vector giving the number of matches in each string.
 #' @examples
-#' count_matches("abacad", "a")
+#' count_matches(c("abacad", "xyz"), "a")
 #' count_matches("2.1.0.13", ".")
 #' count_matches("2.1.0.13", stringr::coll("."))
 #' @export
@@ -686,7 +691,7 @@ count_matches <- function(string, pattern) {
     }
   }
   locations <- str_locate_all(string, pattern)
-  n_matches <- vapply(locations, nrow, integer(1)) %>% sum
+  n_matches <- intmat_list_nrows(locations)
   n_matches
 }
 
@@ -791,18 +796,20 @@ str_split_camel_case <- function(string, lower = FALSE) {
 #' The \eqn{n}th instance of an pattern will cover a series of character
 #' indices. These functions tell you which indices those are.
 #'
-#' \itemize{
-#' \item `str_first_instance_indices(...)` is just `str_nth_instance_indices(..., n = 1)`.
-#' \item `str_last_instance_indices(...)` is just `str_nth_instance_indices(..., n = -1)`.
-#' }
+#' \itemize{ \item `str_first_instance_indices(...)` is just
+#' `str_nth_instance_indices(..., n = 1)`. \item
+#' `str_last_instance_indices(...)` is just `str_nth_instance_indices(..., n =
+#' -1)`. }
 #'
 #' @param strings A character vector.
 #' @param pattern A character vector. Pattern(s) specified like the pattern(s)
-#'   in the stringr package (e.g. look at [stringr::str_locate()]). If
-#'   this has length >1 its length must be the same as that of `string`.
+#'   in the stringr package (e.g. look at [stringr::str_locate()]). If this has
+#'   length >1 its length must be the same as that of `string`.
 #' @param n Then \eqn{n} for the \eqn{n}th instance of the pattern.
 #'
-#' @return A two-column matrix. The \eqn{i}th row of this matrix gives the start and end indices of the \eqn{n}th instance of `pattarn` in the \emph{i}th element of `strings`.
+#' @return A two-column matrix. The \eqn{i}th row of this matrix gives the start
+#'   and end indices of the \eqn{n}th instance of `pattarn` in the \emph{i}th
+#'   element of `strings`.
 #'
 #' @examples
 #' str_nth_instance_indices(c("abcdabcxyz", "abcabc"), "abc", 2)

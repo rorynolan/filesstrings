@@ -18,6 +18,6 @@ file extension. It is vectorised over \code{string}. If there is no period in
 \code{string}, the input is returned.
 }
 \examples{
-before_last_dot(c("spreadsheet1.csv", "doc2.doc"))
+before_last_dot(c("spreadsheet1.csv", "doc2.doc", ".R"))
 
 }

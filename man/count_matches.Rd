@@ -14,13 +14,13 @@ in the stringr package (e.g. look at \code{\link[stringr:str_locate]{stringr::st
 this has length >1 its length must be the same as that of \code{string}.}
 }
 \value{
-A numeric vector giving the number of matches in each string.
+An integer vector giving the number of matches in each string.
 }
 \description{
-Vectorised over \code{string} and pattern.
+Vectorised over \code{string} and \code{pattern}.
 }
 \examples{
-count_matches("abacad", "a")
+count_matches(c("abacad", "xyz"), "a")
 count_matches("2.1.0.13", ".")
 count_matches("2.1.0.13", stringr::coll("."))
 }

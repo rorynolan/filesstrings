@@ -35,28 +35,10 @@ str_list_remove_empties <- function(char_list) {
     .Call(`_filesstrings_str_list_remove_empties`, char_list)
 }
 
-#' Get the nth element of each vector in a list of numeric or character
-#' vectors.
-#'
-#' These are faster implementations of procedures that could very easily be
-#' done with [base::sapply].
-#'
-#' @param char_list A list of character vectors.
-#' @param n The index of the element that you want from each vector.
-#'
-#' @return A list.
-#'
-#' @examples
-#' str_list_nth_elems(list(c("a", "b", "c"), c("d", "f", "a")), 2)
-#' num_list_nth_elems(list(1:5, 0:2), 4)
-#' @export
 str_list_nth_elems <- function(char_list, n) {
     .Call(`_filesstrings_str_list_nth_elems`, char_list, n)
 }
 
-#' @rdname str_list_nth_elems
-#' @param num_list A list of numeric vectors.
-#' @export
 num_list_nth_elems <- function(num_list, n) {
     .Call(`_filesstrings_num_list_nth_elems`, num_list, n)
 }
@@ -75,5 +57,9 @@ correct_interleave <- function(orig, strings1, strings2) {
 
 interleave_char_lists <- function(strings1, strings2) {
     .Call(`_filesstrings_interleave_char_lists`, strings1, strings2)
+}
+
+intmat_list_nrows <- function(intmat_list) {
+    .Call(`_filesstrings_intmat_list_nrows`, intmat_list)
 }
 
