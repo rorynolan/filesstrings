@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // paste_collapse
 std::string paste_collapse(CharacterVector strings, std::string collapse);
-RcppExport SEXP filesstrings_paste_collapse(SEXP stringsSEXP, SEXP collapseSEXP) {
+RcppExport SEXP _filesstrings_paste_collapse(SEXP stringsSEXP, SEXP collapseSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -19,7 +19,7 @@ END_RCPP
 }
 // paste_collapse_list_elems
 CharacterVector paste_collapse_list_elems(List char_list, std::string collapse);
-RcppExport SEXP filesstrings_paste_collapse_list_elems(SEXP char_listSEXP, SEXP collapseSEXP) {
+RcppExport SEXP _filesstrings_paste_collapse_list_elems(SEXP char_listSEXP, SEXP collapseSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -31,7 +31,7 @@ END_RCPP
 }
 // str_list_remove_empties
 List str_list_remove_empties(List char_list);
-RcppExport SEXP filesstrings_str_list_remove_empties(SEXP char_listSEXP) {
+RcppExport SEXP _filesstrings_str_list_remove_empties(SEXP char_listSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -42,7 +42,7 @@ END_RCPP
 }
 // str_list_nth_elems
 CharacterVector str_list_nth_elems(List char_list, int n);
-RcppExport SEXP filesstrings_str_list_nth_elems(SEXP char_listSEXP, SEXP nSEXP) {
+RcppExport SEXP _filesstrings_str_list_nth_elems(SEXP char_listSEXP, SEXP nSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -54,7 +54,7 @@ END_RCPP
 }
 // num_list_nth_elems
 NumericVector num_list_nth_elems(List num_list, int n);
-RcppExport SEXP filesstrings_num_list_nth_elems(SEXP num_listSEXP, SEXP nSEXP) {
+RcppExport SEXP _filesstrings_num_list_nth_elems(SEXP num_listSEXP, SEXP nSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -66,7 +66,7 @@ END_RCPP
 }
 // interleave_strings
 CharacterVector interleave_strings(CharacterVector strings1, CharacterVector strings2);
-RcppExport SEXP filesstrings_interleave_strings(SEXP strings1SEXP, SEXP strings2SEXP) {
+RcppExport SEXP _filesstrings_interleave_strings(SEXP strings1SEXP, SEXP strings2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -78,7 +78,7 @@ END_RCPP
 }
 // correct_interleave_helper
 CharacterVector correct_interleave_helper(std::string orig, CharacterVector strings1, CharacterVector strings2);
-RcppExport SEXP filesstrings_correct_interleave_helper(SEXP origSEXP, SEXP strings1SEXP, SEXP strings2SEXP) {
+RcppExport SEXP _filesstrings_correct_interleave_helper(SEXP origSEXP, SEXP strings1SEXP, SEXP strings2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -91,7 +91,7 @@ END_RCPP
 }
 // correct_interleave
 List correct_interleave(CharacterVector orig, List strings1, List strings2);
-RcppExport SEXP filesstrings_correct_interleave(SEXP origSEXP, SEXP strings1SEXP, SEXP strings2SEXP) {
+RcppExport SEXP _filesstrings_correct_interleave(SEXP origSEXP, SEXP strings1SEXP, SEXP strings2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -104,7 +104,7 @@ END_RCPP
 }
 // interleave_char_lists
 List interleave_char_lists(List strings1, List strings2);
-RcppExport SEXP filesstrings_interleave_char_lists(SEXP strings1SEXP, SEXP strings2SEXP) {
+RcppExport SEXP _filesstrings_interleave_char_lists(SEXP strings1SEXP, SEXP strings2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -116,15 +116,15 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"filesstrings_paste_collapse", (DL_FUNC) &filesstrings_paste_collapse, 2},
-    {"filesstrings_paste_collapse_list_elems", (DL_FUNC) &filesstrings_paste_collapse_list_elems, 2},
-    {"filesstrings_str_list_remove_empties", (DL_FUNC) &filesstrings_str_list_remove_empties, 1},
-    {"filesstrings_str_list_nth_elems", (DL_FUNC) &filesstrings_str_list_nth_elems, 2},
-    {"filesstrings_num_list_nth_elems", (DL_FUNC) &filesstrings_num_list_nth_elems, 2},
-    {"filesstrings_interleave_strings", (DL_FUNC) &filesstrings_interleave_strings, 2},
-    {"filesstrings_correct_interleave_helper", (DL_FUNC) &filesstrings_correct_interleave_helper, 3},
-    {"filesstrings_correct_interleave", (DL_FUNC) &filesstrings_correct_interleave, 3},
-    {"filesstrings_interleave_char_lists", (DL_FUNC) &filesstrings_interleave_char_lists, 2},
+    {"_filesstrings_paste_collapse", (DL_FUNC) &_filesstrings_paste_collapse, 2},
+    {"_filesstrings_paste_collapse_list_elems", (DL_FUNC) &_filesstrings_paste_collapse_list_elems, 2},
+    {"_filesstrings_str_list_remove_empties", (DL_FUNC) &_filesstrings_str_list_remove_empties, 1},
+    {"_filesstrings_str_list_nth_elems", (DL_FUNC) &_filesstrings_str_list_nth_elems, 2},
+    {"_filesstrings_num_list_nth_elems", (DL_FUNC) &_filesstrings_num_list_nth_elems, 2},
+    {"_filesstrings_interleave_strings", (DL_FUNC) &_filesstrings_interleave_strings, 2},
+    {"_filesstrings_correct_interleave_helper", (DL_FUNC) &_filesstrings_correct_interleave_helper, 3},
+    {"_filesstrings_correct_interleave", (DL_FUNC) &_filesstrings_correct_interleave, 3},
+    {"_filesstrings_interleave_char_lists", (DL_FUNC) &_filesstrings_interleave_char_lists, 2},
     {NULL, NULL, 0}
 };
 

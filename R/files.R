@@ -21,9 +21,22 @@ create_dirs <- function(...) {
                                       FALSE
                                     }
                                   })
-  message(sum(created), " directories created.",
-          sum(!created), "not created because they already existed.")
-  created
+  msg <- sum(created) %>% {
+    ifelse(., paste(., ifelse(. == 1, "directory", "directories"),
+                    "created. "),
+           "")
+  }
+  n_not_created <- sum(!created)
+  if (n_not_created) {
+    msg %<>% paste0(n_not_created,
+                    ifelse(n_not_created == 1, " directory", " directories"),
+                    " not created because ",
+                    ifelse(n_not_created == 1,
+                           "it already exists.",
+                           "they already exist."))
+  }
+  message(msg)
+  invisible(created)
 }
 
 #' Remove directories
@@ -41,8 +54,10 @@ create_dirs <- function(...) {
 remove_dirs <- function(...) {
   dirs <- unlist(...)
   outcome <- !as.logical(purrr::map_int(dirs, unlink, recursive = TRUE))
-  message(sum(outcome), " directories deleted. ", sum(!outcome),
-          " failed to delete.")
+  outcome %>% {
+    paste(sum(.), ifelse(sum(.) == 1, "directory", "directories"),
+          "deleted.", sum(!.), "failed to delete.")
+  } %>% message()
   invisible(outcome)
 }
 
@@ -114,19 +129,25 @@ move_file <- function(file, destination) {
 #'   which to move the files.
 #' @return Invisibly, a logical vector with a `TRUE` for each time the operation
 #'   succeeded and a `FALSE` for every fail.
+#' @examples
+#' setwd(tempdir())
+#' dir.create("dir")
+#' files <- c("1litres_1.txt", "1litres_30.txt", "3litres_5.txt")
+#' file.create(files)
+#' file.move(files, "dir")
 #' @export
 move_files <- function(files, destinations) {
-  create_dirs(destinations)
+  n_created_dirs <- sum(create_dirs(destinations))
   if(length(destinations) == length(files)) {
     outcome <- mapply(move_file, files, destinations)
   } else if (length(destinations) == 1) {
     outcome <- vapply(files, move_file, logical(1), destinations)
   } else {
-    stop("the number of destinations must be equal to 1 or equal to the ",
+    stop("The number of destinations must be equal to 1 or equal to the ",
          "number of files to be moved")
   }
-  message(sum(outcome), " files moved. ", sum(!outcome),
-          " failed to move.")
+  message(sum(outcome), ifelse(sum(outcome) == 1, " file", " files"),
+          " moved. ", sum(!outcome), " failed to move.")
   invisible(outcome)
 }
 

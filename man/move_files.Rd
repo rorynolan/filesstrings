@@ -32,3 +32,10 @@ respective directory. This function also works to move directories.
 If you try to move files to a directory that doesn't exist, the directory is
 first created and then the files are put inside.
 }
+\examples{
+setwd(tempdir())
+dir.create("dir")
+files <- c("1litres_1.txt", "1litres_30.txt", "3litres_5.txt")
+file.create(files)
+file.move(files, "dir")
+}

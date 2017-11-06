@@ -505,7 +505,8 @@ str_before_last <- function(strings, pattern) {
 #' Get the part of a string before the last period.
 #'
 #' This is usually used to get the part of a file name that doesn't include the
-#' file extension. It is vectorised over `string`.
+#' file extension. It is vectorised over `string`. If there is no period in
+#' `string`, the input is returned.
 #'
 #' @param string A character vector.
 #'
@@ -516,7 +517,7 @@ str_before_last <- function(strings, pattern) {
 #'
 #' @export
 before_last_dot <- function(string) {
-  str_before_nth(string, coll("."), -1)
+  tools::file_path_sans_ext(string)
 }
 
 #' Pad a character vector with empty strings.

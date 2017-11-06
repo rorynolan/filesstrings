@@ -1,3 +1,5 @@
+context("C++ stuff")
+
 test_that("paste_collapse_list_elems works", {
   expect_equal(paste_collapse_list_elems(list(1:3, c("a", 5, "rory")),
                                       collapse = "R"),

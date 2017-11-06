@@ -1,3 +1,5 @@
+context("Strings")
+
 test_that("can_be_numeric works", {
   expect_true(can_be_numeric("3"))
   expect_true(can_be_numeric("5 "))

@@ -1,3 +1,5 @@
+context("Files")
+
 test_that("nice_file_nums works", {
   setwd(tempdir())
   expect_true(dir.create("nice_file_nums_test"))

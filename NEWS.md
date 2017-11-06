@@ -1,3 +1,18 @@
+### 1.1.1
+
+#### BUG FIXES
+* Make `before_last_dot()` work in the case where the input has no dots.
+
+
+### 1.1.0
+
+#### NEW FEATURES
+* Added `first` and `last` companions for `nth` functions.
+
+#### MINOR IMPROVEMENTS
+* Minor documentation improvements.
+
+
 ### 1.1.0
 
 #### NEW FEATURES

@@ -2,7 +2,7 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 paste_collapse <- function(strings, collapse) {
-    .Call(filesstrings_paste_collapse, strings, collapse)
+    .Call(`_filesstrings_paste_collapse`, strings, collapse)
 }
 
 #' Apply paste collapse to each element of a list.
@@ -19,7 +19,7 @@ paste_collapse <- function(strings, collapse) {
 #' paste_collapse_list_elems(list(1:3, c("a", 5, "rory")), collapse = "R")
 #' @export
 paste_collapse_list_elems <- function(char_list, collapse = "") {
-    .Call(filesstrings_paste_collapse_list_elems, char_list, collapse)
+    .Call(`_filesstrings_paste_collapse_list_elems`, char_list, collapse)
 }
 
 #' Remove empty strings from a character list.
@@ -32,7 +32,7 @@ paste_collapse_list_elems <- function(char_list, collapse = "") {
 #' str_list_remove_empties(list(c("a", "", "b"), "gg", c("", 1, "")))
 #' @export
 str_list_remove_empties <- function(char_list) {
-    .Call(filesstrings_str_list_remove_empties, char_list)
+    .Call(`_filesstrings_str_list_remove_empties`, char_list)
 }
 
 #' Get the nth element of each vector in a list of numeric or character
@@ -51,29 +51,29 @@ str_list_remove_empties <- function(char_list) {
 #' num_list_nth_elems(list(1:5, 0:2), 4)
 #' @export
 str_list_nth_elems <- function(char_list, n) {
-    .Call(filesstrings_str_list_nth_elems, char_list, n)
+    .Call(`_filesstrings_str_list_nth_elems`, char_list, n)
 }
 
 #' @rdname str_list_nth_elems
 #' @param num_list A list of numeric vectors.
 #' @export
 num_list_nth_elems <- function(num_list, n) {
-    .Call(filesstrings_num_list_nth_elems, num_list, n)
+    .Call(`_filesstrings_num_list_nth_elems`, num_list, n)
 }
 
 interleave_strings <- function(strings1, strings2) {
-    .Call(filesstrings_interleave_strings, strings1, strings2)
+    .Call(`_filesstrings_interleave_strings`, strings1, strings2)
 }
 
 correct_interleave_helper <- function(orig, strings1, strings2) {
-    .Call(filesstrings_correct_interleave_helper, orig, strings1, strings2)
+    .Call(`_filesstrings_correct_interleave_helper`, orig, strings1, strings2)
 }
 
 correct_interleave <- function(orig, strings1, strings2) {
-    .Call(filesstrings_correct_interleave, orig, strings1, strings2)
+    .Call(`_filesstrings_correct_interleave`, orig, strings1, strings2)
 }
 
 interleave_char_lists <- function(strings1, strings2) {
-    .Call(filesstrings_interleave_char_lists, strings1, strings2)
+    .Call(`_filesstrings_interleave_char_lists`, strings1, strings2)
 }
 

@@ -1,3 +1,5 @@
+context("Utils")
+
 test_that("all_equal works", {
   expect_true(all_equal(1, rep(1, 3)))
   expect_true(all_equal(rep(1, 3), 1))
