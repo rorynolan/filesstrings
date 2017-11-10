@@ -1,30 +1,24 @@
-#' @rdname filesstrings-deprecated
-#' @param char_list A list of character vectors.
-#' @param collapse See \code{\link{paste}}.
+#' @name filesstrings-defunct
+#' @rdname filesstrings-defunct
 #' @export
-PasteCollapseListElems <- function(char_list, collapse = "") {
-  .Deprecated("paste_collapse_list_elems")
-  paste_collapse_list_elems(char_list, collapse)
+PasteCollapseListElems <- function(...) {
+  .Defunct("paste_collapse_list_elems")
 }
 
-#' @rdname filesstrings-deprecated
+#' @rdname filesstrings-defunct
 #' @export
-StrListRemoveEmpties <- function(char_list) {
-  .Deprecated("str_list_remove_empties")
-  str_list_remove_empties(char_list)
+StrListRemoveEmpties <- function(...) {
+  .Defunct("str_list_remove_empties")
 }
 
-#' @rdname filesstrings-deprecated
+#' @rdname filesstrings-defunct
 #' @export
-CharListElemsNthElem <- function(char_list, n) {
-  .Deprecated("str_list_nth_elems")
-  str_list_nth_elems(char_list, n)
+CharListElemsNthElem <- function(...) {
+  .Defunct("str_list_nth_elems")
 }
 
-#' @rdname filesstrings-deprecated
-#' @param num_list A list of numeric vectors.
+#' @rdname filesstrings-defunct
 #' @export
-NumListElemsNthElem <- function(num_list, n) {
-  .Deprecated("num_list_nth_elems")
-  num_list_nth_elems(num_list, n)
+NumListElemsNthElem <- function(...) {
+  .Defunct("num_list_nth_elems")
 }

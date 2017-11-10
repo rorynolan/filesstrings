@@ -1,19 +1,12 @@
-#' @rdname filesstrings-deprecated
-#' @param a A vector.
-#' @param b Either `NULL` or a vector of length either 1 or `length(a)`
+#' @rdname filesstrings-defunct
 #' @export
-AllEqual <- function(a, b = NULL) {
-  .Deprecated("all_equal")
-  all_equal(a, b)
+AllEqual <- function(...) {
+  .Defunct("all_equal")
 }
 
-#' @rdname filesstrings-deprecated
-#' @param vec.ascending A strictly increasing numeric vector.
-#' @param max.gap The biggest allowable gap between adjacent elements for them
-#'   to be considered part of the same \emph{group}.
+#' @rdname filesstrings-defunct
 #' @export
-GroupClose <- function(vec.ascending, max.gap = 1) {
-  .Deprecated("group_close")
-  group_close(vec.ascending, max.gap)
+GroupClose <- function(...) {
+  .Defunct("group_close")
 }
 

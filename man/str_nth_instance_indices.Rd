@@ -6,25 +6,25 @@
 \alias{str_last_instance_indices}
 \title{Get the indices of the \eqn{n}th instance of a pattern.}
 \usage{
-str_nth_instance_indices(strings, pattern, n)
+str_nth_instance_indices(string, pattern, n)
 
-str_first_instance_indices(strings, pattern)
+str_first_instance_indices(string, pattern)
 
-str_last_instance_indices(strings, pattern)
+str_last_instance_indices(string, pattern)
 }
 \arguments{
-\item{strings}{A character vector.}
+\item{string}{A character vector. These functions are vectorized over this
+argument.}
 
 \item{pattern}{A character vector. Pattern(s) specified like the pattern(s)
-in the stringr package (e.g. look at \code{\link[stringr:str_locate]{stringr::str_locate()}}). If this has
-length >1 its length must be the same as that of \code{string}.}
+in the \code{stringr`` package (e.g. look at [stringr::str_locate()]). If this has length >1 its length must be the same as that of}string`.}
 
 \item{n}{Then \eqn{n} for the \eqn{n}th instance of the pattern.}
 }
 \value{
 A two-column matrix. The \eqn{i}th row of this matrix gives the start
 and end indices of the \eqn{n}th instance of \code{pattarn} in the \emph{i}th
-element of \code{strings}.
+element of \code{string}.
 }
 \description{
 The \eqn{n}th instance of an pattern will cover a series of character

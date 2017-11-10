@@ -13,22 +13,13 @@ if (getRversion() >= "2.15.1") {
   library.dynam.unload("filesstrings", libpath)
 }
 
-#' Deprecated functions
-#'
-#' These functions have been deprecated, mostly because the naming style of the
-#' package has been changed. To figure out which function to run instead, run
-#' the deprecated function of interest and you'll get a warning message telling
-#' you which function to use instead.
-#'
-#' @name filesstrings-deprecated
-NULL
-
 #' Defunct functions
 #'
 #' These functions have been made defunct, mostly because the naming style of
-#' the package has been changed. To figure out which function to run instead,
-#' run the defunct function of interest and you'll get an error message
-#' telling you which function to use instead.
+#' the package has been changed. Some have been removed because they were not
+#' well-done.
+#'
+#' @param ... Defunct function arguments.
 #'
 #' @name filesstrings-defunct
 NULL

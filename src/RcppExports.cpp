@@ -125,6 +125,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// intmat_list_bind_nth_rows
+IntegerVector intmat_list_bind_nth_rows(List intmat_list, IntegerVector n);
+RcppExport SEXP _filesstrings_intmat_list_bind_nth_rows(SEXP intmat_listSEXP, SEXP nSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type intmat_list(intmat_listSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type n(nSEXP);
+    rcpp_result_gen = Rcpp::wrap(intmat_list_bind_nth_rows(intmat_list, n));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_filesstrings_paste_collapse", (DL_FUNC) &_filesstrings_paste_collapse, 2},
@@ -137,6 +149,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_filesstrings_correct_interleave", (DL_FUNC) &_filesstrings_correct_interleave, 3},
     {"_filesstrings_interleave_char_lists", (DL_FUNC) &_filesstrings_interleave_char_lists, 2},
     {"_filesstrings_intmat_list_nrows", (DL_FUNC) &_filesstrings_intmat_list_nrows, 1},
+    {"_filesstrings_intmat_list_bind_nth_rows", (DL_FUNC) &_filesstrings_intmat_list_bind_nth_rows, 2},
     {NULL, NULL, 0}
 };
 

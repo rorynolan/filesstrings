@@ -22,8 +22,9 @@ library(filesstrings)
 I often want to get the first, last or *n*^th^ number in a string.
 ```{r nth number}
 pop <- "A population of 1000 comprised of 488 dogs and 512 cats."
-nth_number(pop, 1)
-nth_number(pop, -1)  # last number
+first_number(pop)
+nth_number(pop, 2)
+last_number(pop)
 ```
 
 ## All the numbers in a string
@@ -42,8 +43,8 @@ str_split_by_nums(pop)
 ```
 
 ## Could that be interpreted as numeric?
-Sometimes we don't want to know is something *is* numeric, we want to know if it could be considered to be numeric (or could be coerced to numeric). For this, there's `CanBeNumeric()`.
-```{r CanBeNumeric}
+Sometimes we don't want to know is something *is* numeric, we want to know if it could be considered to be numeric (or could be coerced to numeric). For this, there's `can_be_numeric()`.
+```{r can_be_numeric}
 is.numeric(23)
 is.numeric("23")
 can_be_numeric(23)
@@ -82,21 +83,21 @@ count_matches(single_spaced, " ")  # half the spaces are gone
 ## The bit of a string after the *n*^th^ appearance of a pattern
 Suppose we have sentences telling us about a couple of boxes:
 ```{r about a box}
-box.infos <- c("Box 1 has weight 23kg and volume 0.3 cubic metres.",
+box_infos <- c("Box 1 has weight 23kg and volume 0.3 cubic metres.",
                "Box 2 has weight 20kg and volume 0.33 cubic metres.")
 ```
 We can get (for example) the weights of the boxes by taking the first number that appears after the word "weight".
 ```{r after weight}
 library(magrittr)
-str_after_nth(box.infos, "weight", 1)  # the bit of the string after 1st "weight"
-str_after_nth(box.infos, "weight", 1) %>% nth_number(1)  # 1st number after 1st "weight"
+str_after_nth(box_infos, "weight", 1)  # the bit of the string after 1st "weight"
+str_after_nth(box_infos, "weight", 1) %>% nth_number(1)  # 1st number after 1st "weight"
 ```
 We'd like to put all of the box information into a nice data frame. Here's how.
 ```{r box df, message=FALSE}
-tibble::tibble(box = nth_number(box.infos, 1),
-        weight = str_after_nth(box.infos, "weight", 1) %>% 
+tibble::tibble(box = nth_number(box_infos, 1),
+        weight = str_after_nth(box_infos, "weight", 1) %>% 
           nth_number(1, decimals = TRUE),
-        volume = str_after_nth(box.infos, "volume", 1) %>% 
+        volume = str_after_nth(box_infos, "volume", 1) %>% 
           nth_number(1, decimals = TRUE)
 )
 ```
@@ -104,10 +105,7 @@ tibble::tibble(box = nth_number(box.infos, 1),
 ## Split camel case
 Sometimes people use camel case (CamelCase) to avoid using spaces. What if we want to put the spaces back in?
 ```{r camel case}
-camel.names <- c("JoeBloggs", "JaneyMac")
-str_split_camel_case(camel.names)
+camel_names <- c("JoeBloggs", "JaneyMac")
+str_split_camel_case(camel_names)
 ```
-Now we have a list where each list element is a vector of a person's names. To put them together with spaces in between, we can use `paste_collapse_list_elems()`. This is an efficient way to perform `paste(..., collapse = ...)` on each element of a list.
-```{r PasteCollapseListElems}
-str_split_camel_case(camel.names) %>% paste_collapse_list_elems(" ")
-```
+

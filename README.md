@@ -3,7 +3,7 @@ filesstrings
 
 Convenient functions for moving files, deleting directories, and a variety of string operations that facilitate manipulating file names and extracting information from strings.
 
-[![Travis-CI Build Status](https://travis-ci.org/rorynolan/filesstrings.svg?branch=master)](https://travis-ci.org/rorynolan/filesstrings) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/rorynolan/filesstrings?branch=master&svg=true)](https://ci.appveyor.com/project/rorynolan/filesstrings) [![codecov](https://codecov.io/gh/rorynolan/filesstrings/branch/master/graph/badge.svg)](https://codecov.io/gh/rorynolan/filesstrings) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/filesstrings)](https://cran.r-project.org/package=filesstrings) ![RStudio CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/filesstrings) [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![JOSS publication](http://joss.theoj.org/papers/10.21105/joss.00260/status.svg)](https://doi.org/10.21105/joss.00260)
+[![Travis-CI Build Status](https://travis-ci.org/rorynolan/filesstrings.svg?branch=master)](https://travis-ci.org/rorynolan/filesstrings) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/rorynolan/filesstrings?branch=master&svg=true)](https://ci.appveyor.com/project/rorynolan/filesstrings) [![codecov](https://codecov.io/gh/rorynolan/filesstrings/branch/master/graph/badge.svg)](https://codecov.io/gh/rorynolan/filesstrings) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/filesstrings)](https://cran.r-project.org/package=filesstrings) ![RStudio CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/filesstrings) [![RStudio CRAN monthly downloads](http://cranlogs.r-pkg.org/badges/autothresholdr)](http://cran.rstudio.com/web/packages/autothresholdr/index.html) [![Rdocumentation](http://www.rdocumentation.org/badges/version/filesstrings)](http://www.rdocumentation.org/packages/filesstrings) [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![JOSS publication](http://joss.theoj.org/papers/10.21105/joss.00260/status.svg)](https://doi.org/10.21105/joss.00260)
 
 Installation
 ============
@@ -51,7 +51,7 @@ Now let's put the file into the directory:
 file.move("tmp.txt", "tmp_dir")
 ```
 
-    #> 1 files moved. 0 failed to move.
+    #> 1 file moved. 0 failed.
 
 ### Delete Directories
 
@@ -61,7 +61,7 @@ To delete directories with base R, one has to use `unlink(..., recursive = TRUE)
 dir.remove("tmp_dir")
 ```
 
-    #> 1 directories deleted. 0 failed to delete.
+    #> 1 directory deleted. 0 failed to delete.
 
 ### Remove spaces from file names
 

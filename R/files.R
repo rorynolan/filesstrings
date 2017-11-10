@@ -9,10 +9,10 @@
 #'   paths of the directories that were passed to the function.
 #' @examples
 #' setwd(tempdir())
-#' create_dirs(c("mydir", "yourdir"))
-#' remove_dirs(c("mydir", "yourdir"))
+#' create_dir(c("mydir", "yourdir"))
+#' remove_dir(c("mydir", "yourdir"))
 #' @export
-create_dirs <- function(...) {
+create_dir <- function(...) {
   dirs <- unique(unlist(...))
   created <- purrr::map_lgl(dirs, function(dir) {
                                     if (!dir.exists(dir)) {
@@ -51,9 +51,9 @@ create_dirs <- function(...) {
 #' @examples
 #' setwd(tempdir())
 #' sapply(c("mydir1", "mydir2"), dir.create)
-#' remove_dirs(c("mydir1", "mydir2"))
+#' remove_dir(c("mydir1", "mydir2"))
 #' @export
-remove_dirs <- function(...) {
+remove_dir <- function(...) {
   dirs <- unlist(...)
   outcome <- !as.logical(purrr::map_int(dirs, unlink, recursive = TRUE))
   outcome %>% {
@@ -63,46 +63,9 @@ remove_dirs <- function(...) {
   invisible(outcome)
 }
 
-#' @rdname remove_dirs
+#' @rdname remove_dir
 #' @export
-dir.remove <- remove_dirs
-
-#' Merge tables on disk
-#'
-#' Merge tables saved on disk as delimited files. They need to have the same
-#' number of columns and the same column names (if they have column names).
-#'
-#' @param files The paths to the files to merge.
-#' @param delim Delimeter used to separate values.
-#' @param out_name The path to the output file containing the merged tables.
-#' @param header Do the tables to be merged have headers?
-#' @param ... Additional arguments passed to [readr::read_delim].
-#' @examples
-#' setwd(tempdir())
-#' dir.create("MergeTablesOnDisk_test")
-#' setwd("MergeTablesOnDisk_test")
-#' tab1 <- tibble::tibble(x = 1, y = 2)
-#' tab2 <- tibble::tibble(x = 1, y = 29)
-#' mapply(readr::write_csv, list(tab1, tab2), paste0(c("tab1", "tab2"), ".csv"))
-#' merge_tables_on_disk(c("tab1.csv", "tab2.csv"), ",", "merged.csv")
-#' readr::read_csv("merged.csv")
-#' setwd("..")
-#' dir.remove("MergeTablesOnDisk_test")
-#' @export
-merge_tables_on_disk <- function(files, delim,
-                                 out_name, header = TRUE, ...) {
-  tables <- lapply(files, readr::read_delim, delim, col_names = header, ...)
-  ncs <- vapply(tables, ncol, integer(1))
-  if (!all_equal(ncs)) stop("The tables have different numbers of columns.")
-  if (header) {
-    namess <- vapply(tables, names, character(ncs[1]))
-    if (!all(apply(namess, 1, all_equal))) {
-      stop("Tables have different colnames.")
-    }
-  }
-  merged <- Reduce(rbind, tables)
-  readr::write_delim(merged, out_name, delim = delim, col_names = header)
-}
+dir.remove <- remove_dir
 
 move_file <- function(file, destination) {
   # This also works for directories
@@ -143,16 +106,16 @@ move_files <- function(files, destinations) {
     stop("The number of destinations must be equal to 1 or equal to the ",
          "number of files to be moved")
   }
-  n_created_dirs <- sum(suppressMessages(create_dirs(destinations)))
+  n_created_dirs <- sum(suppressMessages(create_dir(destinations)))
   if (n_created_dirs > 0) {
     message(n_created_dirs, " ", "director",
             ifelse(n_created_dirs == 1, "y", "ies"),
             " created.")
   }
   if(length(destinations) == length(files)) {
-    outcome <- mapply(move_file, files, destinations)
+    outcome <- purrr::map2_lgl(files, destinations, move_file)
   } else {
-    outcome <- vapply(files, move_file, logical(1), destinations)
+    outcome <- purrr::map_lgl(files, move_file, destinations)
   }
   message(sum(outcome), ifelse(sum(outcome) == 1, " file", " files"),
           " moved. ", sum(!outcome), " failed.")
@@ -321,8 +284,8 @@ unitize_dirs <- function(unit, pattern = NULL, dir = ".") {
   if (!all(str_detect(lf, unit))) {
     stop(paste0("The file names must all contain the word", unit ,"."))
   }
-  up_to_first_units <- str_before_nth(lf, unit, 1)
-  nums <- vapply(up_to_first_units, nth_number, numeric(1), -1, decimals = TRUE)
+  up_to_first_units <- str_before_first(lf, unit)
+  nums <- purrr::map_dbl(up_to_first_units, last_number, decimals = TRUE)
   un <- unique(nums)
   for (i in un) {
     files <- lf[nums == i]

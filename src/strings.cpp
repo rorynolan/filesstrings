@@ -11,19 +11,19 @@ std::string paste_collapse(CharacterVector strings, std::string collapse) {
   }
   return out;
 }
-//' Apply paste collapse to each element of a list.
-//'
-//' This is the same as doing
-//' \code{sapply(char.list, paste, collapse = collapse)}, it's just faster.
-//'
-//' @param char_list A list of character vectors.
-//' @param collapse See \code{\link{paste}}.
-//'
-//' @return A list of character vectors.
-//'
-//' @examples
-//' paste_collapse_list_elems(list(1:3, c("a", 5, "rory")), collapse = "R")
-//' @export
+// Apply paste collapse to each element of a list.
+//
+// This is the same as doing
+// \code{sapply(char.list, paste, collapse = collapse)}, it's just faster.
+//
+// @param char_list A list of character vectors.
+// @param collapse See \code{\link{paste}}.
+//
+// @return A list of character vectors.
+//
+// @examples
+// paste_collapse_list_elems(list(1:3, c("a", 5, "rory")), collapse = "R")
+// @export
 // [[Rcpp::export]]
 CharacterVector paste_collapse_list_elems(List char_list,
                                           std::string collapse = "") {
@@ -36,15 +36,15 @@ CharacterVector paste_collapse_list_elems(List char_list,
   return(pasted);
 }
 
-//' Remove empty strings from a character list.
-//'
-//' @param char_list A list of character vectors.
-//'
-//' @return A list of character vectors.
-//'
-//' @examples
-//' str_list_remove_empties(list(c("a", "", "b"), "gg", c("", 1, "")))
-//' @export
+// Remove empty strings from a character list.
+//
+// @param char_list A list of character vectors.
+//
+// @return A list of character vectors.
+//
+// @examples
+// str_list_remove_empties(list(c("a", "", "b"), "gg", c("", 1, "")))
+// @export
 // [[Rcpp::export]]
 List str_list_remove_empties(List char_list) {
   List no_empties = clone(char_list);
@@ -208,4 +208,21 @@ IntegerVector intmat_list_nrows(List intmat_list) {
     nrows[i] = mat_i.nrow();
   }
   return nrows;
+}
+
+// [[Rcpp::export]]
+IntegerVector intmat_list_bind_nth_rows(List intmat_list, IntegerVector n) {
+  IntegerMatrix mat1 = as<IntegerMatrix>(intmat_list[0]);
+  std::size_t nc = mat1.ncol();
+  std::size_t intmat_list_size = intmat_list.size();
+  IntegerMatrix out(intmat_list_size, nc);
+  std::copy(mat1.row(n[0]).begin(), mat1.row(n[0]).end(), out.row(0).begin());
+  if (intmat_list_size > 1) {
+    for (std::size_t i = 1; i != intmat_list_size; ++i) {
+      IntegerMatrix mat_i = as<IntegerMatrix>(intmat_list[i]);
+      std::copy(mat_i.row(n[i]).begin(), mat_i.row(n[i]).end(),
+                out.row(i).begin());
+    }
+  }
+  return out;
 }

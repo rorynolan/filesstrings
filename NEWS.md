@@ -1,7 +1,11 @@
-### 1.2.0
+## 2.0.0
 
-### MINOR IMPROVEMENTS
-* `count_matches()` is much faster.
+#### NEW FEATURES
+* Functions which were previously deprecated are now defunct.
+
+#### MINOR IMPROVEMENTS
+* `count_matches()` and `str_nth_instance_indices()` are much faster.
+* `merge_tables_on_disk()` and `paste_different_lengths()` are gone. They didn't belong.
 
 #### BUG FIXES
 * `before_last_dot()` now works in the case where the input has no dots.

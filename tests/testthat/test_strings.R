@@ -157,19 +157,6 @@ test_that("extend_char_vec works", {
   expect_error(extend_char_vec(c("0", "1"), length_out = 1))
 })
 
-test_that("paste_different_lengths works", {
-  expect_equal(paste_different_lengths(list(1:3, 1:4)), c("11", 22, 33, 4))
-  expect_equal(paste_different_lengths(list(1:3, 1:4), sep = "S"),
-               c("1S1", "2S2", "3S3", 4))
-  writeLines(as.character(1:3), "paste_different_lengths1.txt")
-  writeLines(as.character(1:4), "paste_different_lengths2.txt")
-  expect_equal(paste_different_lengths(
-    list.files(pattern = "paste_different_lengths"),
-  sep = "S"), c("1S1", "2S2", "3S3", 4))
-  # clean up working directory
-  file.remove(list.files(pattern = "paste_different_lengths"))
-})
-
 test_that("put_in_pos works", {
   expect_equal(put_in_pos(1:3, c(1, 8, 9)), c(1, rep("", 6), 2, 3))
   expect_equal(put_in_pos(c("Apple", "Orange", "County"), c(5, 7, 8)),

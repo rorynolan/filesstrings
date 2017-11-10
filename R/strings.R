@@ -226,7 +226,7 @@ extract_numbers <- function(string, leave_as_string = FALSE, decimals = FALSE,
   } else {
     numerics <- suppressWarnings(lapply(numbers, as.integer))
   }
-  na.pos <- vapply(numerics, anyNA, logical(1))
+  na.pos <- purrr::map_lgl(numerics, anyNA)
   if (leave_as_string) {
     numbers[na.pos] <- NA_character_
   } else {
@@ -258,7 +258,7 @@ extract_non_numerics <- function(string, decimals = FALSE,
   non_numerics <- str_split(string, pattern) %>% str_list_remove_empties
   numerics <- extract_numbers(string, decimals = decimals,
                              leading_decimals = leading_decimals, negs = negs)
-  na_pos <- vapply(numerics, anyNA, logical(1))
+  na_pos <- purrr::map_lgl(numerics, anyNA)
   non_numerics[na_pos] <- NA_character_
   non_numerics
 }
@@ -562,49 +562,6 @@ extend_char_vec <- function(char_vec, extend_by = NA, length_out = NA) {
   }
 }
 
-#' Paste vectors/files with different lengths/numbers of lines.
-#'
-#' Paste character vectors of different lengths, optionally inputting the
-#' vectors as file names, which become character vectors via `readLines`.
-#' Vectors are first extended to all be the same length via
-#' [ExtendCharVec()] and are then pasted together, with no separator
-#' put in when pasting empty strings. See the examples if you don't understand.
-#'
-#' @param files A character vector of files to be read in via `readLines`
-#'   to be pasted. If you would like to use this function on vectors already in
-#'   the environment (without reading in files), pass them into this argument as
-#'   a list (see the examples).
-#' @param sep What (if anything) do you want to paste in between things as
-#'   you're pasting them together.
-#' @return A character vector.
-#' @examples
-#' paste_different_lengths(list(1:3, 1:4))
-#' paste_different_lengths(list(1:3, 1:4), sep = "sSs")
-#' setwd(tempdir())
-#' writeLines(as.character(1:3), "PasteDifferentLengths1.txt")
-#' writeLines(as.character(1:4), "PasteDifferentLengths2.txt")
-#' paste_different_lengths(list.files(pattern = "PasteDifferentLengths"),
-#'                         sep = "sSsepPp")
-#' # clean up working directory
-#' file.remove(list.files(pattern = "PasteDifferentLengths"))
-#' @export
-paste_different_lengths <- function(files, sep = "") {
-  if (is.character(files)) {
-    files <- lapply(files, readLines)
-  }
-  if (!is.list(files)) stop("files must be either a character vector or ",
-                            "a list of objects.")
-  max_length <- max(vapply(files, length, integer(1)))
-  files <- vapply(files, extend_char_vec, character(max_length),
-                  length_out = max_length)
-  if (length(sep) != 1) stop("sep must have length 1.")
-  if (sep == "") {
-    apply(files, 1, paste, collapse = "")
-  } else {
-    apply(files, 1, function(x) paste(x[as.logical(nchar(x))], collapse = sep))
-  }
-}
-
 #' Put specified strings in specified positions in an otherwise empty character
 #' vector.
 #'
@@ -801,40 +758,53 @@ str_split_camel_case <- function(string, lower = FALSE) {
 #' `str_last_instance_indices(...)` is just `str_nth_instance_indices(..., n =
 #' -1)`. }
 #'
-#' @param strings A character vector.
+#' @param string A character vector. These functions are vectorized over this
+#'   argument.
 #' @param pattern A character vector. Pattern(s) specified like the pattern(s)
-#'   in the stringr package (e.g. look at [stringr::str_locate()]). If this has
-#'   length >1 its length must be the same as that of `string`.
+#'   in the `stringr`` package (e.g. look at [stringr::str_locate()]). If this
+#'   has length >1 its length must be the same as that of `string`.
 #' @param n Then \eqn{n} for the \eqn{n}th instance of the pattern.
 #'
 #' @return A two-column matrix. The \eqn{i}th row of this matrix gives the start
 #'   and end indices of the \eqn{n}th instance of `pattarn` in the \emph{i}th
-#'   element of `strings`.
+#'   element of `string`.
 #'
 #' @examples
 #' str_nth_instance_indices(c("abcdabcxyz", "abcabc"), "abc", 2)
 #'
 #' @export
-str_nth_instance_indices <- function(strings, pattern, n) {
-  instances <- str_locate_all(strings, pattern)
-  instances %>% vapply(function(x, n) {
-    l <- length(x)
-    if (n < 0) n <- nrow(x) + n + 1
-    if (n < 1 || n > l) {
-      stop("There aren't n instances of pattern in one or more of the strings.")
-    }
-    x[n, ]
-  }, integer(2), n) %>% t
+str_nth_instance_indices <- function(string, pattern, n) {
+  n %<>% as.integer()
+  if (n == 0) stop("'n' cannot be zero.")
+  instances <- str_locate_all(string, pattern)
+  n_instances <- lengths(instances) / 2
+  bad <- n_instances < abs(n)
+  if (any(bad)) {
+    first_bad <- match(T, bad)
+    stop("There aren't ", abs(n),
+         " instances of pattern in one or more of the strings. ",
+         "The first such bad string is string ", first_bad, ": '",
+         string[first_bad], "' which has ", n_instances[first_bad],
+         " instances.")
+  }
+  l <- length(string)
+  if (n > 0) {
+    n %<>% rep(l)
+  } else {
+    n <- n_instances + n + 1
+  }
+  intmat_list_bind_nth_rows(instances, n - 1) %>%
+    magrittr::set_colnames(c("start", "end"))
 }
 
 #' @rdname str_nth_instance_indices
 #' @export
-str_first_instance_indices <- function(strings, pattern) {
-  str_nth_instance_indices(strings = strings, pattern = pattern, n = 1)
+str_first_instance_indices <- function(string, pattern) {
+  str_nth_instance_indices(string = string, pattern = pattern, n = 1)
 }
 
 #' @rdname str_nth_instance_indices
 #' @export
-str_last_instance_indices <- function(strings, pattern) {
-  str_nth_instance_indices(strings = strings, pattern = pattern, n = -1)
+str_last_instance_indices <- function(string, pattern) {
+  str_nth_instance_indices(string = string, pattern = pattern, n = -1)
 }

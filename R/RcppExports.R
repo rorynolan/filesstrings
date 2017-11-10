@@ -5,32 +5,10 @@ paste_collapse <- function(strings, collapse) {
     .Call(`_filesstrings_paste_collapse`, strings, collapse)
 }
 
-#' Apply paste collapse to each element of a list.
-#'
-#' This is the same as doing
-#' \code{sapply(char.list, paste, collapse = collapse)}, it's just faster.
-#'
-#' @param char_list A list of character vectors.
-#' @param collapse See \code{\link{paste}}.
-#'
-#' @return A list of character vectors.
-#'
-#' @examples
-#' paste_collapse_list_elems(list(1:3, c("a", 5, "rory")), collapse = "R")
-#' @export
 paste_collapse_list_elems <- function(char_list, collapse = "") {
     .Call(`_filesstrings_paste_collapse_list_elems`, char_list, collapse)
 }
 
-#' Remove empty strings from a character list.
-#'
-#' @param char_list A list of character vectors.
-#'
-#' @return A list of character vectors.
-#'
-#' @examples
-#' str_list_remove_empties(list(c("a", "", "b"), "gg", c("", 1, "")))
-#' @export
 str_list_remove_empties <- function(char_list) {
     .Call(`_filesstrings_str_list_remove_empties`, char_list)
 }
@@ -61,5 +39,9 @@ interleave_char_lists <- function(strings1, strings2) {
 
 intmat_list_nrows <- function(intmat_list) {
     .Call(`_filesstrings_intmat_list_nrows`, intmat_list)
+}
+
+intmat_list_bind_nth_rows <- function(intmat_list, n) {
+    .Call(`_filesstrings_intmat_list_bind_nth_rows`, intmat_list, n)
 }
 
