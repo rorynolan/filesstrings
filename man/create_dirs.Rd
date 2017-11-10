@@ -7,12 +7,13 @@
 create_dirs(...)
 }
 \arguments{
-\item{...}{The names of the directories, specified via relative or
-absolute paths.}
+\item{...}{The names of the directories, specified via relative or absolute
+paths. Duplicates are ignored.}
 }
 \value{
 Invisibly, a vector with a \code{TRUE} for each time a directory was
-actually created and a \code{FALSE} otherwise.
+actually created and a \code{FALSE} otherwise. Theis vector is named with the
+paths of the directories that were passed to the function.
 }
 \description{
 Given the names of (potential) directories, create the ones that do not

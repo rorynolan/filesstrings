@@ -2,17 +2,18 @@
 #'
 #' Given the names of (potential) directories, create the ones that do not
 #' already exist.
-#' @param ... The names of the directories, specified via relative or
-#'   absolute paths.
+#' @param ... The names of the directories, specified via relative or absolute
+#'   paths. Duplicates are ignored.
 #' @return Invisibly, a vector with a `TRUE` for each time a directory was
-#'   actually created and a `FALSE` otherwise.
+#'   actually created and a `FALSE` otherwise. Theis vector is named with the
+#'   paths of the directories that were passed to the function.
 #' @examples
 #' setwd(tempdir())
 #' create_dirs(c("mydir", "yourdir"))
 #' remove_dirs(c("mydir", "yourdir"))
 #' @export
 create_dirs <- function(...) {
-  dirs <- unlist(...)
+  dirs <- unique(unlist(...))
   created <- purrr::map_lgl(dirs, function(dir) {
                                     if (!dir.exists(dir)) {
                                       dir.create(dir)
@@ -21,6 +22,7 @@ create_dirs <- function(...) {
                                       FALSE
                                     }
                                   })
+  names(created) <- dirs
   msg <- sum(created) %>% {
     ifelse(., paste(., ifelse(. == 1, "directory", "directories"),
                     "created. "),
@@ -137,17 +139,23 @@ move_file <- function(file, destination) {
 #' file.move(files, "dir")
 #' @export
 move_files <- function(files, destinations) {
-  n_created_dirs <- sum(create_dirs(destinations))
-  if(length(destinations) == length(files)) {
-    outcome <- mapply(move_file, files, destinations)
-  } else if (length(destinations) == 1) {
-    outcome <- vapply(files, move_file, logical(1), destinations)
-  } else {
+  if (! length(destinations) %in% (c(1, length(files)))) {
     stop("The number of destinations must be equal to 1 or equal to the ",
          "number of files to be moved")
   }
+  n_created_dirs <- sum(suppressMessages(create_dirs(destinations)))
+  if (n_created_dirs > 0) {
+    message(n_created_dirs, " ", "director",
+            ifelse(n_created_dirs == 1, "y", "ies"),
+            " created.")
+  }
+  if(length(destinations) == length(files)) {
+    outcome <- mapply(move_file, files, destinations)
+  } else {
+    outcome <- vapply(files, move_file, logical(1), destinations)
+  }
   message(sum(outcome), ifelse(sum(outcome) == 1, " file", " files"),
-          " moved. ", sum(!outcome), " failed to move.")
+          " moved. ", sum(!outcome), " failed.")
   invisible(outcome)
 }
 
