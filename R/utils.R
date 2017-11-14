@@ -41,7 +41,7 @@ all_equal <- function(a, b = NULL) {
 #'
 #' Given a strictly increasing vector (each element is bigger than the last),
 #' group together stretches of the vector where \emph{adjacent} elements are
-#' separeted by at most some specified distance. Hence, each element in each
+#' separated by at most some specified distance. Hence, each element in each
 #' group has at least one other element in that group that is \emph{close} to
 #' it. See the examples.
 #' @param vec_ascending A strictly increasing numeric vector.

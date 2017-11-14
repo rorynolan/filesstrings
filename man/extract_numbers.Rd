@@ -68,7 +68,7 @@ the string that aren't extracted by \code{extract_numbers}. \code{nth_number} is
 convenient wrapper for \code{extract_numbers}, allowing you to choose which number
 you want. Similarly \code{nth_non_numeric}. Please view the examples at the bottom
 of this page to ensure that you understand how these functions work, and
-their limitations. These functions are vectorised over \code{string}.
+their limitations. These functions are vectorized over \code{string}.
 }
 \details{
 If any part of a string contains an ambiguous number (e.g. \code{1.2.3} would be

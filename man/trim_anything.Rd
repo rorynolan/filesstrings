@@ -15,7 +15,7 @@ regular expression). So to trim a period, use \code{char = "."} and not
 
 \item{side}{Which side do you want to trim from? \code{"both"} is the
 default, but you can also have just either \code{"left"} or \code{"right"}
-(or optionally the shorthands \code{"b"}, \code{"l"} and \code{"r"}).}
+(or optionally the shortened \code{"b"}, \code{"l"} and \code{"r"}).}
 }
 \value{
 A string.

@@ -20,7 +20,7 @@ A string: the file name in your intended form.
 \description{
 Say you want to ensure a name is fit to be the name of a csv file. Then, if
 the input doesn't end with ".csv", this function will tack ".csv" onto the
-end of it. This is vectorised over the first argument.
+end of it. This is vectorized over the first argument.
 }
 \examples{
 give_ext(c("abc", "abc.csv"), "csv")

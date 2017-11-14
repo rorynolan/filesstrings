@@ -12,7 +12,7 @@ paths. Duplicates are ignored.}
 }
 \value{
 Invisibly, a vector with a \code{TRUE} for each time a directory was
-actually created and a \code{FALSE} otherwise. Theis vector is named with the
+actually created and a \code{FALSE} otherwise. This vector is named with the
 paths of the directories that were passed to the function.
 }
 \description{

@@ -15,7 +15,7 @@ otherwise.
 }
 \description{
 After padding is removed, could the input string be considered to be numeric,
-i.e. could it be coerced to numeric. This function is vectorised over its one
+i.e. could it be coerced to numeric. This function is vectorized over its one
 argument.
 }
 \examples{

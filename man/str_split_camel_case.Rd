@@ -2,7 +2,7 @@
 % Please edit documentation in R/strings.R
 \name{str_split_camel_case}
 \alias{str_split_camel_case}
-\title{Split a string based on camelcase}
+\title{Split a string based on CamelCase}
 \usage{
 str_split_camel_case(string, lower = FALSE)
 }
@@ -16,7 +16,7 @@ A list of character vectors, one list element for each element of
 \code{string}.
 }
 \description{
-Vectorised over \code{string}.
+Vectorized over \code{string}.
 }
 \examples{
 str_split_camel_case(c("RoryNolan", "NaomiFlagg", "DepartmentOfSillyHats"))

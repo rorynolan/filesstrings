@@ -10,7 +10,7 @@ remove_filename_spaces(dir = ".", pattern = "", replacement = "")
 \item{dir}{The directory in which to perform the operation.}
 
 \item{pattern}{A regular expression. If specified, only files matching this
-pattern wil be treated.}
+pattern will be treated.}
 
 \item{replacement}{What do you want to replace the spaces with? This
 defaults to nothing, another sensible choice would be an underscore.}

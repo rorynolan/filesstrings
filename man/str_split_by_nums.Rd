@@ -2,7 +2,7 @@
 % Please edit documentation in R/strings.R
 \name{str_split_by_nums}
 \alias{str_split_by_nums}
-\title{Split a string by its numeric charachters.}
+\title{Split a string by its numeric characters.}
 \usage{
 str_split_by_nums(string, decimals = FALSE, leading_decimals = FALSE,
   negs = FALSE)
@@ -20,7 +20,7 @@ the start of a number?}
 are not handled here (see the examples).}
 }
 \description{
-Break a string wherever you go from a numeric charachter to a non-numeric or
+Break a string wherever you go from a numeric character to a non-numeric or
 vice-versa.
 }
 \examples{

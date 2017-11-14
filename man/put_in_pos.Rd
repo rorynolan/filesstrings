@@ -8,18 +8,18 @@ vector.}
 put_in_pos(strings, positions)
 }
 \arguments{
-\item{strings}{A charachter vector of the strings to put in positions
-(coerced by \link{as.character} if not charachter already).}
+\item{strings}{A character vector of the strings to put in positions
+(coerced by \link{as.character} if not character already).}
 
-\item{positions}{The indices of the charachter vector to be occupied by the
+\item{positions}{The indices of the character vector to be occupied by the
 elements of strings. Must be the same length as strings or of length 1.}
 }
 \value{
-A charachter vector.
+A character vector.
 }
 \description{
-Create a charachter vector with a set of strings at specified positions in
-that charachter vector, with the rest of it taken up by empty strings.
+Create a character vector with a set of strings at specified positions in
+that character vector, with the rest of it taken up by empty strings.
 }
 \examples{
 put_in_pos(1:3, c(1, 8, 9))

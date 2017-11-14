@@ -14,7 +14,7 @@ A character vector.
 }
 \description{
 This is usually used to get the part of a file name that doesn't include the
-file extension. It is vectorised over \code{string}. If there is no period in
+file extension. It is vectorized over \code{string}. If there is no period in
 \code{string}, the input is returned.
 }
 \examples{

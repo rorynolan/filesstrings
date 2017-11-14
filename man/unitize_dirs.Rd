@@ -7,7 +7,7 @@
 unitize_dirs(unit, pattern = NULL, dir = ".")
 }
 \arguments{
-\item{unit}{The unit upon which to base the categorising.}
+\item{unit}{The unit upon which to base the categorizing.}
 
 \item{pattern}{If set, only files with names matching this pattern will be
 treated.}

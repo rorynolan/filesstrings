@@ -23,7 +23,7 @@ in the \code{stringr`` package (e.g. look at [stringr::str_locate()]). If this h
 }
 \value{
 A two-column matrix. The \eqn{i}th row of this matrix gives the start
-and end indices of the \eqn{n}th instance of \code{pattarn} in the \emph{i}th
+and end indices of the \eqn{n}th instance of \code{pattern} in the \eqn{i}th
 element of \code{string}.
 }
 \description{

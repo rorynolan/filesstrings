@@ -30,10 +30,10 @@ be a space, comma or any manner of thing.
 \itemize{
 \item \code{get_currency}
 takes a string and returns the currency of the first number therein. It is
-vectorised over string.
+vectorized over string.
 \item \code{get_currencies} takes a string and returns
 the currencies of all of the numbers within that string. It is not
-vectorised. }
+vectorized. }
 }
 \details{
 These functions do not allow for leading decimal points.

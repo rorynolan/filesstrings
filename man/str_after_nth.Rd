@@ -36,7 +36,7 @@ A character vector of the desired strings.
 }
 \description{
 Extract the part of a string which is before or after the \emph{n}th occurrence of
-a specified pattern, vectorised over the string. \code{n} can be negatively
+a specified pattern, vectorized over the string. \code{n} can be negatively
 indexed. See 'Arguments'.
 }
 \details{

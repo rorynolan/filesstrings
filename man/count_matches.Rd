@@ -17,7 +17,7 @@ this has length >1 its length must be the same as that of \code{string}.}
 An integer vector giving the number of matches in each string.
 }
 \description{
-Vectorised over \code{string} and \code{pattern}.
+Vectorized over \code{string} and \code{pattern}.
 }
 \examples{
 count_matches(c("abacad", "xyz"), "a")

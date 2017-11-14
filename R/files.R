@@ -5,7 +5,7 @@
 #' @param ... The names of the directories, specified via relative or absolute
 #'   paths. Duplicates are ignored.
 #' @return Invisibly, a vector with a `TRUE` for each time a directory was
-#'   actually created and a `FALSE` otherwise. Theis vector is named with the
+#'   actually created and a `FALSE` otherwise. This vector is named with the
 #'   paths of the directories that were passed to the function.
 #' @examples
 #' setwd(tempdir())
@@ -70,10 +70,10 @@ dir.remove <- remove_dir
 move_file <- function(file, destination) {
   # This also works for directories
   file <- normalizePath(file)  # get full path
-  file.name.base <- basename(file)
+  file_name_base <- basename(file)
   destination <- normalizePath(destination)  # remove risk of tilde use
-  new.name <- paste0(destination, "/", file.name.base)
-  file.rename(file, new.name)
+  new_name <- paste0(destination, "/", file_name_base)
+  file.rename(file, new_name)
 }
 
 #' Move files around.
@@ -161,8 +161,8 @@ file.move <- move_files
 #' dir.remove("NiceFileNums_test")
 #' @export
 nice_file_nums <- function(dir = ".", pattern = NA) {
-  init.dir <- getwd()
-  on.exit(setwd(init.dir))
+  init_dir <- getwd()
+  on.exit(setwd(init_dir))
   setwd(dir)
   if (is.na(pattern)) {
     lf <- list.files()
@@ -182,7 +182,7 @@ nice_file_nums <- function(dir = ".", pattern = NA) {
 #'
 #' @param dir The directory in which to perform the operation.
 #' @param pattern A regular expression. If specified, only files matching this
-#'   pattern wil be treated.
+#'   pattern will be treated.
 #' @param replacement What do you want to replace the spaces with? This
 #'   defaults to nothing, another sensible choice would be an underscore.
 #' @return A logical vector indicating which operation succeeded for each of the
@@ -200,12 +200,12 @@ nice_file_nums <- function(dir = ".", pattern = NA) {
 #' dir.remove("RemoveFileNameSpaces_test")
 #' @export
 remove_filename_spaces <- function(dir = ".", pattern = "", replacement = "") {
-  init.dir <- getwd()
-  on.exit(setwd(init.dir))
+  init_dir <- getwd()
+  on.exit(setwd(init_dir))
   setwd(dir)
   lf <- list.files(pattern = pattern)
-  new.names <- str_replace_all(lf, " ", replacement)
-  outcome <- file.rename(lf, new.names)
+  new_names <- str_replace_all(lf, " ", replacement)
+  outcome <- file.rename(lf, new_names)
   message(sum(outcome), " files renamed. ", sum(!outcome),
           " failed to rename.")
   invisible(outcome)
@@ -233,8 +233,8 @@ remove_filename_spaces <- function(dir = ".", pattern = "", replacement = "") {
 #' dir.remove("RenameWithNums_test")
 #' @export
 rename_with_nums <- function(dir = ".", pattern = NULL) {
-  init.dir <- getwd()
-  on.exit(setwd(init.dir))
+  init_dir <- getwd()
+  on.exit(setwd(init_dir))
   setwd(dir)
   lf <- list.files(pattern = pattern)
   ext <- unique(tools::file_ext(lf))
@@ -262,7 +262,7 @@ rename_with_nums <- function(dir = ".", pattern = NULL) {
 #' [nth_number()]) before the first occurrence of the unit name. There
 #' is the option to only treat files matching a certain pattern.
 #'
-#' @param unit The unit upon which to base the categorising.
+#' @param unit The unit upon which to base the categorizing.
 #' @param pattern If set, only files with names matching this pattern will be
 #'   treated.
 #' @param dir In which directory do you want to perform this action (defaults
