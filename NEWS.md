@@ -8,7 +8,7 @@
 * `merge_tables_on_disk()` and `paste_different_lengths()` are gone. They didn't belong.
 
 #### BUG FIXES
-* `before_last_dot()` now works in the case where the input has no dots.
+* `before_last_dot()` now works in the case where the input has no dots, returning the input.
 
 
 ### 1.1.0
@@ -75,6 +75,7 @@
 
 
 ### 0.3.1
+
 #### BUG FIXES
 * Fixed problem of
 `Found no calls to: ‘R_registerRoutines’, ‘R_useDynamicSymbols’`
