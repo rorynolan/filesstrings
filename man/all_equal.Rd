@@ -7,22 +7,26 @@
 all_equal(a, b = NULL)
 }
 \arguments{
-\item{a}{A vector.}
+\item{a}{A vector, array or list.}
 
-\item{b}{Either \code{NULL} or a vector of length either 1 or \code{length(a)}.}
+\item{b}{Either \code{NULL} or a vector, array or list of length either 1 or
+\code{length(a)}.}
 }
 \value{
 \code{TRUE} if "equality of all" is satisfied (as detailed in
-"Description" above) and \code{FALSE} otherwise.
+'Description' above) and \code{FALSE} otherwise.
 }
 \description{
 If one argument is specified, check that all elements of that argument are
 equal. If two arguments of equal length are specified, check equality of all
 of their corresponding elements. If two arguments are specified, \code{a} of
-length 1 and \code{b} of length greater than 1, check that all elements of
-\code{b} are equal to the element in a. If two arguments are specified, \code{a} of
-length greater than 1 and \code{b} of 1, check that all elements of
-\code{a} are equal to the element in \code{b}.
+length 1 and \code{b} of length greater than 1, check that all elements of \code{b} are
+equal to the element in a. If two arguments are specified, \code{a} of length
+greater than 1 and \code{b} of 1, check that all elements of \code{a} are equal to the
+element in \code{b}.
+}
+\note{
+This behaviour is totally different from \code{\link[base:all.equal]{base::all.equal()}}.
 }
 \examples{
 all_equal(1, rep(1, 3))
@@ -31,4 +35,6 @@ all_equal(1:4, 1:4)
 all_equal(1:4, c(1, 2, 3, 3))
 all_equal(rep(1, 10))
 all_equal(c(1, 88))
+all_equal(1:2)
+all_equal(list(1:2))
 }

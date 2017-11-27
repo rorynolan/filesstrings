@@ -4,10 +4,6 @@ Title: Handy String and File Manipulation
 Version: 1.2.0
 Authors@R: c(person("Rory", "Nolan", email = "rorynoolan@gmail.com", 
                     role = c("aut", "cre", "cph")),
-             person("Jim", "Hester", email = "jim.hester@rstudio.com", 
-                    role = "ctb"),
-             person("Kirill", "Muller", email = "krlmlr+r@mailbox.org", 
-                    role = "ctb"),
              person("Sergi", "Padilla-Parra", email = "spadilla@well.ox.ac.uk", 
                     role = "ths"))
 Maintainer: Rory Nolan <rorynoolan@gmail.com>
@@ -24,7 +20,8 @@ Imports:
     tools,
     ore,
     matrixStats,
-    purrr
+    purrr,
+    checkmate
 RoxygenNote: 6.0.1
 Suggests: testthat,
     covr,

@@ -3,15 +3,18 @@
 #' If one argument is specified, check that all elements of that argument are
 #' equal. If two arguments of equal length are specified, check equality of all
 #' of their corresponding elements. If two arguments are specified, `a` of
-#' length 1 and `b` of length greater than 1, check that all elements of
-#' `b` are equal to the element in a. If two arguments are specified, `a` of
-#' length greater than 1 and `b` of 1, check that all elements of
-#' `a` are equal to the element in `b`.
+#' length 1 and `b` of length greater than 1, check that all elements of `b` are
+#' equal to the element in a. If two arguments are specified, `a` of length
+#' greater than 1 and `b` of 1, check that all elements of `a` are equal to the
+#' element in `b`.
 #'
-#' @param a A vector.
-#' @param b Either `NULL` or a vector of length either 1 or `length(a)`.
+#' @note This behaviour is totally different from [base::all.equal()].
+#'
+#' @param a A vector, array or list.
+#' @param b Either `NULL` or a vector, array or list of length either 1 or
+#'   `length(a)`.
 #' @return `TRUE` if "equality of all" is satisfied (as detailed in
-#'   "Description" above) and `FALSE` otherwise.
+#'   'Description' above) and `FALSE` otherwise.
 #' @examples
 #' all_equal(1, rep(1, 3))
 #' all_equal(2, 1:3)
@@ -19,8 +22,18 @@
 #' all_equal(1:4, c(1, 2, 3, 3))
 #' all_equal(rep(1, 10))
 #' all_equal(c(1, 88))
+#' all_equal(1:2)
+#' all_equal(list(1:2))
 #' @export
 all_equal <- function(a, b = NULL) {
+  checkmate::assert(checkmate::check_null(a),
+                    checkmate::check_vector(a),
+                    checkmate::check_list(a),
+                    checkmate::check_array(a))
+  checkmate::assert(checkmate::check_null(b),
+                    checkmate::check_vector(b),
+                    checkmate::check_list(b),
+                    checkmate::check_array(b))
   if (is.null(a) && (!is.null(b))) return(FALSE)
   if (is.null(b[1])) {
     return(length(unique(a)) == 1)

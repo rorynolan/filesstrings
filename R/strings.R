@@ -113,7 +113,11 @@ singleize <- function(string, pattern) {
 #' nice_nums(c("abc9def55", "abc10xyz7"))}
 #' @export
 nice_nums <- function(strings) {
-  if (!is.character(strings)) stop("str.vec must be a vector of strings")
+  checkmate::check_character(strings)
+  have_nums <- str_detect(strings, "\\d")
+  if (!all(have_nums)) {
+    stop("Some of the input strings have no numbers in them.")
+  }
   non_nums <- extract_non_numerics(strings)
   if (!all_equal(non_nums)) {
     stop("The non-number bits of the strings are different.")

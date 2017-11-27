@@ -36,6 +36,7 @@ test_that("nice_nums works", {
   expect_error(nice_nums(c("abc9def55", "abc10xyz7")))
   expect_error(nice_nums(c("abc9def55", "9abc10def7")))
   expect_error(nice_nums(c("0abc9def55g", "abc10def7g0")))
+  expect_error(nice_nums("abc"), "no numbers")
 })
 
 test_that("extract_numbers works", {
