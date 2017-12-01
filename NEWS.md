@@ -1,7 +1,7 @@
 ## 2.0.0
 
 #### NEW FEATURES
-* Functions which were previously deprecated are now defunct.
+* Functions which were previously deprecated are now defunct. This brings the package completely in line with the tidyverse style.
 
 #### MINOR IMPROVEMENTS
 * `count_matches()` and `str_nth_instance_indices()` are much faster.

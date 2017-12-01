@@ -8,4 +8,4 @@
 There were no ERRORs, WARNINGs or NOTEs.
 
 ## Reverse Dependencies
-There are 3 reverse dependencies. This update is major and breaks 2 of them, however I am the maintainer of those packages and fixes are ready to go just as soon as this package is accepted. 
+There are 3 reverse dependencies: `detrendr`, `exampletestr` and `nandb`. This update breaks two of them. Updates to all 3 to come in line with the update of this package are ready to go and will be submitted immediately when this package is accepted (I am the maintainer of all 3). 

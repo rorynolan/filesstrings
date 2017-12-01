@@ -7,7 +7,8 @@ test_that("paste_collapse_list_elems works", {
 })
 
 test_that("str_list_remove_empties works", {
-  expect_equal(str_list_remove_empties(list(c("a", "", "b"), "gg", c("", 1, ""))),
+  expect_equal(str_list_remove_empties(list(c("a", "", "b"), "gg",
+                                            c("", 1, ""))),
                list(c("a", "b"), "gg", "1"))
 })
 

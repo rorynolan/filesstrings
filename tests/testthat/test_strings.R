@@ -56,7 +56,8 @@ test_that("extract_numbers works", {
   expect_equal(extract_numbers("-123abc456", negs = TRUE), list(c(-123, 456)))
   expect_equal(extract_numbers("--123abc456", negs = TRUE), list(c(-123, 456)))
   expect_equal(extract_non_numerics("abc123abc456"), list(rep("abc", 2)))
-  expect_equal(extract_non_numerics("abc1.23abc456"), list(c("abc", ".", "abc")))
+  expect_equal(extract_non_numerics("abc1.23abc456"),
+               list(c("abc", ".", "abc")))
   expect_equal(extract_non_numerics("abc1.23abc456", decimals = TRUE),
                list(c("abc", "abc")))
   expect_equal(extract_non_numerics("abc1..23abc456", decimals = TRUE),
