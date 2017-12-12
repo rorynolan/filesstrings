@@ -21,7 +21,7 @@ A logical vector with a \code{TRUE} for each successful renaming and a
 Rename the files in the directory, replacing file names with numbers only.
 }
 \examples{
-setwd(tempdir())
+\dontrun{
 dir.create("RenameWithNums_test")
 setwd("RenameWithNums_test")
 files <- c("1litres 1.txt", "1litres 30.txt", "3litres 5.txt")
@@ -29,5 +29,5 @@ file.create(files)
 rename_with_nums()
 list.files()
 setwd("..")
-dir.remove("RenameWithNums_test")
+dir.remove("RenameWithNums_test")}
 }

@@ -21,7 +21,7 @@ Invisibly, a logical vector with \code{TRUE} for each success and
 Delete directories and all of their contents.
 }
 \examples{
-setwd(tempdir())
+\dontrun{
 sapply(c("mydir1", "mydir2"), dir.create)
-remove_dir(c("mydir1", "mydir2"))
+remove_dir(c("mydir1", "mydir2"))}
 }

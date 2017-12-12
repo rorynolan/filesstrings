@@ -25,7 +25,7 @@ Remove spaces in file names in a specified directory, replacing them with
 whatever you want, default nothing.
 }
 \examples{
-setwd(tempdir())
+\dontrun{
 dir.create("RemoveFileNameSpaces_test")
 setwd("RemoveFileNameSpaces_test")
 files <- c("1litres 1.txt", "1litres 30.txt", "3litres 5.txt")
@@ -33,5 +33,5 @@ file.create(files)
 remove_filename_spaces()
 list.files()
 setwd("..")
-dir.remove("RemoveFileNameSpaces_test")
+dir.remove("RemoveFileNameSpaces_test")}
 }

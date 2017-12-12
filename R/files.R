@@ -8,9 +8,9 @@
 #'   actually created and a `FALSE` otherwise. This vector is named with the
 #'   paths of the directories that were passed to the function.
 #' @examples
-#' setwd(tempdir())
+#' \dontrun{
 #' create_dir(c("mydir", "yourdir"))
-#' remove_dir(c("mydir", "yourdir"))
+#' remove_dir(c("mydir", "yourdir"))}
 #' @export
 create_dir <- function(...) {
   dirs <- unique(unlist(...))
@@ -49,9 +49,9 @@ create_dir <- function(...) {
 #' @return Invisibly, a logical vector with `TRUE` for each success and
 #'   `FALSE` for failures.
 #' @examples
-#' setwd(tempdir())
+#' \dontrun{
 #' sapply(c("mydir1", "mydir2"), dir.create)
-#' remove_dir(c("mydir1", "mydir2"))
+#' remove_dir(c("mydir1", "mydir2"))}
 #' @export
 remove_dir <- function(...) {
   dirs <- unlist(...)
@@ -95,11 +95,11 @@ move_file <- function(file, destination) {
 #' @return Invisibly, a logical vector with a `TRUE` for each time the operation
 #'   succeeded and a `FALSE` for every fail.
 #' @examples
-#' setwd(tempdir())
+#' \dontrun{
 #' dir.create("dir")
 #' files <- c("1litres_1.txt", "1litres_30.txt", "3litres_5.txt")
 #' file.create(files)
-#' file.move(files, "dir")
+#' file.move(files, "dir")}
 #' @export
 move_files <- function(files, destinations) {
   if (! length(destinations) %in% (c(1, length(files)))) {
@@ -150,7 +150,7 @@ file.move <- move_files
 #'   (should be all `TRUE`s) and a `FALSE` otherwise.
 #'
 #' @examples
-#' setwd(tempdir())
+#' \dontrun{
 #' dir.create("NiceFileNums_test")
 #' setwd("NiceFileNums_test")
 #' files <- c("1litres_1.txt", "1litres_30.txt", "3litres_5.txt")
@@ -158,7 +158,7 @@ file.move <- move_files
 #' nice_file_nums()
 #' nice_file_nums(pattern = "\\.txt$")
 #' setwd("..")
-#' dir.remove("NiceFileNums_test")
+#' dir.remove("NiceFileNums_test")}
 #' @export
 nice_file_nums <- function(dir = ".", pattern = NA) {
   init_dir <- getwd()
@@ -189,7 +189,7 @@ nice_file_nums <- function(dir = ".", pattern = NA) {
 #'   files attempted. Using a missing value for a file or path name will always
 #'   be regarded as a failure.
 #' @examples
-#' setwd(tempdir())
+#' \dontrun{
 #' dir.create("RemoveFileNameSpaces_test")
 #' setwd("RemoveFileNameSpaces_test")
 #' files <- c("1litres 1.txt", "1litres 30.txt", "3litres 5.txt")
@@ -197,7 +197,7 @@ nice_file_nums <- function(dir = ".", pattern = NA) {
 #' remove_filename_spaces()
 #' list.files()
 #' setwd("..")
-#' dir.remove("RemoveFileNameSpaces_test")
+#' dir.remove("RemoveFileNameSpaces_test")}
 #' @export
 remove_filename_spaces <- function(dir = ".", pattern = "", replacement = "") {
   init_dir <- getwd()
@@ -222,7 +222,7 @@ remove_filename_spaces <- function(dir = ".", pattern = "", replacement = "") {
 #' @return A logical vector with a `TRUE` for each successful renaming and a
 #'   `FALSE` otherwise.
 #' @examples
-#' setwd(tempdir())
+#' \dontrun{
 #' dir.create("RenameWithNums_test")
 #' setwd("RenameWithNums_test")
 #' files <- c("1litres 1.txt", "1litres 30.txt", "3litres 5.txt")
@@ -230,7 +230,7 @@ remove_filename_spaces <- function(dir = ".", pattern = "", replacement = "") {
 #' rename_with_nums()
 #' list.files()
 #' setwd("..")
-#' dir.remove("RenameWithNums_test")
+#' dir.remove("RenameWithNums_test")}
 #' @export
 rename_with_nums <- function(dir = ".", pattern = NULL) {
   init_dir <- getwd()
@@ -270,14 +270,14 @@ rename_with_nums <- function(dir = ".", pattern = NULL) {
 #' @return Invisibly `TRUE` if the operation is successful, if not there will be an
 #'   error.
 #' @examples
-#' setwd(tempdir())
+#' \dontrun{
 #' dir.create("UnitDirs_test")
 #' setwd("UnitDirs_test")
 #' files <- c("1litres_1.txt", "1litres_3.txt", "3litres.txt", "5litres_1.txt")
 #' file.create(files)
 #' unitize_dirs("litres", "\\.txt")
 #' setwd("..")
-#' dir.remove("UnitDirs_test")
+#' dir.remove("UnitDirs_test")}
 #' @export
 unitize_dirs <- function(unit, pattern = NULL, dir = ".") {
   lf <- list.files(pattern = pattern)

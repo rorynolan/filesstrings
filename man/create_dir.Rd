@@ -20,7 +20,7 @@ Given the names of (potential) directories, create the ones that do not
 already exist.
 }
 \examples{
-setwd(tempdir())
+\dontrun{
 create_dir(c("mydir", "yourdir"))
-remove_dir(c("mydir", "yourdir"))
+remove_dir(c("mydir", "yourdir"))}
 }

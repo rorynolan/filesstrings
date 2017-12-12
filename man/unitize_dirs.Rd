@@ -31,12 +31,12 @@ This function takes the number to be the last number (as defined in
 is the option to only treat files matching a certain pattern.
 }
 \examples{
-setwd(tempdir())
+\dontrun{
 dir.create("UnitDirs_test")
 setwd("UnitDirs_test")
 files <- c("1litres_1.txt", "1litres_3.txt", "3litres.txt", "5litres_1.txt")
 file.create(files)
 unitize_dirs("litres", "\\\\.txt")
 setwd("..")
-dir.remove("UnitDirs_test")
+dir.remove("UnitDirs_test")}
 }

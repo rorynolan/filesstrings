@@ -34,7 +34,7 @@ not the renaming. To see examples of how this function works, see the
 examples in that function's documentation.
 }
 \examples{
-setwd(tempdir())
+\dontrun{
 dir.create("NiceFileNums_test")
 setwd("NiceFileNums_test")
 files <- c("1litres_1.txt", "1litres_30.txt", "3litres_5.txt")
@@ -42,5 +42,5 @@ file.create(files)
 nice_file_nums()
 nice_file_nums(pattern = "\\\\.txt$")
 setwd("..")
-dir.remove("NiceFileNums_test")
+dir.remove("NiceFileNums_test")}
 }
