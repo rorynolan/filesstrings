@@ -1,3 +1,9 @@
+### 2.0.2
+
+#### BUG FIXES
+* Fix to `all_equal()` for dealing with arrays.
+
+
 ### 2.0.1
 
 #### BUG FIXES

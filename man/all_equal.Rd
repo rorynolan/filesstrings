@@ -26,7 +26,11 @@ greater than 1 and \code{b} of 1, check that all elements of \code{a} are equal 
 element in \code{b}.
 }
 \note{
-This behaviour is totally different from \code{\link[base:all.equal]{base::all.equal()}}.
+\itemize{\item This behaviour is totally different from
+\code{\link[base:all.equal]{base::all.equal()}}. \item There's also \code{\link[dplyr:all_equal]{dplyr::all_equal()}}, which is
+different again. To avoid confusion, always use the full
+\code{filesstrings::all_equal()} and never \code{library(filesstrings)} followed by
+just \code{all_equal()}.}
 }
 \examples{
 all_equal(1, rep(1, 3))
@@ -37,4 +41,5 @@ all_equal(rep(1, 10))
 all_equal(c(1, 88))
 all_equal(1:2)
 all_equal(list(1:2))
+all_equal(1:4, matrix(1:4, nrow = 2))  # note that this gives TRUE
 }

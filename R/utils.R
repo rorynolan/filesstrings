@@ -8,7 +8,11 @@
 #' greater than 1 and `b` of 1, check that all elements of `a` are equal to the
 #' element in `b`.
 #'
-#' @note This behaviour is totally different from [base::all.equal()].
+#' @note \itemize{\item This behaviour is totally different from
+#'   [base::all.equal()]. \item There's also [dplyr::all_equal()], which is
+#'   different again. To avoid confusion, always use the full
+#'   `filesstrings::all_equal()` and never `library(filesstrings)` followed by
+#'   just `all_equal()`.}
 #'
 #' @param a A vector, array or list.
 #' @param b Either `NULL` or a vector, array or list of length either 1 or
@@ -24,6 +28,7 @@
 #' all_equal(c(1, 88))
 #' all_equal(1:2)
 #' all_equal(list(1:2))
+#' all_equal(1:4, matrix(1:4, nrow = 2))  # note that this gives TRUE
 #' @export
 all_equal <- function(a, b = NULL) {
   checkmate::assert(checkmate::check_null(a),
@@ -34,6 +39,8 @@ all_equal <- function(a, b = NULL) {
                     checkmate::check_vector(b),
                     checkmate::check_list(b),
                     checkmate::check_array(b))
+  if (is.array(a)) a %<>% as.vector()
+  if (is.array(b)) b %<>% as.vector()
   if (is.null(a) && (!is.null(b))) return(FALSE)
   if (is.null(b[1])) {
     return(length(unique(a)) == 1)
