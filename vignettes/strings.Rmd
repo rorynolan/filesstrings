@@ -59,7 +59,7 @@ str_elem("abcdefz", -1)  # last element
 ```
 
 ## Trim anything (not just whitespace)
-`stringr`'s `str_trim` just trims whitespace. What if you want to trim something else? Now you can `TrimAnything()`.
+`stringr`'s `str_trim` just trims whitespace. What if you want to trim something else? Now you can `trim_anything()`.
 ```{r trim anything}
 trim_anything("__rmarkdown_", "_")
 ```
