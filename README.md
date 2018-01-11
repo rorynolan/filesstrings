@@ -102,13 +102,13 @@ I often want to get the first, last or *n*<sup>th</sup> number in a string.
 
 ``` r
 pop <- "A population of 1000 comprised of 488 dogs and 512 cats."
-nth_number(pop, 1)
+nth_number(pop, n = 1)
 ```
 
     #> [1] 1000
 
 ``` r
-nth_number(pop, -1)  # last number
+nth_number(pop, n = -1)  # last number
 ```
 
     #> [1] 512

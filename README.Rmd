@@ -74,8 +74,8 @@ file.remove(list.files(pattern = "txt$"))  # clean up
 I often want to get the first, last or *n*^th^ number in a string.
 ```{r nth number}
 pop <- "A population of 1000 comprised of 488 dogs and 512 cats."
-nth_number(pop, 1)
-nth_number(pop, -1)  # last number
+nth_number(pop, n = 1)
+nth_number(pop, n = -1)  # last number
 ```
 
 ### All the numbers in a string
