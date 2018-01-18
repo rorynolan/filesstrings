@@ -205,9 +205,19 @@ remove_filename_spaces <- function(dir = ".", pattern = "", replacement = "") {
   setwd(dir)
   lf <- list.files(pattern = pattern)
   new_names <- str_replace_all(lf, " ", replacement)
-  outcome <- file.rename(lf, new_names)
-  message(sum(outcome), " files renamed. ", sum(!outcome),
-          " failed to rename.")
+  n_to_rename <- length(setdiff(lf, new_names))
+  outcome <- logical()
+  if (n_to_rename) {
+    outcome <- file.rename(lf, new_names)
+    if (sum(outcome) != n_to_rename) {
+      stop("Failed to rename ", sum(!outcome), " file",
+           ifelse(sum(!outcome) == 1, "", "s"), ".")
+    }
+    message(n_to_rename, " file", ifelse(n_to_rename == 1, "", "s"),
+            " required renaming and this was done successfully.")
+  } else {
+    message("No files required renaming.")
+  }
   invisible(outcome)
 }
 

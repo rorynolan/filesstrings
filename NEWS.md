@@ -1,3 +1,7 @@
+### 2.0.3
+* Fix to message in `remove_filename_spaces()`.
+
+
 ### 2.0.2
 
 #### BUG FIXES

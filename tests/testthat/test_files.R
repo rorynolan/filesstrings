@@ -20,6 +20,7 @@ test_that("remove_filename_spaces works", {
   expect_equal(file.create(files), rep(TRUE, 3))
   expect_equal(remove_filename_spaces(), rep(TRUE, 3))
   expect_equal(list.files(), c("1litres1.txt", "1litres30.txt", "3litres5.txt"))
+  expect_equal(remove_filename_spaces(), logical())
   setwd("..")
   expect_true(dir.remove("remove_filename_spaces_test"))
 })
