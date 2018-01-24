@@ -212,7 +212,7 @@ nice_nums <- function(strings) {
 #' nth_non_numeric("--123abc456", -2)
 #' @export
 extract_numbers <- function(string, leave_as_string = FALSE, decimals = FALSE,
-                           leading_decimals = FALSE, negs = FALSE) {
+         leading_decimals = FALSE, negs = FALSE) {
   if (leading_decimals == TRUE && decimals == FALSE) {
     stop("To allow leading decimals, you need to first allow decimals.")
   }
@@ -225,11 +225,9 @@ extract_numbers <- function(string, leave_as_string = FALSE, decimals = FALSE,
   }
   if (negs) pattern <- str_c("-?", pattern)
   numbers <- str_extract_all(string, pattern)
-  if (decimals) {
-    numerics <- suppressWarnings(lapply(numbers, as.numeric))
-  } else {
-    numerics <- suppressWarnings(lapply(numbers, as.integer))
-  }
+  numerics <- suppressWarnings(lapply(numbers, as.numeric))
+  if (!decimals && isTRUE(checkmate::check_integerish(unlist(numerics))))
+    numerics %<>% purrr::map(as.integer)
   na_pos <- purrr::map_lgl(numerics, anyNA)
   if (leave_as_string) {
     numbers[na_pos] <- NA_character_
