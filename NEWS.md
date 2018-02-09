@@ -1,7 +1,7 @@
 ### 2.0.4
 
 #### BUG FIXES
-* Fix bug in `extract_numbers()` which arose when integerish numbers outised the 32-bit integer range reared their heads.
+* Fix bug in `extract_numbers()` which arose when integerish numbers outside the 32-bit integer range reared their heads.
 
 
 ### 2.0.3
