@@ -258,6 +258,14 @@ int match_arg_index1(std::string arg, CharacterVector choices) {
   if (n_matches == 0) {  // no match
     return -1;
   } else if (n_matches > 1) {  // ambiguity
+    std::size_t arg_len = arg.length();
+    for (int i = 0; i != n_choices; ++i) {
+      std::string choice(choices[i]);
+      if (arg_len == choice.length()) {
+        if (std::equal(arg.begin(), arg.end(), choice.begin()))
+          return i;
+      }
+    }
     return -2;
   } else {
     return first_true;

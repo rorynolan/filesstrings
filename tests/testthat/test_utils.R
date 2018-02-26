@@ -48,4 +48,11 @@ test_that("match_arg() works", {
                "prefix of two.+Apples.+Avocados.+")
   expect_error(match_arg(c("A", "a"), choices),
                "arg.+must have length 1.+use.+several_ok = TRUE")
+  choices %<>% c("bananas")
+  expect_error(match_arg("p", choices, ignore_case = TRUE),
+               "elements 3 and 7.+Bananas.+bananas.+effectively duplicates.")
+  choices %<>% c("Pears")
+  expect_error(match_arg("p", choices, ignore_case = TRUE),
+               "Element 8.+Pears.+is a duplicate")
+  expect_equal(match_arg("ab", c("ab", "abc")), "ab")
 })

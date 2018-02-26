@@ -29,13 +29,16 @@ of that element.
 }
 \details{
 \code{ERROR}s are thrown when a match is not made and where the match is
-ambiguous.
+ambiguous. However, sometimes ambiguities are inevitable. Consider the case
+where \code{choices = c("ab", "abc")}, then there's no way to choose \code{"ab"}
+because \code{"ab"} is a prefix for \code{"ab"} and \code{"abc"}. If this is the case, you
+need to provide a full match, i.e. using \code{arg = "ab"} will get you \code{"ab"}
+without an error, however \code{arg = "a"} will throw an ambiguity error.
 
 This function inspired by \code{RSAGA::match.arg.ext()}. Its behaviour is almost
-identical (the difference is with \code{RSAGA::match.arg.ext()}, setting
-\code{ignore.case = TRUE} guarantees that the function returns strings in all
-lower case, but that is not the case with \code{filesstrings::match_arg()}) but
-\code{RSAGA} is a heavy package to depend upon so \code{filesstrings::match_arg()}
+identical (the difference is that \code{RSAGA::match.arg.ext(..., ignore.case = TRUE)} guarantees that the function returns strings in all lower case, but
+that is not so with \code{filesstrings::match_arg(..., ignore_case = TRUE)})
+but \code{RSAGA} is a heavy package to depend upon so \code{filesstrings::match_arg()}
 might be handy for package developers.
 }
 \examples{

@@ -111,13 +111,17 @@ group_close <- function(vec_ascending, max_gap = 1) {
 #' of that element.
 #'
 #' `ERROR`s are thrown when a match is not made and where the match is
-#' ambiguous.
+#' ambiguous. However, sometimes ambiguities are inevitable. Consider the case
+#' where `choices = c("ab", "abc")`, then there's no way to choose `"ab"`
+#' because `"ab"` is a prefix for `"ab"` and `"abc"`. If this is the case, you
+#' need to provide a full match, i.e. using `arg = "ab"` will get you `"ab"`
+#' without an error, however `arg = "a"` will throw an ambiguity error.
 #'
 #' This function inspired by `RSAGA::match.arg.ext()`. Its behaviour is almost
-#' identical (the difference is with `RSAGA::match.arg.ext()`, setting
-#' `ignore.case = TRUE` guarantees that the function returns strings in all
-#' lower case, but that is not the case with `filesstrings::match_arg()`) but
-#' `RSAGA` is a heavy package to depend upon so `filesstrings::match_arg()`
+#' identical (the difference is that `RSAGA::match.arg.ext(..., ignore.case =
+#' TRUE)` guarantees that the function returns strings in all lower case, but
+#' that is not so with `filesstrings::match_arg(..., ignore_case = TRUE)`)
+#' but `RSAGA` is a heavy package to depend upon so `filesstrings::match_arg()`
 #' might be handy for package developers.
 #'
 #' @param arg A character vector (of length one unless `several_ok = TRUE`).
@@ -148,6 +152,26 @@ match_arg <- function(arg, choices, index = FALSE, several_ok = FALSE,
   checkmate::assert_flag(ignore_case)
   if (is.null(arg)) return(choices[1])
   checkmate::assert_character(arg, min.len = 1)
+  first_dup <- anyDuplicated(choices)
+  if (first_dup) {
+    stop("`choices` must not have duplicate elements. ", "\n",
+         "    * Element ", first_dup,
+         " of your `choices` ('", choices[first_dup], "') is a duplicate.")
+  }
+  if (ignore_case) {
+    lower_choices <- str_to_lower(choices)
+    first_dup <- anyDuplicated(lower_choices)
+    if (first_dup) {
+      dupair_indices <- c(match(lower_choices[first_dup], lower_choices),
+                          first_dup)
+      dupair <- choices[dupair_indices]
+      stop("`choices` must not have duplicate elements. ", "\n",
+           "    * Since you have set `ignore_case = TRUE`, elements ",
+           dupair_indices[1], " and ", dupair_indices[2],
+           " of your `choices` ('", dupair[1], "' and '", dupair[2], "') ",
+           "are effectively duplicates.")
+    }
+  }
   arg_len <- length(arg)
   if ((!several_ok) && arg_len > 1) {
     stop("`arg` must have length 1.", "\n",
@@ -156,7 +180,7 @@ match_arg <- function(arg, choices, index = FALSE, several_ok = FALSE,
          "use `several_ok = TRUE`. ")
   }
   if (ignore_case) {
-    indices <- match_arg_index(str_to_lower(arg), str_to_lower(choices))
+    indices <- match_arg_index(str_to_lower(arg), lower_choices)
   } else {
     indices <- match_arg_index(arg, choices)
   }
