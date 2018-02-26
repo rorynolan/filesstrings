@@ -1,3 +1,9 @@
+### 2.1.0
+
+#### NEW FEATURES
+* There is a new function `match_arg()` for argument matching which is inspired by  `RSAGA::match.arg.ext()`. Its behaviour is almost identical but `RSAGA` is a heavy package to depend upon so `filesstrings::match_arg()` might be handy for package developers.
+
+
 ### 2.0.4
 
 #### BUG FIXES

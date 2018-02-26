@@ -104,3 +104,83 @@ group_close <- function(vec_ascending, max_gap = 1) {
   }
 }
 
+#' Argument Matching
+#'
+#' Match `arg` against a series of candidate `choices` where `NULL` means take
+#' the first one. `arg` _matches_ an element of `choices` if `arg` is a prefix
+#' of that element.
+#'
+#' `ERROR`s are thrown when a match is not made and where the match is
+#' ambiguous.
+#'
+#' This function inspired by `RSAGA::match.arg.ext()`. Its behaviour is almost
+#' identical (the difference is with `RSAGA::match.arg.ext()`, setting
+#' `ignore.case = TRUE` guarantees that the function returns strings in all
+#' lower case, but that is not the case with `filesstrings::match_arg()`) but
+#' `RSAGA` is a heavy package to depend upon so `filesstrings::match_arg()`
+#' might be handy for package developers.
+#'
+#' @param arg A character vector (of length one unless `several_ok = TRUE`).
+#' @param choices A character vector of candidate values.
+#' @param index Return the index of the match rather than the match itself?
+#'   Default no.
+#' @param several_ok Allow `arg` to have length greater than one to match
+#'   several arguments at once? Default no.
+#' @param ignore_case Ignore case while matching. Default no. If this is `TRUE`,
+#'   the returned value is the matched element of `choices` (with its original
+#'   casing).
+#'
+#' @examples
+#' choices <- c("Apples", "Pears", "Bananas", "Oranges")
+#' match_arg(NULL, choices)
+#' match_arg("A", choices)
+#' match_arg("B", choices, index = TRUE)
+#' match_arg(c("a", "b"), choices, several_ok = TRUE, ignore_case = TRUE)
+#' match_arg(c("b", "a"), choices, ignore_case = TRUE, index = TRUE,
+#'           several_ok = TRUE)
+#'
+#' @export
+match_arg <- function(arg, choices, index = FALSE, several_ok = FALSE,
+                      ignore_case = FALSE) {
+  checkmate::assert_character(choices, min.len = 1)
+  checkmate::assert_flag(index)
+  checkmate::assert_flag(several_ok)
+  checkmate::assert_flag(ignore_case)
+  if (is.null(arg)) return(choices[1])
+  checkmate::assert_character(arg, min.len = 1)
+  arg_len <- length(arg)
+  if ((!several_ok) && arg_len > 1) {
+    stop("`arg` must have length 1.", "\n",
+         "    * Your `arg` has length ", arg_len, ".", "\n",
+         "    * To use an `arg` with length greater than one, ",
+         "use `several_ok = TRUE`. ")
+  }
+  if (ignore_case) {
+    indices <- match_arg_index(str_to_lower(arg), str_to_lower(choices))
+  } else {
+    indices <- match_arg_index(arg, choices)
+  }
+  bads <- indices < 0
+  if (any(bads)) {
+    first_bad_index <- match(T, bads)
+    first_bad_type <- indices[first_bad_index]
+    stopifnot(first_bad_type %in% -(1:2))  # should never happen
+    if (first_bad_type == -1) {
+      stop("`arg` must be a prefix of exactly one element of `choices`.", "\n",
+           "    * Your `arg` '", arg[first_bad_index], "' is not a prefix of ",
+           "any element of `choices`.")
+    } else {
+      two_ambigs <- str_detect(choices, str_c("^", arg[first_bad_index])) %>%
+        {choices[.]} %>%
+        {.[1:2]}
+      stop("`arg` must be a prefix of exactly one element of `choices`.", "\n",
+           "    * Your `arg` '", arg[first_bad_index], "' is a prefix of two ",
+           "or more element of `choices`.", "\n",
+           "    * The first two of these are '", two_ambigs[1], " 'and '",
+           two_ambigs[2], "'.")
+    }
+  }
+  indices %<>% {. + 1}
+  if (index) return(indices)
+  choices[indices]
+}

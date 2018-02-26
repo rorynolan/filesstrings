@@ -45,3 +45,7 @@ intmat_list_bind_nth_rows <- function(intmat_list, n) {
     .Call(`_filesstrings_intmat_list_bind_nth_rows`, intmat_list, n)
 }
 
+match_arg_index <- function(arg, choices) {
+    .Call(`_filesstrings_match_arg_index`, arg, choices)
+}
+
