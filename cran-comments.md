@@ -8,4 +8,4 @@
 There were no ERRORs, WARNINGs or NOTEs.
 
 ## Reverse Dependencies
-There are 2 reverse dependencies: `exampletestr`, `ijtiff`. This update breaks neither. See https://github.com/rorynolan/filesstrings/blob/master/revdep/checks.rds for full check results.
+There are 3 reverse dependencies: `detrendr`, `exampletestr` and `ijtiff`. This update breaks none. See https://github.com/rorynolan/filesstrings/blob/master/revdep/checks.rds for full check results.
