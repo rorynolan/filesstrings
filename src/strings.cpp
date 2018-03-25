@@ -252,14 +252,14 @@ int match_arg_index1(std::string arg, CharacterVector choices) {
   std::size_t n_choices = choices.size();
   LogicalVector is_pre(n_choices);
   int first_true = -1;
-  for (int i = 0; i != n_choices; ++i)
+  for (std::size_t i = 0; i != n_choices; ++i)
     is_pre[i] = is_prefix(std::string(choices[i]), arg);
   int n_matches = count_if(is_pre, first_true);
   if (n_matches == 0) {  // no match
     return -1;
   } else if (n_matches > 1) {  // ambiguity
     std::size_t arg_len = arg.length();
-    for (int i = 0; i != n_choices; ++i) {
+    for (std::size_t i = 0; i != n_choices; ++i) {
       std::string choice(choices[i]);
       if (arg_len == choice.length()) {
         if (std::equal(arg.begin(), arg.end(), choice.begin()))
