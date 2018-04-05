@@ -61,11 +61,7 @@ lst_df_pos_brace <- function(positions, braces) {
     .Call(`_filesstrings_lst_df_pos_brace`, positions, braces)
 }
 
-as_numeric1 <- function(x) {
-    .Call(`_filesstrings_as_numeric1`, x)
-}
-
-lst_as_numeric <- function(x) {
-    .Call(`_filesstrings_lst_as_numeric`, x)
+lst_char_to_num <- function(x) {
+    .Call(`_filesstrings_lst_char_to_num`, x)
 }
 

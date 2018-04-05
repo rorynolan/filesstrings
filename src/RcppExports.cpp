@@ -184,25 +184,14 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// as_numeric1
-NumericVector as_numeric1(CharacterVector x);
-RcppExport SEXP _filesstrings_as_numeric1(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(as_numeric1(x));
-    return rcpp_result_gen;
-END_RCPP
-}
-// lst_as_numeric
-List lst_as_numeric(List x);
-RcppExport SEXP _filesstrings_lst_as_numeric(SEXP xSEXP) {
+// lst_char_to_num
+List lst_char_to_num(List x);
+RcppExport SEXP _filesstrings_lst_char_to_num(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(lst_as_numeric(x));
+    rcpp_result_gen = Rcpp::wrap(lst_char_to_num(x));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -223,8 +212,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_filesstrings_int_lst_first_col", (DL_FUNC) &_filesstrings_int_lst_first_col, 1},
     {"_filesstrings_str_elems", (DL_FUNC) &_filesstrings_str_elems, 2},
     {"_filesstrings_lst_df_pos_brace", (DL_FUNC) &_filesstrings_lst_df_pos_brace, 2},
-    {"_filesstrings_as_numeric1", (DL_FUNC) &_filesstrings_as_numeric1, 1},
-    {"_filesstrings_lst_as_numeric", (DL_FUNC) &_filesstrings_lst_as_numeric, 1},
+    {"_filesstrings_lst_char_to_num", (DL_FUNC) &_filesstrings_lst_char_to_num, 1},
     {NULL, NULL, 0}
 };
 

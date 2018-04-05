@@ -228,7 +228,7 @@ extract_numbers <- function(string, leave_as_string = FALSE, decimals = FALSE,
   }
   if (negs) pattern <- str_c("-?", pattern)
   numbers <- str_extract_all(string, pattern)
-  numerics <- suppressWarnings(lst_as_numeric(numbers))
+  numerics <- suppressWarnings(lst_char_to_num(numbers))
   if (!decimals && isTRUE(checkmate::check_integerish(unlist(numerics))))
     numerics %<>% purrr::map(as.integer)
   na_pos <- purrr::map_lgl(numerics, anyNA)

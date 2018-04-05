@@ -1,6 +1,5 @@
 #include <stdexcept>
 #include <string>
-#include <boost/lexical_cast.hpp>
 
 #include <Rcpp.h>
 
@@ -331,26 +330,30 @@ List lst_df_pos_brace(List positions, List braces) {
   return out;
 }
 
-// [[Rcpp::export]]
-NumericVector as_numeric1(CharacterVector x) {
+NumericVector char_to_num(CharacterVector x) {
   std::size_t n = x.size();
+  if (n == 0) return NumericVector(0);
   NumericVector out(n);
   for (std::size_t i = 0; i != n; ++i) {
+    std::string x_i(x[i]);
     double number = NA_REAL;
     try {
-      number = boost::lexical_cast<double>(std::string(x[i]));
-    } catch (const boost::bad_lexical_cast& e) {
+      std::size_t pos;
+      number = std::stod(x_i, &pos);
+      number = ((pos == x_i.size()) ? number : NA_REAL);
+    } catch (const std::invalid_argument& e) {
       ;  // do nothing
     }
     out[i] = number;
   }
   return out;
 }
+
 // [[Rcpp::export]]
-List lst_as_numeric(List x) {
+List lst_char_to_num(List x) {
   std::size_t n = x.size();
   List out(n);
   for (std::size_t i = 0; i != n; ++i)
-    out[i] = as_numeric1(x[i]);
+    out[i] = char_to_num(x[i]);
   return out;
 }
