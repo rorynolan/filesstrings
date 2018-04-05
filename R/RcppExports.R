@@ -49,3 +49,23 @@ match_arg_index <- function(arg, choices) {
     .Call(`_filesstrings_match_arg_index`, arg, choices)
 }
 
+int_lst_first_col <- function(x) {
+    .Call(`_filesstrings_int_lst_first_col`, x)
+}
+
+str_elems <- function(strings, locations) {
+    .Call(`_filesstrings_str_elems`, strings, locations)
+}
+
+lst_df_pos_brace <- function(positions, braces) {
+    .Call(`_filesstrings_lst_df_pos_brace`, positions, braces)
+}
+
+as_numeric1 <- function(x) {
+    .Call(`_filesstrings_as_numeric1`, x)
+}
+
+lst_as_numeric <- function(x) {
+    .Call(`_filesstrings_lst_as_numeric`, x)
+}
+

@@ -1,3 +1,7 @@
+#include <stdexcept>
+#include <string>
+#include <boost/lexical_cast.hpp>
+
 #include <Rcpp.h>
 
 using namespace Rcpp;
@@ -278,5 +282,75 @@ IntegerVector match_arg_index(CharacterVector arg, CharacterVector choices) {
   IntegerVector out(arg_sz);
   for (int i = 0; i != arg_sz; ++i)
     out[i] = match_arg_index1(std::string(arg[i]), choices);
+  return out;
+}
+
+// [[Rcpp::export]]
+List int_lst_first_col(List x) {
+  std::size_t n = x.size();
+  List out(n);
+  for (std::size_t i = 0; i != n; ++i) {
+    IntegerMatrix x_i = as<IntegerMatrix>(x[i]);
+    out[i] = x_i.column(0);
+  }
+  return out;
+}
+
+// [[Rcpp::export]]
+List str_elems(StringVector strings, List locations) {
+  std::size_t n = strings.size();
+  if (locations.size() != n) {
+    throw std::invalid_argument("`strings` and `locations` must have the "
+                                "same length.");
+  }
+  List out(n);
+  for (std::size_t i = 0; i != n; ++i) {
+    IntegerVector locations_i = locations[i];
+    std::size_t m = locations_i.size();
+    CharacterVector out_i(m);
+    for (std::size_t j = 0; j != m; ++j) {
+      out_i[j] = std::string(1, strings[i][locations_i[j] - 1]);
+    }
+    out[i] = out_i;
+  }
+  return out;
+}
+
+// [[Rcpp::export]]
+List lst_df_pos_brace(List positions, List braces) {
+  std::size_t n = positions.size();
+  if (braces.size() != n) {
+    throw std::invalid_argument("`positions` and `braces` must have the "
+                                  "same length.");
+  }
+  List out(n);
+  for (std::size_t i = 0; i != n; ++i) {
+    out[i] = DataFrame::create(_["position"] = positions[i],
+                               _["brace"] = braces[i]);
+  }
+  return out;
+}
+
+// [[Rcpp::export]]
+NumericVector as_numeric1(CharacterVector x) {
+  std::size_t n = x.size();
+  NumericVector out(n);
+  for (std::size_t i = 0; i != n; ++i) {
+    double number = NA_REAL;
+    try {
+      number = boost::lexical_cast<double>(std::string(x[i]));
+    } catch (const boost::bad_lexical_cast& e) {
+      ;  // do nothing
+    }
+    out[i] = number;
+  }
+  return out;
+}
+// [[Rcpp::export]]
+List lst_as_numeric(List x) {
+  std::size_t n = x.size();
+  List out(n);
+  for (std::size_t i = 0; i != n; ++i)
+    out[i] = as_numeric1(x[i]);
   return out;
 }

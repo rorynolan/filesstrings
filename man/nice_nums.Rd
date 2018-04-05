@@ -27,6 +27,7 @@ nice_nums(strings)
 
 nice_nums(c("abc9def55", "abc10def7"))
 nice_nums(c("01abc9def55", "5abc10def777", "99abc4def4"))
+nice_nums(1:10)
 
 \dontrun{
 nice_nums(c("abc9def55", "abc10xyz7"))}

@@ -1,3 +1,12 @@
+### 2.2.0
+
+#### MINOR IMPROVEMENTS
+* Speed up `extract_numbers()`.
+
+#### BUG FIXES
+* Fix some bad typing in C++ code.
+
+
 ### 2.1.0
 
 #### NEW FEATURES

@@ -4,8 +4,8 @@
 #' i.e. could it be coerced to numeric. This function is vectorized over its one
 #' argument.
 #' @param string A character vector.
-#' @return A character vector. `TRUE` if the argument can be considered to be numeric or `FALSE`
-#'   otherwise.
+#' @return A character vector. `TRUE` if the argument can be considered to be
+#'   numeric or `FALSE` otherwise.
 #' @examples
 #' can_be_numeric("3")
 #' can_be_numeric("5 ")
@@ -108,12 +108,15 @@ singleize <- function(string, pattern) {
 #'
 #' nice_nums(c("abc9def55", "abc10def7"))
 #' nice_nums(c("01abc9def55", "5abc10def777", "99abc4def4"))
+#' nice_nums(1:10)
 #'
 #' \dontrun{
 #' nice_nums(c("abc9def55", "abc10xyz7"))}
 #' @export
 nice_nums <- function(strings) {
-  checkmate::check_character(strings)
+  checkmate::assert(checkmate::check_numeric(strings),
+                    checkmate::check_character(strings))
+  if (is.numeric(strings)) strings %<>% as.character()
   have_nums <- str_detect(strings, "\\d")
   if (!all(have_nums)) {
     stop("Some of the input strings have no numbers in them.")
@@ -225,7 +228,7 @@ extract_numbers <- function(string, leave_as_string = FALSE, decimals = FALSE,
   }
   if (negs) pattern <- str_c("-?", pattern)
   numbers <- str_extract_all(string, pattern)
-  numerics <- suppressWarnings(lapply(numbers, as.numeric))
+  numerics <- suppressWarnings(lst_as_numeric(numbers))
   if (!decimals && isTRUE(checkmate::check_integerish(unlist(numerics))))
     numerics %<>% purrr::map(as.integer)
   na_pos <- purrr::map_lgl(numerics, anyNA)
@@ -413,12 +416,18 @@ str_to_vec <- function(string) {
 #'
 #' Given a character vector of strings and one of patterns (in regular
 #' expression), which of the strings match all (or any) of the patterns.
+#'
+#' For huge character vectors, this can be quite slow and you're better off
+#' implementing your own solution with [stringr::str_detect()].
+#'
 #' @param strings A character vector.
 #' @param patterns Regular expressions.
 #' @param ignore_case Do we want to ignore case when matching patterns?
 #' @param any Set this to `TRUE` if you want to see which strings match
 #'   \emph{any} of the patterns and not \emph{all} (all is the default).
+#'
 #' @return A character vector of strings matching the patterns.
+#'
 #' @examples
 #' str_with_patterns(c("abc", "bcd", "cde"), c("b", "c"))
 #' str_with_patterns(c("abc", "bcd", "cde"), c("b", "c"), any = TRUE)
@@ -435,11 +444,11 @@ str_with_patterns <- function(strings, patterns, ignore_case = FALSE,
     patterns <- tolower(patterns)
   }
   matches <- as.matrix(vapply(strings, str_detect, logical(length(patterns)),
-                              patterns))
+                              patterns))  # The docs admit that this is slow
   if (any) {
-    keeps <- apply(matches, 2, any)
+    keeps <- matrixStats::colAnys(matches)
   } else {
-    keeps <- apply(matches, 2, all)
+    keeps <- matrixStats::colAlls(matches)
   }
   strings_orig[keeps]
 }
@@ -472,7 +481,7 @@ str_with_patterns <- function(strings, patterns, ignore_case = FALSE,
 #' @export
 str_after_nth <- function(strings, pattern, n) {
   nth_instance_indices <- str_nth_instance_indices(strings, pattern, n)
-  mapply(str_sub, strings, nth_instance_indices[, "end"] + 1, nchar(strings))
+  str_sub(strings, nth_instance_indices[, "end"] + 1)
 }
 
 #' @rdname str_after_nth
@@ -491,7 +500,7 @@ str_after_last <- function(strings, pattern) {
 #' @export
 str_before_nth <- function(strings, pattern, n) {
   nth_instance_indices <- str_nth_instance_indices(strings, pattern, n)
-  mapply(str_sub, strings, 1, nth_instance_indices[, "start"] - 1)
+  str_sub(strings, 1, nth_instance_indices[, "start"] - 1)
 }
 
 #' @rdname str_after_nth
@@ -660,21 +669,18 @@ count_matches <- function(string, pattern) {
 #'
 #' @param string A character vector
 #'
-#' @return A list of data frames ([tibble][tibble::tibble]s), one for each member
-#'   of the string character vector. Each data frame has a "position" and
-#'   "brace" column which give the positions and types of braces in the given
-#'   string.
+#' @return A list of data frames, one for each member of the string character
+#'   vector. Each data frame has a "position" and "brace" column which give the
+#'   positions and types of braces in the given string.
 #'
 #' @examples
 #' locate_braces(c("a{](kkj)})", "ab(]c{}"))
 #' @export
 locate_braces <- function(string) {
   locations <- str_locate_all(string, "[\\(\\)\\[\\]\\{\\}]") %>%
-    lapply(function(x) x[, 1])
-  braces <- mapply(str_elem, string, locations, SIMPLIFY = FALSE)
-  dfs <- mapply(function(x, y) tibble::tibble(position = x, brace = y),
-                locations, braces, SIMPLIFY = FALSE)
-  dfs
+    int_lst_first_col()
+  braces <- str_elems(string, locations)
+  lst_df_pos_brace(locations, braces)
 }
 
 #' Remove the quoted parts of a string.

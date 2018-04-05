@@ -10,8 +10,8 @@ can_be_numeric(string)
 \item{string}{A character vector.}
 }
 \value{
-A character vector. \code{TRUE} if the argument can be considered to be numeric or \code{FALSE}
-otherwise.
+A character vector. \code{TRUE} if the argument can be considered to be
+numeric or \code{FALSE} otherwise.
 }
 \description{
 After padding is removed, could the input string be considered to be numeric,

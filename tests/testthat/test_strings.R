@@ -37,6 +37,7 @@ test_that("nice_nums works", {
   expect_error(nice_nums(c("abc9def55", "9abc10def7")))
   expect_error(nice_nums(c("0abc9def55g", "abc10def7g0")))
   expect_error(nice_nums("abc"), "no numbers")
+  expect_equal(nice_nums(1:10), c(paste0(0, 1:9), 10))
 })
 
 test_that("extract_numbers works", {
@@ -181,10 +182,10 @@ test_that("count_matches works", {
 
 test_that("locate_braces works", {
   expect_equal(locate_braces(c("a{](kkj)})", "ab(]c{}")),
-               list(tibble::tibble(position = as.integer(c(2, 3, 4, 8, 9, 10)),
-                                   brace = c("{", "]", "(", ")", "}", ")")),
-                    tibble::tibble(position = as.integer(c(3, 4, 6, 7)),
-                                   brace = c("(", "]", "{", "}"))))
+               list(data.frame(position = as.integer(c(2, 3, 4, 8, 9, 10)),
+                               brace = c("{", "]", "(", ")", "}", ")")),
+                    data.frame(position = as.integer(c(3, 4, 6, 7)),
+                               brace = c("(", "]", "{", "}"))))
 })
 
 test_that("remove_quoted works", {

@@ -149,6 +149,63 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// int_lst_first_col
+List int_lst_first_col(List x);
+RcppExport SEXP _filesstrings_int_lst_first_col(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(int_lst_first_col(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// str_elems
+List str_elems(StringVector strings, List locations);
+RcppExport SEXP _filesstrings_str_elems(SEXP stringsSEXP, SEXP locationsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< StringVector >::type strings(stringsSEXP);
+    Rcpp::traits::input_parameter< List >::type locations(locationsSEXP);
+    rcpp_result_gen = Rcpp::wrap(str_elems(strings, locations));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lst_df_pos_brace
+List lst_df_pos_brace(List positions, List braces);
+RcppExport SEXP _filesstrings_lst_df_pos_brace(SEXP positionsSEXP, SEXP bracesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type positions(positionsSEXP);
+    Rcpp::traits::input_parameter< List >::type braces(bracesSEXP);
+    rcpp_result_gen = Rcpp::wrap(lst_df_pos_brace(positions, braces));
+    return rcpp_result_gen;
+END_RCPP
+}
+// as_numeric1
+NumericVector as_numeric1(CharacterVector x);
+RcppExport SEXP _filesstrings_as_numeric1(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(as_numeric1(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lst_as_numeric
+List lst_as_numeric(List x);
+RcppExport SEXP _filesstrings_lst_as_numeric(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(lst_as_numeric(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_filesstrings_paste_collapse", (DL_FUNC) &_filesstrings_paste_collapse, 2},
@@ -163,6 +220,11 @@ static const R_CallMethodDef CallEntries[] = {
     {"_filesstrings_intmat_list_nrows", (DL_FUNC) &_filesstrings_intmat_list_nrows, 1},
     {"_filesstrings_intmat_list_bind_nth_rows", (DL_FUNC) &_filesstrings_intmat_list_bind_nth_rows, 2},
     {"_filesstrings_match_arg_index", (DL_FUNC) &_filesstrings_match_arg_index, 2},
+    {"_filesstrings_int_lst_first_col", (DL_FUNC) &_filesstrings_int_lst_first_col, 1},
+    {"_filesstrings_str_elems", (DL_FUNC) &_filesstrings_str_elems, 2},
+    {"_filesstrings_lst_df_pos_brace", (DL_FUNC) &_filesstrings_lst_df_pos_brace, 2},
+    {"_filesstrings_as_numeric1", (DL_FUNC) &_filesstrings_as_numeric1, 1},
+    {"_filesstrings_lst_as_numeric", (DL_FUNC) &_filesstrings_lst_as_numeric, 1},
     {NULL, NULL, 0}
 };
 

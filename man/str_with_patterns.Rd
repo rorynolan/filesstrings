@@ -23,6 +23,10 @@ A character vector of strings matching the patterns.
 Given a character vector of strings and one of patterns (in regular
 expression), which of the strings match all (or any) of the patterns.
 }
+\details{
+For huge character vectors, this can be quite slow and you're better off
+implementing your own solution with \code{\link[stringr:str_detect]{stringr::str_detect()}}.
+}
 \examples{
 str_with_patterns(c("abc", "bcd", "cde"), c("b", "c"))
 str_with_patterns(c("abc", "bcd", "cde"), c("b", "c"), any = TRUE)
