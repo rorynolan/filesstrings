@@ -55,7 +55,9 @@ create_dir <- function(...) {
 #' @export
 remove_dir <- function(...) {
   dirs <- unlist(...)
+  exist <- dir.exists(dirs)
   outcome <- !as.logical(purrr::map_int(dirs, unlink, recursive = TRUE))
+  outcome[!exist] <- FALSE
   outcome %>% {
     paste(sum(.), ifelse(sum(.) == 1, "directory", "directories"),
           "deleted.", sum(!.), "failed to delete.")

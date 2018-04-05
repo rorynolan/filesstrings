@@ -5,6 +5,7 @@
 
 #### BUG FIXES
 * Fix some bad typing in C++ code.
+* `remove_dirs()` was claiming to have deleted directories that weren't there.
 
 
 ### 2.1.0
