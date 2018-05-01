@@ -1,7 +1,9 @@
 ---
-title: "filesstrings"
 output: github_document
 ---
+
+
+# `filesstrings`  <img src="junk/sticker.png" height="200" align="right">
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, comment = "#>")

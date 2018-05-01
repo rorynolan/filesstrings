@@ -1,5 +1,5 @@
-filesstrings
-================
+
+# `filesstrings` <img src="junk/sticker.png" height="200" align="right">
 
 Convenient functions for moving files, deleting directories, and a
 variety of string operations that facilitate manipulating file names and
