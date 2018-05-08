@@ -5,9 +5,9 @@
 \alias{file.move}
 \title{Move files around.}
 \usage{
-move_files(files, destinations)
+move_files(files, destinations, overwrite = FALSE)
 
-file.move(files, destinations)
+file.move(files, destinations, overwrite = FALSE)
 }
 \arguments{
 \item{files}{A character vector of files to move (relative or absolute
@@ -15,6 +15,8 @@ paths).}
 
 \item{destinations}{A character vector of the destination directories into
 which to move the files.}
+
+\item{overwrite}{Allow overwriting of files? Default no.}
 }
 \value{
 Invisibly, a logical vector with a \code{TRUE} for each time the operation

@@ -51,7 +51,8 @@ test_that("create_dir works", {
 })
 
 test_that("unitize_dirs works", {
-  setwd(tempdir())
+  cwd <- setwd(tempdir())
+  on.exit(setwd(cwd))
   expect_equal(dir.create("unitize_dirs_test"), TRUE)
   setwd("unitize_dirs_test")
   files <- c("1litres_1.txt", "1litres_3.txt", "3litres.txt", "5litres_1.txt")
@@ -61,11 +62,24 @@ test_that("unitize_dirs works", {
   setwd("..")
   expect_error(unitize_dirs("litres"))
   expect_true(dir.remove("unitize_dirs_test"))
+  setwd(cwd)
 })
 
-test_that("file.move errors correctly", {
-  setwd(tempdir())
+test_that("file.move edge cases work correctly", {
+  cwd <- setwd(tempdir())
+  on.exit(setwd(cwd))
   dir.create("tmpdir0")
   file.create("tmpfile0.R")
-  expect_error(file.move("tmpfile0.R", c("tmpdir0", "tmpdir0")))
+  expect_error(file.move("tmpfile0.R", c("tmpdir0", "tmpdir0")),
+               "number of destinations must.*1 or.*number of files to be moved")
+  expect_error(file.move(c("tmpfile0.R", "tmpfile0.R"),
+                         c("tmpdir0", "tmpdir0")),
+               "must not have.*duplicated elements.*Element 2.*duplicate")
+  file.move("tmpfile0.R", "tmpdir0/")
+  file.create("tmpfile0.R")
+  expect_message(file.move("tmpfile0.R", "tmpdir0/"),
+                 "To allow overwriting, use `overwrite = TRUE`")
+  expect_message(file.move("tmpfile0.R", "tmpdir0/", overwrite = TRUE),
+                 "1 file moved. 0 failed.")
+  setwd(cwd)
 })

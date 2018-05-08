@@ -1,3 +1,9 @@
+### 2.3.0
+
+#### MINOR IMPROVEMENTS
+* Add an `overwrite` argument to `file.move()` with default value `FALSE` to ensure that files are not accidentally overwritten.
+
+
 ### 2.2.0
 
 #### MINOR IMPROVEMENTS

@@ -60,13 +60,13 @@ all_equal <- function(a, b = NULL) {
 #' Group together close adjacent elements of a vector.
 #'
 #' Given a strictly increasing vector (each element is bigger than the last),
-#' group together stretches of the vector where \emph{adjacent} elements are
+#' group together stretches of the vector where *adjacent* elements are
 #' separated by at most some specified distance. Hence, each element in each
-#' group has at least one other element in that group that is \emph{close} to
+#' group has at least one other element in that group that is *close* to
 #' it. See the examples.
 #' @param vec_ascending A strictly increasing numeric vector.
 #' @param max_gap The biggest allowable gap between adjacent elements for them
-#'   to be considered part of the same \emph{group}.
+#'   to be considered part of the same *group*.
 #' @return A where each element is one group, as a numeric vector.
 #' @examples
 #' group_close(1:10, 1)

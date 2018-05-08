@@ -69,13 +69,12 @@ remove_dir <- function(...) {
 #' @export
 dir.remove <- remove_dir
 
-move_file <- function(file, destination) {
-  # This also works for directories
-  file <- normalizePath(file)  # get full path
+moved_file_new_path <- function(file, destination) {
+  # This function does not move any files, it helps `move_files()` which does
+  file %<>% normalizePath()  # get full path
   file_name_base <- basename(file)
-  destination <- normalizePath(destination)  # remove risk of tilde use
-  new_name <- paste0(destination, "/", file_name_base)
-  file.rename(file, new_name)
+  destination %<>% {suppressWarnings(normalizePath(.))}  # replace tildes
+  paste0(destination, "/", file_name_base)
 }
 
 #' Move files around.
@@ -94,6 +93,7 @@ move_file <- function(file, destination) {
 #'   paths).
 #' @param destinations A character vector of the destination directories into
 #'   which to move the files.
+#' @param overwrite Allow overwriting of files? Default no.
 #' @return Invisibly, a logical vector with a `TRUE` for each time the operation
 #'   succeeded and a `FALSE` for every fail.
 #' @examples
@@ -103,10 +103,19 @@ move_file <- function(file, destination) {
 #' file.create(files)
 #' file.move(files, "dir")}
 #' @export
-move_files <- function(files, destinations) {
-  if (! length(destinations) %in% (c(1, length(files)))) {
+move_files <- function(files, destinations, overwrite = FALSE) {
+  checkmate::assert_file_exists(files)
+  checkmate::assert_character(destinations, min.chars = 1)
+  checkmate::assert_flag(overwrite)
+  anydup_files <- anyDuplicated(files)
+  if (anydup_files) {
+    stop("`files` must not have any duplicated elements.", "\n",
+         "    * Element ", anydup_files, " of `files` is a duplicate.")
+  }
+  if (length(destinations) == 1) destinations %<>% rep(length(files))
+  if (length(destinations) != length(files)) {
     stop("The number of destinations must be equal to 1 or equal to the ",
-         "number of files to be moved")
+         "number of files to be moved.")
   }
   n_created_dirs <- sum(suppressMessages(create_dir(destinations)))
   if (n_created_dirs > 0) {
@@ -114,14 +123,32 @@ move_files <- function(files, destinations) {
             ifelse(n_created_dirs == 1, "y", "ies"),
             " created.")
   }
-  if(length(destinations) == length(files)) {
-    outcome <- purrr::map2_lgl(files, destinations, move_file)
-  } else {
-    outcome <- purrr::map_lgl(files, move_file, destinations)
+  n_files <- length(files)
+  overwrite_attempt <- FALSE
+  out <- rep(FALSE, n_files)
+  new_paths <- moved_file_new_path(files, destinations)
+  for (i in seq_len(n_files)) {
+    if (file.exists(new_paths[i])) {
+      overwrite_attempt <- TRUE
+      if (overwrite) {
+        file.rename(files[i], new_paths[i])
+        out[i] <- TRUE
+      }
+    } else {
+      file.rename(files[i], new_paths[i])
+      out[i] <- TRUE
+    }
   }
-  message(sum(outcome), ifelse(sum(outcome) == 1, " file", " files"),
-          " moved. ", sum(!outcome), " failed.")
-  invisible(outcome)
+  n_succeeded <- sum(out)
+  n_failed <- sum(!out)
+  message(n_succeeded, ifelse(n_succeeded == 1, " file", " files"),
+          " moved. ", n_failed, " failed.")
+  if (sum(!out) && !overwrite && overwrite_attempt) {
+    message("Some files failed to move because it would have caused files ",
+            "to be overwritten. ", "\n",
+            "    * To allow overwriting, use `overwrite = TRUE`.")
+  }
+  invisible(out)
 }
 
 #' @rdname move_files
@@ -130,7 +157,7 @@ file.move <- move_files
 
 #' Make file numbers comply with alphabetical order
 #'
-#' If files are numbered, their numbers may not \emph{comply} with alphabetical
+#' If files are numbered, their numbers may not *comply* with alphabetical
 #' order, i.e. "file2.ext" comes after "file10.ext" in alphabetical order. This
 #' function renames the files in the specified directory such that they comply
 #' with alphabetical order, so here "file2.ext" would be renamed to

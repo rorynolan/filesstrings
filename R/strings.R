@@ -90,10 +90,10 @@ singleize <- function(string, pattern) {
 
 #' Make string numbers comply with alphabetical order
 #'
-#' If strings are numbered, their numbers may not \emph{comply} with
+#' If strings are numbered, their numbers may not *comply* with
 #' alphabetical order, i.e. "abc2" comes after "abc10" in alphabetical order. We
 #' might (for whatever reason) wish to change them such that they come in the
-#' order \emph{that we would like}. This function alters the strings such that
+#' order *that we would like*. This function alters the strings such that
 #' they comply with alphabetical order, so here "abc2" would be renamed to
 #' "abc02". It works on file names with more than one number in them e.g.
 #' "abc01def3" (a string with 2 numbers). All the file names that it works on
@@ -424,7 +424,7 @@ str_to_vec <- function(string) {
 #' @param patterns Regular expressions.
 #' @param ignore_case Do we want to ignore case when matching patterns?
 #' @param any Set this to `TRUE` if you want to see which strings match
-#'   \emph{any} of the patterns and not \emph{all} (all is the default).
+#'   *any* of the patterns and not *all* (all is the default).
 #'
 #' @return A character vector of strings matching the patterns.
 #'
@@ -468,7 +468,7 @@ str_with_patterns <- function(strings, patterns, ignore_case = FALSE,
 #' @param pattern A regular expression.
 #' @param n A natural number to identify the \eqn{n}th occurrence (defaults to
 #'   first (`n = 1`)). This can be negatively indexed, so if you wish to select
-#'   the \emph{last} occurrence, you need `n = -1`, for the second-last, you
+#'   the *last* occurrence, you need `n = -1`, for the second-last, you
 #'   need `n = -2` and so on.
 #' @return A character vector of the desired strings.
 #' @examples
@@ -608,7 +608,7 @@ put_in_pos <- function(strings, positions) {
 #' side(s).
 #'
 #' @param string A string.
-#' @param pattern A string. The pattern to be trimmed (\emph{not} interpreted as
+#' @param pattern A string. The pattern to be trimmed (*not* interpreted as
 #'   regular expression). So to trim a period, use `char = "."` and not
 #'   `char = "\\\\."`).
 #' @param side Which side do you want to trim from? `"both"` is the

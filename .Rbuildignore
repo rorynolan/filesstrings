@@ -12,3 +12,5 @@
 ^codemeta\.json$
 ^paper$
 ^CONDUCT\.md$
+^junk$
+^README\.md$
