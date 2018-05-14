@@ -104,9 +104,15 @@ moved_file_new_path <- function(file, destination) {
 #' file.move(files, "dir")}
 #' @export
 move_files <- function(files, destinations, overwrite = FALSE) {
+  checkmate::assert_character(files)
+  checkmate::assert_character(destinations)
+  checkmate::assert_flag(overwrite)
+  if (filesstrings::all_equal(files, character(0))) {
+    message("0 files moved. 0 failed.")
+    return(invisible(logical(0)))
+  }
   checkmate::assert_file_exists(files)
   checkmate::assert_character(destinations, min.chars = 1)
-  checkmate::assert_flag(overwrite)
   anydup_files <- anyDuplicated(files)
   if (anydup_files) {
     stop("`files` must not have any duplicated elements.", "\n",

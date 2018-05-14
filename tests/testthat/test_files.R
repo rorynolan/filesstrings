@@ -81,5 +81,7 @@ test_that("file.move edge cases work correctly", {
                  "To allow overwriting, use `overwrite = TRUE`")
   expect_message(file.move("tmpfile0.R", "tmpdir0/", overwrite = TRUE),
                  "1 file moved. 0 failed.")
+  expect_message(file.move(character(0), character(0)),
+                 "0 files moved. 0 failed.")
   setwd(cwd)
 })
