@@ -3,9 +3,10 @@ Type: Package
 Title: Handy File and String Manipulation
 Version: 2.4.0
 Authors@R: c(person("Rory", "Nolan", email = "rorynoolan@gmail.com", 
-                    role = c("aut", "cre", "cph")),
+                    role = c("aut", "cre", "cph"),
+                    comment = c(ORCID = "0000-0002-5239-4043")),
              person("Sergi", "Padilla-Parra", email = "spadilla@well.ox.ac.uk", 
-                    role = "ths"))
+                    role = "ths", comment = c(ORCID = "0000-0002-8010-9481")))
 Maintainer: Rory Nolan <rorynoolan@gmail.com>
 Description: Convenient functions for moving files, deleting directories, 
     and a variety of string operations that facilitate manipulating files 
