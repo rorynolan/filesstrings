@@ -87,9 +87,12 @@ CharacterVector str_list_nth_elems(List char_list, int n) {
   CharacterVector nths(sls);
   for (int i = 0; i < sls; i++) {
     CharacterVector strings = as<CharacterVector>(char_list[i]);
-    if (n < 0)
-      n = strings.size() + 1 + n;
-    nths[i] = (((n > strings.size()) | (n <= 0)) ? NA_STRING : strings[n - 1]);
+    int n_i = n;
+    if (n_i < 0)
+      n_i += strings.size() + 1;
+    nths[i] = (((n_i > strings.size()) | (n_i <= 0)) ?
+                   NA_STRING :
+                   strings[n_i - 1]);
   }
   return(nths);
 }

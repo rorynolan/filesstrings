@@ -1,7 +1,7 @@
 Package: filesstrings
 Type: Package
 Title: Handy File and String Manipulation
-Version: 2.3.0
+Version: 2.4.0
 Authors@R: c(person("Rory", "Nolan", email = "rorynoolan@gmail.com", 
                     role = c("aut", "cre", "cph")),
              person("Sergi", "Padilla-Parra", email = "spadilla@well.ox.ac.uk", 
@@ -27,8 +27,7 @@ Suggests: testthat,
     covr,
     knitr,
     rmarkdown
-LinkingTo: Rcpp,
-    BH
+LinkingTo: Rcpp
 Depends: stringr
 SystemRequirements: C++11
 URL: https://www.github.com/rorynolan/filesstrings

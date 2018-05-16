@@ -9,8 +9,9 @@ singleize(string, pattern)
 \arguments{
 \item{string}{A character vector. The string(s) to be purged of duplicates.}
 
-\item{pattern}{A character vector. Regular expression(s) of the pattern(s)
-that we wish not to be duplicated.}
+\item{pattern}{A character vector. Pattern(s) specified like the pattern(s)
+in the stringr package (e.g. look at \code{\link[stringr:str_locate]{stringr::str_locate()}}). If
+this has length >1 its length must be the same as that of \code{string}.}
 }
 \value{
 The string with the duplicates fixed.

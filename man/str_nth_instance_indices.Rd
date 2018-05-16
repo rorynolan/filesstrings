@@ -17,7 +17,8 @@ str_last_instance_indices(string, pattern)
 argument.}
 
 \item{pattern}{A character vector. Pattern(s) specified like the pattern(s)
-in the \code{stringr`` package (e.g. look at [stringr::str_locate()]). If this has length >1 its length must be the same as that of}string`.}
+in the stringr package (e.g. look at \code{\link[stringr:str_locate]{stringr::str_locate()}}). If
+this has length >1 its length must be the same as that of \code{string}.}
 
 \item{n}{Then \eqn{n} for the \eqn{n}th instance of the pattern.}
 }

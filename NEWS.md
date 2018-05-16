@@ -1,3 +1,13 @@
+### 2.4.0
+
+#### NEW FEATURES
+* Added `nth_number_after_mth()` and friends (there are 8 friends).
+
+#### DEFUNCT
+* Defunct functions are now gone completely (as opposed to triggering a `.Defunct()` call).
+
+
+
 ### 2.3.0
 
 #### MINOR IMPROVEMENTS

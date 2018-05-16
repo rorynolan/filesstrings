@@ -24,7 +24,9 @@ str_before_last(strings, pattern)
 \arguments{
 \item{strings}{A character vector.}
 
-\item{pattern}{A regular expression.}
+\item{pattern}{A character vector. Pattern(s) specified like the pattern(s)
+in the stringr package (e.g. look at \code{\link[stringr:str_locate]{stringr::str_locate()}}). If
+this has length >1 its length must be the same as that of \code{string}.}
 
 \item{n}{A natural number to identify the \eqn{n}th occurrence (defaults to
 first (\code{n = 1})). This can be negatively indexed, so if you wish to select
