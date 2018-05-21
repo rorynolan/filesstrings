@@ -194,7 +194,13 @@ match_arg <- function(arg, choices, index = FALSE, several_ok = FALSE,
            "    * Your `arg` '", arg[first_bad_index], "' is not a prefix of ",
            "any element of `choices`.")
     } else {
-      two_ambigs <- str_detect(choices, str_c("^", arg[first_bad_index])) %>%
+      if (ignore_case) {
+        two_ambigs <- str_detect(tolower(choices),
+                                 str_c("^", tolower(arg)[first_bad_index]))
+      } else {
+        two_ambigs <- str_detect(choices, str_c("^", arg[first_bad_index]))
+      }
+      two_ambigs %<>%
         {choices[.]} %>%
         {.[1:2]}
       stop("`arg` must be a prefix of exactly one element of `choices`.", "\n",

@@ -44,7 +44,9 @@ test_that("match_arg() works", {
                          several_ok = TRUE),
                c(3, 1))
   choices %<>% c("Avocados", "Apricots")
-  expect_error(match_arg("A", choices),
+  expect_error(match_arg("A", choices, ignore_case = FALSE),
+               "prefix of two.+Apples.+Avocados.+")
+  expect_error(match_arg("a", choices, ignore_case = TRUE),
                "prefix of two.+Apples.+Avocados.+")
   expect_error(match_arg(c("A", "a"), choices),
                "arg.+must have length 1.+use.+several_ok = TRUE")
