@@ -39,8 +39,13 @@ all_equal <- function(a, b = NULL) {
                     checkmate::check_vector(b),
                     checkmate::check_list(b),
                     checkmate::check_array(b))
-  if (is.array(a)) a %<>% as.vector()
-  if (is.array(b)) b %<>% as.vector()
+  if (is.array(a)) {
+    if (!is.array(b)) return(FALSE)
+    if (!all_equal(dim(a), dim(b))) return(FALSE)
+    a %<>% as.vector()
+    b %<>% as.vector()
+  }
+  if (is.array(b)) if (!is.array(a)) return(FALSE)
   if (is.null(a) && (!is.null(b))) return(FALSE)
   if (is.null(b[1])) {
     return(length(unique(a)) == 1)

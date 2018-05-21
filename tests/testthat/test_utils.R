@@ -11,8 +11,11 @@ test_that("all_equal works", {
   expect_false(all_equal(character(0), NA))
   expect_false(all_equal(NA, character(0)))
   expect_false(all_equal(NULL, NA))
-  expect_true(all_equal(1:4, matrix(1:4, nrow = 2)))
-  expect_true(all_equal(matrix(1:4, nrow = 2), 1:4))
+  expect_true(all_equal(matrix(1:4, nrow = 2), matrix(1:4, nrow = 2)))
+  expect_false(all_equal(array(1, dim = c(2, 2, 2)), 99))
+  expect_false(all_equal(99, array(1, dim = c(2, 2, 2))))
+  expect_false(all_equal(array(1, dim = c(2, 2, 2)),
+                         array(1, dim = c(3, 3, 3))))
 })
 
 test_that("group_close works", {
