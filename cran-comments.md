@@ -9,4 +9,4 @@
 There were no ERRORs, WARNINGs or NOTEs.
 
 ## Reverse Dependencies
-There are 4 reverse dependencies: `autothresholdr`, `detrendr`, `exampletestr` and `ijtiff`. This update does not break any of them. See https://github.com/rorynolan/filesstrings/blob/master/revdep/checks.rds for full check results.
+There are 4 reverse dependencies: `autothresholdr`, `detrendr`, `exampletestr`, `ijtiff` and `nandb`. This update does not break any of them. See https://github.com/rorynolan/filesstrings/blob/master/revdep/checks.rds for full check results.
