@@ -48,7 +48,10 @@ all_equal <- function(a, b = NULL) {
     b %<>% array(dim = dim(a))
   if (is.array(b) && isTRUE(checkmate::check_scalar(a)))
     a %<>% array(dim = dim(b))
-  if (is.null(b)) return(length(unique(a)) == 1)
+  if (is.null(b)) {
+    if (rlang::is_atomic(a)) return(all(a == a[[1]]))
+    return(length(unique(a)) == 1)
+  }
   if (is.array(a)) {
     if (!is.array(b)) return(FALSE)
     if (!all_equal(dim(a), dim(b))) return(FALSE)

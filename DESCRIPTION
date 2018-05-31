@@ -22,7 +22,8 @@ Imports:
     ore,
     matrixStats,
     purrr,
-    checkmate
+    checkmate,
+    rlang
 RoxygenNote: 6.0.1
 Suggests: testthat,
     covr,
