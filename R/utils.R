@@ -48,6 +48,7 @@ all_equal <- function(a, b = NULL) {
     b %<>% array(dim = dim(a))
   if (is.array(b) && isTRUE(checkmate::check_scalar(a)))
     a %<>% array(dim = dim(b))
+  if (is.null(b)) return(length(unique(a)) == 1)
   if (is.array(a)) {
     if (!is.array(b)) return(FALSE)
     if (!all_equal(dim(a), dim(b))) return(FALSE)
@@ -56,19 +57,15 @@ all_equal <- function(a, b = NULL) {
   }
   if (is.array(b)) if (!is.array(a)) return(FALSE)
   if (is.null(a) && (!is.null(b))) return(FALSE)
-  if (is.null(b)) {
-    return(length(unique(a)) == 1)
-  } else {
-    if (length(a) == 1) {
-      if (length(b) == 0) return(FALSE)
-      a <- rep(a, length(b))
-    }
-    if (length(b) == 1) {
-      if (length(a) == 0) return(FALSE)
-      b <- rep(b, length(a))
-    }
-    return(isTRUE(all.equal(a, b)))
+  if (length(a) == 1) {
+    if (length(b) == 0) return(FALSE)
+    a <- rep(a, length(b))
   }
+  if (length(b) == 1) {
+    if (length(a) == 0) return(FALSE)
+    b <- rep(b, length(a))
+  }
+  return(isTRUE(all.equal(a, b)))
 }
 
 #' Group together close adjacent elements of a vector.
