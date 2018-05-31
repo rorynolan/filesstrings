@@ -49,7 +49,7 @@ all_equal <- function(a, b = NULL) {
   if (is.array(b) && isTRUE(checkmate::check_scalar(a)))
     a %<>% array(dim = dim(b))
   if (is.null(b)) {
-    if (rlang::is_atomic(a)) return(all(a == a[[1]]))
+    if (rlang::is_atomic(a)) return(isTRUE(all(a == a[[1]])) || all(is.na(a)))
     return(length(unique(a)) == 1)
   }
   if (is.array(a)) {
