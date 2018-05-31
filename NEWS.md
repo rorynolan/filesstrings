@@ -1,3 +1,9 @@
+### 2.5.0
+
+#### NEW FEATURES
+* Improvement to `all_equal()` and its documentation.
+
+
 ### 2.4.0
 
 #### NEW FEATURES

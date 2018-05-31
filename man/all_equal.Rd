@@ -17,13 +17,19 @@ all_equal(a, b = NULL)
 'Description' above) and \code{FALSE} otherwise.
 }
 \description{
-If one argument is specified, check that all elements of that argument are
-equal. If two arguments of equal length are specified, check equality of all
-of their corresponding elements. If two arguments are specified, \code{a} of
-length 1 and \code{b} of length greater than 1, check that all elements of \code{b} are
-equal to the element in a. If two arguments are specified, \code{a} of length
-greater than 1 and \code{b} of 1, check that all elements of \code{a} are equal to the
-element in \code{b}.
+This function will return \code{TRUE} whenever \code{\link[base:all.equal]{base::all.equal()}}
+would return \code{TRUE}, however it will also return \code{TRUE} in some other cases:
+\itemize{
+\item If \code{a} is given and \code{b} is not, \code{TRUE} will be returned if all of the
+elements of \code{a} are the same.
+\item If \code{a} is a scalar and \code{b} is a vector or array, \code{TRUE} will be returned
+if every element in \code{b} is equal to \code{a}.
+\item If \code{a} is a vector or array and \code{b} is a scalar, \code{TRUE} will be returned
+if every element in \code{a} is equal to \code{b}.
+}
+
+When this function does not return \code{TRUE}, it returns \code{FALSE} (unless it
+errors). This is unlike \code{\link[base:all.equal]{base::all.equal()}}.
 }
 \note{
 \itemize{\item This behaviour is totally different from

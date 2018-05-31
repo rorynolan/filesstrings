@@ -16,6 +16,8 @@ test_that("all_equal works", {
   expect_false(all_equal(99, array(1, dim = c(2, 2, 2))))
   expect_false(all_equal(array(1, dim = c(2, 2, 2)),
                          array(1, dim = c(3, 3, 3))))
+  expect_false(all_equal(matrix(1:4, nrow = 2), 1:3))
+  expect_false(all_equal(1:3, matrix(1:4, nrow = 2)))
 })
 
 test_that("group_close works", {
