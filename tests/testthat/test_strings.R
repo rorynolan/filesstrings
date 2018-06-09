@@ -171,6 +171,7 @@ test_that("trim_anything works", {
   expect_equal(trim_anything("..abcd.", ".", "left"), "abcd.")
   expect_equal(trim_anything("-ghi--", "-"), "ghi")
   expect_equal(trim_anything("-ghi--", "--"), "-ghi")
+  expect_equal(trim_anything("-ghi--", "--", "right"), "-ghi")
 })
 
 test_that("count_matches works", {
@@ -205,6 +206,12 @@ test_that("str_split_camel_case works", {
                                 "DepartmentOfSillyHats")),
                list(c("Rory", "Nolan"), c("Naomi", "Flagg"),
                     c("Department", "Of", "Silly", "Hats")))
+  expect_equal(str_split_camel_case(c("RoryNolan", "NaomiFlagg",
+                                      "DepartmentOfSillyHats"),
+                                    lower = TRUE),
+               list(c("Rory", "Nolan"), c("Naomi", "Flagg"),
+                    c("Department", "Of", "Silly", "Hats")) %>%
+                 lapply(str_to_lower))
 })
 
 test_that("str_nth_instance_indices errors in the right way", {
@@ -221,3 +228,18 @@ test_that("str_first/last_instance_indices work", {
                  set_colnames(c("start", "end")))
 
 })
+
+test_that("`nth_number_after_mth()` works", {
+  string <- c("abc1abc2abc3abc4abc5abc6abc7abc8abc9", "abc1def2ghi3abc4def5ghi6abc7def8ghi9")
+  expect_equal(nth_number_after_mth(string, "abc", 1, 3), c(3, 7))
+  expect_equal(nth_number_after_mth(string, "abc", 2, 3), c(4, 8))
+  expect_equal(nth_number_after_first(string, "abc", 2), c(2, 2))
+  expect_equal(nth_number_after_last(string, "abc", -1), c(9, 9))
+  expect_equal(first_number_after_mth(string, "abc", 2), c(2, 4))
+  expect_equal(last_number_after_mth(string, "abc", 1), c(9, 9))
+  expect_equal(first_number_after_first(string, "abc"), c(1, 1))
+  expect_equal(first_number_after_last(string, "abc"), c(9, 7))
+  expect_equal(last_number_after_first(string, "abc"), c(9, 9))
+  expect_equal(last_number_after_last(string, "abc"), c(9, 9))
+})
+

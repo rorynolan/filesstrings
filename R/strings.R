@@ -278,7 +278,8 @@ extract_non_numerics <- function(string, decimals = FALSE,
 nth_number <- function(string, n, leave_as_string = FALSE, decimals = FALSE,
                        leading_decimals = FALSE, negs = FALSE) {
   # this function doesn't work for strings with decimal numbers
-  if (n == 0) stop("n must be a nonzero integer.")
+  checkmate::assert_number(n)
+  checkmate::assert_number(abs(n), lower = 1)
   numbers <- extract_numbers(string, leave_as_string = TRUE, negs = negs,
                       decimals = decimals, leading_decimals = leading_decimals)
   nth_numbers <- str_list_nth_elems(numbers, n)
@@ -315,7 +316,8 @@ last_number <- function(string, leave_as_string = FALSE, decimals = FALSE,
 #' @export
 nth_non_numeric <- function(string, n, decimals = FALSE,
                             leading_decimals = FALSE, negs = FALSE) {
-  if (n == 0) stop("n must be a nonzero integer.")
+  checkmate::assert_number(n)
+  checkmate::assert_number(abs(n), lower = 1)
   non_numerics <- extract_non_numerics(string, decimals = decimals, negs = negs,
                                      leading_decimals = leading_decimals)
   str_list_nth_elems(non_numerics, n)
@@ -376,7 +378,7 @@ str_split_by_nums <- function(string, decimals = FALSE,
 #' str_elem("abcd", -2)
 #' @export
 str_elem <- function(string, index) {
-  if (!is.character(string)) stop("string must be of character type")
+  checkmate::assert_character(string)
   str_sub(string, index, index)
 }
 
@@ -392,7 +394,7 @@ str_elem <- function(string, index) {
 #' str_paste_elems("abcdef", c(2, 5:6))
 #' @export
 str_paste_elems <- function(string, indices) {
-  if (!is.character(string)) stop("string must be of character type")
+  checkmate::assert_character(string)
   stopifnot(length(string) == 1)
   elems <- str_elem(string, indices)
   pasted <- paste(elems, collapse = "")
@@ -409,7 +411,7 @@ str_paste_elems <- function(string, indices) {
 #' str_to_vec("abcdef")
 #' @export
 str_to_vec <- function(string) {
-  if (!is.character(string)) stop("string must be of character type")
+  checkmate::assert_character(string)
   strsplit(string, NULL)[[1]]
 }
 
@@ -438,7 +440,7 @@ str_to_vec <- function(string) {
 #' @export
 str_with_patterns <- function(strings, patterns, ignore_case = FALSE,
                               any = FALSE) {
-  if (!is.character(strings)) stop("strings must be of character type")
+  checkmate::assert_character(strings)
   strings_orig <- strings
   if (ignore_case) {
     strings <- tolower(strings)
@@ -554,17 +556,14 @@ before_last_dot <- function(string) {
 #' extend_char_vec(c("a", "b"), length_out = 10)
 #' @export
 extend_char_vec <- function(char_vec, extend_by = NA, length_out = NA) {
-  if (length(extend_by) != 1) stop("extend.by must have length 1.")
+  checkmate::assert_int(extend_by, na.ok = TRUE)
   if (is.na(extend_by) && is.na(length_out)) {
     stop("One of extend.by or length.out must be specified.")
   }
-  if (is.numeric(char_vec)) char_vec <- as.character(char_vec)
-  if (!is.character(char_vec))
-    stop("char.vec must be of numeric or character type.")
-  if (!is.na(extend_by)) {
-    if (!is.numeric(extend_by)) stop("If specified, extend.by must be numeric.")
-    return(c(char_vec, rep("", extend_by)))
-  }
+  checkmate::assert_atomic(char_vec)
+  if (is.numeric(char_vec)) char_vec %<>% as.character()
+  checkmate::assert_character(char_vec)
+  if (!is.na(extend_by)) return(c(char_vec, rep("", extend_by)))
   if (!is.na(length_out)) {
     if (!(is.numeric(length_out) && length_out >= length(char_vec))) {
       stop("If specified, length.out must be numeric and at least equal to ",
@@ -622,9 +621,8 @@ put_in_pos <- function(strings, positions) {
 #' trim_anything("-ghi--", "--")
 #' @export
 trim_anything <- function(string, pattern, side = "both") {
-  stopifnot(nchar(string) > 0)
-  side <- tolower(side)  # give side some case lenience
-  side <- match.arg(side, c("both", "left", "right"))
+  checkmate::assert_character(string)
+  side %<>% match_arg(c("both", "left", "right"), ignore_case = TRUE)
   pattern <- ore::ore.escape(pattern) %>%
     str_c("(?:", ., ")")
   switch(side,
@@ -781,8 +779,8 @@ str_split_camel_case <- function(string, lower = FALSE) {
 #'
 #' @export
 str_nth_instance_indices <- function(string, pattern, n) {
-  n %<>% as.integer()
-  if (n == 0) stop("'n' cannot be zero.")
+  checkmate::assert_number(n)
+  checkmate::assert_number(abs(n), lower = 1)
   instances <- str_locate_all(string, pattern)
   n_instances <- lengths(instances) / 2
   bad <- n_instances < abs(n)

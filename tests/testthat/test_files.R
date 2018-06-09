@@ -13,7 +13,8 @@ test_that("nice_file_nums works", {
 })
 
 test_that("remove_filename_spaces works", {
-  setwd(tempdir())
+  cwd <- setwd(tempdir())
+  on.exit(setwd(cwd))
   expect_true(dir.create("remove_filename_spaces_test"))
   setwd("remove_filename_spaces_test")
   files <- c("1litres 1.txt", "1litres 30.txt", "3litres 5.txt")
@@ -23,21 +24,36 @@ test_that("remove_filename_spaces works", {
   expect_equal(remove_filename_spaces(), logical())
   setwd("..")
   expect_true(dir.remove("remove_filename_spaces_test"))
+  file.create(c("1litres 1.txt", "1litres1.txt"))
+  expect_error(remove_filename_spaces(),
+               str_c("Not renaming because to do so would also overwrite.*",
+                     "1litres 1.txt.*and.*1litres1.txt.*already exist.*",
+                     "so to rename.*1litres 1.txt.*to.*1litres1.txt.*",
+                     "would be to overwrite.*1litres1.txt"))
+  setwd(cwd)
 })
 
 test_that("rename_with_nums works", {
-  setwd(tempdir())
+  cwd <- setwd(tempdir())
+  on.exit(setwd(cwd))
   expect_true(dir.create("rename_with_nums_test"))
   setwd("rename_with_nums_test")
   files <- c("1litres 1.txt", "1litres 30.txt", "3litres 5.txt")
   expect_equal(file.create(files), rep(TRUE, 3))
-  expect_equal(rename_with_nums(), rep(TRUE, 3))
-  expect_equal(list.files(), paste0(1:3, ".txt"))
-  expect_error(rename_with_nums())
+  expect_equal(rename_with_nums(pattern = ".txt$"), rep(TRUE, 3))
+  expect_equal(list.files(pattern = ".txt$"), paste0(1:3, ".txt"))
+  expect_error(rename_with_nums(),
+               str_c("Some of the names are already in the desired format.*",
+                     "[Uu]nable to proceed as renaming may result in deletion"))
   file.create("xyz.csv")
-  expect_error(rename_with_nums())
+  expect_error(rename_with_nums(),
+               "Files matching pattern have different extensions.")
+  file.remove(dir(pattern = ".txt$"))
+  file.remove(dir(pattern = ".csv$"))
+  expect_error(rename_with_nums(pattern = ".txt$"), "No files found to rename.")
   setwd("..")
   expect_true(dir.remove("rename_with_nums_test"))
+  setwd(cwd)
 })
 
 test_that("create_dir works", {
