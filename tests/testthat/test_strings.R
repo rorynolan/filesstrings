@@ -230,7 +230,8 @@ test_that("str_first/last_instance_indices work", {
 })
 
 test_that("`nth_number_after_mth()` works", {
-  string <- c("abc1abc2abc3abc4abc5abc6abc7abc8abc9", "abc1def2ghi3abc4def5ghi6abc7def8ghi9")
+  string <- c("abc1abc2abc3abc4abc5abc6abc7abc8abc9",
+              "abc1def2ghi3abc4def5ghi6abc7def8ghi9")
   expect_equal(nth_number_after_mth(string, "abc", 1, 3), c(3, 7))
   expect_equal(nth_number_after_mth(string, "abc", 2, 3), c(4, 8))
   expect_equal(nth_number_after_first(string, "abc", 2), c(2, 2))

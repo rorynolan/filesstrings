@@ -138,11 +138,13 @@ move_files <- function(files, destinations, overwrite = FALSE) {
       overwrite_attempt <- TRUE
       if (overwrite) {
         file.rename(files[i], new_paths[i])
-        out[i] <- TRUE
+        if ((!file.exists(files[i])) && file.exists(new_paths[i]))
+          out[i] <- TRUE
       }
     } else {
       file.rename(files[i], new_paths[i])
-      out[i] <- TRUE
+      if ((!file.exists(files[i])) && file.exists(new_paths[i]))
+        out[i] <- TRUE
     }
   }
   n_succeeded <- sum(out)
@@ -196,9 +198,8 @@ file.move <- move_files
 #' dir.remove("NiceFileNums_test")}
 #' @export
 nice_file_nums <- function(dir = ".", pattern = NA) {
-  init_dir <- getwd()
+  init_dir <- setwd(dir)
   on.exit(setwd(init_dir))
-  setwd(dir)
   if (is.na(pattern)) {
     lf <- list.files()
   } else {
@@ -235,8 +236,6 @@ nice_file_nums <- function(dir = ".", pattern = NA) {
 #' dir.remove("RemoveFileNameSpaces_test")}
 #' @export
 remove_filename_spaces <- function(dir = ".", pattern = "", replacement = "") {
-  init_dir <- setwd(dir)
-  on.exit(setwd(init_dir))
   lf <- list.files(pattern = pattern)
   new_names <- str_replace_all(lf, " ", replacement)
   new_new_names <- new_names[new_names != lf]
@@ -283,9 +282,8 @@ remove_filename_spaces <- function(dir = ".", pattern = "", replacement = "") {
 #' dir.remove("RenameWithNums_test")}
 #' @export
 rename_with_nums <- function(dir = ".", pattern = NULL) {
-  init_dir <- getwd()
+  init_dir <- setwd(dir)
   on.exit(setwd(init_dir))
-  setwd(dir)
   lf <- list.files(pattern = pattern)
   l <- length(lf)
   if (l == 0) stop("No files found to rename.")
