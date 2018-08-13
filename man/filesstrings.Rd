@@ -4,7 +4,6 @@
 \name{filesstrings}
 \alias{filesstrings}
 \alias{filesstrings-package}
-\alias{filesstrings-package}
 \title{\code{filesstrings}: handy file and string manipulation}
 \description{
 Convenient functions for moving files, deleting directories, and a variety of

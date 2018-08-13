@@ -5,6 +5,19 @@
 
 using namespace Rcpp;
 
+//' Paste a vector of strings into a single string.
+//'
+//' Paste a vector of strings together with a specified separator.
+//'
+//' @param strings A character vector of strings.
+//' @param collapse A string.
+//'
+//' @return A string.
+//'
+//' @examples
+//' paste_collapse(c("abc", "def"), collapse = "_")
+//'
+//' @noRd
 // [[Rcpp::export]]
 std::string paste_collapse(CharacterVector strings, std::string collapse) {
   std::string out = as<std::string>(strings[0]);
@@ -15,19 +28,20 @@ std::string paste_collapse(CharacterVector strings, std::string collapse) {
   return out;
 }
 
-// Apply paste collapse to each element of a list.
-//
-// This is the same as doing
-// \code{sapply(char.list, paste, collapse = collapse)}, it's just faster.
-//
-// @param char_list A list of character vectors.
-// @param collapse See \code{\link{paste}}.
-//
-// @return A list of character vectors.
-//
-// @examples
-// paste_collapse_list_elems(list(1:3, c("a", 5, "rory")), collapse = "R")
-// @export
+//' Apply paste collapse to each element of a list.
+//'
+//' This is the same as doing
+//' `sapply(char.list, paste, collapse = collapse)`, it's just faster.
+//'
+//' @param char_list A list of character vectors.
+//' @param collapse A string.
+//'
+//' @return A list of character vectors.
+//'
+//' @examples
+//' paste_collapse_list_elems(list(1:3, c("a", 5, "rory")), collapse = "R")
+//'
+//' @noRd
 // [[Rcpp::export]]
 CharacterVector paste_collapse_list_elems(List char_list,
                                           std::string collapse = "") {
@@ -40,15 +54,16 @@ CharacterVector paste_collapse_list_elems(List char_list,
   return(pasted);
 }
 
-// Remove empty strings from a character list.
-//
-// @param char_list A list of character vectors.
-//
-// @return A list of character vectors.
-//
-// @examples
-// str_list_remove_empties(list(c("a", "", "b"), "gg", c("", 1, "")))
-// @export
+//' Remove empty strings from a character list.
+//'
+//' @param char_list A list of character vectors.
+//'
+//' @return A list of character vectors.
+//'
+//' @examples
+//' str_list_remove_empties(list(c("a", "", "b"), "gg", c("", 1, "")))
+//'
+//' @noRd
 // [[Rcpp::export]]
 List str_list_remove_empties(List char_list) {
   List no_empties = clone(char_list);
@@ -66,21 +81,22 @@ List str_list_remove_empties(List char_list) {
   return(no_empties);
 }
 
-// Get the nth element of each vector in a list of numeric or character
-// vectors.
-//
-// These are faster implementations of procedures that could very easily be
-// done with [base::sapply].
-//
-// @param char_list A list of character vectors.
-// @param n The index of the element that you want from each vector.
-//
-// @return A list.
-//
-// @examples
-// str_list_nth_elems(list(c("a", "b", "c"), c("d", "f", "a")), 2)
-// num_list_nth_elems(list(1:5, 0:2), 4)
-// @export
+//' Get the nth element of each vector in a list of numeric or character
+//' vectors.
+//'
+//' These are faster implementations of procedures that could very easily be
+//' done with [base::sapply].
+//'
+//' @param char_list A list of character vectors.
+//' @param n The index of the element that you want from each vector.
+//'
+//' @return A list.
+//'
+//' @examples
+//' str_list_nth_elems(list(c("a", "b", "c"), c("d", "f", "a")), 2)
+//' num_list_nth_elems(list(1:5, 0:2), 4)
+//'
+//' @noRd
 // [[Rcpp::export]]
 CharacterVector str_list_nth_elems(List char_list, int n) {
   int sls = char_list.size();
@@ -97,9 +113,9 @@ CharacterVector str_list_nth_elems(List char_list, int n) {
   return(nths);
 }
 
-// @rdname str_list_nth_elems
-// @param num_list A list of numeric vectors.
-// @export
+//' @rdname str_list_nth_elems
+//' @param num_list A list of numeric vectors.
+//' @noRd
 // [[Rcpp::export]]
 NumericVector num_list_nth_elems(List num_list, int n) {
   int sls = num_list.size();
@@ -111,6 +127,24 @@ NumericVector num_list_nth_elems(List num_list, int n) {
   return(nths);
 }
 
+
+//' Interleave two vectors of strings.
+//'
+//' Make a vector of strings where the first element is from `strings1`, the
+//' second is from `strings2`, the third is from `strings1`, the fourth is from
+//' `strings2`, and so on.
+//'
+//' `strings1` and `strings2` must be the same length or differ in length only
+//' by 1. If `strings2` is longer, it goes first.
+//'
+//' @param strings1,strings2 Character vectors.
+//'
+//' @return A character vector.
+//'
+//' @examples
+//' interleave_strings(c("a", "c", "e"), c("b", "d"))
+//'
+//' @noRd
 // [[Rcpp::export]]
 CharacterVector interleave_strings(CharacterVector strings1,
                                    CharacterVector strings2) {
@@ -148,10 +182,11 @@ CharacterVector interleave_strings(CharacterVector strings1,
   }
 }
 
+
 // [[Rcpp::export]]
-CharacterVector correct_interleave_helper(std::string orig,
-                                  CharacterVector strings1,
-                                  CharacterVector strings2) {
+CharacterVector interleave_correctly_vec(std::string orig,
+                                         CharacterVector strings1,
+                                         CharacterVector strings2) {
   CharacterVector interleave = NA_STRING;
   if (strings1.size() == 0)
     interleave = strings2;
@@ -171,7 +206,7 @@ CharacterVector correct_interleave_helper(std::string orig,
 }
 
 // [[Rcpp::export]]
-List correct_interleave(CharacterVector orig, List strings1, List strings2) {
+List interleave_correctly(CharacterVector orig, List strings1, List strings2) {
   int l = orig.size();
   List interleaved(l);
   if (strings1.size() != l || strings2.size() != l) {
@@ -181,7 +216,7 @@ List correct_interleave(CharacterVector orig, List strings1, List strings2) {
   }
   else {
     for (int i = 0; i < l; i++) {
-      interleaved[i] = correct_interleave_helper(as<std::string>(orig[i]),
+      interleaved[i] = interleave_correctly_vec(as<std::string>(orig[i]),
                                           strings1[i], strings2[i]);
     }
   }

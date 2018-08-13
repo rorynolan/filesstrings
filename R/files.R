@@ -69,9 +69,23 @@ remove_dir <- function(...) {
 #' @export
 dir.remove <- remove_dir
 
-moved_file_new_path <- function(file, destination) {
+#' Get the new path of a file that is to be moved.
+#'
+#' `move_files()` actually moves files, but it uses this function to get the
+#' full path of the file's new home.
+#'
+#' @param file The file to move.
+#' @param destination Folder to move the file to.
+#'
+#' @return A string. The file's new home.
+#'
+#' @examples
+#' get_new_home("a", "b")
+#'
+#' @noRd
+get_new_home <- function(file, destination) {
   # This function does not move any files, it helps `move_files()` which does
-  file %<>% normalizePath()  # get full path
+  file %<>% normalizePath()
   file_name_base <- basename(file)
   destination %<>% {suppressWarnings(normalizePath(.))}  # replace tildes
   paste0(destination, "/", file_name_base)
@@ -132,7 +146,7 @@ move_files <- function(files, destinations, overwrite = FALSE) {
   n_files <- length(files)
   overwrite_attempt <- FALSE
   out <- rep(FALSE, n_files)
-  new_paths <- moved_file_new_path(files, destinations)
+  new_paths <- get_new_home(files, destinations)
   for (i in seq_len(n_files)) {
     if (file.exists(new_paths[i])) {
       overwrite_attempt <- TRUE

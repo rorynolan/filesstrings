@@ -14,8 +14,8 @@
 extract_numbers(string, leave_as_string = FALSE, decimals = FALSE,
   leading_decimals = FALSE, negs = FALSE)
 
-extract_non_numerics(string, decimals = FALSE, leading_decimals = FALSE,
-  negs = FALSE)
+extract_non_numerics(string, decimals = FALSE,
+  leading_decimals = FALSE, negs = FALSE)
 
 nth_number(string, n, leave_as_string = FALSE, decimals = FALSE,
   leading_decimals = FALSE, negs = FALSE)

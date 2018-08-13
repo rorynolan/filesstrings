@@ -361,7 +361,7 @@ str_split_by_nums <- function(string, decimals = FALSE,
     non_nums <- extract_non_numerics(string, decimals = decimals, negs = negs,
                                      leading_decimals = leading_decimals)
   }
-  correct_interleave(string, non_nums, nums)
+  interleave_correctly(string, non_nums, nums)
 }
 
 

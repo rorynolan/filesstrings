@@ -22,13 +22,13 @@ test_that("str_list_nth_elems works", {
 test_that("Random Rcpp stuff works",{
   expect_equal(filesstrings:::interleave_strings(c("a", "b", "v"), "a"),
                NA_character_)
-  expect_equal(filesstrings:::correct_interleave_helper("a", character(0), "a"),
+  expect_equal(filesstrings:::interleave_correctly_vec("a", character(0), "a"),
                "a")
-  expect_equal(filesstrings:::correct_interleave_helper("a", "a", character(0)),
+  expect_equal(filesstrings:::interleave_correctly_vec("a", "a", character(0)),
                "a")
-  expect_equal(filesstrings:::correct_interleave_helper("ab", "b", "a"),
+  expect_equal(filesstrings:::interleave_correctly_vec("ab", "b", "a"),
                c("a", "b"))
-  expect_equal(filesstrings:::correct_interleave("a", list(), list()),
+  expect_equal(filesstrings:::interleave_correctly("a", list(), list()),
                list(NA_character_))
   expect_equal(filesstrings:::interleave_char_lists(list("a"), list()),
                list(NA_character_))
