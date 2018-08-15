@@ -1,3 +1,12 @@
+### 2.6.0
+
+#### NEW FEATURES
+* Added functions `nth_number_before_mth()` and friends (there are 8 friends).
+
+#### MINOR IMPROVEMENTS
+* Improvements to documentation.
+
+
 ### 2.5.0
 
 #### NEW FEATURES

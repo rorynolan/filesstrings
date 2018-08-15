@@ -85,44 +85,108 @@ List str_list_remove_empties(List char_list) {
 //' vectors.
 //'
 //' These are faster implementations of procedures that could very easily be
-//' done with [base::sapply].
+//' done with [purrr::map_dbl] or [purrr::map_chr].
+//'
+//' This is a wrapper function for [str_list_nth_elems_()] that
+//' has better error handling.
 //'
 //' @param char_list A list of character vectors.
-//' @param n The index of the element that you want from each vector.
+//' @param n The index of the element that you want from each vector. If
+//'   `char_list` is of length 1, this can be any length and those indices will
+//'   be extracted from `char_list[[1]]`. Otherwise, this must either be of
+//'   length 1 or the same length as `char_list`. All of this is to say that
+//'   the function is vectorised over this argument.
 //'
 //' @return A list.
 //'
 //' @examples
-//' str_list_nth_elems(list(c("a", "b", "c"), c("d", "f", "a")), 2)
-//' num_list_nth_elems(list(1:5, 0:2), 4)
+//' str_list_nth_elems_(list(c("a", "b", "c"), c("d", "f", "a")), 2)
+//' num_list_nth_elems_(list(1:5, 0:2), 4)
 //'
 //' @noRd
 // [[Rcpp::export]]
-CharacterVector str_list_nth_elems(List char_list, int n) {
-  int sls = char_list.size();
-  CharacterVector nths(sls);
-  for (int i = 0; i < sls; i++) {
-    CharacterVector strings = as<CharacterVector>(char_list[i]);
-    int n_i = n;
-    if (n_i < 0)
-      n_i += strings.size() + 1;
-    nths[i] = (((n_i > strings.size()) | (n_i <= 0)) ?
+CharacterVector str_list_nth_elems_(List char_list, IntegerVector n) {
+  std::size_t cl_sz = char_list.size(), n_sz = n.size();
+  CharacterVector nths;
+  if (cl_sz == 1) {
+    nths = CharacterVector(n_sz);
+    CharacterVector strings = as<CharacterVector>(char_list[0]);
+    for (std::size_t i = 0; i != n_sz; ++i) {
+      int n_i = n[i];
+      if (n_i < 0)
+        n_i += strings.size() + 1;
+      nths[i] = (((n_i > strings.size()) | (n_i <= 0)) ?
                    NA_STRING :
                    strings[n_i - 1]);
+    }
+  } else {
+    nths = CharacterVector(cl_sz);
+    if (n.size() == 1) {
+      for (std::size_t i = 0; i < cl_sz; i++) {
+        CharacterVector strings = as<CharacterVector>(char_list[i]);
+        int n_i = n[0];
+        if (n_i < 0)
+          n_i += strings.size() + 1;
+        nths[i] = (((n_i > strings.size()) | (n_i <= 0)) ?
+                     NA_STRING :
+                     strings[n_i - 1]);
+      }
+    } else {
+      for (std::size_t i = 0; i < cl_sz; i++) {
+        CharacterVector strings = as<CharacterVector>(char_list[i]);
+        int n_i = n[i];
+        if (n_i < 0)
+          n_i += strings.size() + 1;
+        nths[i] = (((n_i > strings.size()) | (n_i <= 0)) ?
+                     NA_STRING :
+                     strings[n_i - 1]);
+      }
+    }
   }
   return(nths);
 }
 
-//' @rdname str_list_nth_elems
+//' @rdname str_list_nth_elems_
 //' @param num_list A list of numeric vectors.
 //' @noRd
 // [[Rcpp::export]]
-NumericVector num_list_nth_elems(List num_list, int n) {
-  int sls = num_list.size();
-  NumericVector nths(sls);
-  for (int i = 0; i < sls; i++) {
-    NumericVector nums = as<NumericVector>(num_list[i]);
-    nths[i] = ((n > nums.size()) ? NA_REAL : nums[n - 1]);
+NumericVector num_list_nth_elems_(List num_list, IntegerVector n) {
+  std::size_t nls = num_list.size(), n_sz = n.size();
+  NumericVector nths;
+  if (nls == 1) {
+    nths = NumericVector(n_sz);
+    NumericVector strings = as<NumericVector>(num_list[0]);
+    for (std::size_t i = 0; i != n_sz; ++i) {
+      int n_i = n[i];
+      if (n_i < 0)
+        n_i += strings.size() + 1;
+      nths[i] = (((n_i > strings.size()) | (n_i <= 0)) ?
+                   NA_REAL :
+                   strings[n_i - 1]);
+    }
+  } else {
+    nths = NumericVector(nls);
+    if (n.size() == 1) {
+      for (std::size_t i = 0; i < nls; i++) {
+        NumericVector nums = as<NumericVector>(num_list[i]);
+        int n_i = n[0];
+        if (n_i < 0)
+          n_i += nums.size() + 1;
+        nths[i] = (((n_i > nums.size()) | (n_i <= 0)) ?
+                     NA_REAL :
+                     nums[n_i - 1]);
+      }
+    } else {
+      for (std::size_t i = 0; i < nls; i++) {
+        NumericVector nums = as<NumericVector>(num_list[i]);
+        int n_i = n[i];
+        if (n_i < 0)
+          n_i += nums.size() + 1;
+        nths[i] = (((n_i > nums.size()) | (n_i <= 0)) ?
+                     NA_REAL :
+                     nums[n_i - 1]);
+      }
+    }
   }
   return(nths);
 }

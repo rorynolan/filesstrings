@@ -89,6 +89,15 @@ test_that("extract_numbers works", {
   expect_equal(nth_non_numeric("--123abc456", -2), "--")
   expect_error(extract_numbers("a.23", leading_decimals = T))
   expect_error(extract_non_numerics("a.23", leading_decimals = T))
+  expect_equal(first_number("abc"), NA_integer_)
+  expect_equal(first_non_numeric("1"), NA_character_)
+  expect_equal(last_non_numeric(c("abc", "def")), c("abc", "def"))
+  expect_equal(nth_non_numeric(c("ab12bd23", "wx56yz89"), c(3, -1)),
+               c(NA, "yz"))
+  expect_equal(filesstrings:::num_list_nth_elems(list(c(1, 2)), c(-1, 3)),
+               c(2, NA))
+  expect_equal(filesstrings:::num_list_nth_elems(list(1:2, 3:4), -1), c(2, 4))
+  expect_equal(filesstrings:::num_list_nth_elems(list(1:2, 3:4), c(-1, 1)), 2:3)
 })
 
 test_that("str_split_by_nums works", {

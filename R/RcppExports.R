@@ -54,27 +54,34 @@ str_list_remove_empties <- function(char_list) {
 #' vectors.
 #'
 #' These are faster implementations of procedures that could very easily be
-#' done with [base::sapply].
+#' done with [purrr::map_dbl] or [purrr::map_chr].
+#'
+#' This is a wrapper function for [str_list_nth_elems_()] that
+#' has better error handling.
 #'
 #' @param char_list A list of character vectors.
-#' @param n The index of the element that you want from each vector.
+#' @param n The index of the element that you want from each vector. If
+#'   `char_list` is of length 1, this can be any length and those indices will
+#'   be extracted from `char_list[[1]]`. Otherwise, this must either be of
+#'   length 1 or the same length as `char_list`. All of this is to say that
+#'   the function is vectorised over this argument.
 #'
 #' @return A list.
 #'
 #' @examples
-#' str_list_nth_elems(list(c("a", "b", "c"), c("d", "f", "a")), 2)
-#' num_list_nth_elems(list(1:5, 0:2), 4)
+#' str_list_nth_elems_(list(c("a", "b", "c"), c("d", "f", "a")), 2)
+#' num_list_nth_elems_(list(1:5, 0:2), 4)
 #'
 #' @noRd
-str_list_nth_elems <- function(char_list, n) {
-    .Call(`_filesstrings_str_list_nth_elems`, char_list, n)
+str_list_nth_elems_ <- function(char_list, n) {
+    .Call(`_filesstrings_str_list_nth_elems_`, char_list, n)
 }
 
-#' @rdname str_list_nth_elems
+#' @rdname str_list_nth_elems_
 #' @param num_list A list of numeric vectors.
 #' @noRd
-num_list_nth_elems <- function(num_list, n) {
-    .Call(`_filesstrings_num_list_nth_elems`, num_list, n)
+num_list_nth_elems_ <- function(num_list, n) {
+    .Call(`_filesstrings_num_list_nth_elems_`, num_list, n)
 }
 
 #' Interleave two vectors of strings.

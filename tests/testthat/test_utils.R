@@ -63,3 +63,14 @@ test_that("match_arg() works", {
                "Element 8.+Pears.+is a duplicate")
   expect_equal(match_arg("ab", c("ab", "abc")), "ab")
 })
+
+test_that("`*_list_nth_elems()` error correctly", {
+  expect_error(filesstrings:::str_list_nth_elems(list("a", "b"), 1:3),
+               paste("If both `char_list` and `n` .* lengths greater than 1.*",
+                     "then their lengths must be equal.*",
+                     "Your `char_list has length 2 and your `n` has length 3."))
+  expect_error(filesstrings:::num_list_nth_elems(list(1, 2), 1:3),
+               paste("If both `num_list` and `n` have lengths greater than 1.*",
+                     "then their lengths must be equal.*",
+                     "Your `num_list has length 2 and your `n` has length 3."))
+})
