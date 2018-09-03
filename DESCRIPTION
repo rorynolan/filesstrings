@@ -1,39 +1,43 @@
 Package: filesstrings
 Type: Package
 Title: Handy File and String Manipulation
-Version: 2.6.0
+Version: 2.7.0
 Authors@R: c(person("Rory", "Nolan", email = "rorynoolan@gmail.com", 
                     role = c("aut", "cre", "cph"),
                     comment = c(ORCID = "0000-0002-5239-4043")),
              person("Sergi", "Padilla-Parra", email = "spadilla@well.ox.ac.uk", 
                     role = "ths", comment = c(ORCID = "0000-0002-8010-9481")))
 Maintainer: Rory Nolan <rorynoolan@gmail.com>
-Description: Convenient functions for moving files, deleting directories, 
-    and a variety of string operations that facilitate manipulating files 
-    and extracting information from strings.
+Description: This started out as a package for file and string manipulation. 
+    Since then, the 'fs' and 'strex' packages emerged, offering functionality
+    previously given by this package (but slightly better). Those packages have
+    hence almost pushed 'filesstrings' into extinction. However, it still has
+    a small number of unique, handy file manipulation functions which can be 
+    seen in the vignette. One example is a function to remove spaces from all 
+    file names in a directory.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports:
-    tibble,
-    Rcpp,
     magrittr,
     tools,
-    ore,
-    matrixStats,
     purrr,
     checkmate,
+    strex,
+    matrixStats,
+    Rcpp,
+    ore,
+    tibble,
     rlang
 RoxygenNote: 6.1.0
 Suggests: testthat,
     covr,
     knitr,
-    rmarkdown,
-    dplyr
-LinkingTo: Rcpp
+    rmarkdown
 Depends: stringr
-SystemRequirements: C++11
 URL: https://www.github.com/rorynolan/filesstrings
 BugReports: https://www.github.com/rorynolan/filesstrings/issues
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
+LinkingTo: 
+    Rcpp

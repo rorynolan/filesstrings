@@ -18,6 +18,7 @@ test_that("all_equal works", {
                          array(1, dim = c(3, 3, 3))))
   expect_false(all_equal(matrix(1:4, nrow = 2), 1:3))
   expect_false(all_equal(1:3, matrix(1:4, nrow = 2)))
+  expect_true(all_equal(list(1, 1)))
 })
 
 test_that("group_close works", {
@@ -48,29 +49,5 @@ test_that("match_arg() works", {
   expect_equal(match_arg(c("b", "a"), choices, ignore_case = TRUE, index = TRUE,
                          several_ok = TRUE),
                c(3, 1))
-  choices %<>% c("Avocados", "Apricots")
-  expect_error(match_arg("A", choices, ignore_case = FALSE),
-               "prefix of two.+Apples.+Avocados.+")
-  expect_error(match_arg("a", choices, ignore_case = TRUE),
-               "prefix of two.+Apples.+Avocados.+")
-  expect_error(match_arg(c("A", "a"), choices),
-               "arg.+must have length 1.+use.+several_ok = TRUE")
-  choices %<>% c("bananas")
-  expect_error(match_arg("p", choices, ignore_case = TRUE),
-               "elements 3 and 7.+Bananas.+bananas.+effectively duplicates.")
-  choices %<>% c("Pears")
-  expect_error(match_arg("p", choices, ignore_case = TRUE),
-               "Element 8.+Pears.+is a duplicate")
   expect_equal(match_arg("ab", c("ab", "abc")), "ab")
-})
-
-test_that("`*_list_nth_elems()` error correctly", {
-  expect_error(filesstrings:::str_list_nth_elems(list("a", "b"), 1:3),
-               paste("If both `char_list` and `n` .* lengths greater than 1.*",
-                     "then their lengths must be equal.*",
-                     "Your `char_list has length 2 and your `n` has length 3."))
-  expect_error(filesstrings:::num_list_nth_elems(list(1, 2), 1:3),
-               paste("If both `num_list` and `n` have lengths greater than 1.*",
-                     "then their lengths must be equal.*",
-                     "Your `num_list has length 2 and your `n` has length 3."))
 })

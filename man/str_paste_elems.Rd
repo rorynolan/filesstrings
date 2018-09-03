@@ -12,13 +12,6 @@ str_paste_elems(string, indices)
 \item{indices}{A numeric vector of positive integers detailing the indices of
 the characters of \code{string} that we wish to paste together.}
 }
-\value{
-A string.
-}
 \description{
-Extract characters - specified by their indices - from a string and paste
-them together
-}
-\examples{
-str_paste_elems("abcdef", c(2, 5:6))
+See \code{\link[strex:str_paste_elems]{strex::str_paste_elems()}}.
 }

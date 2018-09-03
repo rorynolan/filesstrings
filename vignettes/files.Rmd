@@ -13,27 +13,11 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE, comment = "#>")
 ```
 
+Here are some useful things which `filesstrings` makes easier than `base` or `fs`.
+
 First let's load the library: 
 ```{r load}
 library(filesstrings)
-```
-
-## Move files around
-I find it bizarre that base R has no `file.move`. To move a file, you have to unintuitively rename it. `filesstrings` provides `file.move(files, destinations)`. This function has the nice feature that if you try to move files to a directory that doesn't exist, it creates the directory first and then puts the files inside. 
-Let's create a directory and a file:
-```{r create dir}
-dir.create("tmp_dir")
-file.create("tmp.txt")
-```
-Now let's put the file into the directory:
-```{r put a file in a dir}
-file.move("tmp.txt", "tmp_dir")
-```
-
-## Delete Directories
-To delete directories with base R, one has to use `unlink(..., recursive = TRUE)`. The `filesstrings` package gives you `dir.remove()` which does the same job.
-```{r, remove directory}
-dir.remove("tmp_dir")
 ```
 
 ## Remove spaces from file names

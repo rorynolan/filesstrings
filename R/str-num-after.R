@@ -1,122 +1,40 @@
 #' Find the \eqn{n}th number after the \eqn{m}th occurrence of a pattern.
 #'
-#' Given a string, a pattern and natural numbers `n` and `m`, find the `n`th
-#' number after the `m`th occurrence of the pattern.
+#' See [strex::str_nth_number_after_mth()].
 #'
-#' @param string A character vector.
-#' @param n,m Natural numbers.
-#' @inheritParams singleize
-#' @inheritParams extract_numbers
+#' @inheritParams strex::str_nth_number_after_mth
 #'
-#' @return A numeric vector.
-#'
-#' @examples
-#' string <- c("abc1abc2abc3abc4abc5abc6abc7abc8abc9",
-#'             "abc1def2ghi3abc4def5ghi6abc7def8ghi9")
-#' nth_number_after_mth(string, "abc", 1, 3)
-#' nth_number_after_mth(string, "abc", 2, 3)
 #' @export
-nth_number_after_mth <- function(string, pattern, n, m,
-                                 decimals = FALSE, leading_decimals = FALSE,
-                                 negs = FALSE, leave_as_string = FALSE) {
-  string %>%
-    str_after_nth(pattern, m) %>%
-    nth_number(n, decimals = decimals, leading_decimals = leading_decimals,
-               negs = negs, leave_as_string = leave_as_string)
-}
+nth_number_after_mth <- strex::str_nth_number_after_mth
 
 #' @rdname nth_number_after_mth
-#' @examples
-#' nth_number_after_first(string, "abc", 2)
 #' @export
-nth_number_after_first <- function(string, pattern, n,
-                                   decimals = FALSE, leading_decimals = FALSE,
-                                   negs = FALSE, leave_as_string = FALSE) {
-  nth_number_after_mth(string, pattern, n = n, m = 1,
-                       decimals = decimals, leading_decimals = leading_decimals,
-                       negs = negs, leave_as_string = leave_as_string)
-}
+nth_number_after_first <- strex::str_nth_number_after_first
 
 #' @rdname nth_number_after_mth
-#' @examples
-#' nth_number_after_last(string, "abc", -1)
 #' @export
-nth_number_after_last <- function(string, pattern, n,
-                                  decimals = FALSE, leading_decimals = FALSE,
-                                  negs = FALSE, leave_as_string = FALSE) {
-  nth_number_after_mth(string, pattern, n = n, m = -1,
-                       decimals = decimals, leading_decimals = leading_decimals,
-                       negs = negs, leave_as_string = leave_as_string)
-}
+nth_number_after_last <- strex::str_nth_number_after_last
 
 #' @rdname nth_number_after_mth
-#' @examples
-#' first_number_after_mth(string, "abc", 2)
 #' @export
-first_number_after_mth <- function(string, pattern, m,
-                                   decimals = FALSE, leading_decimals = FALSE,
-                                   negs = FALSE, leave_as_string = FALSE) {
-  nth_number_after_mth(string, pattern, n = 1, m = m,
-                       decimals = decimals, leading_decimals = leading_decimals,
-                       negs = negs, leave_as_string = leave_as_string)
-}
+first_number_after_mth <- strex::str_first_number_after_mth
 
 #' @rdname nth_number_after_mth
-#' @examples
-#' last_number_after_mth(string, "abc", 1)
 #' @export
-last_number_after_mth <- function(string, pattern, m,
-                                  decimals = FALSE, leading_decimals = FALSE,
-                                  negs = FALSE, leave_as_string = FALSE) {
-  nth_number_after_mth(string, pattern, n = -1, m = m,
-                       decimals = decimals, leading_decimals = leading_decimals,
-                       negs = negs, leave_as_string = leave_as_string)
-}
+last_number_after_mth <- strex::str_last_number_after_mth
 
 #' @rdname nth_number_after_mth
-#' @examples
-#' first_number_after_first(string, "abc")
 #' @export
-first_number_after_first <- function(string, pattern,
-                                     decimals = FALSE, leading_decimals = FALSE,
-                                     negs = FALSE, leave_as_string = FALSE) {
-  nth_number_after_mth(string, pattern, n = 1, m = 1,
-                       decimals = decimals, leading_decimals = leading_decimals,
-                       negs = negs, leave_as_string = leave_as_string)
-}
+first_number_after_first <- strex::str_first_number_after_first
 
 #' @rdname nth_number_after_mth
-#' @examples
-#' first_number_after_last(string, "abc")
 #' @export
-first_number_after_last <- function(string, pattern,
-                                    decimals = FALSE, leading_decimals = FALSE,
-                                    negs = FALSE, leave_as_string = FALSE) {
-  nth_number_after_mth(string, pattern, n = 1, m = -1,
-                       decimals = decimals, leading_decimals = leading_decimals,
-                       negs = negs, leave_as_string = leave_as_string)
-}
+first_number_after_last <- strex::str_first_number_after_last
 
 #' @rdname nth_number_after_mth
-#' @examples
-#' last_number_after_first(string, "abc")
 #' @export
-last_number_after_first <- function(string, pattern,
-                                    decimals = FALSE, leading_decimals = FALSE,
-                                    negs = FALSE, leave_as_string = FALSE) {
-  nth_number_after_mth(string, pattern, n = -1, m = 1,
-                       decimals = decimals, leading_decimals = leading_decimals,
-                       negs = negs, leave_as_string = leave_as_string)
-}
+last_number_after_first <- strex::str_last_number_after_first
 
 #' @rdname nth_number_after_mth
-#' @examples
-#' last_number_after_last(string, "abc")
 #' @export
-last_number_after_last <- function(string, pattern,
-                                   decimals = FALSE, leading_decimals = FALSE,
-                                   negs = FALSE, leave_as_string = FALSE) {
-  nth_number_after_mth(string, pattern, n = -1, m = -1,
-                       decimals = decimals, leading_decimals = leading_decimals,
-                       negs = negs, leave_as_string = leave_as_string)
-}
+last_number_after_last <- strex::str_last_number_after_last

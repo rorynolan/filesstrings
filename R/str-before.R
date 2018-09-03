@@ -19,16 +19,9 @@ str_before_last <- function(strings, pattern) {
 
 #' Get the part of a string before the last period.
 #'
-#' This is usually used to get the part of a file name that doesn't include the
-#' file extension. It is vectorized over `string`. If there is no period in
-#' `string`, the input is returned.
+#' See [strex::str_before_last_dot()].
 #'
-#' @param string A character vector.
-#'
-#' @return A character vector.
-#'
-#' @examples
-#' before_last_dot(c("spreadsheet1.csv", "doc2.doc", ".R"))
+#' @inheritParams strex::str_before_last_dot
 #'
 #' @export
 before_last_dot <- function(string) {

@@ -22,21 +22,6 @@ this has length >1 its length must be the same as that of \code{string}.}
 
 \item{n}{Then \eqn{n} for the \eqn{n}th instance of the pattern.}
 }
-\value{
-A two-column matrix. The \eqn{i}th row of this matrix gives the start
-and end indices of the \eqn{n}th instance of \code{pattern} in the \eqn{i}th
-element of \code{string}.
-}
 \description{
-The \eqn{n}th instance of an pattern will cover a series of character
-indices. These functions tell you which indices those are.
-}
-\details{
-\itemize{ \item \code{str_first_instance_indices(...)} is just
-\code{str_nth_instance_indices(..., n = 1)}. \item
-\code{str_last_instance_indices(...)} is just \code{str_nth_instance_indices(..., n = -1)}. }
-}
-\examples{
-str_nth_instance_indices(c("abcdabcxyz", "abcabc"), "abc", 2)
-
+See \code{\link[strex:str_locate_nth]{strex::str_locate_nth()}}.
 }

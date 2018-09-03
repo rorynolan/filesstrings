@@ -13,19 +13,6 @@ singleize(string, pattern)
 in the stringr package (e.g. look at \code{\link[stringr:str_locate]{stringr::str_locate()}}). If
 this has length >1 its length must be the same as that of \code{string}.}
 }
-\value{
-The string with the duplicates fixed.
-}
 \description{
-If a string contains a given pattern duplicated back-to-back a number of
-times, remove that duplication, leaving the pattern appearing once in that
-position (works if the pattern is duplicated in different parts of a string,
-removing all instances of duplication). This is vectorized over string and
-pattern.
-}
-\examples{
-singleize("abc//def", "/")
-singleize("abababcabab", "ab")
-singleize(c("abab", "cdcd"), "cd")
-singleize(c("abab", "cdcd"), c("ab", "cd"))
+See \code{\link[strex:str_singleize]{strex::str_singleize()}}.
 }

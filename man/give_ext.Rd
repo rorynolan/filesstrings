@@ -14,16 +14,6 @@ give_ext(string, ext, replace = FALSE)
 \item{replace}{If the file has an extension already, replace it (or append
 the new extension name)?}
 }
-\value{
-A string: the file name in your intended form.
-}
 \description{
-Say you want to ensure a name is fit to be the name of a csv file. Then, if
-the input doesn't end with ".csv", this function will tack ".csv" onto the
-end of it. This is vectorized over the first argument.
-}
-\examples{
-give_ext(c("abc", "abc.csv"), "csv")
-give_ext("abc.csv", "pdf")
-give_ext("abc.csv", "pdf", replace = TRUE)
+See \code{\link[strex:str_give_ext]{strex::str_give_ext()}}.
 }

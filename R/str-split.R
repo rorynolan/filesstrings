@@ -1,22 +1,8 @@
 #' Split a string based on CamelCase
 #'
-#' Vectorized over `string`.
+#' See [strex::str_split_camel_case()].
 #'
-#' @param string A character vector.
-#' @param lower Do you want the output to be all lower case (or as is)?
+#' @inheritParams strex::str_split_camel_case
 #'
-#' @return A list of character vectors, one list element for each element of
-#'   `string`.
-#'
-#' @references Adapted from Ramnath Vaidyanathan's answer at
-#' http://stackoverflow.com/questions/8406974/splitting-camelcase-in-r.
-#'
-#' @examples
-#' str_split_camel_case(c("RoryNolan", "NaomiFlagg", "DepartmentOfSillyHats"))
 #' @export
-str_split_camel_case <- function(string, lower = FALSE) {
-  string <- gsub("^[^[:alnum:]]+|[^[:alnum:]]+$", "", string)
-  string <- gsub("(?!^)(?=[[:upper:]])", " ", string, perl = TRUE)
-  if (lower) string <- tolower(string)
-  str_split(string, " ")
-}
+str_split_camel_case <- strex::str_split_camel_case

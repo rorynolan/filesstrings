@@ -9,17 +9,6 @@ can_be_numeric(string)
 \arguments{
 \item{string}{A character vector.}
 }
-\value{
-A character vector. \code{TRUE} if the argument can be considered to be
-numeric or \code{FALSE} otherwise.
-}
 \description{
-After padding is removed, could the input string be considered to be numeric,
-i.e. could it be coerced to numeric. This function is vectorized over its one
-argument.
-}
-\examples{
-can_be_numeric("3")
-can_be_numeric("5 ")
-can_be_numeric(c("1a", "abc"))
+See \code{\link[strex:str_can_be_numeric]{strex::str_can_be_numeric()}}.
 }

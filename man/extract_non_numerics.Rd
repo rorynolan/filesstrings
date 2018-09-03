@@ -5,7 +5,7 @@
 \alias{nth_non_numeric}
 \alias{first_non_numeric}
 \alias{last_non_numeric}
-\title{Extract or non-numbers from a string.}
+\title{Extract non-numbers from a string.}
 \usage{
 extract_non_numerics(string, decimals = FALSE,
   leading_decimals = FALSE, negs = FALSE)
@@ -38,31 +38,5 @@ non-numeric), \code{n = -2} will give you the second last number and so on. The
 function is vectorized over this argument.}
 }
 \description{
-\code{extract_non_numerics} extracts the bits of the string that aren't extracted
-by \code{extract_numbers}. \code{nth_non_numeric} is a convenient wrapper for
-\code{extract_non_numerics}, allowing you to choose which number you want. Please
-run the examples at the bottom of this page to ensure that you understand how
-these functions work, and their limitations. These functions are vectorized
-over \code{string}.
-}
-\details{
-\itemize{
-\item \code{first_non_numeric(...)} is just \code{nth_non_numeric(..., n = 1)}.
-\item \code{last_non_numeric(...)} is just \code{nth_non_numeric(..., n = -1)}.
-}
-}
-\examples{
-extract_non_numerics("abc123abc456")
-extract_non_numerics("abc1.23abc456")
-extract_non_numerics("abc1.23abc456", decimals = TRUE)
-extract_non_numerics("abc1..23abc456", decimals = TRUE)
-extract_non_numerics("abc1..23abc456", decimals = TRUE,
-                     leading_decimals = TRUE)
-extract_non_numerics(c("-123abc456", "ab1c"))
-extract_non_numerics("-123abc456", negs = TRUE)
-extract_non_numerics("--123abc456", negs = TRUE)
-extract_non_numerics("--123abc456", negs = TRUE)
-nth_non_numeric("--123abc456", 1)
-nth_non_numeric("--123abc456", -2)
-
+See \code{\link[strex:str_extract_non_numerics]{strex::str_extract_non_numerics()}}
 }

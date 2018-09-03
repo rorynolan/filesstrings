@@ -9,14 +9,6 @@ locate_braces(string)
 \arguments{
 \item{string}{A character vector}
 }
-\value{
-A list of data frames, one for each member of the string character
-vector. Each data frame has a "position" and "brace" column which give the
-positions and types of braces in the given string.
-}
 \description{
-Give the positions of \code{(}, \code{)}, \code{[}, \code{]}, \code{\{}, \code{\}} within a string.
-}
-\examples{
-locate_braces(c("a{](kkj)})", "ab(]c{}"))
+See \code{\link[strex:str_locate_braces]{strex::str_locate_braces()}}.
 }

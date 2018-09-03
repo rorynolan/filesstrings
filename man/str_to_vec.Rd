@@ -9,13 +9,6 @@ str_to_vec(string)
 \arguments{
 \item{string}{A string.}
 }
-\value{
-A character vector.
-}
 \description{
-Go from a string to a vector whose \eqn{i}th element is the \eqn{i}th
-character in the string.
-}
-\examples{
-str_to_vec("abcdef")
+See \code{\link[strex:str_to_vec]{strex::str_to_vec()}}.
 }

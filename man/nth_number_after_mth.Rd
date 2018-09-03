@@ -46,7 +46,9 @@ last_number_after_last(string, pattern, decimals = FALSE,
 in the stringr package (e.g. look at \code{\link[stringr:str_locate]{stringr::str_locate()}}). If
 this has length >1 its length must be the same as that of \code{string}.}
 
-\item{n, m}{Natural numbers.}
+\item{n}{Natural numbers.}
+
+\item{m}{Natural numbers.}
 
 \item{decimals}{Do you want to include the possibility of decimal numbers
 (\code{TRUE}) or not (\code{FALSE}, the default).}
@@ -60,24 +62,6 @@ are not handled here (see the examples).}
 \item{leave_as_string}{Do you want to return the number as a string (\code{TRUE})
 or as numeric (\code{FALSE}, the default)?}
 }
-\value{
-A numeric vector.
-}
 \description{
-Given a string, a pattern and natural numbers \code{n} and \code{m}, find the \code{n}th
-number after the \code{m}th occurrence of the pattern.
-}
-\examples{
-string <- c("abc1abc2abc3abc4abc5abc6abc7abc8abc9",
-            "abc1def2ghi3abc4def5ghi6abc7def8ghi9")
-nth_number_after_mth(string, "abc", 1, 3)
-nth_number_after_mth(string, "abc", 2, 3)
-nth_number_after_first(string, "abc", 2)
-nth_number_after_last(string, "abc", -1)
-first_number_after_mth(string, "abc", 2)
-last_number_after_mth(string, "abc", 1)
-first_number_after_first(string, "abc")
-first_number_after_last(string, "abc")
-last_number_after_first(string, "abc")
-last_number_after_last(string, "abc")
+See \code{\link[strex:str_nth_number_after_mth]{strex::str_nth_number_after_mth()}}.
 }

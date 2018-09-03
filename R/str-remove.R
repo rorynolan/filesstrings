@@ -1,19 +1,8 @@
 #' Remove the quoted parts of a string.
 #'
-#' If any parts of a string are quoted (between quotation marks), remove those
-#' parts of the string, including the quotes. Run the examples and you'll know
-#' exactly how this function works.
+#' See [strex::str_remove_quoted()].
 #'
-#' @param string A character vector.
+#' @inheritParams strex::str_remove_quoted
 #'
-#' @return A character vector.
-#' @examples
-#' string <- "\"abc\"67a\'dk\'f"
-#' cat(string)
-#' remove_quoted(string)
 #' @export
-remove_quoted <- function(string) {
-  string <- str_replace_all(string, "(?:\".*?\")", "")
-  string <- str_replace_all(string, "(?:\'.*?\')", "")
-  string
-}
+remove_quoted <- strex::str_remove_quoted

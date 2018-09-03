@@ -33,10 +33,6 @@ test_that("nice_nums works", {
                c("abc09def55", "abc10def07"))
   expect_equal(nice_nums(c("abc9def55", "abc10def777", "abc4def4")),
                c("abc09def055", "abc10def777", "abc04def004"))
-  expect_error(nice_nums(c("abc9def55", "abc10xyz7")))
-  expect_error(nice_nums(c("abc9def55", "9abc10def7")))
-  expect_error(nice_nums(c("0abc9def55g", "abc10def7g0")))
-  expect_error(nice_nums("abc"), "no numbers")
   expect_equal(nice_nums(1:10), c(paste0(0, 1:9), 10))
 })
 
@@ -94,10 +90,6 @@ test_that("extract_numbers works", {
   expect_equal(last_non_numeric(c("abc", "def")), c("abc", "def"))
   expect_equal(nth_non_numeric(c("ab12bd23", "wx56yz89"), c(3, -1)),
                c(NA, "yz"))
-  expect_equal(filesstrings:::num_list_nth_elems(list(c(1, 2)), c(-1, 3)),
-               c(2, NA))
-  expect_equal(filesstrings:::num_list_nth_elems(list(1:2, 3:4), -1), c(2, 4))
-  expect_equal(filesstrings:::num_list_nth_elems(list(1:2, 3:4), c(-1, 1)), 2:3)
 })
 
 test_that("str_split_by_nums works", {
@@ -224,17 +216,16 @@ test_that("str_split_camel_case works", {
 })
 
 test_that("str_nth_instance_indices errors in the right way", {
-  expect_error(filesstrings:::str_nth_instance_indices("aba", "a", 9), "There")
+  expect_error(str_nth_instance_indices("aba", "a", 9), "There")
 })
 
 test_that("str_first/last_instance_indices work", {
-  library(magrittr)
   expect_equal(str_first_instance_indices(c("abcdabcxyz", "abcabc"), "abc"),
                matrix(c(1, 3), nrow = 2, ncol = 2, byrow = TRUE) %>%
-                 set_colnames(c("start", "end")))
+                 magrittr::set_colnames(c("start", "end")))
   expect_equal(str_last_instance_indices(c("abcdabcxyz", "abcabc"), "abc"),
                matrix(c(5, 7, 4, 6), nrow = 2, ncol = 2, byrow = TRUE) %>%
-                 set_colnames(c("start", "end")))
+                 magrittr::set_colnames(c("start", "end")))
 
 })
 

@@ -26,9 +26,15 @@ NULL
 
 #' `filesstrings`: handy file and string manipulation
 #'
-#' Convenient functions for moving files, deleting directories, and a variety of
-#' string operations that facilitate manipulating files and extracting
-#' information from strings.
+#' This started out as a package for file and string manipulation. Since then,
+#' the `fs` file manipulation package and the `strex string manipulation package
+#' emerged, offering functionality previously given by this package (but
+#' slightly better). Those packages have hence almost pushed 'filesstrings' into
+#' extinction. However, it still has a small number of unique, handy file
+#' manipulation functions which can be seen in the
+#' [vignette](https://cran.r-project.org/package=filesstrings/vignettes/files.html).
+#' One example is a function to remove spaces from all file names in a
+#' directory.
 #'
 #' @docType package
 #' @name filesstrings

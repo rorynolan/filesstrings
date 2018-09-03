@@ -1,3 +1,9 @@
+### 2.7.0
+
+#### NEW FEATURES
+* All of the `stringr`-style string manipulation is now done by the `strex` package, which `filesstrings` now depends upon. That was the main functionality of `filesstrings`, so `filesstrings` is going to be more dormant from now on.
+
+
 ### 2.6.0
 
 #### NEW FEATURES

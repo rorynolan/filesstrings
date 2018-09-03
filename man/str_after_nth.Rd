@@ -33,25 +33,6 @@ first (\code{n = 1})). This can be negatively indexed, so if you wish to select
 the \emph{last} occurrence, you need \code{n = -1}, for the second-last, you
 need \code{n = -2} and so on.}
 }
-\value{
-A character vector of the desired strings.
-}
 \description{
-Extract the part of a string which is before or after the \emph{n}th occurrence of
-a specified pattern, vectorized over the string. \code{n} can be negatively
-indexed. See 'Arguments'.
-}
-\details{
-\itemize{ \item \code{str_after_first(...)} is just \code{str_after_nth(..., n = 1)}.
-\item \code{str_after_last(...)} is just \code{str_after_nth(..., n = -1)}. \item
-\code{str_before_first(...)} is just \code{str_before_nth(..., n = 1)}. \item
-\code{str_before_last(...)} is just \code{str_before_nth(..., n = -1)}. }
-}
-\examples{
-string <- "ab..cd..de..fg..h"
-str_after_nth(string, "\\\\.\\\\.", 3)
-str_before_nth(string, "e", 1)
-str_before_nth(string, "\\\\.", -3)
-str_before_nth(string, ".", -3)
-str_before_nth(rep(string, 2), fixed("."), -3)
+See \code{\link[strex:str_after_nth]{strex::str_after_nth()}}.
 }

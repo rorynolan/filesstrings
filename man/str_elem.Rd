@@ -12,13 +12,6 @@ str_elem(string, index)
 \item{index}{An integer. Negative indexing is allowed as in
 \code{\link[stringr:str_sub]{stringr::str_sub()}}.}
 }
-\value{
-A one-character string.
-}
 \description{
-If the element does not exist, this function returns the empty string.
-}
-\examples{
-str_elem(c("abcd", "xyz"), 3)
-str_elem("abcd", -2)
+See \code{\link[strex:str_elem]{strex::str_elem()}}.
 }

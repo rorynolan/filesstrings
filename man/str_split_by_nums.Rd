@@ -20,11 +20,5 @@ the start of a number?}
 are not handled here (see the examples).}
 }
 \description{
-Break a string wherever you go from a numeric character to a non-numeric or
-vice-versa.
-}
-\examples{
-str_split_by_nums(c("abc123def456.789gh", "a1b2c344"))
-str_split_by_nums("abc123def456.789gh", decimals = TRUE)
-str_split_by_nums("22")
+See \code{\link[strex:str_split_by_nums]{strex::str_split_by_nums()}}.
 }

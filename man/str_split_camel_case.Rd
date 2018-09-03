@@ -11,17 +11,6 @@ str_split_camel_case(string, lower = FALSE)
 
 \item{lower}{Do you want the output to be all lower case (or as is)?}
 }
-\value{
-A list of character vectors, one list element for each element of
-\code{string}.
-}
 \description{
-Vectorized over \code{string}.
-}
-\examples{
-str_split_camel_case(c("RoryNolan", "NaomiFlagg", "DepartmentOfSillyHats"))
-}
-\references{
-Adapted from Ramnath Vaidyanathan's answer at
-http://stackoverflow.com/questions/8406974/splitting-camelcase-in-r.
+See \code{\link[strex:str_split_camel_case]{strex::str_split_camel_case()}}.
 }

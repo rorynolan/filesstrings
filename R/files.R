@@ -250,6 +250,8 @@ nice_file_nums <- function(dir = ".", pattern = NA) {
 #' dir.remove("RemoveFileNameSpaces_test")}
 #' @export
 remove_filename_spaces <- function(dir = ".", pattern = "", replacement = "") {
+  init_dir <- setwd(dir)
+  on.exit(setwd(init_dir))
   lf <- list.files(pattern = pattern)
   new_names <- str_replace_all(lf, " ", replacement)
   new_new_names <- new_names[new_names != lf]

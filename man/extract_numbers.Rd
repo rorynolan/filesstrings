@@ -5,7 +5,7 @@
 \alias{nth_number}
 \alias{first_number}
 \alias{last_number}
-\title{Extract numbers (or non-numbers) from a string.}
+\title{Extract numbers from a string.}
 \usage{
 extract_numbers(string, leave_as_string = FALSE, decimals = FALSE,
   leading_decimals = FALSE, negs = FALSE)
@@ -40,45 +40,6 @@ number (or non-numeric) whereas \code{n = -1} will give you the last number (or
 non-numeric), \code{n = -2} will give you the second last number and so on. The
 function is vectorized over this argument.}
 }
-\value{
-For \code{extract_numbers} and \code{extract_non_numerics}, a list of numeric or
-character vectors, one list element for each element of \code{string}. For
-\code{nth_number} and \code{nth_non_numeric}, a vector the same length as \code{string} (as
-in \code{length(string)}, not \code{nchar(string)}).
-}
 \description{
-\code{extract_numbers} extracts the numbers (or non-numbers) from a string where
-decimals are optionally allowed. \code{nth_number} is a
-convenient wrapper for \code{extract_numbers}, allowing you to choose which number
-you want. Please run the examples at the bottom
-of this page to ensure that you understand how these functions work, and
-their limitations. These functions are vectorized over \code{string}.
-}
-\details{
-If any part of a string contains an ambiguous number (e.g. \code{1.2.3} would be
-ambiguous if \code{decimals = TRUE} (but not otherwise)), the value returned for
-that string will be \code{NA}. Note that these functions do not know about
-scientific notation (e.g. \code{1e6} for 1000000).
-
-\itemize{
-\item \code{first_number(...)} is just \code{nth_number(..., n = 1)}.
-\item \code{last_number(...)} is just \code{nth_number(..., n = -1)}.
-}
-}
-\examples{
-extract_numbers(c("abc123abc456", "abc1.23abc456"))
-extract_numbers(c("abc1.23abc456", "abc1..23abc456"), decimals = TRUE)
-extract_numbers("abc1..23abc456", decimals = TRUE)
-extract_numbers("abc1..23abc456", decimals = TRUE, leading_decimals = TRUE)
-extract_numbers("abc1..23abc456", decimals = TRUE, leading_decimals = TRUE,
-                leave_as_string = TRUE)
-extract_numbers("-123abc456")
-extract_numbers("-123abc456", negs = TRUE)
-extract_numbers("--123abc456", negs = TRUE)
-extract_numbers(c(rep("abc1.2.3", 2), "a1b2.2.3", "e5r6"), decimals = TRUE)
-extract_numbers("ab.1.2", decimals = TRUE, leading_decimals = TRUE)
-nth_number("abc1.23abc456", 2:3)
-nth_number("abc1.23abc456", 2, decimals = TRUE)
-nth_number("-123abc456", -2, negs = TRUE)
-
+See \code{\link[strex:str_extract_numbers]{strex::str_extract_numbers()}}.
 }
