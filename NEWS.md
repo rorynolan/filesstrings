@@ -1,3 +1,9 @@
+### 2.7.1
+
+#### BUG FIXES
+* Insist on `strex` v0.1.1; v0.1.0 didn't pass on mac on CRAN.
+
+
 ### 2.7.0
 
 #### NEW FEATURES
