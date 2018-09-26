@@ -26,7 +26,7 @@ Imports:
     strex (>= 0.1.1),
     matrixStats,
     Rcpp,
-    ore,
+    ore (>= 1.4.0),
     tibble,
     rlang
 RoxygenNote: 6.1.0
