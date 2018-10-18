@@ -1,3 +1,13 @@
+### 3.0.0
+
+#### DEFUNCT
+* `str_with_patterns()` is defunct in light of `stringr::str_subset()`.
+* `count_matches()` is defunct in light of `stringr::str_count()`.
+
+#### BUG FIXES
+* Depend on a version of `strex` which is reliable on mac.
+
+
 ### 2.7.1
 
 #### BUG FIXES

@@ -114,19 +114,6 @@ test_that("str_to_vec works", {
   expect_equal(str_to_vec("abcdef"), c("a", "b", "c", "d", "e", "f"))
 })
 
-test_that("str_with_patterns works", {
-  expect_equal(str_with_patterns(c("abc", "bcd", "cde"), c("b", "c")),
-               c("abc", "bcd"))
-  expect_equal(str_with_patterns(c("abc", "bcd", "cde"), c("b", "c"),
-                                   any = TRUE), c("abc", "bcd", "cde"))
-  expect_equal(str_with_patterns(toupper(c("abc", "bcd", "cde")),
-                                   c("b", "c"), any = TRUE),
-               character(0))
-  expect_equal(str_with_patterns(toupper(c("abc", "bcd", "cde")),
-                                   c("b", "c"), any = TRUE,
-  ignore_case = TRUE), toupper(c("abc", "bcd", "cde")))
-})
-
 test_that("str_after_nth works", {
   string <- "ab..cd..de..fg..h"
   expect_equal(str_after_nth(string, "\\.\\.", 3), "fg..h",
@@ -173,13 +160,6 @@ test_that("trim_anything works", {
   expect_equal(trim_anything("-ghi--", "-"), "ghi")
   expect_equal(trim_anything("-ghi--", "--"), "-ghi")
   expect_equal(trim_anything("-ghi--", "--", "right"), "-ghi")
-})
-
-test_that("count_matches works", {
-  expect_equal(count_matches("abacad", "a"), 3)
-  expect_equal(count_matches("2.1.0.13", "."), 8)
-  expect_equal(count_matches("2.1.0.13", stringr::coll(".")), 3)
-  expect_error(count_matches("2", c("0", 1)))
 })
 
 test_that("locate_braces works", {
