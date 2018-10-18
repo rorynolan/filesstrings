@@ -4,5 +4,8 @@ language: R
 sudo: false
 cache: packages
 
+r_github_packages:
+  - rorynolan/strex
+
 after_success:
   - Rscript -e 'covr::codecov(line_exclusions = c("R/strings_deprecated.R", "R/files_deprecated.R", "R/RcppExports_deprecated.R", "R/utils_deprecated.R", "R/filesstrings.R"))'
