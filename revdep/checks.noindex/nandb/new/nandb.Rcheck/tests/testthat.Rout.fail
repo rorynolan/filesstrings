@@ -1,0 +1,54 @@
+
+R version 3.5.1 (2018-07-02) -- "Feather Spray"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(testthat)
+> library(nandb)
+> 
+> test_check("nandb")
+[31m──[39m [31m1. Error: deduplicate_nb_filename() works correctly (@test-utils.R#26) [39m [31m────────────────[39m
+'count_matches' is defunct.
+Use 'stringr::str_count()' instead.
+See help("Defunct") and help("filesstrings-defunct").
+1: expect_equal(deduplicate_nb_filename(path), paste0("detrended_exponential_thresh=4,3_tau=1,2", 
+       "_brightness_filt=NA,NA.tif")) at testthat/test-utils.R:26
+2: quasi_label(enquo(object), label)
+3: eval_bare(get_expr(quo), get_env(quo))
+4: deduplicate_nb_filename(path)
+5: filesstrings::count_matches(path, thresh_pattern)
+6: .Defunct("stringr::str_count()", "filesstrings") at /Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/R/filesstrings-defunct.R:19
+7: stop(paste(msg, collapse = ""), call. = FALSE, domain = NA)
+
+[31m──[39m [31m2. Error: deduplicate_cc_nb_filename() works correctly (@test-utils.R#65) [39m [31m─────────────[39m
+'count_matches' is defunct.
+Use 'stringr::str_count()' instead.
+See help("Defunct") and help("filesstrings-defunct").
+1: expect_equal(deduplicate_cc_nb_filename(path), paste0("detrended_exponential_thresh=4,3_tau=1,2", 
+       "_brightness_filt=NA,NA.tif")) at testthat/test-utils.R:65
+2: quasi_label(enquo(object), label)
+3: eval_bare(get_expr(quo), get_env(quo))
+4: deduplicate_cc_nb_filename(path)
+5: filesstrings::count_matches(path, thresh_pattern)
+6: .Defunct("stringr::str_count()", "filesstrings") at /Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/R/filesstrings-defunct.R:19
+7: stop(paste(msg, collapse = ""), call. = FALSE, domain = NA)
+
+══ testthat results  ══════════════════════════════════════════════════════════════════════
+OK: 96 SKIPPED: 0 FAILED: 2
+1. Error: deduplicate_nb_filename() works correctly (@test-utils.R#26) 
+2. Error: deduplicate_cc_nb_filename() works correctly (@test-utils.R#65) 
+
+Error: testthat unit tests failed
+Execution halted

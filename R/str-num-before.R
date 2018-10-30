@@ -88,7 +88,8 @@ last_number_before_mth <- function(string, pattern, m,
 #' first_number_before_first(string, "def")
 #' @export
 first_number_before_first <- function(string, pattern,
-                                      decimals = FALSE, leading_decimals = FALSE,
+                                      decimals = FALSE,
+                                      leading_decimals = FALSE,
                                       negs = FALSE, leave_as_string = FALSE) {
   nth_number_before_mth(string, pattern,
     n = 1, m = 1,

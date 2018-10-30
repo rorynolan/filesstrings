@@ -22,19 +22,19 @@ group_close <- function(vec_ascending, max_gap = 1) {
   if (lv == 1) {
     return(list(vec_ascending))
   } else {
-    gaps <- vec_ascending[2:lv] - vec_ascending[1:(lv-1)]
+    gaps <- vec_ascending[2:lv] - vec_ascending[1:(lv - 1)]
     big_gaps <- gaps > max_gap
-    nbgaps <- sum(big_gaps)  # number of big gaps
+    nbgaps <- sum(big_gaps) # number of big gaps
     if (!nbgaps) {
       return(list(vec_ascending))
     } else {
-      ends <- which(big_gaps)  # vertical end of lines
+      ends <- which(big_gaps) # vertical end of lines
       group1 <- vec_ascending[1:ends[1]]
       lg <- list(group1)
-      if (nbgaps == 1){
+      if (nbgaps == 1) {
         lg[[2]] <- vec_ascending[(ends[1] + 1):lv]
       } else {
-        for (i in 2:nbgaps){
+        for (i in 2:nbgaps) {
           lg[[i]] <- vec_ascending[(ends[i - 1] + 1):ends[i]]
           ikeep <- i
         }
@@ -44,4 +44,3 @@ group_close <- function(vec_ascending, max_gap = 1) {
     }
   }
 }
-

@@ -26,6 +26,7 @@ str_before_last <- function(strings, pattern) {
 #' @export
 before_last_dot <- function(string) {
   string %>%
-    tools::file_path_sans_ext() %T>%
-      {.[(string == .) & (str_elem(., 1) == ".")] <- ""}
+    tools::file_path_sans_ext() %T>% {
+      .[(string == .) & (str_elem(., 1) == ".")] <- ""
+    }
 }

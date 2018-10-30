@@ -25,8 +25,10 @@ extend_char_vec <- function(char_vec, extend_by = NA, length_out = NA) {
   if (!is.na(extend_by)) return(c(char_vec, rep("", extend_by)))
   if (!is.na(length_out)) {
     if (!(is.numeric(length_out) && length_out >= length(char_vec))) {
-      stop("If specified, length.out must be numeric and at least equal to ",
-           "the length of char.vec.")
+      stop(
+        "If specified, length.out must be numeric and at least equal to ",
+        "the length of char.vec."
+      )
     }
     c(char_vec, rep("", length_out - length(char_vec)))
   }

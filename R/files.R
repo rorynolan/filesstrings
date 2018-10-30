@@ -15,27 +15,33 @@
 create_dir <- function(...) {
   dirs <- unique(unlist(...))
   created <- purrr::map_lgl(dirs, function(dir) {
-                                    if (!dir.exists(dir)) {
-                                      dir.create(dir)
-                                      TRUE
-                                    } else {
-                                      FALSE
-                                    }
-                                  })
+    if (!dir.exists(dir)) {
+      dir.create(dir)
+      TRUE
+    } else {
+      FALSE
+    }
+  })
   names(created) <- dirs
   msg <- sum(created) %>% {
-    ifelse(., paste(., ifelse(. == 1, "directory", "directories"),
-                    "created. "),
-           "")
+    ifelse(., paste(
+      ., ifelse(. == 1, "directory", "directories"),
+      "created. "
+    ),
+    ""
+    )
   }
   n_not_created <- sum(!created)
   if (n_not_created) {
-    msg %<>% paste0(n_not_created,
-                    ifelse(n_not_created == 1, " directory", " directories"),
-                    " not created because ",
-                    ifelse(n_not_created == 1,
-                           "it already exists.",
-                           "they already exist."))
+    msg %<>% paste0(
+      n_not_created,
+      ifelse(n_not_created == 1, " directory", " directories"),
+      " not created because ",
+      ifelse(n_not_created == 1,
+        "it already exists.",
+        "they already exist."
+      )
+    )
   }
   message(msg)
   invisible(created)
@@ -54,13 +60,15 @@ create_dir <- function(...) {
 #' remove_dir(c("mydir1", "mydir2"))}
 #' @export
 remove_dir <- function(...) {
-  dirs <- unlist(...)
+  dirs <- unlist(list(...))
   exist <- dir.exists(dirs)
   outcome <- !as.logical(purrr::map_int(dirs, unlink, recursive = TRUE))
   outcome[!exist] <- FALSE
   outcome %>% {
-    paste(sum(.), ifelse(sum(.) == 1, "directory", "directories"),
-          "deleted.", sum(!.), "failed to delete.")
+    paste(
+      sum(.), ifelse(sum(.) == 1, "directory", "directories"),
+      "deleted.", sum(!.), "failed to delete."
+    )
   } %>% message()
   invisible(outcome)
 }
@@ -87,7 +95,9 @@ get_new_home <- function(file, destination) {
   # This function does not move any files, it helps `move_files()` which does
   file %<>% normalizePath()
   file_name_base <- basename(file)
-  destination %<>% {suppressWarnings(normalizePath(.))}  # replace tildes
+  destination %<>% {
+    suppressWarnings(normalizePath(.))
+  } # replace tildes
   paste0(destination, "/", file_name_base)
 }
 
@@ -129,19 +139,25 @@ move_files <- function(files, destinations, overwrite = FALSE) {
   checkmate::assert_character(destinations, min.chars = 1)
   anydup_files <- anyDuplicated(files)
   if (anydup_files) {
-    stop("`files` must not have any duplicated elements.", "\n",
-         "    * Element ", anydup_files, " of `files` is a duplicate.")
+    stop(
+      "`files` must not have any duplicated elements.", "\n",
+      "    * Element ", anydup_files, " of `files` is a duplicate."
+    )
   }
   if (length(destinations) == 1) destinations %<>% rep(length(files))
   if (length(destinations) != length(files)) {
-    stop("The number of destinations must be equal to 1 or equal to the ",
-         "number of files to be moved.")
+    stop(
+      "The number of destinations must be equal to 1 or equal to the ",
+      "number of files to be moved."
+    )
   }
   n_created_dirs <- sum(suppressMessages(create_dir(destinations)))
   if (n_created_dirs > 0) {
-    message(n_created_dirs, " ", "director",
-            ifelse(n_created_dirs == 1, "y", "ies"),
-            " created.")
+    message(
+      n_created_dirs, " ", "director",
+      ifelse(n_created_dirs == 1, "y", "ies"),
+      " created."
+    )
   }
   n_files <- length(files)
   overwrite_attempt <- FALSE
@@ -152,23 +168,29 @@ move_files <- function(files, destinations, overwrite = FALSE) {
       overwrite_attempt <- TRUE
       if (overwrite) {
         file.rename(files[i], new_paths[i])
-        if ((!file.exists(files[i])) && file.exists(new_paths[i]))
+        if ((!file.exists(files[i])) && file.exists(new_paths[i])) {
           out[i] <- TRUE
+        }
       }
     } else {
       file.rename(files[i], new_paths[i])
-      if ((!file.exists(files[i])) && file.exists(new_paths[i]))
+      if ((!file.exists(files[i])) && file.exists(new_paths[i])) {
         out[i] <- TRUE
+      }
     }
   }
   n_succeeded <- sum(out)
   n_failed <- sum(!out)
-  message(n_succeeded, ifelse(n_succeeded == 1, " file", " files"),
-          " moved. ", n_failed, " failed.")
+  message(
+    n_succeeded, ifelse(n_succeeded == 1, " file", " files"),
+    " moved. ", n_failed, " failed."
+  )
   if (sum(!out) && !overwrite && overwrite_attempt) {
-    message("Some files failed to move because it would have caused files ",
-            "to be overwritten. ", "\n",
-            "    * To allow overwriting, use `overwrite = TRUE`.")
+    message(
+      "Some files failed to move because it would have caused files ",
+      "to be overwritten. ", "\n",
+      "    * To allow overwriting, use `overwrite = TRUE`."
+    )
   }
   invisible(out)
 }
@@ -220,8 +242,10 @@ nice_file_nums <- function(dir = ".", pattern = NA) {
     lf <- list.files(pattern = pattern)
   }
   renamed <- file.rename(lf, nice_nums(lf))
-  message(sum(renamed), " files renamed into the desired format. ",
-          sum(!renamed), " failed.")
+  message(
+    sum(renamed), " files renamed into the desired format. ",
+    sum(!renamed), " failed."
+  )
   invisible(renamed)
 }
 
@@ -259,17 +283,21 @@ remove_filename_spaces <- function(dir = ".", pattern = "", replacement = "") {
     index <- which.max(lf == new_new_names[1] & str_detect(lf, " "))
     spacey <- lf[index]
     spaceless <- new_new_names[1]
-    stop("Not renaming because to do so would also overwrite.", "\n",
-         "    * For example, both '", spacey, "' and '", spaceless,
-         "' already exist, so to rename '", spacey, "' to '", spaceless,
-         "' would be to overwrite '", spaceless, "'.")
+    stop(
+      "Not renaming because to do so would also overwrite.", "\n",
+      "    * For example, both '", spacey, "' and '", spaceless,
+      "' already exist, so to rename '", spacey, "' to '", spaceless,
+      "' would be to overwrite '", spaceless, "'."
+    )
   }
   n_to_rename <- length(setdiff(lf, new_names))
   outcome <- logical()
   if (n_to_rename) {
     outcome <- file.rename(lf, new_names)
-    message(n_to_rename, " file", ifelse(n_to_rename == 1, "", "s"),
-            " required renaming and this was done successfully.")
+    message(
+      n_to_rename, " file", ifelse(n_to_rename == 1, "", "s"),
+      " required renaming and this was done successfully."
+    )
   } else {
     message("No files required renaming.")
   }
@@ -305,14 +333,18 @@ rename_with_nums <- function(dir = ".", pattern = NULL) {
   if (l == 0) stop("No files found to rename.")
   ext <- unique(tools::file_ext(lf))
   if (length(ext) != 1) {
-    stop("Files matching pattern have different extensions.", "\n", "    * ",
-         " This function only works with files of the same file extension.")
+    stop(
+      "Files matching pattern have different extensions.", "\n", "    * ",
+      " This function only works with files of the same file extension."
+    )
   }
   new_names <- nice_nums(paste0(seq_len(l), ".", ext))
   if (any(new_names %in% lf)) {
-    stop("Some of the names are already in the desired format, for example '",
-         new_names[new_names %in% lf][1], "'.", "\n",
-         "    * Unable to proceed as renaming may result in deletion.")
+    stop(
+      "Some of the names are already in the desired format, for example '",
+      new_names[new_names %in% lf][1], "'.", "\n",
+      "    * Unable to proceed as renaming may result in deletion."
+    )
   }
   file.rename(lf, new_names)
 }
@@ -348,7 +380,7 @@ rename_with_nums <- function(dir = ".", pattern = NULL) {
 unitize_dirs <- function(unit, pattern = NULL, dir = ".") {
   lf <- list.files(pattern = pattern)
   if (!all(str_detect(lf, unit))) {
-    stop(paste0("The file names must all contain the word", unit ,"."))
+    stop(paste0("The file names must all contain the word", unit, "."))
   }
   up_to_first_units <- str_before_first(lf, unit)
   nums <- purrr::map_dbl(up_to_first_units, last_number, decimals = TRUE)

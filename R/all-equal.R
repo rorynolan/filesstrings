@@ -36,18 +36,24 @@
 #' all_equal(1:4, matrix(1:4, nrow = 2))  # note that this gives TRUE
 #' @export
 all_equal <- function(a, b = NULL) {
-  checkmate::assert(checkmate::check_null(a),
-                    checkmate::check_vector(a),
-                    checkmate::check_list(a),
-                    checkmate::check_array(a))
-  checkmate::assert(checkmate::check_null(b),
-                    checkmate::check_vector(b),
-                    checkmate::check_list(b),
-                    checkmate::check_array(b))
-  if (is.array(a) && isTRUE(checkmate::check_scalar(b)))
+  checkmate::assert(
+    checkmate::check_null(a),
+    checkmate::check_vector(a),
+    checkmate::check_list(a),
+    checkmate::check_array(a)
+  )
+  checkmate::assert(
+    checkmate::check_null(b),
+    checkmate::check_vector(b),
+    checkmate::check_list(b),
+    checkmate::check_array(b)
+  )
+  if (is.array(a) && isTRUE(checkmate::check_scalar(b))) {
     b %<>% array(dim = dim(a))
-  if (is.array(b) && isTRUE(checkmate::check_scalar(a)))
+  }
+  if (is.array(b) && isTRUE(checkmate::check_scalar(a))) {
     a %<>% array(dim = dim(b))
+  }
   if (is.null(b)) {
     if (rlang::is_atomic(a)) return(isTRUE(all(a == a[[1]])) || all(is.na(a)))
     return(length(unique(a)) == 1)

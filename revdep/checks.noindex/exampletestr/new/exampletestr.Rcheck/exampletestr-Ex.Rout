@@ -1,0 +1,92 @@
+
+R version 3.5.1 (2018-07-02) -- "Feather Spray"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "exampletestr"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('exampletestr')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("make-test-shells")
+> ### * make-test-shells
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: make-test-shells
+> ### Title: Create test shells.
+> ### Aliases: make-test-shells make_test_shell_fun make_tests_shells_file
+> ###   make_tests_shells_pkg
+> 
+> ### ** Examples
+> 
+> usethis::create_package(tempdir(), open = FALSE)
+[32m✔[39m Setting active project to [34m'/private/var/folders/l_/2mwm03p55zg7zjykv084hhvr0000gn/T/RtmpwCfmqA'[39m
+[32m✔[39m Creating [34m'R/'[39m
+[32m✔[39m Creating [34m'man/'[39m
+[32m✔[39m Writing [34m'DESCRIPTION'[39m
+[32m✔[39m Writing [34m'NAMESPACE'[39m
+> file.copy(system.file("extdata", c("detect.R", "match.R"),
++                       package = "exampletestr"),
++           paste0(tempdir(), "/R"))
+[1] TRUE TRUE
+> make_test_shell_fun("str_detect()", document = TRUE, open = FALSE,
++                     pkg_dir = tempdir())
+Running [90m`devtools::document()`[39m . . .
+Updating RtmpwCfmqA documentation
+Updating roxygen version in /private/var/folders/l_/2mwm03p55zg7zjykv084hhvr0000gn/T/RtmpwCfmqA/DESCRIPTION
+Loading RtmpwCfmqA
+[32m✔[39m Adding [34m'testthat'[39m to [32mSuggests[39m field in DESCRIPTION
+[32m✔[39m Creating [34m'tests/testthat/'[39m
+[32m✔[39m Writing [34m'tests/testthat.R'[39m
+[32m✔[39m Wrote [90m`tests/testthat/test-str_detect-examples.R`[39m.
+[31m●[39m Complete the unit tests in [90m`tests/testthat/test-str_detect-examples.R`[39m.
+> make_tests_shells_file("detect", document = FALSE, open = FALSE,
++                        pkg_dir = tempdir())
+[32m✔[39m Wrote [90m`tests/testthat/test-detect-examples.R`[39m.
+[31m●[39m Complete the unit tests in [90m`tests/testthat/test-detect-examples.R`[39m.
+> make_tests_shells_pkg(overwrite = TRUE, document = FALSE,
++                       pkg_dir = tempdir())
+[32m✔[39m Wrote [90m`tests/testthat/test-detect-examples.R`[39m.
+[31m●[39m Complete the unit tests in [90m`tests/testthat/test-detect-examples.R`[39m.
+[32m✔[39m Wrote [90m`tests/testthat/test-match-examples.R`[39m.
+[31m●[39m Complete the unit tests in [90m`tests/testthat/test-match-examples.R`[39m.
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+
+detaching ‘devtools_shims’, ‘package:RtmpwCfmqA’
+
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  2.184 0.094 2.304 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')
