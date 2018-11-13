@@ -1,3 +1,9 @@
+### 3.0.1
+
+#### BUG FIXES
+* Depend on latest, least buggy `strex`.
+
+
 ### 3.0.0
 
 #### DEFUNCT

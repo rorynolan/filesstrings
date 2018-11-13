@@ -2,7 +2,7 @@
 # filesstrings <img src="man/figures/logo.png" align="right" height=140/>
 
 This started out as a package for file and string manipulation. Since
-then, the ‘fs’ file manipulation package and the ‘strex’ string
+then, the `fs` file manipulation package and the \`strex string
 manipulation package emerged, offering functionality previously given by
 this package (but slightly better). Those packages have hence almost
 pushed ‘filesstrings’ into extinction. However, it still has a small
@@ -37,7 +37,8 @@ publication](http://joss.theoj.org/papers/10.21105/joss.00260/status.svg)](https
 
 # Installation
 
-To install `filesstrings` CRAN, in R, enter
+To install the release version of `filesstrings` from
+[CRAN](https://cran.r-project.org/package=filesstrings), in R, enter
 
 ``` r
 install.packages("filesstrings")
