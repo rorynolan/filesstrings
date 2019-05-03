@@ -14,14 +14,14 @@
 #' @export
 create_dir <- function(...) {
   dirs <- unique(unlist(...))
-  created <- purrr::map_lgl(dirs, function(dir) {
+  created <- vapply(dirs, function(dir) {
     if (!dir.exists(dir)) {
       dir.create(dir)
       TRUE
     } else {
       FALSE
     }
-  })
+  }, logical(1))
   names(created) <- dirs
   msg <- sum(created) %>% {
     ifelse(., paste(
@@ -62,7 +62,7 @@ create_dir <- function(...) {
 remove_dir <- function(...) {
   dirs <- unlist(list(...))
   exist <- dir.exists(dirs)
-  outcome <- !as.logical(purrr::map_int(dirs, unlink, recursive = TRUE))
+  outcome <- !as.logical(vapply(dirs, unlink, integer(1), recursive = TRUE))
   outcome[!exist] <- FALSE
   outcome %>% {
     paste(
@@ -383,7 +383,7 @@ unitize_dirs <- function(unit, pattern = NULL, dir = ".") {
     stop(paste0("The file names must all contain the word", unit, "."))
   }
   up_to_first_units <- str_before_first(lf, unit)
-  nums <- purrr::map_dbl(up_to_first_units, last_number, decimals = TRUE)
+  nums <- vapply(up_to_first_units, last_number, numeric(1), decimals = TRUE)
   un <- unique(nums)
   for (i in un) {
     files <- lf[nums == i]
