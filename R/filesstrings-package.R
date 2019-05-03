@@ -1,6 +1,5 @@
 #' @import stringr
 #' @importFrom magrittr '%>%' '%<>%' '%T>%'
-#' @importFrom strex match_arg
 NULL
 
 ## quiets concerns of R CMD check re: the .'s that appear in pipelines

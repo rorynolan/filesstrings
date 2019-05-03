@@ -25,7 +25,9 @@ Imports:
     strex (>= 1.0.0),
     matrixStats (>= 0.50.0),
     tibble (>= 2.0.1),
-    rlang (>= 0.3.3)
+    ore (>= 1.4.0),
+    rlang (>= 0.3.3),
+    stringi
 RoxygenNote: 6.1.1
 Suggests: 
     testthat,
