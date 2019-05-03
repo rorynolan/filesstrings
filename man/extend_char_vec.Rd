@@ -2,9 +2,12 @@
 % Please edit documentation in R/str-pad.R
 \name{extend_char_vec}
 \alias{extend_char_vec}
+\alias{str_extend_char_vec}
 \title{Pad a character vector with empty strings.}
 \usage{
 extend_char_vec(char_vec, extend_by = NA, length_out = NA)
+
+str_extend_char_vec(char_vec, extend_by = NA, length_out = NA)
 }
 \arguments{
 \item{char_vec}{A character vector. The thing you wish to expand.}

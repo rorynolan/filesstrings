@@ -2,9 +2,12 @@
 % Please edit documentation in R/str-give-ext.R
 \name{give_ext}
 \alias{give_ext}
+\alias{str_give_ext}
 \title{Ensure a file name has the intended extension.}
 \usage{
 give_ext(string, ext, replace = FALSE)
+
+str_give_ext(string, ext, replace = FALSE)
 }
 \arguments{
 \item{string}{The intended file name.}

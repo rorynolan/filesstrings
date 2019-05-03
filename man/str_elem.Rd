@@ -2,12 +2,15 @@
 % Please edit documentation in R/str-elem.R
 \name{str_elem}
 \alias{str_elem}
+\alias{elem}
 \title{Extract a single character from a string, using its index.}
 \usage{
 str_elem(string, index)
+
+elem(string, index)
 }
 \arguments{
-\item{string}{A string.}
+\item{string}{A character vector.}
 
 \item{index}{An integer. Negative indexing is allowed as in
 \code{\link[stringr:str_sub]{stringr::str_sub()}}.}

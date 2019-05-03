@@ -47,7 +47,6 @@ test_that("match_arg() works", {
     ignore_case = TRUE, index = TRUE
   ), 2)
   choices <- c("Apples", "Pears", "Bananas", "Oranges")
-  expect_equal(match_arg(NULL, choices), "Apples")
   expect_equal(match_arg("A", choices), "Apples")
   expect_equal(match_arg("B", choices, index = TRUE), 3)
   expect_equal(

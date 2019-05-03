@@ -2,15 +2,20 @@
 % Please edit documentation in R/str-elem.R
 \name{str_paste_elems}
 \alias{str_paste_elems}
-\title{Extract bits of a string and paste them together}
+\alias{paste_elems}
+\title{Extract bits of a string and paste them together.}
 \usage{
-str_paste_elems(string, indices)
+str_paste_elems(string, indices, sep = "")
+
+paste_elems(string, indices, sep = "")
 }
 \arguments{
-\item{string}{A string.}
+\item{string}{A character vector.}
 
-\item{indices}{A numeric vector of positive integers detailing the indices of
-the characters of \code{string} that we wish to paste together.}
+\item{indices}{A vector of integerish values. Negative indexing is allowed as
+in \code{\link[stringr:str_sub]{stringr::str_sub()}}.}
+
+\item{sep}{A string. The separator for pasting \code{string} elements together.}
 }
 \description{
 See \code{\link[strex:str_paste_elems]{strex::str_paste_elems()}}.

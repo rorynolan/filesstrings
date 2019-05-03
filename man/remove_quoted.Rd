@@ -2,9 +2,12 @@
 % Please edit documentation in R/str-remove.R
 \name{remove_quoted}
 \alias{remove_quoted}
+\alias{str_remove_quoted}
 \title{Remove the quoted parts of a string.}
 \usage{
 remove_quoted(string)
+
+str_remove_quoted(string)
 }
 \arguments{
 \item{string}{A character vector.}

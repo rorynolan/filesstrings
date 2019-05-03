@@ -2,18 +2,40 @@
 % Please edit documentation in R/str-currency.R
 \name{currency}
 \alias{currency}
-\alias{get_currencies}
-\alias{get_currency}
+\alias{str_extract_currencies}
+\alias{extract_currencies}
+\alias{str_nth_currency}
+\alias{nth_currency}
+\alias{str_first_currency}
+\alias{first_currency}
+\alias{str_last_currency}
+\alias{last_currency}
 \title{Get the currencies of numbers within a string.}
 \usage{
-get_currencies(string)
+str_extract_currencies(string)
 
-get_currency(string)
+extract_currencies(string)
+
+str_nth_currency(string, n)
+
+nth_currency(string, n)
+
+str_first_currency(string)
+
+first_currency(string)
+
+str_last_currency(string)
+
+last_currency(string)
 }
 \arguments{
-\item{string}{A string for \code{get_currencies()} and a character vector for
-\code{get_currency()}.}
+\item{string}{A character vector.}
+
+\item{n}{A vector of integerish values. Must be either length 1 or
+have length equal to the length of \code{string}. Negative indices count from
+the back: while \code{n = 1} and \code{n = 2} correspond to first and second, \code{n = -1} and \code{n = -2} correspond to last and second-last. \code{n = 0} will return
+\code{NA}.}
 }
 \description{
-See \code{\link[strex:str_get_currency]{strex::str_get_currency()}}.
+See \code{\link[strex:str_extract_currencies]{strex::str_extract_currencies()}}.
 }

@@ -6,3 +6,7 @@
 #'
 #' @export
 singleize <- strex::str_singleize
+
+#' @rdname singleize
+#' @export
+str_singleize <- singleize

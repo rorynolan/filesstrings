@@ -1,141 +1,76 @@
-#' Find the \eqn{n}th number before the \eqn{m}th occurrence of a pattern.
+#' Find the `n`th number before the `m`th occurrence of a pattern.
 #'
-#' Given a string, a pattern and natural numbers `n` and `m`, find the `n`th
-#' number that comes before the `m`th occurrence of the pattern.
+#' See [strex::str_nth_number_before_mth()].
 #'
-#' @param string A character vector.
-#' @param n,m Natural numbers.
-#' @inheritParams singleize
-#' @inheritParams extract_numbers
+#' @inheritParams strex::str_nth_number_before_mth
 #'
-#' @return A numeric vector.
-#'
-#' @examples
-#' string <- c("abc1abc2abc3abc4def5abc6abc7abc8abc9",
-#'             "abc1def2ghi3abc4def5ghi6abc7def8ghi9")
-#' nth_number_before_mth(string, "def", 1, 1)
-#' nth_number_before_mth(string, "abc", 2, 3)
 #' @export
-nth_number_before_mth <- function(string, pattern, n, m,
-                                  decimals = FALSE, leading_decimals = FALSE,
-                                  negs = FALSE, leave_as_string = FALSE) {
-  string %>%
-    str_before_nth(pattern, m) %>%
-    nth_number(n,
-      decimals = decimals, leading_decimals = leading_decimals,
-      negs = negs, leave_as_string = leave_as_string
-    )
-}
+nth_number_before_mth <- strex::str_nth_number_before_mth
 
 #' @rdname nth_number_before_mth
-#' @examples
-#' nth_number_before_first(string, "def", 2)
 #' @export
-nth_number_before_first <- function(string, pattern, n,
-                                    decimals = FALSE, leading_decimals = FALSE,
-                                    negs = FALSE, leave_as_string = FALSE) {
-  nth_number_before_mth(string, pattern,
-    n = n, m = 1,
-    decimals = decimals, leading_decimals = leading_decimals,
-    negs = negs, leave_as_string = leave_as_string
-  )
-}
+str_nth_number_before_mth <- nth_number_before_mth
 
 #' @rdname nth_number_before_mth
-#' @examples
-#' nth_number_before_last(string, "def", -1)
 #' @export
-nth_number_before_last <- function(string, pattern, n,
-                                   decimals = FALSE, leading_decimals = FALSE,
-                                   negs = FALSE, leave_as_string = FALSE) {
-  nth_number_before_mth(string, pattern,
-    n = n, m = -1,
-    decimals = decimals, leading_decimals = leading_decimals,
-    negs = negs, leave_as_string = leave_as_string
-  )
-}
+nth_number_before_first <- strex::str_nth_number_before_first
 
 #' @rdname nth_number_before_mth
-#' @examples
-#' first_number_before_mth(string, "abc", 2)
 #' @export
-first_number_before_mth <- function(string, pattern, m,
-                                    decimals = FALSE, leading_decimals = FALSE,
-                                    negs = FALSE, leave_as_string = FALSE) {
-  nth_number_before_mth(string, pattern,
-    n = 1, m = m,
-    decimals = decimals, leading_decimals = leading_decimals,
-    negs = negs, leave_as_string = leave_as_string
-  )
-}
+nth_number_before_last <- strex::str_nth_number_before_last
 
 #' @rdname nth_number_before_mth
-#' @examples
-#' last_number_before_mth(string, "def", 1)
 #' @export
-last_number_before_mth <- function(string, pattern, m,
-                                   decimals = FALSE, leading_decimals = FALSE,
-                                   negs = FALSE, leave_as_string = FALSE) {
-  nth_number_before_mth(string, pattern,
-    n = -1, m = m,
-    decimals = decimals, leading_decimals = leading_decimals,
-    negs = negs, leave_as_string = leave_as_string
-  )
-}
+first_number_before_mth <- strex::str_first_number_before_mth
 
 #' @rdname nth_number_before_mth
-#' @examples
-#' first_number_before_first(string, "def")
 #' @export
-first_number_before_first <- function(string, pattern,
-                                      decimals = FALSE,
-                                      leading_decimals = FALSE,
-                                      negs = FALSE, leave_as_string = FALSE) {
-  nth_number_before_mth(string, pattern,
-    n = 1, m = 1,
-    decimals = decimals, leading_decimals = leading_decimals,
-    negs = negs, leave_as_string = leave_as_string
-  )
-}
+last_number_before_mth <- strex::str_last_number_before_mth
 
 #' @rdname nth_number_before_mth
-#' @examples
-#' first_number_before_last(string, "def")
 #' @export
-first_number_before_last <- function(string, pattern,
-                                     decimals = FALSE, leading_decimals = FALSE,
-                                     negs = FALSE, leave_as_string = FALSE) {
-  nth_number_before_mth(string, pattern,
-    n = 1, m = -1,
-    decimals = decimals, leading_decimals = leading_decimals,
-    negs = negs, leave_as_string = leave_as_string
-  )
-}
+first_number_before_first <- strex::str_first_number_before_first
 
 #' @rdname nth_number_before_mth
-#' @examples
-#' last_number_before_first(string, "def")
 #' @export
-last_number_before_first <- function(string, pattern,
-                                     decimals = FALSE, leading_decimals = FALSE,
-                                     negs = FALSE, leave_as_string = FALSE) {
-  nth_number_before_mth(string, pattern,
-    n = -1, m = 1,
-    decimals = decimals, leading_decimals = leading_decimals,
-    negs = negs, leave_as_string = leave_as_string
-  )
-}
+first_number_before_last <- strex::str_first_number_before_last
 
 #' @rdname nth_number_before_mth
-#' @examples
-#' last_number_before_last(string, "def")
 #' @export
-last_number_before_last <- function(string, pattern,
-                                    decimals = FALSE, leading_decimals = FALSE,
-                                    negs = FALSE, leave_as_string = FALSE) {
-  nth_number_before_mth(string, pattern,
-    n = -1, m = -1,
-    decimals = decimals, leading_decimals = leading_decimals,
-    negs = negs, leave_as_string = leave_as_string
-  )
-}
+last_number_before_first <- strex::str_last_number_before_first
+
+#' @rdname nth_number_before_mth
+#' @export
+last_number_before_last <- strex::str_last_number_before_last
+
+#' @rdname nth_number_before_mth
+#' @export
+str_nth_number_before_first <- strex::str_nth_number_before_first
+
+#' @rdname nth_number_before_mth
+#' @export
+str_nth_number_before_last <- strex::str_nth_number_before_last
+
+#' @rdname nth_number_before_mth
+#' @export
+str_first_number_before_mth <- strex::str_first_number_before_mth
+
+#' @rdname nth_number_before_mth
+#' @export
+str_last_number_before_mth <- strex::str_last_number_before_mth
+
+#' @rdname nth_number_before_mth
+#' @export
+str_first_number_before_first <- strex::str_first_number_before_first
+
+#' @rdname nth_number_before_mth
+#' @export
+str_first_number_before_last <- strex::str_first_number_before_last
+
+#' @rdname nth_number_before_mth
+#' @export
+str_last_number_before_first <- strex::str_last_number_before_first
+
+#' @rdname nth_number_before_mth
+#' @export
+str_last_number_before_last <- strex::str_last_number_before_last

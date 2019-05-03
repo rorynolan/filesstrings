@@ -20,28 +20,23 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports:
-    magrittr,
-    tools,
-    purrr,
-    checkmate,
-    strex (>= 0.1.3),
-    matrixStats,
-    Rcpp,
-    ore (>= 1.4.0),
-    tibble,
-    rlang
-RoxygenNote: 6.1.0
+    magrittr (>= 1.5),
+    checkmate (>= 1.9.1),
+    strex (>= 1.0.0),
+    matrixStats (>= 0.50.0),
+    tibble (>= 2.0.1),
+    rlang (>= 0.3.3)
+RoxygenNote: 6.1.1
 Suggests: 
     testthat,
     covr,
     knitr,
     rmarkdown,
-    spelling
+    spelling,
+    dplyr
 Depends: stringr
 URL: https://www.github.com/rorynolan/filesstrings
 BugReports: https://www.github.com/rorynolan/filesstrings/issues
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
-LinkingTo: 
-    Rcpp
 Language: en-US

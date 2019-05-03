@@ -2,10 +2,23 @@
 % Please edit documentation in R/str-split-by-nums.R
 \name{str_split_by_nums}
 \alias{str_split_by_nums}
+\alias{split_by_nums}
+\alias{split_by_numbers}
+\alias{str_split_by_numbers}
 \title{Split a string by its numeric characters.}
 \usage{
 str_split_by_nums(string, decimals = FALSE, leading_decimals = FALSE,
-  negs = FALSE)
+  negs = FALSE, sci = FALSE, commas = FALSE)
+
+split_by_nums(string, decimals = FALSE, leading_decimals = FALSE,
+  negs = FALSE, sci = FALSE, commas = FALSE)
+
+split_by_numbers(string, decimals = FALSE, leading_decimals = FALSE,
+  negs = FALSE, sci = FALSE, commas = FALSE)
+
+str_split_by_numbers(string, decimals = FALSE,
+  leading_decimals = FALSE, negs = FALSE, sci = FALSE,
+  commas = FALSE)
 }
 \arguments{
 \item{string}{A string.}
@@ -18,7 +31,14 @@ the start of a number?}
 
 \item{negs}{Do you want to allow negative numbers? Note that double negatives
 are not handled here (see the examples).}
+
+\item{sci}{Make the search aware of scientific notation e.g. 2e3 is the same
+as 2000.}
+
+\item{commas}{Allow comma separators in numbers (i.e. interpret 1,100 as a
+single number (one thousand one hundred) rather than two numbers (one and
+one hundred)).}
 }
 \description{
-See \code{\link[strex:str_split_by_nums]{strex::str_split_by_nums()}}.
+See \code{\link[strex:str_split_by_numbers]{strex::str_split_by_numbers()}}.
 }

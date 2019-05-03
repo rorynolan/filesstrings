@@ -33,3 +33,7 @@ extend_char_vec <- function(char_vec, extend_by = NA, length_out = NA) {
     c(char_vec, rep("", length_out - length(char_vec)))
   }
 }
+
+#' @rdname extend_char_vec
+#' @export
+str_extend_char_vec <- extend_char_vec

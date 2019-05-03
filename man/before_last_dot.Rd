@@ -2,9 +2,12 @@
 % Please edit documentation in R/str-before.R
 \name{before_last_dot}
 \alias{before_last_dot}
+\alias{str_before_last_dot}
 \title{Get the part of a string before the last period.}
 \usage{
 before_last_dot(string)
+
+str_before_last_dot(string)
 }
 \arguments{
 \item{string}{A character vector.}

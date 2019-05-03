@@ -2,22 +2,45 @@
 % Please edit documentation in R/str-extract-non-nums.R
 \name{extract_non_numerics}
 \alias{extract_non_numerics}
+\alias{str_extract_non_numerics}
 \alias{nth_non_numeric}
+\alias{str_nth_non_numeric}
 \alias{first_non_numeric}
+\alias{str_first_non_numeric}
 \alias{last_non_numeric}
+\alias{str_last_non_numeric}
 \title{Extract non-numbers from a string.}
 \usage{
 extract_non_numerics(string, decimals = FALSE,
-  leading_decimals = FALSE, negs = FALSE)
+  leading_decimals = decimals, negs = FALSE, sci = FALSE,
+  commas = FALSE)
 
-nth_non_numeric(string, n, decimals = FALSE, leading_decimals = FALSE,
-  negs = FALSE)
+str_extract_non_numerics(string, decimals = FALSE,
+  leading_decimals = decimals, negs = FALSE, sci = FALSE,
+  commas = FALSE)
 
-first_non_numeric(string, decimals = FALSE, leading_decimals = FALSE,
-  negs = FALSE)
+nth_non_numeric(string, n, decimals = FALSE,
+  leading_decimals = decimals, negs = FALSE, sci = FALSE,
+  commas = FALSE)
 
-last_non_numeric(string, decimals = FALSE, leading_decimals = FALSE,
-  negs = FALSE)
+str_nth_non_numeric(string, n, decimals = FALSE,
+  leading_decimals = decimals, negs = FALSE, sci = FALSE,
+  commas = FALSE)
+
+first_non_numeric(string, decimals = FALSE,
+  leading_decimals = decimals, negs = FALSE, sci = FALSE,
+  commas = FALSE)
+
+str_first_non_numeric(string, decimals = FALSE,
+  leading_decimals = decimals, negs = FALSE, sci = FALSE,
+  commas = FALSE)
+
+last_non_numeric(string, decimals = FALSE, leading_decimals = decimals,
+  negs = FALSE, sci = FALSE, commas = FALSE)
+
+str_last_non_numeric(string, decimals = FALSE,
+  leading_decimals = decimals, negs = FALSE, sci = FALSE,
+  commas = FALSE)
 }
 \arguments{
 \item{string}{A string.}
@@ -31,11 +54,17 @@ the start of a number?}
 \item{negs}{Do you want to allow negative numbers? Note that double negatives
 are not handled here (see the examples).}
 
-\item{n}{The index of the number (or non-numeric) that you seek. Negative
-indexing is allowed i.e. \code{n = 1} (the default) will give you the first
-number (or non-numeric) whereas \code{n = -1} will give you the last number (or
-non-numeric), \code{n = -2} will give you the second last number and so on. The
-function is vectorized over this argument.}
+\item{sci}{Make the search aware of scientific notation e.g. 2e3 is the same
+as 2000.}
+
+\item{commas}{Allow comma separators in numbers (i.e. interpret 1,100 as a
+single number (one thousand one hundred) rather than two numbers (one and
+one hundred)).}
+
+\item{n}{A vector of integerish values. Must be either length 1 or
+have length equal to the length of \code{string}. Negative indices count from
+the back: while \code{n = 1} and \code{n = 2} correspond to first and second, \code{n = -1} and \code{n = -2} correspond to last and second-last. \code{n = 0} will return
+\code{NA}.}
 }
 \description{
 See \code{\link[strex:str_extract_non_numerics]{strex::str_extract_non_numerics()}}

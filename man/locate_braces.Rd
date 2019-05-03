@@ -2,9 +2,12 @@
 % Please edit documentation in R/str-locate.R
 \name{locate_braces}
 \alias{locate_braces}
+\alias{str_locate_braces}
 \title{Locate the braces in a string.}
 \usage{
 locate_braces(string)
+
+str_locate_braces(string)
 }
 \arguments{
 \item{string}{A character vector}

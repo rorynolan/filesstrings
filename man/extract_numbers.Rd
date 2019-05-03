@@ -2,28 +2,49 @@
 % Please edit documentation in R/str-extract-nums.R
 \name{extract_numbers}
 \alias{extract_numbers}
+\alias{str_extract_numbers}
 \alias{nth_number}
+\alias{str_nth_number}
 \alias{first_number}
+\alias{str_first_number}
 \alias{last_number}
+\alias{str_last_number}
 \title{Extract numbers from a string.}
 \usage{
-extract_numbers(string, leave_as_string = FALSE, decimals = FALSE,
-  leading_decimals = FALSE, negs = FALSE)
+extract_numbers(string, decimals = FALSE, leading_decimals = decimals,
+  negs = FALSE, sci = FALSE, commas = FALSE,
+  leave_as_string = FALSE)
 
-nth_number(string, n, leave_as_string = FALSE, decimals = FALSE,
-  leading_decimals = FALSE, negs = FALSE)
+str_extract_numbers(string, decimals = FALSE,
+  leading_decimals = decimals, negs = FALSE, sci = FALSE,
+  commas = FALSE, leave_as_string = FALSE)
 
-first_number(string, leave_as_string = FALSE, decimals = FALSE,
-  leading_decimals = FALSE, negs = FALSE)
+nth_number(string, n, decimals = FALSE, leading_decimals = decimals,
+  negs = FALSE, sci = FALSE, commas = FALSE,
+  leave_as_string = FALSE)
 
-last_number(string, leave_as_string = FALSE, decimals = FALSE,
-  leading_decimals = FALSE, negs = FALSE)
+str_nth_number(string, n, decimals = FALSE,
+  leading_decimals = decimals, negs = FALSE, sci = FALSE,
+  commas = FALSE, leave_as_string = FALSE)
+
+first_number(string, decimals = FALSE, leading_decimals = decimals,
+  negs = FALSE, sci = FALSE, commas = FALSE,
+  leave_as_string = FALSE)
+
+str_first_number(string, decimals = FALSE, leading_decimals = decimals,
+  negs = FALSE, sci = FALSE, commas = FALSE,
+  leave_as_string = FALSE)
+
+last_number(string, decimals = FALSE, leading_decimals = decimals,
+  negs = FALSE, sci = FALSE, commas = FALSE,
+  leave_as_string = FALSE)
+
+str_last_number(string, decimals = FALSE, leading_decimals = decimals,
+  negs = FALSE, sci = FALSE, commas = FALSE,
+  leave_as_string = FALSE)
 }
 \arguments{
 \item{string}{A string.}
-
-\item{leave_as_string}{Do you want to return the number as a string (\code{TRUE})
-or as numeric (\code{FALSE}, the default)?}
 
 \item{decimals}{Do you want to include the possibility of decimal numbers
 (\code{TRUE}) or not (\code{FALSE}, the default).}
@@ -34,11 +55,20 @@ the start of a number?}
 \item{negs}{Do you want to allow negative numbers? Note that double negatives
 are not handled here (see the examples).}
 
-\item{n}{The index of the number (or non-numeric) that you seek. Negative
-indexing is allowed i.e. \code{n = 1} (the default) will give you the first
-number (or non-numeric) whereas \code{n = -1} will give you the last number (or
-non-numeric), \code{n = -2} will give you the second last number and so on. The
-function is vectorized over this argument.}
+\item{sci}{Make the search aware of scientific notation e.g. 2e3 is the same
+as 2000.}
+
+\item{commas}{Allow comma separators in numbers (i.e. interpret 1,100 as a
+single number (one thousand one hundred) rather than two numbers (one and
+one hundred)).}
+
+\item{leave_as_string}{Do you want to return the number as a string (\code{TRUE})
+or as numeric (\code{FALSE}, the default)?}
+
+\item{n}{A vector of integerish values. Must be either length 1 or
+have length equal to the length of \code{string}. Negative indices count from
+the back: while \code{n = 1} and \code{n = 2} correspond to first and second, \code{n = -1} and \code{n = -2} correspond to last and second-last. \code{n = 0} will return
+\code{NA}.}
 }
 \description{
 See \code{\link[strex:str_extract_numbers]{strex::str_extract_numbers()}}.

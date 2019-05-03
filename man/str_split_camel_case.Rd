@@ -2,9 +2,12 @@
 % Please edit documentation in R/str-split.R
 \name{str_split_camel_case}
 \alias{str_split_camel_case}
+\alias{split_camel_case}
 \title{Split a string based on CamelCase}
 \usage{
 str_split_camel_case(string, lower = FALSE)
+
+split_camel_case(string, lower = FALSE)
 }
 \arguments{
 \item{string}{A character vector.}

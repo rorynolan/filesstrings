@@ -2,9 +2,12 @@
 % Please edit documentation in R/can-be-num.R
 \name{can_be_numeric}
 \alias{can_be_numeric}
+\alias{str_can_be_numeric}
 \title{Check if a string could be considered as numeric.}
 \usage{
 can_be_numeric(string)
+
+str_can_be_numeric(string)
 }
 \arguments{
 \item{string}{A character vector.}

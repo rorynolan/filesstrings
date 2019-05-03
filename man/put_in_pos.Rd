@@ -2,10 +2,13 @@
 % Please edit documentation in R/str-put-in-pos.R
 \name{put_in_pos}
 \alias{put_in_pos}
+\alias{str_put_in_pos}
 \title{Put specified strings in specified positions in an otherwise empty character
 vector.}
 \usage{
 put_in_pos(strings, positions)
+
+str_put_in_pos(strings, positions)
 }
 \arguments{
 \item{strings}{A character vector of the strings to put in positions

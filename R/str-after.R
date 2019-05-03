@@ -1,22 +1,27 @@
-#' Text before or after \eqn{n}th occurrence of pattern.
+#' Text after the `n`th occurrence of pattern.
 #'
 #' See [strex::str_after_nth()].
 #'
 #' @inheritParams strex::str_after_nth
 #' @export
-str_after_nth <- function(strings, pattern, n) {
-  nth_instance_indices <- str_nth_instance_indices(strings, pattern, n)
-  str_sub(strings, nth_instance_indices[, "end"] + 1)
-}
+str_after_nth <- strex::str_after_nth
 
 #' @rdname str_after_nth
 #' @export
-str_after_first <- function(strings, pattern) {
-  str_after_nth(strings = strings, pattern = pattern, n = 1)
-}
+after_nth <- strex::str_after_nth
 
 #' @rdname str_after_nth
 #' @export
-str_after_last <- function(strings, pattern) {
-  str_after_nth(strings = strings, pattern = pattern, n = -1)
-}
+str_after_first <- strex::str_after_first
+
+#' @rdname str_after_nth
+#' @export
+after_first <- strex::str_after_first
+
+#' @rdname str_after_nth
+#' @export
+str_after_last <- strex::str_after_last
+
+#' @rdname str_after_nth
+#' @export
+after_last <- strex::str_after_last

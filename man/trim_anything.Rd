@@ -2,12 +2,15 @@
 % Please edit documentation in R/str-trim.R
 \name{trim_anything}
 \alias{trim_anything}
+\alias{str_trim_anything}
 \title{Trim something other than whitespace}
 \usage{
 trim_anything(string, pattern, side = "both")
+
+str_trim_anything(string, pattern, side = "both")
 }
 \arguments{
-\item{string}{A string.}
+\item{string}{A character vector.}
 
 \item{pattern}{A string. The pattern to be trimmed (\emph{not} interpreted as
 regular expression). So to trim a period, use \code{char = "."} and not

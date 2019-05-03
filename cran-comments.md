@@ -21,8 +21,6 @@ There were no ERRORs, WARNINGs or NOTEs.
 
 ## Reverse Dependencies
 
-There are 5 reverse dependencies: `autothresholdr`, `detrendr`, `exampletestr`, `ijtiff` and `nandb`. This update breaks `nandb`. 
-
-I am the maintainer of `nandb` and an update to this package (which will depend on this newest version of `filesstrings`) is ready to go so as soon as the new `filesstrings` is on CRAN with binaries built, I'll submit the `nandb` fix.
+There are 5 reverse dependencies; this update does not break anything. 
 
 See https://github.com/rorynolan/filesstrings/blob/master/revdep/checks.rds for full check results.

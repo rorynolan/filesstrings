@@ -4,5 +4,12 @@ language: R
 sudo: false
 cache: packages
 
+env:
+  - _R_CHECK_LENGTH_1_CONDITION_=true
+  - _R_CHECK_LENGTH_1_LOGIC2_=true
+
 after_success:
   - Rscript -e 'covr::codecov()'
+
+r_github_packages:
+  - rorynolan/strex

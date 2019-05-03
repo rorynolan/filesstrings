@@ -6,18 +6,32 @@ test_that("can_be_numeric works", {
   expect_equal(can_be_numeric(c("1a", "abc")), rep(FALSE, 2))
 })
 
-test_that("get_currencies works", {
+test_that("extract_currencies works", {
   expect_equal(
-    get_currencies("35.00 $1.14 abc5 $3.8 77"),
+    extract_currencies("35.00 $1.14 abc5 $3.8 77")[c("curr_sym", "amount")],
     tibble::tibble(
-      currency = c("", "$", "c", "$", " "),
+      curr_sym = c("", "$", "c", "$", " "),
       amount = c(35, 1.14, 5, 3.8, 77)
     )
   )
+  expect_equal(first_currency(c("ab3 13", "$1"))$curr_sym, c("b", "$"))
 })
 
-test_that("get_currency works", {
-  expect_equal(get_currency(c("ab3 13", "$1")), c("b", "$"))
+test_that("`nth_number_before_mth()` works", {
+  string <- c(
+    "abc1abc2abc3abc4def5abc6abc7abc8abc9",
+    "abc1def2ghi3abc4def5ghi6abc7def8ghi9"
+  )
+  expect_equal(nth_number_before_mth(string, "def", 1, 1), c(1, 1))
+  expect_equal(nth_number_before_mth(string, "abc", 2, 3), c(2, 2))
+  expect_equal(nth_number_before_first(string, "def", 2), c(2, NA))
+  expect_equal(nth_number_before_last(string, "def", -1), c(4, 7))
+  expect_equal(first_number_before_mth(string, "abc", 2), c(1, 1))
+  expect_equal(last_number_before_mth(string, "def", 1), c(4, 1))
+  expect_equal(first_number_before_first(string, "def"), c(1, 1))
+  expect_equal(first_number_before_last(string, "def"), c(1, 1))
+  expect_equal(last_number_before_first(string, "def"), c(4, 1))
+  expect_equal(last_number_before_last(string, "def"), c(4, 7))
 })
 
 test_that("singleize works", {
@@ -55,12 +69,14 @@ test_that("extract_numbers works", {
   )
   expect_equal(
     extract_numbers(c("abc1.23abc456", "abc1..23abc456"),
-      decimals = TRUE
+      decimals = TRUE, leading_decimals = FALSE,
     ),
     list(c(1.23, 456), c(1, 23, 456))
   )
   expect_equal(
-    extract_numbers("abc1..23abc456", decimals = TRUE),
+    extract_numbers("abc1..23abc456",
+      decimals = TRUE, leading_decimals = FALSE
+    ),
     list(c(1, 23, 456))
   )
   expect_equal(extract_numbers("abc1..23abc456",
@@ -81,11 +97,15 @@ test_that("extract_numbers works", {
     list(c("abc", ".", "abc"))
   )
   expect_equal(
-    extract_non_numerics("abc1.23abc456", decimals = TRUE),
+    extract_non_numerics("abc1.23abc456",
+      decimals = TRUE, leading_decimals = TRUE
+    ),
     list(c("abc", "abc"))
   )
   expect_equal(
-    extract_non_numerics("abc1..23abc456", decimals = TRUE),
+    extract_non_numerics("abc1..23abc456",
+      decimals = TRUE, leading_decimals = FALSE
+    ),
     list(c("abc", "..", "abc"))
   )
   expect_equal(extract_non_numerics("abc1..23abc456",
@@ -101,22 +121,29 @@ test_that("extract_numbers works", {
     extract_non_numerics("--123abc456", negs = TRUE),
     list(c("-", "abc"))
   )
-  expect_equal(extract_numbers("abc1.2.3", decimals = TRUE), list(NA_real_))
-  expect_equal(extract_numbers("ab.1.2",
+  expect_equal(
+    suppressWarnings(extract_numbers("abc1.2.3",
+      decimals = TRUE, leading_decimals = TRUE
+    )),
+    list(NA_real_)
+  )
+  expect_equal(suppressWarnings(extract_numbers("ab.1.2",
     decimals = TRUE,
     leading_decimals = TRUE
-  ), list(NA_real_))
+  )), list(NA_real_))
   expect_equal(
-    extract_numbers(c(rep("abc1.2.3", 2), "a1b2.2.3", "e5r6"),
-      decimals = TRUE
-    ),
+    suppressWarnings(extract_numbers(c(rep("abc1.2.3", 2), "a1b2.2.3", "e5r6"),
+      decimals = TRUE, leading_decimals = TRUE
+    )),
     c(as.list(rep(NA_real_, 3)), list(c(5, 6)))
   )
   expect_equal(nth_number("abc1.23abc456", 2), 23)
   expect_equal(first_number("abc1a2"), 1)
   expect_equal(last_number("akd50lkdjf0qukwjfj8"), 8)
   expect_equal(nth_number("abc1.23abc456", 2, leave_as_string = TRUE), "23")
-  expect_equal(nth_number("abc1.23abc456", 2, decimals = TRUE), 456)
+  expect_equal(nth_number("abc1.23abc456", 2,
+    decimals = TRUE, leading_decimals = TRUE
+  ), 456)
   expect_equal(nth_number("-123abc456", -2, negs = TRUE), -123)
   expect_equal(
     extract_non_numerics("--123abc456", negs = TRUE),
@@ -125,8 +152,8 @@ test_that("extract_numbers works", {
   expect_equal(first_non_numeric("--123abc456"), "--")
   expect_equal(last_non_numeric("--123abc456"), "abc")
   expect_equal(nth_non_numeric("--123abc456", -2), "--")
-  expect_error(extract_numbers("a.23", leading_decimals = T))
-  expect_error(extract_non_numerics("a.23", leading_decimals = T))
+  expect_error(extract_numbers("a.23", leading_decimals = TRUE))
+  expect_error(extract_non_numerics("a.23", leading_decimals = TRUE))
   expect_equal(first_number("abc"), NA_integer_)
   expect_equal(first_non_numeric("1"), NA_character_)
   expect_equal(last_non_numeric(c("abc", "def")), c("abc", "def"))
@@ -145,7 +172,9 @@ test_that("str_split_by_nums works", {
     )
   )
   expect_equal(
-    str_split_by_nums("abc123def456.789gh", decimals = TRUE),
+    str_split_by_nums("abc123def456.789gh",
+      decimals = TRUE, leading_decimals = TRUE
+    ),
     list(c("abc", "123", "def", "456.789", "gh"))
   )
   expect_equal(str_split_by_nums("22"), list("22"))
@@ -229,18 +258,24 @@ test_that("trim_anything works", {
 })
 
 test_that("locate_braces works", {
+  skip_if_not_installed("dplyr")
   expect_equal(
-    locate_braces(c("a{](kkj)})", "ab(]c{}")),
+    as.data.frame(locate_braces(c("a{](kkj)})", "ab(]c{}")),
+      stringsAsFactors = FALSE
+    )[c("position", "brace")],
     list(
       data.frame(
         position = as.integer(c(2, 3, 4, 8, 9, 10)),
-        brace = c("{", "]", "(", ")", "}", ")")
+        brace = c("{", "]", "(", ")", "}", ")"),
+        stringsAsFactors = FALSE
       ),
       data.frame(
         position = as.integer(c(3, 4, 6, 7)),
-        brace = c("(", "]", "{", "}")
+        brace = c("(", "]", "{", "}"),
+        stringsAsFactors = FALSE
       )
-    )
+    ) %>%
+      dplyr::bind_rows()
   )
 })
 
@@ -282,18 +317,19 @@ test_that("str_split_camel_case works", {
   )
 })
 
-test_that("str_nth_instance_indices errors in the right way", {
-  expect_error(str_nth_instance_indices("aba", "a", 9), "There")
-})
-
-test_that("str_first/last_instance_indices work", {
+test_that("str_locate_nth() works", {
   expect_equal(
-    str_first_instance_indices(c("abcdabcxyz", "abcabc"), "abc"),
+    str_locate_nth("aba", "a", 9),
+    matrix(NA_integer_, ncol = 2, nrow = 1) %>%
+      magrittr::set_colnames(c("start", "end"))
+  )
+  expect_equal(
+    str_locate_first(c("abcdabcxyz", "abcabc"), "abc"),
     matrix(c(1, 3), nrow = 2, ncol = 2, byrow = TRUE) %>%
       magrittr::set_colnames(c("start", "end"))
   )
   expect_equal(
-    str_last_instance_indices(c("abcdabcxyz", "abcabc"), "abc"),
+    str_locate_last(c("abcdabcxyz", "abcabc"), "abc"),
     matrix(c(5, 7, 4, 6), nrow = 2, ncol = 2, byrow = TRUE) %>%
       magrittr::set_colnames(c("start", "end"))
   )

@@ -2,6 +2,7 @@
 % Please edit documentation in R/str-num-before.R
 \name{nth_number_before_mth}
 \alias{nth_number_before_mth}
+\alias{str_nth_number_before_mth}
 \alias{nth_number_before_first}
 \alias{nth_number_before_last}
 \alias{first_number_before_mth}
@@ -10,43 +11,108 @@
 \alias{first_number_before_last}
 \alias{last_number_before_first}
 \alias{last_number_before_last}
-\title{Find the \eqn{n}th number before the \eqn{m}th occurrence of a pattern.}
+\alias{str_nth_number_before_first}
+\alias{str_nth_number_before_last}
+\alias{str_first_number_before_mth}
+\alias{str_last_number_before_mth}
+\alias{str_first_number_before_first}
+\alias{str_first_number_before_last}
+\alias{str_last_number_before_first}
+\alias{str_last_number_before_last}
+\title{Find the \code{n}th number before the \code{m}th occurrence of a pattern.}
 \usage{
 nth_number_before_mth(string, pattern, n, m, decimals = FALSE,
-  leading_decimals = FALSE, negs = FALSE, leave_as_string = FALSE)
+  leading_decimals = decimals, negs = FALSE, sci = FALSE,
+  commas = FALSE, leave_as_string = FALSE)
+
+str_nth_number_before_mth(string, pattern, n, m, decimals = FALSE,
+  leading_decimals = decimals, negs = FALSE, sci = FALSE,
+  commas = FALSE, leave_as_string = FALSE)
 
 nth_number_before_first(string, pattern, n, decimals = FALSE,
-  leading_decimals = FALSE, negs = FALSE, leave_as_string = FALSE)
+  leading_decimals = decimals, negs = FALSE, sci = FALSE,
+  commas = FALSE, leave_as_string = FALSE)
 
 nth_number_before_last(string, pattern, n, decimals = FALSE,
-  leading_decimals = FALSE, negs = FALSE, leave_as_string = FALSE)
+  leading_decimals = decimals, negs = FALSE, sci = FALSE,
+  commas = FALSE, leave_as_string = FALSE)
 
 first_number_before_mth(string, pattern, m, decimals = FALSE,
-  leading_decimals = FALSE, negs = FALSE, leave_as_string = FALSE)
+  leading_decimals = decimals, negs = FALSE, sci = FALSE,
+  commas = FALSE, leave_as_string = FALSE)
 
 last_number_before_mth(string, pattern, m, decimals = FALSE,
-  leading_decimals = FALSE, negs = FALSE, leave_as_string = FALSE)
+  leading_decimals = decimals, negs = FALSE, sci = FALSE,
+  commas = FALSE, leave_as_string = FALSE)
 
 first_number_before_first(string, pattern, decimals = FALSE,
-  leading_decimals = FALSE, negs = FALSE, leave_as_string = FALSE)
+  leading_decimals = decimals, negs = FALSE, sci = FALSE,
+  commas = FALSE, leave_as_string = FALSE)
 
 first_number_before_last(string, pattern, decimals = FALSE,
-  leading_decimals = FALSE, negs = FALSE, leave_as_string = FALSE)
+  leading_decimals = decimals, negs = FALSE, sci = FALSE,
+  commas = FALSE, leave_as_string = FALSE)
 
 last_number_before_first(string, pattern, decimals = FALSE,
-  leading_decimals = FALSE, negs = FALSE, leave_as_string = FALSE)
+  leading_decimals = decimals, negs = FALSE, sci = FALSE,
+  commas = FALSE, leave_as_string = FALSE)
 
 last_number_before_last(string, pattern, decimals = FALSE,
-  leading_decimals = FALSE, negs = FALSE, leave_as_string = FALSE)
+  leading_decimals = decimals, negs = FALSE, sci = FALSE,
+  commas = FALSE, leave_as_string = FALSE)
+
+str_nth_number_before_first(string, pattern, n, decimals = FALSE,
+  leading_decimals = decimals, negs = FALSE, sci = FALSE,
+  commas = FALSE, leave_as_string = FALSE)
+
+str_nth_number_before_last(string, pattern, n, decimals = FALSE,
+  leading_decimals = decimals, negs = FALSE, sci = FALSE,
+  commas = FALSE, leave_as_string = FALSE)
+
+str_first_number_before_mth(string, pattern, m, decimals = FALSE,
+  leading_decimals = decimals, negs = FALSE, sci = FALSE,
+  commas = FALSE, leave_as_string = FALSE)
+
+str_last_number_before_mth(string, pattern, m, decimals = FALSE,
+  leading_decimals = decimals, negs = FALSE, sci = FALSE,
+  commas = FALSE, leave_as_string = FALSE)
+
+str_first_number_before_first(string, pattern, decimals = FALSE,
+  leading_decimals = decimals, negs = FALSE, sci = FALSE,
+  commas = FALSE, leave_as_string = FALSE)
+
+str_first_number_before_last(string, pattern, decimals = FALSE,
+  leading_decimals = decimals, negs = FALSE, sci = FALSE,
+  commas = FALSE, leave_as_string = FALSE)
+
+str_last_number_before_first(string, pattern, decimals = FALSE,
+  leading_decimals = decimals, negs = FALSE, sci = FALSE,
+  commas = FALSE, leave_as_string = FALSE)
+
+str_last_number_before_last(string, pattern, decimals = FALSE,
+  leading_decimals = decimals, negs = FALSE, sci = FALSE,
+  commas = FALSE, leave_as_string = FALSE)
 }
 \arguments{
 \item{string}{A character vector.}
 
-\item{pattern}{A character vector. Pattern(s) specified like the pattern(s)
-in the stringr package (e.g. look at \code{\link[stringr:str_locate]{stringr::str_locate()}}). If
-this has length >1 its length must be the same as that of \code{string}.}
+\item{pattern}{The pattern to look for.
 
-\item{n, m}{Natural numbers.}
+The default interpretation is a regular expression, as described in
+\link[stringi:stringi-search-regex]{stringi::stringi-search-regex}.
+
+To match a without regular expression (i.e. as a human would), use
+\link[stringr:coll]{coll()}. For details see \code{\link[stringr:regex]{stringr::regex()}}.}
+
+\item{n}{Vectors of integerish values. Must be either length 1 or have
+length equal to the length of \code{string}. Negative indices count from the
+back: while \code{1} and \code{2} correspond to first and second, \code{-1} and \code{-2}
+correspond to last and second-last. \code{0} will return \code{NA}.}
+
+\item{m}{Vectors of integerish values. Must be either length 1 or have
+length equal to the length of \code{string}. Negative indices count from the
+back: while \code{1} and \code{2} correspond to first and second, \code{-1} and \code{-2}
+correspond to last and second-last. \code{0} will return \code{NA}.}
 
 \item{decimals}{Do you want to include the possibility of decimal numbers
 (\code{TRUE}) or not (\code{FALSE}, the default).}
@@ -57,27 +123,16 @@ the start of a number?}
 \item{negs}{Do you want to allow negative numbers? Note that double negatives
 are not handled here (see the examples).}
 
+\item{sci}{Make the search aware of scientific notation e.g. 2e3 is the same
+as 2000.}
+
+\item{commas}{Allow comma separators in numbers (i.e. interpret 1,100 as a
+single number (one thousand one hundred) rather than two numbers (one and
+one hundred)).}
+
 \item{leave_as_string}{Do you want to return the number as a string (\code{TRUE})
 or as numeric (\code{FALSE}, the default)?}
 }
-\value{
-A numeric vector.
-}
 \description{
-Given a string, a pattern and natural numbers \code{n} and \code{m}, find the \code{n}th
-number that comes before the \code{m}th occurrence of the pattern.
-}
-\examples{
-string <- c("abc1abc2abc3abc4def5abc6abc7abc8abc9",
-            "abc1def2ghi3abc4def5ghi6abc7def8ghi9")
-nth_number_before_mth(string, "def", 1, 1)
-nth_number_before_mth(string, "abc", 2, 3)
-nth_number_before_first(string, "def", 2)
-nth_number_before_last(string, "def", -1)
-first_number_before_mth(string, "abc", 2)
-last_number_before_mth(string, "def", 1)
-first_number_before_first(string, "def")
-first_number_before_last(string, "def")
-last_number_before_first(string, "def")
-last_number_before_last(string, "def")
+See \code{\link[strex:str_nth_number_before_mth]{strex::str_nth_number_before_mth()}}.
 }

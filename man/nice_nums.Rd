@@ -2,12 +2,21 @@
 % Please edit documentation in R/str-nice-nums.R
 \name{nice_nums}
 \alias{nice_nums}
+\alias{str_nice_nums}
+\alias{str_alphord_nums}
+\alias{alphord_nums}
 \title{Make string numbers comply with alphabetical order}
 \usage{
-nice_nums(strings)
+nice_nums(string)
+
+str_nice_nums(string)
+
+str_alphord_nums(string)
+
+alphord_nums(string)
 }
 \arguments{
-\item{strings}{A vector of strings.}
+\item{string}{A character vector.}
 }
 \description{
 See \code{\link[strex:str_alphord_nums]{strex::str_alphord_nums()}}.

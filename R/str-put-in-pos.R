@@ -24,3 +24,7 @@ put_in_pos <- function(strings, positions) {
   out[positions] <- strings
   out
 }
+
+#' @rdname put_in_pos
+#' @export
+str_put_in_pos <- put_in_pos
