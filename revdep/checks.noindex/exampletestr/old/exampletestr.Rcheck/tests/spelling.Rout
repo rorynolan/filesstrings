@@ -1,0 +1,33 @@
+
+R version 3.5.3 (2019-03-11) -- "Great Truth"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> if(requireNamespace('spelling', quietly = TRUE))
++   spelling::spell_check_test(vignettes = TRUE, error = FALSE,
++                              skip_on_cran = TRUE)
+Potential spelling errors:
+  WORD        FOUND IN
+Walthert    NEWS.md:31
+Wellcome    NEWS.md:80
+github      NEWS.md:31,79
+https       NEWS.md:31
+rorynolan   NEWS.md:31
+verisons    NEWS.md:24
+All Done!
+> 
+> proc.time()
+   user  system elapsed 
+  0.383   0.062   0.459 

@@ -1,0 +1,31 @@
+---
+title: "Brightness timeseries"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Brightness timeseries}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+### Ordinary brightness
+
+Consider a time-stack image series `img` of 100 frames. An ordinary call `brightness(img, def = "epsilon")` will use all 100 frames to calculate the brightness image.
+
+
+### A contiguous brightness timeseries
+
+Sometimes we want to see how the brightness is changing over the course of the acquisition. To do this, we could break up `img` into sequences of say 25 consecutive frames, getting 4 sets of frames (1-25, 26-50, 51-75 and 76-100) and calculate 4 brightness images. Ordinarily this would be quite laborious but `brightness_timeseries(img, def = "epsilon", frames_per_set = 25)` does this with ease.
+
+
+### An overlapped brightness timeseries
+
+To get more fine-grained time information, we could overlap the windows to get 76 sets of frames (1-25, 2-26, 3-27, ..., 76-100). This can be done with `brightness_timeseries(img, def = "epsilon", frames_per_set = 25, overlap = TRUE)`. Beware when calculating overlapped timeseries like this that the resulting frames are correlated because e.g. the calculations on frames 1-25 and 2-26 use almost all of the same data.

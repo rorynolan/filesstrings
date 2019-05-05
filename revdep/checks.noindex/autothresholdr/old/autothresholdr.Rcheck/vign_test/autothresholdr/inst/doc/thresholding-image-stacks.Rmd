@@ -1,0 +1,121 @@
+---
+title: "Thresholding Image Stacks"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Thresholding Image Stacks}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+if (utils::packageVersion("knitr") >= "1.20.15") {
+  knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "#>",
+    fig.width = 7, fig.height = 6,
+    tidy = "styler"
+  )
+} else {
+  knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "#>",
+    fig.width = 7, fig.height = 6
+  )
+}
+library(magrittr)
+apply_on_pillars <- function(arr3d, FUN) {
+  if (length(dim(arr3d)) == 4 && dim(arr3d)[3] == 1) arr3d %<>% {.[, , 1, ]}
+  apply(arr3d, c(1, 2), FUN) %>% {
+    if (length(dim(.)) == 3) {
+      aperm(., c(2, 3, 1))
+    } else {
+      .
+    }
+  }
+}
+```
+
+## Stacks of Images
+
+`50.tif` is a TIFF file which is a stack of 50 images of a bit of a cell taken over a short space of time (i.e. it's a video). 
+
+```{r 50-tif}
+img <- ijtiff::read_tif(system.file("extdata", "50.tif", 
+                                    package = "autothresholdr"))
+dim(img)
+```
+
+Let's display the first 3 frames:
+
+```{r first-3-frames, fig.height=2, echo=FALSE}
+first3 <- matrix(max(img), ncol = 3 * dim(img)[2] + 2, nrow = dim(img)[1])
+for (i in 1:3) {
+  first3[, (i - 1) * dim(img)[2] + i + seq_len(dim(img)[2]) - 1] <- 
+    img[, , 1, i]
+}
+ijtiff::display(first3)
+```
+
+and the last 3 frames:
+
+```{r last-3-frames, fig.height=2, echo=FALSE}
+last3 <- matrix(max(img), ncol = 3 * dim(img)[2] + 2, nrow = dim(img)[1])
+for (i in 1:3) {
+  last3[, (i - 1) * dim(img)[2] + i + seq_len(dim(img)[2]) - 1] <- 
+    img[, , 1, dim(img)[4] - (i - 1)]
+}
+ijtiff::display(last3)
+```
+
+You'll notice that these images are almost identical. That's because they're images of the same area taken very quickly one after another. There are two ways to threshold an image stack like this. One is the naiive way: find a threshold based on every pixel in the stack, then pixels below the threshold are excluded (set to `NA`). Let's try that:
+
+```{r naive}
+library(autothresholdr)
+naiively_threshed_img <- apply_mask(img, "tri")
+attr(naiively_threshed_img, "thresh")  # The threshold chosen by "Triangle" is 4
+```
+
+Now let's display the first 3 frames and the last 3 frames:
+
+```{r naiive-first-3-frames, fig.height=2, echo=FALSE}
+first3 <- matrix(max(naiively_threshed_img), ncol = 3 * dim(naiively_threshed_img)[2] + 2, nrow = dim(naiively_threshed_img)[1])
+for (i in 1:3) {
+  first3[, (i - 1) * dim(naiively_threshed_img)[2] + i + seq_len(dim(naiively_threshed_img)[2]) - 1] <- 
+    naiively_threshed_img[, , 1, i]
+}
+ijtiff::display(first3)
+```
+
+```{r naiive-last-3-frames, fig.height=2, echo=FALSE}
+last3 <- matrix(max(naiively_threshed_img), ncol = 3 * dim(naiively_threshed_img)[2] + 2, nrow = dim(naiively_threshed_img)[1])
+for (i in 1:3) {
+  last3[, (i - 1) * dim(naiively_threshed_img)[2] + i + seq_len(dim(naiively_threshed_img)[2]) - 1] <- 
+    naiively_threshed_img[, , 1, dim(naiively_threshed_img)[4] - (i - 1)]
+}
+ijtiff::display(last3)
+```
+
+If you look closely, you can see that the threshold mask is (slightly) different for different frames. Let's highlight the pixels which are sometimes thresholded away, sometimes not:
+
+```{r sometimes-sometimes-not, echo=FALSE}
+naiively_threshed_img %>% 
+  apply_on_pillars(function(x) {
+    (sum(is.na(x)) > 0) && (sum(is.na(x)) < length(x))}) %>% 
+  ijtiff::display()
+```
+
+So (unsurprisingly), it seems that around the edges of the cell (where the signal from the cell is more feint), the pixels are sometimes thresholded away, sometimes not. There are also some seemingly random pixels within the cell which are sometimes thresholded away, sometimes not. 
+
+Now, given that you know that the cell is more or less stationary and you want the threshold to get rid of the _non-cell_ bits and keep the _cell_ bits, its reasonable to assert that the mask should be the same for every frame. It's possible to apply the same mask to every frame, and to compute this mask, it makes sense to incorporate information from all of the frames. This is what `mean_stack_thresh()` and `med_stack_thresh()` do. `mean_stack_thresh()` computes the mask based on the mean of all of the frames (gotten by calculating the mean intensity of the stack at each pixel position). `med_stack_thresh()` uses the median instead of the mean. They're both very similar. If you don't know which one to use, just use `mean_stack_thresh()`.
+
+Let's visualize them both:
+
+```{r stack-threshs}
+ijtiff::display(mean_stack_thresh(img, "tri"))
+ijtiff::display(med_stack_thresh(img, "tri"))
+```
+
+You can see that the results of `mean_stack_thresh()` and `med_stack_thresh()` are similar but not identical. Both do a fine job.
+
+Note that if the cell (or whatever is recorded over the course of several frames) is not stationary (or almost stationary), then `mean_stack_thresh()` and `med_stack_thresh()` are not appropriate.

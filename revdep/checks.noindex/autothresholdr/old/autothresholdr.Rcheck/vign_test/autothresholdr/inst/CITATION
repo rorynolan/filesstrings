@@ -1,0 +1,19 @@
+citHeader("To cite autothresholdr in publications use:")
+
+citEntry(entry = "Article",
+  title        = "Automatic thresholding from the gradients of region boundaries",
+  author       = personList(as.person("G. Landini"),
+                   as.person("D.A. Randell"),
+                   as.person("S. Fouad"),
+                   as.person("A. Galton")),
+  journal      = "Journal of Microscopy",
+  year         = "2017",
+  volume       = "265",
+  number       = "2",
+  pages        = "185--195",
+
+  textVersion  =
+  paste("G. Landini, D.A. Randell, S. Fouad, and A. Galton.",
+        "Automatic thresholding from the gradients of region boundaries.",
+        "Journal of Microscopy, 265(2), 185-195.")
+)

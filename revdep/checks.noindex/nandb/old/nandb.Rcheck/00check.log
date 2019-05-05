@@ -1,0 +1,108 @@
+* using log directory ‘/Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/checks.noindex/nandb/old/nandb.Rcheck’
+* using R version 3.5.3 (2019-03-11)
+* using platform: x86_64-apple-darwin15.6.0 (64-bit)
+* using session charset: UTF-8
+* checking for file ‘nandb/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘nandb’ version ‘2.0.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘nandb’ can be installed ... OK
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking ‘build’ directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking dependencies in R code ... NOTE
+Namespaces in Imports field not imported from:
+  ‘MASS’ ‘stats’
+  All declared Imports should be used.
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking compiled code ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... ERROR
+Running examples in ‘nandb-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: brightness
+> ### Title: Calculate brightness from image series.
+> ### Aliases: brightness
+> 
+> ### ** Examples
+> 
+> img <- ijtiff::read_tif(system.file('extdata', '50.tif', package = 'nandb'))
+Error in intmat_list_bind_nth_rows(instances, n - 1) : 
+  could not find function "intmat_list_bind_nth_rows"
+Calls: <Anonymous> ... str_before_nth -> str_nth_instance_indices -> %>% -> eval -> eval
+Execution halted
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... ERROR
+  Running ‘spelling.R’
+  Comparing ‘spelling.Rout’ to ‘spelling.Rout.save’ ...6,10d5
+< Potential spelling errors:
+<   WORD        FOUND IN
+< Kmer        NEWS.md:36
+< linux       NEWS.md:20
+< tidyverse   NEWS.md:27
+  Running ‘testthat.R’
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+  ══ testthat results  ═══════════════════════════════════════════════════════════════════════════════════════
+  OK: 48 SKIPPED: 1 WARNINGS: 1 FAILED: 17
+  1. Error: brightness works (@test-brightness.R#5) 
+  2. Error: brightness_folder works (@test-brightness.R#40) 
+  3. Error: brightness_timeseries works (@test-brightness.R#92) 
+  4. Error: cc_brightness() works (@test-cc_brightness.R#3) 
+  5. Error: cc_brightness_timeseries() works (@test-cc_brightness.R#51) 
+  6. Error: cc_brightness_folder() works (@test-cc_brightness.R#126) 
+  7. Error: cc_brightness_timeseries_folder() works (@test-cc_brightness.R#152) 
+  8. Error: cc_number() works (@test-cc_number.R#3) 
+  9. Error: cc_number_timeseries() works (@test-cc_number.R#51) 
+  1. ...
+  
+  Error: testthat unit tests failed
+  Execution halted
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+* checking re-building of vignette outputs ... WARNING
+Error in re-building vignettes:
+  ...
+Quitting from lines 35-38 (single-images.Rmd) 
+Error: processing vignette 'single-images.Rmd' failed with diagnostics:
+could not find function "intmat_list_bind_nth_rows"
+Execution halted
+
+* checking PDF version of manual ... OK
+* DONE
+Status: 2 ERRORs, 1 WARNING, 1 NOTE

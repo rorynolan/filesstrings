@@ -1,0 +1,15 @@
+ifeq "$(WIN)" "64"
+PKG_CPPFLAGS= -I../windows/libtiff-4.0.9/include
+PKG_LIBS= -L../windows/libtiff-4.0.9/lib${R_ARCH} -ltiff -ljpeg -llzma -lz
+else
+PKG_LIBS= -ltiff -ljpeg -llzma -lz
+endif
+
+
+all: clean winlibs
+
+winlibs:
+	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R"
+
+clean:
+	rm -f $(SHLIB) $(OBJECTS)

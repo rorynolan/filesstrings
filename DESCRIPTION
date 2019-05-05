@@ -21,7 +21,7 @@ Encoding: UTF-8
 LazyData: true
 Imports:
     magrittr (>= 1.5),
-    checkmate (>= 1.9.1),
+    checkmate (>= 1.9.3),
     strex (>= 1.0.0),
     matrixStats (>= 0.50.0),
     tibble (>= 2.0.1),

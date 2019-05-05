@@ -1,0 +1,35 @@
+
+R version 3.5.3 (2019-03-11) -- "Great Truth"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(testthat)
+> library(exampletestr)
+> 
+> test_check("exampletestr")
+[31m──[39m [31m1. Error: `make_tests_shells_file()` works (@test-exemplar.R#211) [39m [31m──────────────────────────────────────[39m
+more 'from' files than 'to' files
+1: expect_true(all(file.copy(system.file("extdata", c("detect.R", "match.R"), package = "exampletestr"), "R"))) at testthat/test-exemplar.R:211
+2: quasi_label(enquo(object), label, arg = "object")
+3: eval_bare(get_expr(quo), get_env(quo))
+4: file.copy(system.file("extdata", c("detect.R", "match.R"), package = "exampletestr"), "R")
+5: stop("more 'from' files than 'to' files")
+
+══ testthat results  ═══════════════════════════════════════════════════════════════════════════════════════
+OK: 21 SKIPPED: 0 WARNINGS: 7 FAILED: 1
+1. Error: `make_tests_shells_file()` works (@test-exemplar.R#211) 
+
+Error: testthat unit tests failed
+Execution halted

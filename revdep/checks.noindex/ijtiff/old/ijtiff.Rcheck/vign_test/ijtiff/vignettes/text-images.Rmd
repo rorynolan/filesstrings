@@ -1,0 +1,31 @@
+---
+title: "Text Images"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Text Images}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## What are text images
+
+Text images are just arrays of numbers stored in a tab-delimited file (https://en.wikipedia.org/wiki/Tab-separated_values), where each location in the file is a pixel and the value stored there is the pixel intensity. 
+
+
+## What are they good for?
+
+### You might need to read them
+
+Many softwares (e.g. Microsoft excel) don't support the saving of arrays as TIFF files. Many of these such softwares do support the saving of arrays as (tab-separated) text files. So, whether you like it or not, you might come across an image that was saved as a text file. You might not (if you're lucky), but I have, so being able to read them is handy. Beware that `ijtiff::read_txt_img()` assumes a tab-separated file (so something else like a CSV file won't work). This is the type of text image that you can save from _ImageJ_.
+
+### You might (once in a million years) want to write them
+
+A 32-bit TIFF file can only hold values up to $2^{32} - 1$, that's approximately $4 \times 10^9$. For whatever reason, this might not be enough for you, what if you want to write a value of $10^{10}$ to an image? Then, you're out of luck with TIFF files (and most if not all other image formats), but a text image is your friend. Text images place no restriction on the values therein. They're awkward and inefficient, but they can get you out of a hole sometimes.

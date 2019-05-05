@@ -1,0 +1,85 @@
+* using log directory ‘/Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/checks.noindex/exampletestr/new/exampletestr.Rcheck’
+* using R version 3.5.3 (2019-03-11)
+* using platform: x86_64-apple-darwin15.6.0 (64-bit)
+* using session charset: UTF-8
+* checking for file ‘exampletestr/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘exampletestr’ version ‘1.4.1’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘exampletestr’ can be installed ... OK
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking ‘build’ directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... ERROR
+  Running ‘spelling.R’
+  Comparing ‘spelling.Rout’ to ‘spelling.Rout.save’ ...6,13d5
+< Potential spelling errors:
+<   WORD        FOUND IN
+< Walthert    NEWS.md:31
+< Wellcome    NEWS.md:80
+< github      NEWS.md:31,79
+< https       NEWS.md:31
+< rorynolan   NEWS.md:31
+< verisons    NEWS.md:24
+  Running ‘testthat.R’
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+  > test_check("exampletestr")
+  [31m──[39m [31m1. Error: `make_tests_shells_file()` works (@test-exemplar.R#211) [39m [31m──────────────────────────────────────[39m
+  more 'from' files than 'to' files
+  1: expect_true(all(file.copy(system.file("extdata", c("detect.R", "match.R"), package = "exampletestr"), "R"))) at testthat/test-exemplar.R:211
+  2: quasi_label(enquo(object), label, arg = "object")
+  3: eval_bare(get_expr(quo), get_env(quo))
+  4: file.copy(system.file("extdata", c("detect.R", "match.R"), package = "exampletestr"), "R")
+  5: stop("more 'from' files than 'to' files")
+  
+  ══ testthat results  ═══════════════════════════════════════════════════════════════════════════════════════
+  OK: 21 SKIPPED: 0 WARNINGS: 7 FAILED: 1
+  1. Error: `make_tests_shells_file()` works (@test-exemplar.R#211) 
+  
+  Error: testthat unit tests failed
+  Execution halted
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+* checking re-building of vignette outputs ... OK
+* checking PDF version of manual ... OK
+* DONE
+Status: 1 ERROR

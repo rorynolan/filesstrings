@@ -1,0 +1,100 @@
+---
+title: "The _ImageJ_ Problem"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{The ImageJ Problem}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(magrittr)
+```
+
+## Introduction
+
+The _ImageJ_ software (https://imagej.nih.gov/ij) is a widely-used image viewing and processing software, particularly popular in microscopy and life sciences. It supports the TIFF image format (and many others). It reads TIFF files perfectly, however it can sometimes write them in a peculiar way, meaning that when other softwares try to read TIFF files written by _ImageJ_, mistakes can be made. 
+
+One goal of the `ijtiff` R package is to correctly import TIFF files that were saved from _ImageJ_.
+ 
+### Frames and Channels in TIFF files
+
+* In a volumetric image, _frames_ are typically the different z-slices. In a time-stack of images (i.e. a video), each frame represents a time-point.
+* There is one _channel_ per colour. A conventional colour image is made up of 3 colour channels: red, green and blue. A grayscale (black and white) image has just one channel. It's possible to acquire two channels (e.g. red an blue but not green), five channels (e.g. infrared, red, green, blue and ultraviolet), or any number at all, but these cases are seen mostly in specialist imaging fields like microscopy.
+
+### The Peculiarity of _ImageJ_ TIFF files
+
+It is common to use `TIFFTAG_SAMPLESPERPIXEL` to record the number of channels in a TIFF image, however _ImageJ_ sometimes leaves `TIFFTAG_SAMPLESPERPIXEL` with a value of 1 and instead encodes the number of channels in `TIFFTAG_IMAGEDESCRIPTION` which might look something like  
+`"ImageJ=1.51 images=16 channels=2 slices=8"`.
+
+A conventional TIFF reader would miss this channel information (because it is in an unusual place). `ijtiff` does not miss it. We'll see an example below. 
+
+_Note_: These peculiar _ImageJ_-written TIFF files are still bona fide TIFF files according to the TIFF specification. They just break with common conventions of encoding channel information.
+
+## Reading _ImageJ_ TIFF files
+
+```{r 2 channel path}
+path_2ch_ij <- system.file("img", "Rlogo-banana-red_green.tif", 
+                           package = "ijtiff")
+```
+`path_2ch_ij` is the path to a TIFF file which was made in _ImageJ_ from the R logo dancing banana GIF used in the README of Jeroen Ooms' `magick` package. The TIFF is a time-stack containing only the red and green channels of the first, third and fifth frames of the original GIF. Here's the full gif:
+
+```{r magickally display gif, echo=FALSE}
+magick::image_read(system.file("img", "Rlogo-banana.gif", package = "ijtiff"))
+```
+
+Here are the red and green channels of the first, third and fifth frames of the TIFF:
+
+```{r red and green banana, echo=FALSE, message=FALSE, dpi=300, fig.height=1, warning=FALSE, fig.width=2}
+rgbanana_tif <- system.file("img", "Rlogo-banana-red_green.tif",
+                            package = "ijtiff") %>% 
+  ijtiff::read_tif()
+d <- dim(rgbanana_tif)
+reds <- purrr::map(seq_len(d[4]), ~ rgbanana_tif[, , 1, .]) %>% 
+  purrr::reduce(cbind)
+greens <- purrr::map(seq_len(d[4]), ~ rgbanana_tif[, , 2, .]) %>% 
+  purrr::reduce(cbind)
+to_display <- array(0, dim = c(2 * nrow(reds), ncol(reds), 3, 1))
+to_display[seq_len(nrow(reds)), , 1, ] <- reds
+to_display[seq_len(nrow(reds)) + nrow(reds), , 2, ] <- greens
+ijtiff::display(to_display)
+```
+
+### The original `tiff` package
+
+When we import it with the original `tiff` package:
+```{r original tiff import}
+img <- tiff::readTIFF(path_2ch_ij, all = TRUE)
+str(img)  # 10 images
+img[[1]][100:110, 50:60]  # print a section of the first image in the series
+```
+
+* We just get a list of `r length(img)` frames, with no information about the `r dim(img[[1]][3])` channels.
+* We get annoying warnings about ImageJ's private TIFF tags 50838 and 50839, which are of no interest to the `R` user. 
+* The numbers in the image array(s) are (by default) normalized to the range [0, 1].
+
+### The `ijtiff` package
+
+When we import the same image with the `ijtiff` package:
+```{r ijtiff import}
+img <- ijtiff::read_tif(path_2ch_ij)
+dim(img)  # 2 channels, 3 frames
+img[100:110, 50:60, 1, 1]  # print a section of the first channel, first frame
+```
+
+* We see the image nicely represented as an array of `r dim(img[[1]][3])` channels of `r dim(img[[1]][4])` frames.
+* We get no needless warnings.
+* The numbers in the image are integers, the same as would be seen if one opened the image with ImageJ.
+
+
+## Note
+The original `tiff` package reads several types of TIFFs correctly, including many that are saved from _ImageJ_. This is just an example of a TIFF type that it doesn't perform so well with.
+
+
+## Advice for all _ImageJ_ users
+Base _ImageJ_ (similar to the `tiff` R package) does not properly open some perfectly good TIFF files^[I think native _ImageJ_ only likes 1, 3 and 4-channel images and complains about the rest, but I'm not sure about this.] (including some TIFF files written by the `tiff` and `ijtiff` R packages).  Instead it often gives you the error message: _imagej can only open 8 and 16 bit/channel images_. These images in fact can be opened in _ImageJ_ using the wonderful _BioFormats_ plugin. See https://imagej.net/Bio-Formats.

@@ -1,0 +1,124 @@
+* using log directory ‘/Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/checks.noindex/exampletestr/old/exampletestr.Rcheck’
+* using R version 3.5.3 (2019-03-11)
+* using platform: x86_64-apple-darwin15.6.0 (64-bit)
+* using session charset: UTF-8
+* checking for file ‘exampletestr/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘exampletestr’ version ‘1.4.1’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘exampletestr’ can be installed ... OK
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking ‘build’ directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... ERROR
+Running examples in ‘exampletestr-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: make-test-shells
+> ### Title: Create test shells.
+> ### Aliases: make-test-shells make_test_shell_fun make_tests_shells_file
+> ###   make_tests_shells_pkg
+> 
+> ### ** Examples
+> 
+> usethis::create_package(tempdir(check = TRUE), open = FALSE)
+[32m✔[39m Setting active project to [34m'/private/var/folders/l_/2mwm03p55zg7zjykv084hhvr0000gn/T/RtmpJsmCKz'[39m
+Warning: `recursive` is deprecated, please use `recurse` instead
+[32m✔[39m Creating [34m'R/'[39m
+[32m✔[39m Writing [34m'DESCRIPTION'[39m
+[34mPackage[39m: RtmpJsmCKz
+[34mTitle[39m: What the Package Does (One Line, Title Case)
+[34mVersion[39m: 0.0.0.9000
+[34mAuthors@R[39m (parsed):
+    * First Last <first.last@example.com> [aut, cre] (<https://orcid.org/YOUR-ORCID-ID>)
+[34mDescription[39m: What the package does (one paragraph).
+[34mLicense[39m: What license it uses
+[34mEncoding[39m: UTF-8
+[34mLazyData[39m: true
+[32m✔[39m Writing [34m'NAMESPACE'[39m
+[32m✔[39m Setting active project to [34m'<no active project>'[39m
+> file.copy(system.file("extdata", c("detect.R", "match.R"),
++                       package = "exampletestr"),
++           paste0(tempdir(), "/R"))
+[1] TRUE TRUE
+> make_test_shell_fun("str_detect()", document = TRUE, open = FALSE,
++                     pkg_dir = tempdir())
+Running [90m`roxygen2::roxygenize()`[39m . . .
+Updating roxygen version in /private/var/folders/l_/2mwm03p55zg7zjykv084hhvr0000gn/T/RtmpJsmCKz/DESCRIPTION
+Loading RtmpJsmCKz
+Error in intmat_list_bind_nth_rows(instances, n - 1) : 
+  could not find function "intmat_list_bind_nth_rows"
+Calls: make_test_shell_fun ... str_after_nth -> str_nth_instance_indices -> %>% -> eval -> eval
+Execution halted
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... ERROR
+  Running ‘spelling.R’
+  Comparing ‘spelling.Rout’ to ‘spelling.Rout.save’ ...6,13d5
+< Potential spelling errors:
+<   WORD        FOUND IN
+< Walthert    NEWS.md:31
+< Wellcome    NEWS.md:80
+< github      NEWS.md:31,79
+< https       NEWS.md:31
+< rorynolan   NEWS.md:31
+< verisons    NEWS.md:24
+  Running ‘testthat.R’
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+  12: ui_yeah(x, .envir = .envir)
+  13: ui_stop(c("User input required, but session is not interactive.", "Query: {x}"))
+  
+  ══ testthat results  ═══════════════════════════════════════════════════════════════════════════════════════
+  OK: 6 SKIPPED: 0 WARNINGS: 1 FAILED: 7
+  1. Error: `extract_examples()` works (@test-exemplar.R#12) 
+  2. Failure: `make_test_shell()` works (@test-exemplar.R#50) 
+  3. Error: `make_test_shell()` works (@test-exemplar.R#53) 
+  4. Failure: `make_tests_shell_fun()` works (@test-exemplar.R#93) 
+  5. Failure: `make_tests_shell_fun()` works (@test-exemplar.R#100) 
+  6. Error: `make_tests_shell_fun()` works (@test-exemplar.R#103) 
+  7. Error: `make_tests_shells_file()` works (@test-exemplar.R#208) 
+  
+  Error: testthat unit tests failed
+  Execution halted
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+* checking re-building of vignette outputs ... OK
+* checking PDF version of manual ... OK
+* DONE
+Status: 2 ERRORs

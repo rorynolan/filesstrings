@@ -1,0 +1,22 @@
+citHeader("To cite detrendr in publications use:")
+
+citEntry(entry   = "Article",
+         title   = "{nandb}--—number and brightness in R with a novel automatic detrending algorithm",
+         author  = personList(as.person("Rory Nolan"),
+                              as.person("Luis Alvarez"),
+                              as.person("Jonathan Elegheert"),
+                              as.person("Maro Iliopoulou"),
+                              as.person("G. Maria Jakobsdottir"),
+                              as.person("Marina Rodriguez-Munoz"),
+                              as.person("A. Radu Aricescu"),
+                              as.person("Sergi Padilla-Parra")),
+         journal = "Bioinformatics",
+         year    = "2017",
+         doi     = "10.1093/bioinformatics/btx434",
+
+         textVersion = paste("Rory Nolan et al., (2017).",
+                             "nandb: number and brightness in R",
+                             "with a novel automatic detrending algorithm.",
+                             "The Journal of Open Source Software, 2(14). ",
+                             "DOI: 10.1093/bioinformatics/btx434.")
+)

@@ -1,0 +1,4 @@
+Quitting from lines 35-38 (single-images.Rmd) 
+Error: processing vignette 'single-images.Rmd' failed with diagnostics:
+could not find function "intmat_list_bind_nth_rows"
+Execution halted

@@ -1,0 +1,104 @@
+
+R version 3.5.3 (2019-03-11) -- "Great Truth"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "exampletestr"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('exampletestr')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("make-test-shells")
+> ### * make-test-shells
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: make-test-shells
+> ### Title: Create test shells.
+> ### Aliases: make-test-shells make_test_shell_fun make_tests_shells_file
+> ###   make_tests_shells_pkg
+> 
+> ### ** Examples
+> 
+> usethis::create_package(tempdir(check = TRUE), open = FALSE)
+[32m✔[39m Setting active project to [34m'/private/var/folders/l_/2mwm03p55zg7zjykv084hhvr0000gn/T/RtmprudCcA'[39m
+Warning: `recursive` is deprecated, please use `recurse` instead
+[32m✔[39m Creating [34m'R/'[39m
+[32m✔[39m Writing [34m'DESCRIPTION'[39m
+[34mPackage[39m: RtmprudCcA
+[34mTitle[39m: What the Package Does (One Line, Title Case)
+[34mVersion[39m: 0.0.0.9000
+[34mAuthors@R[39m (parsed):
+    * First Last <first.last@example.com> [aut, cre] (<https://orcid.org/YOUR-ORCID-ID>)
+[34mDescription[39m: What the package does (one paragraph).
+[34mLicense[39m: What license it uses
+[34mEncoding[39m: UTF-8
+[34mLazyData[39m: true
+[32m✔[39m Writing [34m'NAMESPACE'[39m
+[32m✔[39m Setting active project to [34m'<no active project>'[39m
+> file.copy(system.file("extdata", c("detect.R", "match.R"),
++                       package = "exampletestr"),
++           paste0(tempdir(), "/R"))
+[1] TRUE TRUE
+> make_test_shell_fun("str_detect()", document = TRUE, open = FALSE,
++                     pkg_dir = tempdir())
+Running [90m`roxygen2::roxygenize()`[39m . . .
+Updating roxygen version in /private/var/folders/l_/2mwm03p55zg7zjykv084hhvr0000gn/T/RtmprudCcA/DESCRIPTION
+Loading RtmprudCcA
+[32m✔[39m Setting active project to [34m'/private/var/folders/l_/2mwm03p55zg7zjykv084hhvr0000gn/T/RtmprudCcA'[39m
+[32m✔[39m Adding [34m'testthat'[39m to [32mSuggests[39m field in DESCRIPTION
+Warning: `recursive` is deprecated, please use `recurse` instead
+[32m✔[39m Creating [34m'tests/testthat/'[39m
+[32m✔[39m Writing [34m'tests/testthat.R'[39m
+[31m●[39m Call [90m`use_test()`[39m to initialize a basic test file and open it for editing.
+[32m✔[39m Wrote [90m`tests/testthat/test-str_detect-examples.R`[39m.
+[31m●[39m Complete the unit tests in [90m`tests/testthat/test-str_detect-examples.R`[39m.
+> make_tests_shells_file("detect", document = FALSE, open = FALSE,
++                        pkg_dir = tempdir())
+[32m✔[39m Wrote [90m`tests/testthat/test-detect-examples.R`[39m.
+[31m●[39m Complete the unit tests in [90m`tests/testthat/test-detect-examples.R`[39m.
+> make_tests_shells_pkg(overwrite = TRUE, document = FALSE,
++                       pkg_dir = tempdir())
+[32m✔[39m Wrote [90m`tests/testthat/test-detect-examples.R`[39m.
+[31m●[39m Complete the unit tests in [90m`tests/testthat/test-detect-examples.R`[39m.
+[32m✔[39m Wrote [90m`tests/testthat/test-match-examples.R`[39m.
+[31m●[39m Complete the unit tests in [90m`tests/testthat/test-match-examples.R`[39m.
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+
+detaching ‘devtools_shims’, ‘package:RtmprudCcA’
+
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  2.663 0.101 2.817 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

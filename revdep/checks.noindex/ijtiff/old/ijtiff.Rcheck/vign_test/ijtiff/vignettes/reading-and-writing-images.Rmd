@@ -1,0 +1,119 @@
+---
+title: "Reading and Writing Images"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Reading and Writing Images}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Reading TIFF files
+
+Check out the following video:
+
+![](`r system.file("img", "Rlogo-banana.gif", package = "ijtiff")`)
+
+As you can see, it's a colour video of a banana dancing in front of the R logo. Hence, it has colour channel (red, green and blue) and frame (a video is comprised of several _frames_) information inside. I have this video saved in a TIFF file.
+
+```{r dancing-banana-path}
+path_dancing_banana <- system.file("img", "Rlogo-banana.tif",
+                                   package = "ijtiff")
+print(path_dancing_banana)
+```
+
+To read it in, you just need `read_tif()` and the path to the image.
+
+```{r read-dancing-banana}
+library(ijtiff)
+img_dancing_banana <- read_tif(path_dancing_banana)
+```
+
+Let's take a peek inside of `img_dancing_banana`.
+
+```{r peek}
+str(img_dancing_banana)
+```
+
+You can see it's a `r length(dim(img_dancing_banana))`-dimensional array. The last two dimensions are `r dplyr::nth(dim(img_dancing_banana), -2)` and `r dplyr::nth(dim(img_dancing_banana), -1)`; this is because these are the channel and frame slots respectively: the image has `r dplyr::nth(dim(img_dancing_banana), -2)` channels (red, green and blue) and `r dplyr::nth(dim(img_dancing_banana), -1)` frames. The first two dimensions tell us that the images in the video are `r dim(img_dancing_banana)[1]` pixels tall and `r dim(img_dancing_banana)[2]` pixels wide. The image object is of class `ijtiff_img`. This guarantees that it is a 4-dimensional array with this structure. The attributes of the `ijtiff_img` give information on the various TIFF tags that were part of the TIFF image. You can read more about various TIFF tags at https://www.awaresystems.be/imaging/tiff/tifftags.html. To read just the tags and not the image, use the `read_tags()` function.
+
+That's it really as far as reading TIFF files goes; it's that simple. Let's visualize the constituent parts of that 8-frame, colour TIFF.
+
+```{r red-and-green-banana, echo=FALSE, message=FALSE, out.width='100%', dpi=300, fig.height=0.9}
+library(magrittr)
+d <- dim(img_dancing_banana)
+reds <- purrr::map(seq_len(d[4]), ~ img_dancing_banana[, , 1, .]) %>% 
+  purrr::reduce(cbind)
+greens <- purrr::map(seq_len(d[4]), ~ img_dancing_banana[, , 2, .]) %>% 
+  purrr::reduce(cbind)
+blues <- purrr::map(seq_len(d[4]), ~ img_dancing_banana[, , 3, .]) %>% 
+  purrr::reduce(cbind)
+to_display <- array(0, dim = c(3 * nrow(reds), ncol(reds), 3, 1))
+to_display[seq_len(nrow(reds)), , 1, ] <- reds
+to_display[seq_len(nrow(reds)) + nrow(reds), , 2, ] <- greens
+to_display[seq_len(nrow(reds)) + 2 * nrow(reds), , 3, ] <- blues
+display(to_display)
+```
+
+There you go; 8 frames in 3 colours.
+
+
+### More examples
+
+If you read an image with only one frame, the frame slot (4) will still be there:
+
+```{r one-frame, dpi=300, fig.height=0.5, fig.width=0.5}
+path_rlogo <- system.file("img", "Rlogo.tif", package = "ijtiff")
+img_rlogo <- read_tif(path_rlogo) 
+dim(img_rlogo)  # 4 channels, 1 frame
+class(img_rlogo)
+display(img_rlogo)
+```
+
+You can also have an image with only 1 channel:
+
+```{r one-channel, dpi=300, fig.height=0.5, fig.width=0.5}
+path_rlogo_grey <- system.file("img", "Rlogo-grey.tif", package = "ijtiff")
+img_rlogo_grey <- read_tif(path_rlogo_grey)
+dim(img_rlogo_grey)  # 1 channel, 1 frame
+display(img_rlogo_grey)
+```
+
+
+
+## Writing TIFF files
+
+To write an image, you need an object in the style of an `ijtiff_img` object. You can read about those [here](https://ropensci.github.io/ijtiff/reference/ijtiff_img.html). The basic idea is to have your image in a 4-dimensional array with the structure `img[y, x, channel, frame]`. Then, to write this image to the location `path`, you just type `write_tif(img, path)`. 
+
+```{r write-tif}
+path <- tempfile(pattern = "dancing-banana", fileext = ".tif")
+print(path)
+write_tif(img_dancing_banana, path)
+```
+
+
+
+## Reading text images
+
+You may have a text image that you want to read (but realistically, you might never).^[If you don't know what text images are, see https://ropensci.github.io/ijtiff/articles/text-images.html.]
+
+```{r read-txt-img}
+path_txt_img <- system.file("img", "Rlogo-grey.txt", package = "ijtiff")
+txt_img <- read_txt_img(path_txt_img)
+```
+
+
+## Writing text images
+
+Writing a text image works as you'd expect.
+
+```{r, write-txt-img}
+write_txt_img(txt_img, path = tempfile(pattern = "txtimg", fileext = ".txt"))
+```

@@ -1,0 +1,42 @@
+---
+title: "Batch mode"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Batch mode}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+First of all, please read the vignette on detrending single images at https://rorynolan.github.io/detrendr/articles/single-images.html to see how detrending works on an individual image basis and to understand the nature and importance of thresholding. It's not necessary to understand every line, but it provides important context.
+
+
+## Batch detrending
+
+Batch detrending applies the same routine to all of the images in a directory. If you have a directory with some images that you want to detrend and some that you don't, put the ones you want to detrend in their own directory and detrend that directory. Then put the resulting images wherever you like. 
+
+First decide whether or not your images need to be thresholded or not. Again, if some need to be thresholded and some don't, put these in separate directories and detrend them separately. Always remember to check that the thresholding worked satisfactorily when it has been employed.
+
+To detrend a directory `path/to/some/dir` with e.g. _Huang_ thresholding, run
+
+```{r detrend-dir-thresh, eval=FALSE} 
+dir_detrend_robinhood("path/to/some/dir", thresh = "Huang")
+```
+
+To go without thresholding, just run
+
+```{r detrend-dir-no-thresh, eval=FALSE} 
+dir_detrend_robinhood("path/to/some/dir")
+```
+
+This will make a new directory called `detrended` within `path/to/some/dir` which will contain the detrended TIFF images. They will be named in such a way as to make clear that they were detrended and how they were detrended (with which method and parameters).
+
+The legacy methods also have their batch modes. For example, to use exponential filtering detrending, use `dir_detrend_exp()`.
