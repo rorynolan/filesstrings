@@ -1,5 +1,8 @@
 {
-  "@context": ["https://doi.org/10.5063/schema/codemeta-2.0", "http://schema.org"],
+  "@context": [
+    "https://doi.org/10.5063/schema/codemeta-2.0",
+    "http://schema.org"
+  ],
   "@type": "SoftwareSourceCode",
   "identifier": "filesstrings",
   "description": "This started out as a package for file and string manipulation. \n    Since then, the 'fs' and 'strex' packages emerged, offering functionality\n    previously given by this package (but it's done better in these new ones). \n    Those packages have hence almost pushed 'filesstrings' into extinction. \n    However, it still has a small number of unique, handy file manipulation \n    functions which can be seen in the vignette. \n    One example is a function to remove spaces from all file names in a \n    directory.",
@@ -7,14 +10,14 @@
   "codeRepository": "https://www.github.com/rorynolan/filesstrings",
   "issueTracker": "https://www.github.com/rorynolan/filesstrings/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.5.3",
+    "version": "3.6.0",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.5.3 (2019-03-11)",
+  "runtimePlatform": "R version 3.6.0 (2019-04-26)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -163,7 +166,7 @@
       "@type": "SoftwareApplication",
       "identifier": "strex",
       "name": "strex",
-      "version": ">= 1.0.0",
+      "version": ">= 1.0.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -257,9 +260,16 @@
   ],
   "releaseNotes": "https://github.com/rorynolan/filesstrings/blob/master/NEWS.md",
   "readme": "https://github.com/rorynolan/filesstrings/blob/master/README.md",
-  "fileSize": "47.929KB",
-  "contIntegration": ["https://travis-ci.org/rorynolan/filesstrings", "https://ci.appveyor.com/project/rorynolan/filesstrings", "https://codecov.io/gh/rorynolan/filesstrings"],
-  "developmentStatus": ["https://www.tidyverse.org/lifecycle/#stable", "https://www.repostatus.org/#inactive"],
+  "fileSize": "47.796KB",
+  "contIntegration": [
+    "https://travis-ci.org/rorynolan/filesstrings",
+    "https://ci.appveyor.com/project/rorynolan/filesstrings",
+    "https://codecov.io/gh/rorynolan/filesstrings"
+  ],
+  "developmentStatus": [
+    "https://www.tidyverse.org/lifecycle/#stable",
+    "https://www.repostatus.org/#inactive"
+  ],
   "citation": [
     {
       "@type": "ScholarlyArticle",
