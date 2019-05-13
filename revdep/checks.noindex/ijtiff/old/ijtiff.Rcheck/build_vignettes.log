@@ -1,4 +1,0 @@
-Quitting from lines 35-37 (reading-and-writing-images.Rmd) 
-Error: processing vignette 'reading-and-writing-images.Rmd' failed with diagnostics:
-could not find function "intmat_list_bind_nth_rows"
-Execution halted

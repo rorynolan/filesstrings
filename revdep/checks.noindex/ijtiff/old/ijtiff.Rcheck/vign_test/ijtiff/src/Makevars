@@ -1,2 +1,0 @@
-PKG_CPPFLAGS=-I/usr/local/Cellar/libtiff/4.0.9_4/include
-PKG_LIBS=-L/usr/local/Cellar/libtiff/4.0.9_4/lib -ltiff -ljpeg -lz
