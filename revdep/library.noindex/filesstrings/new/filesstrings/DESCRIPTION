@@ -1,0 +1,39 @@
+Package: filesstrings
+Type: Package
+Title: Handy File and String Manipulation
+Version: 3.1.1
+Authors@R: c(person("Rory", "Nolan", email = "rorynoolan@gmail.com", 
+                    role = c("aut", "cre", "cph"),
+                    comment = c(ORCID = "0000-0002-5239-4043")),
+             person("Sergi", "Padilla-Parra", email = "spadilla@well.ox.ac.uk", 
+                    role = "ths", comment = c(ORCID = "0000-0002-8010-9481")))
+Maintainer: Rory Nolan <rorynoolan@gmail.com>
+Description: This started out as a package for file and string manipulation. 
+    Since then, the 'fs' and 'strex' packages emerged, offering functionality
+    previously given by this package (but it's done better in these new ones). 
+    Those packages have hence almost pushed 'filesstrings' into extinction. 
+    However, it still has a small number of unique, handy file manipulation 
+    functions which can be seen in the vignette. 
+    One example is a function to remove spaces from all file names in a 
+    directory.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Imports: magrittr (>= 1.5), checkmate (>= 1.9.3), strex (>= 1.0.1),
+        matrixStats (>= 0.50.0), tibble (>= 2.0.1), ore (>= 1.4.0),
+        rlang (>= 0.3.3), stringi
+RoxygenNote: 6.1.1
+Suggests: testthat, covr, knitr, rmarkdown, spelling, dplyr
+Depends: R (>= 3.1), stringr
+URL: https://www.github.com/rorynolan/filesstrings
+BugReports: https://www.github.com/rorynolan/filesstrings/issues
+Roxygen: list(markdown = TRUE)
+VignetteBuilder: knitr
+Language: en-US
+RemoteType: local
+RemoteUrl: /Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings
+NeedsCompilation: no
+Packaged: 2019-05-13 20:31:01 UTC; rnolan
+Author: Rory Nolan [aut, cre, cph] (<https://orcid.org/0000-0002-5239-4043>),
+  Sergi Padilla-Parra [ths] (<https://orcid.org/0000-0002-8010-9481>)
+Built: R 3.6.0; ; 2019-05-13 20:31:01 UTC; unix

@@ -1,9 +1,3 @@
-# `filesstrings` 3.1.1
-
-## BUG FIXES
-* Inherit bug fixes in `strex` 1.0.1.
-
-
 # `filesstrings` 3.1.0
 
 ## BREAKING CHANGES

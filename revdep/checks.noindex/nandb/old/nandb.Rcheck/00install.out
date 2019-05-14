@@ -1,0 +1,29 @@
+* installing *source* package ‘nandb’ ...
+** package ‘nandb’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+clang++ -std=gnu++11 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/library.noindex/nandb/Rcpp/include" -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include  -fPIC  -Wall -g -O2  -c ImageFilters.cc -o ImageFilters.o
+clang++ -std=gnu++11 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/library.noindex/nandb/Rcpp/include" -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include  -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
+clang++ -std=gnu++11 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/library.noindex/nandb/Rcpp/include" -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include  -fPIC  -Wall -g -O2  -c cross_var.cpp -o cross_var.o
+clang++ -std=gnu++11 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/library.noindex/nandb/Rcpp/include" -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include  -fPIC  -Wall -g -O2  -c float.cpp -o float.o
+clang++ -std=gnu++11 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/library.noindex/nandb/Rcpp/include" -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include  -fPIC  -Wall -g -O2  -c utils.cpp -o utils.o
+clang++ -std=gnu++11 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Resources/lib -L/usr/local/lib -o nandb.so ImageFilters.o RcppExports.o cross_var.o float.o utils.o -F/Library/Frameworks/R.framework/.. -framework R -Wl,-framework -Wl,CoreFoundation
+ld: warning: ld: warning: object file (ImageFilters.o) was built for newer OSX version (10.14) than being linked (10.13)object file (RcppExports.o) was built for newer OSX version (10.14) than being linked (10.13)
+
+ld: warning: object file (cross_var.o) was built for newer OSX version (10.14) than being linked (10.13)
+ld: warning: object file (float.o) was built for newer OSX version (10.14) than being linked (10.13)
+ld: warning: object file (utils.o) was built for newer OSX version (10.14) than being linked (10.13)
+installing to /Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/checks.noindex/nandb/old/nandb.Rcheck/00LOCK-nandb/00new/nandb/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (nandb)

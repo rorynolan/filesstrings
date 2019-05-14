@@ -1,0 +1,48 @@
+
+R version 3.6.0 (2019-04-26) -- "Planting of a Tree"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(testthat)
+> library(detrendr)
+> 
+> test_check("detrendr")
+[31m──[39m [31m1. Failure: detrending entire derectories works (@test-dir_detrend.R#63) [39m [31m───────────────────[39m
+dir("detrended") not equal to paste0(...).
+2/2 mismatches
+x[1]: "2ch_ij_detrended_thresh=Triangle=0.6,Triangle=0.6_boxcar_for_FFS_l=auto=NA,auto=3.tif"
+y[1]: "2ch_ij_detrended_thresh=Triangle=0.6,Triangle=0.6_boxcar_for_FFS_l=auto=NA,auto=2.tif"
+
+x[2]: "bleached_detrended_thresh=Triangle=41.622_boxcar_for_FFS_l=auto=17.tif"
+y[2]: "bleached_detrended_thresh=Triangle=41.622_boxcar_for_FFS_l=auto=19.tif"
+
+[31m──[39m [31m2. Failure: detrending entire derectories works (@test-dir_detrend.R#93) [39m [31m───────────────────[39m
+dir("detrended") not equal to paste0(...).
+2/2 mismatches
+x[1]: "2ch_ij_detrended_thresh=Triangle=0.6,Triangle=0.6_exponential_for_FFS_tau=auto=NA,auto=NA
+x[1]: .tif"
+y[1]: "2ch_ij_detrended_thresh=Triangle=0.6,Triangle=0.6_exponential_for_FFS_tau=auto=NA,auto=6.
+y[1]: 1767578125.tif"
+
+x[2]: "bleached_detrended_thresh=Triangle=41.622_exponential_for_FFS_tau=auto=22.0703125.tif"
+y[2]: "bleached_detrended_thresh=Triangle=41.622_exponential_for_FFS_tau=auto=20.703125.tif"
+
+══ testthat results  ═══════════════════════════════════════════════════════════════════════════
+OK: 207 SKIPPED: 0 WARNINGS: 1 FAILED: 2
+1. Failure: detrending entire derectories works (@test-dir_detrend.R#63) 
+2. Failure: detrending entire derectories works (@test-dir_detrend.R#93) 
+
+Error: testthat unit tests failed
+Execution halted
