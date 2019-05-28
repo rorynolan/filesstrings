@@ -13,16 +13,3 @@ test_that("translate_fail works", {
                  "-1`."
                ))
 })
-
-test_that("`ptem()` works", {
-  skip_if_not(identical(Sys.getenv("TRAVIS"), "true"))
-  ptem_pkgs <- c("clipr", "styler", "ore")
-  for (p in ptem_pkgs) {
-    skip_if_not_installed(p)
-  }
-  clipr::write_clip("err_fun()")
-  expect_equal(
-    as.character(ptem()),
-    "\"An error message to give ptem\\\\(\\\\) full coverage.\""
-  )
-})

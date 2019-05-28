@@ -28,9 +28,9 @@ ld: warning: object file (pillar_utils_parallel.o) was built for newer OSX versi
 ld: warning: object file (rbernoulli_parallel.o) was built for newer OSX version (10.14) than being linked (10.13)
 ld: warning: object file (rboxes.o) was built for newer OSX version (10.14) than being linked (10.13)
 ld: warning: object file (row_stats_parallel.o) was built for newer OSX version (10.14) than being linked (10.13)
+ld: warning: object file (rpois_parallel.o) was built for newer OSX version (10.14) than being linked (10.13)
 ld: warning: object file (smooth.o) was built for newer OSX version (10.14) than being linked (10.13)
 ld: warning: object file (smooth_parallel.o) was built for newer OSX version (10.14) than being linked (10.13)
-ld: warning: object file (rpois_parallel.o) was built for newer OSX version (10.14) than being linked (10.13)
 ld: warning: object file (utils.o) was built for newer OSX version (10.14) than being linked (10.13)
 ld: warning: object file (stats_parallel.o) was built for newer OSX version (10.14) than being linked (10.13)
 installing to /Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/checks.noindex/detrendr/old/detrendr.Rcheck/00LOCK-detrendr/00new/detrendr/libs

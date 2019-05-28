@@ -2,7 +2,7 @@
 % Please edit documentation in R/all-equal.R
 \name{all_equal}
 \alias{all_equal}
-\title{A more flexible version of \link{all.equal} for vectors.}
+\title{An alternative version of \code{\link[base:all.equal]{base::all.equal()}}.}
 \usage{
 all_equal(a, b = NULL)
 }
@@ -27,6 +27,8 @@ if every element in \code{b} is equal to \code{a}.
 \item If \code{a} is a vector or array and \code{b} is a scalar, \code{TRUE} will be returned
 if every element in \code{a} is equal to \code{b}.
 }
+
+This function ignores names and attributes (except for \code{dim}).
 
 When this function does not return \code{TRUE}, it returns \code{FALSE} (unless it
 errors). This is unlike \code{\link[base:all.equal]{base::all.equal()}}.

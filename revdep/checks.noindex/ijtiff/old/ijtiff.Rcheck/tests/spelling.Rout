@@ -17,28 +17,8 @@ Type 'q()' to quit R.
 
 > if(requireNamespace('spelling', quietly=TRUE))
 +   spelling::spell_check_test(vignettes = TRUE, error = FALSE, skip_on_cran = TRUE)
-Potential spelling errors:
-  WORD              FOUND IN
-Acknowledgement   README.md:80
-AppVeyor          README.md:9,87
-DOI               README.md:25,26
-FCS               NEWS.md:39
-Hacky             NEWS.md:13
-Homebrew          README.md:58
-Messasges         NEWS.md:86
-ROpenSci          NEWS.md:67
-RStudio           README.md:14,16
-Rdocumentation    README.md:17
-appveyor          README.md:91
-codecov           README.md:10
-gnuwin            README.md:62
-htm               README.md:62
-http              README.md:62
-lifecycle         README.md:22
-sourceforge       README.md:62
-yml               README.md:91
 All Done!
 > 
 > proc.time()
    user  system elapsed 
-  0.842   0.143   2.987 
+  0.945   0.167   1.411 

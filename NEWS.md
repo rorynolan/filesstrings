@@ -1,6 +1,12 @@
 # `filesstrings` 3.1.1
 
 ## BUG FIXES
+* `all_equal()` was dealing inconsistently with attributes.
+
+
+# `filesstrings` 3.1.1
+
+## BUG FIXES
 * Inherit bug fixes in `strex` 1.0.1.
 
 

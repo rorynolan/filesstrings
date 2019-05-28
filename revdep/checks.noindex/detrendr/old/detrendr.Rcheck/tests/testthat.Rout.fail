@@ -19,27 +19,30 @@ Type 'q()' to quit R.
 > library(detrendr)
 > 
 > test_check("detrendr")
-[31m──[39m [31m1. Failure: detrending entire derectories works (@test-dir_detrend.R#63) [39m [31m───────────────────[39m
+[31m──[39m [31m1. Failure: detrending entire derectories works (@test-dir_detrend.R#63) [39m [31m───────────────[39m
 dir("detrended") not equal to paste0(...).
 2/2 mismatches
-x[1]: "2ch_ij_detrended_thresh=Triangle=0.6,Triangle=0.6_boxcar_for_FFS_l=auto=NA,auto=3.tif"
-y[1]: "2ch_ij_detrended_thresh=Triangle=0.6,Triangle=0.6_boxcar_for_FFS_l=auto=NA,auto=2.tif"
+x[1]: "2ch_ij_detrended_thresh=Triangle=0.6,Triangle=0.6_boxcar_for_FFS_l=auto=NA,auto=3.tif
+x[1]: "
+y[1]: "2ch_ij_detrended_thresh=Triangle=0.6,Triangle=0.6_boxcar_for_FFS_l=auto=NA,auto=2.tif
+y[1]: "
 
 x[2]: "bleached_detrended_thresh=Triangle=41.622_boxcar_for_FFS_l=auto=17.tif"
 y[2]: "bleached_detrended_thresh=Triangle=41.622_boxcar_for_FFS_l=auto=19.tif"
 
-[31m──[39m [31m2. Failure: detrending entire derectories works (@test-dir_detrend.R#93) [39m [31m───────────────────[39m
+[31m──[39m [31m2. Failure: detrending entire derectories works (@test-dir_detrend.R#93) [39m [31m───────────────[39m
 dir("detrended") not equal to paste0(...).
 2/2 mismatches
-x[1]: "2ch_ij_detrended_thresh=Triangle=0.6,Triangle=0.6_exponential_for_FFS_tau=auto=NA,auto=NA
-x[1]: .tif"
-y[1]: "2ch_ij_detrended_thresh=Triangle=0.6,Triangle=0.6_exponential_for_FFS_tau=auto=NA,auto=6.
-y[1]: 1767578125.tif"
+x[1]: "2ch_ij_detrended_thresh=Triangle=0.6,Triangle=0.6_exponential_for_FFS_tau=auto=NA,aut
+x[1]: o=NA.tif"
+y[1]: "2ch_ij_detrended_thresh=Triangle=0.6,Triangle=0.6_exponential_for_FFS_tau=auto=NA,aut
+y[1]: o=6.1767578125.tif"
 
-x[2]: "bleached_detrended_thresh=Triangle=41.622_exponential_for_FFS_tau=auto=22.0703125.tif"
+x[2]: "bleached_detrended_thresh=Triangle=41.622_exponential_for_FFS_tau=auto=22.0703125.tif
+x[2]: "
 y[2]: "bleached_detrended_thresh=Triangle=41.622_exponential_for_FFS_tau=auto=20.703125.tif"
 
-══ testthat results  ═══════════════════════════════════════════════════════════════════════════
+══ testthat results  ═══════════════════════════════════════════════════════════════════════
 OK: 207 SKIPPED: 0 WARNINGS: 1 FAILED: 2
 1. Failure: detrending entire derectories works (@test-dir_detrend.R#63) 
 2. Failure: detrending entire derectories works (@test-dir_detrend.R#93) 

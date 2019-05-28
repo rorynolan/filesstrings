@@ -33,7 +33,7 @@ Language: en-US
 RemoteType: local
 RemoteUrl: /Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings
 NeedsCompilation: no
-Packaged: 2019-05-13 20:31:01 UTC; rnolan
+Packaged: 2019-05-28 11:16:21 UTC; rnolan
 Author: Rory Nolan [aut, cre, cph] (<https://orcid.org/0000-0002-5239-4043>),
   Sergi Padilla-Parra [ths] (<https://orcid.org/0000-0002-8010-9481>)
-Built: R 3.6.0; ; 2019-05-13 20:31:01 UTC; unix
+Built: R 3.6.0; ; 2019-05-28 11:16:21 UTC; unix

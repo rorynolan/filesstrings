@@ -5,7 +5,7 @@
 * using options ‘--no-manual --no-build-vignettes’
 * checking for file ‘ijtiff/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘ijtiff’ version ‘1.5.0’
+* this is package ‘ijtiff’ version ‘1.5.1’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -31,7 +31,6 @@
 * checking whether the package can be unloaded cleanly ... OK
 * checking whether the namespace can be loaded with stated dependencies ... OK
 * checking whether the namespace can be unloaded cleanly ... OK
-* checking loading without being on the library search path ... OK
 * checking dependencies in R code ... OK
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
@@ -58,27 +57,7 @@
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... OK
   Running ‘spelling.R’
-  Comparing ‘spelling.Rout’ to ‘spelling.Rout.save’ ...5,24d4
-< Potential spelling errors:
-<   WORD              FOUND IN
-< Acknowledgement   README.md:80
-< AppVeyor          README.md:9,87
-< DOI               README.md:25,26
-< FCS               NEWS.md:39
-< Hacky             NEWS.md:13
-< Homebrew          README.md:58
-< Messasges         NEWS.md:86
-< ROpenSci          NEWS.md:67
-< RStudio           README.md:14,16
-< Rdocumentation    README.md:17
-< appveyor          README.md:91
-< codecov           README.md:10
-< gnuwin            README.md:62
-< htm               README.md:62
-< http              README.md:62
-< lifecycle         README.md:22
-< sourceforge       README.md:62
-< yml               README.md:91
+  Comparing ‘spelling.Rout’ to ‘spelling.Rout.save’ ... OK
   Running ‘testthat.R’
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK

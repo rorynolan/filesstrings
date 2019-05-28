@@ -92,25 +92,10 @@ attr(,"class")
 [1] "th"      "numeric"
 > mask <- auto_thresh_mask(img, "huang")
 > ijtiff::display(mask[, , 1, 1])
-Using basic display functionality.
-  * For better display functionality, install the EBImage package.
-  * To install `EBImage`:
-    - Install `BiocManager` with `install.packages("BiocManager")`.
-    - Then run `BiocManager::install("EBImage")`.
 > masked <- auto_thresh_apply_mask(img, "huang")
 > ijtiff::display(masked[, , 1, 1])
-Using basic display functionality.
-  * For better display functionality, install the EBImage package.
-  * To install `EBImage`:
-    - Install `BiocManager` with `install.packages("BiocManager")`.
-    - Then run `BiocManager::install("EBImage")`.
 > masked <- auto_thresh_apply_mask(img, 25)
 > ijtiff::display(masked[, , 1, 1])
-Using basic display functionality.
-  * For better display functionality, install the EBImage package.
-  * To install `EBImage`:
-    - Install `BiocManager` with `install.packages("BiocManager")`.
-    - Then run `BiocManager::install("EBImage")`.
 > 
 > 
 > 
@@ -133,31 +118,11 @@ Reading 50.tif: an 8-bit, 100x100 pixel image of unsigned
 integer type with 1 channel and 50 frames . . .
  Done.
 > ijtiff::display(img[, , 1, 1])
-Using basic display functionality.
-  * For better display functionality, install the EBImage package.
-  * To install `EBImage`:
-    - Install `BiocManager` with `install.packages("BiocManager")`.
-    - Then run `BiocManager::install("EBImage")`.
 > img_thresh_mask <- mean_stack_thresh(img, 'Otsu')
 > ijtiff::display(img_thresh_mask[, , 1, 1])
-Using basic display functionality.
-  * For better display functionality, install the EBImage package.
-  * To install `EBImage`:
-    - Install `BiocManager` with `install.packages("BiocManager")`.
-    - Then run `BiocManager::install("EBImage")`.
 > ijtiff::display(img[, , 1, 1])
-Using basic display functionality.
-  * For better display functionality, install the EBImage package.
-  * To install `EBImage`:
-    - Install `BiocManager` with `install.packages("BiocManager")`.
-    - Then run `BiocManager::install("EBImage")`.
 > img_thresh_mask <- mean_stack_thresh(img, 'Huang')
 > ijtiff::display(img_thresh_mask[, , 1, 1])
-Using basic display functionality.
-  * For better display functionality, install the EBImage package.
-  * To install `EBImage`:
-    - Install `BiocManager` with `install.packages("BiocManager")`.
-    - Then run `BiocManager::install("EBImage")`.
 > 
 > 
 > 
@@ -180,31 +145,11 @@ Reading 50.tif: an 8-bit, 100x100 pixel image of unsigned
 integer type with 1 channel and 50 frames . . .
  Done.
 > ijtiff::display(img[, , 1, 1])
-Using basic display functionality.
-  * For better display functionality, install the EBImage package.
-  * To install `EBImage`:
-    - Install `BiocManager` with `install.packages("BiocManager")`.
-    - Then run `BiocManager::install("EBImage")`.
 > img_thresh_mask <- med_stack_thresh(img, 'Otsu')
 > ijtiff::display(img_thresh_mask[, , 1, 1])
-Using basic display functionality.
-  * For better display functionality, install the EBImage package.
-  * To install `EBImage`:
-    - Install `BiocManager` with `install.packages("BiocManager")`.
-    - Then run `BiocManager::install("EBImage")`.
 > ijtiff::display(img[, , 1, 1])
-Using basic display functionality.
-  * For better display functionality, install the EBImage package.
-  * To install `EBImage`:
-    - Install `BiocManager` with `install.packages("BiocManager")`.
-    - Then run `BiocManager::install("EBImage")`.
 > img_thresh_mask <- med_stack_thresh(img, 'Triangle')
 > ijtiff::display(img_thresh_mask[, , 1, 1])
-Using basic display functionality.
-  * For better display functionality, install the EBImage package.
-  * To install `EBImage`:
-    - Install `BiocManager` with `install.packages("BiocManager")`.
-    - Then run `BiocManager::install("EBImage")`.
 > 
 > 
 > 
@@ -214,7 +159,7 @@ Using basic display functionality.
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  3.301 0.285 5.254 0 0 
+Time elapsed:  3.38 0.252 5.259 0 0 
 > grDevices::dev.off()
 null device 
           1 

@@ -62,7 +62,7 @@
   Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
-  [31m──[39m [31m1. Error: `make_tests_shells_file()` works (@test-exemplar.R#211) [39m [31m──────────────────────────[39m
+  [31m──[39m [31m1. Error: `make_tests_shells_file()` works (@test-exemplar.R#211) [39m [31m──────────────────────[39m
   more 'from' files than 'to' files
   1: expect_true(all(file.copy(system.file("extdata", c("detect.R", "match.R"), package = "exampletestr"), 
          "R"))) at testthat/test-exemplar.R:211
@@ -71,7 +71,7 @@ Last 13 lines of output:
   4: file.copy(system.file("extdata", c("detect.R", "match.R"), package = "exampletestr"), "R")
   5: stop("more 'from' files than 'to' files")
   
-  ══ testthat results  ═══════════════════════════════════════════════════════════════════════════
+  ══ testthat results  ═══════════════════════════════════════════════════════════════════════
   OK: 21 SKIPPED: 0 WARNINGS: 7 FAILED: 1
   1. Error: `make_tests_shells_file()` works (@test-exemplar.R#211) 
   

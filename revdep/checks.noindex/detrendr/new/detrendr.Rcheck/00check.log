@@ -31,7 +31,6 @@
 * checking whether the package can be unloaded cleanly ... OK
 * checking whether the namespace can be loaded with stated dependencies ... OK
 * checking whether the namespace can be unloaded cleanly ... OK
-* checking loading without being on the library search path ... OK
 * checking dependencies in R code ... OK
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
@@ -62,15 +61,15 @@ GNU make is a SystemRequirements.
   Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
-  x[1]: "2ch_ij_detrended_thresh=Triangle=0.6,Triangle=0.6_exponential_for_FFS_tau=auto=NA,auto=NA
-  x[1]: .tif"
-  y[1]: "2ch_ij_detrended_thresh=Triangle=0.6,Triangle=0.6_exponential_for_FFS_tau=auto=NA,auto=6.
-  y[1]: 1767578125.tif"
+  x[1]: o=NA.tif"
+  y[1]: "2ch_ij_detrended_thresh=Triangle=0.6,Triangle=0.6_exponential_for_FFS_tau=auto=NA,aut
+  y[1]: o=6.1767578125.tif"
   
-  x[2]: "bleached_detrended_thresh=Triangle=41.622_exponential_for_FFS_tau=auto=22.0703125.tif"
+  x[2]: "bleached_detrended_thresh=Triangle=41.622_exponential_for_FFS_tau=auto=22.0703125.tif
+  x[2]: "
   y[2]: "bleached_detrended_thresh=Triangle=41.622_exponential_for_FFS_tau=auto=20.703125.tif"
   
-  ══ testthat results  ═══════════════════════════════════════════════════════════════════════════
+  ══ testthat results  ═══════════════════════════════════════════════════════════════════════
   OK: 207 SKIPPED: 0 WARNINGS: 1 FAILED: 2
   1. Failure: detrending entire derectories works (@test-dir_detrend.R#63) 
   2. Failure: detrending entire derectories works (@test-dir_detrend.R#93) 

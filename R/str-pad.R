@@ -22,7 +22,9 @@ extend_char_vec <- function(char_vec, extend_by = NA, length_out = NA) {
   checkmate::assert_atomic(char_vec)
   if (is.numeric(char_vec)) char_vec %<>% as.character()
   checkmate::assert_character(char_vec)
-  if (!is.na(extend_by)) return(c(char_vec, rep("", extend_by)))
+  if (!is.na(extend_by)) {
+    return(c(char_vec, rep("", extend_by)))
+  }
   if (!is.na(length_out)) {
     if (!(is.numeric(length_out) && length_out >= length(char_vec))) {
       stop(

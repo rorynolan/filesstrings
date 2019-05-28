@@ -10,13 +10,13 @@
 |collate  |en_GB.UTF-8                  |
 |ctype    |en_GB.UTF-8                  |
 |tz       |Europe/London                |
-|date     |2019-05-13                   |
+|date     |2019-05-28                   |
 
 # Dependencies
 
 |package      |old   |new   |Δ  |
 |:------------|:-----|:-----|:--|
-|filesstrings |3.1.0 |3.1.1 |*  |
+|filesstrings |3.1.1 |3.1.1 |NA |
 
 # Revdeps
 

@@ -827,13 +827,13 @@ integer type with 4 channels and 1 frame . . .
  Done.
 > tmptxt <- tempfile(pattern = "img", fileext = ".txt")
 > write_txt_img(img, tmptxt)
-Writing imgd1534083baef_ch1.txt, imgd1534083baef_ch2.txt, imgd1534083baef_ch3.txt and imgd1534083baef_ch4.txt: a 76x100 pixel text image with 4 channels and 1 frame . . .
+Writing imgaeb07e56de1c_ch1.txt, imgaeb07e56de1c_ch2.txt, imgaeb07e56de1c_ch3.txt and imgaeb07e56de1c_ch4.txt: a 76x100 pixel text image with 4 channels and 1 frame . . .
  Done.
 > tmptxt_ch1_path <- paste0(filesstrings::before_last_dot(tmptxt), "_ch1.txt")
 > print(tmptxt_ch1_path)
-[1] "/var/folders/l_/2mwm03p55zg7zjykv084hhvr0000gn/T//RtmpMj7khW/imgd1534083baef_ch1.txt"
+[1] "/var/folders/l_/2mwm03p55zg7zjykv084hhvr0000gn/T//Rtmp3s9Ceg/imgaeb07e56de1c_ch1.txt"
 > txt_img <- read_txt_img(tmptxt_ch1_path)
-Reading 76x100 pixel text image 'imgd1534083baef_ch1.txt' . . .
+Reading 76x100 pixel text image 'imgaeb07e56de1c_ch1.txt' . . .
  Done.
 > 
 > 
@@ -877,7 +877,7 @@ integer type with 1 channel and 1 frame . . .
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  2.385 0.182 5.393 0 0 
+Time elapsed:  1.951 0.161 2.416 0 0 
 > grDevices::dev.off()
 null device 
           1 
