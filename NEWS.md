@@ -1,4 +1,4 @@
-# `filesstrings` 3.1.1
+# `filesstrings` 3.1.2
 
 ## BUG FIXES
 * `all_equal()` was dealing inconsistently with attributes.
