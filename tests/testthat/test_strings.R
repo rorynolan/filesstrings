@@ -87,7 +87,7 @@ test_that("extract_numbers works", {
     decimals = TRUE,
     leading_decimals = TRUE,
     leave_as_string = TRUE
-  ), list((c("1", ".23", "456"))))
+  ), list(c("1", ".23", "456")))
   expect_equal(extract_numbers("-123abc456"), list(c(123, 456)))
   expect_equal(extract_numbers("-123abc456", negs = TRUE), list(c(-123, 456)))
   expect_equal(extract_numbers("--123abc456", negs = TRUE), list(c(-123, 456)))

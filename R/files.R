@@ -168,13 +168,13 @@ move_files <- function(files, destinations, overwrite = FALSE) {
       overwrite_attempt <- TRUE
       if (overwrite) {
         file.rename(files[i], new_paths[i])
-        if ((!file.exists(files[i])) && file.exists(new_paths[i])) {
+        if (!file.exists(files[i]) && file.exists(new_paths[i])) {
           out[i] <- TRUE
         }
       }
     } else {
       file.rename(files[i], new_paths[i])
-      if ((!file.exists(files[i])) && file.exists(new_paths[i])) {
+      if (!file.exists(files[i]) && file.exists(new_paths[i])) {
         out[i] <- TRUE
       }
     }
