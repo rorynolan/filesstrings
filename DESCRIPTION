@@ -27,7 +27,8 @@ Imports:
     tibble (>= 2.0.1),
     ore (>= 1.4.0),
     rlang (>= 0.3.3),
-    stringi
+    stringi,
+    withr (>= 2.1.0)
 Remotes: rorynolan/strex
 RoxygenNote: 6.1.1
 Suggests: 

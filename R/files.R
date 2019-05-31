@@ -234,8 +234,8 @@ file.move <- move_files
 #' dir.remove("NiceFileNums_test")}
 #' @export
 nice_file_nums <- function(dir = ".", pattern = NA) {
-  init_dir <- setwd(dir)
-  on.exit(setwd(init_dir))
+  checkmate::assert_directory_exists(dir)
+  withr::local_dir(dir)
   if (is.na(pattern)) {
     lf <- list.files()
   } else {
@@ -274,8 +274,8 @@ nice_file_nums <- function(dir = ".", pattern = NA) {
 #' dir.remove("RemoveFileNameSpaces_test")}
 #' @export
 remove_filename_spaces <- function(dir = ".", pattern = "", replacement = "") {
-  init_dir <- setwd(dir)
-  on.exit(setwd(init_dir))
+  checkmate::assert_directory_exists(dir)
+  withr::local_dir(dir)
   lf <- list.files(pattern = pattern)
   new_names <- str_replace_all(lf, " ", replacement)
   new_new_names <- new_names[new_names != lf]
@@ -326,8 +326,8 @@ remove_filename_spaces <- function(dir = ".", pattern = "", replacement = "") {
 #' dir.remove("RenameWithNums_test")}
 #' @export
 rename_with_nums <- function(dir = ".", pattern = NULL) {
-  init_dir <- setwd(dir)
-  on.exit(setwd(init_dir))
+  checkmate::assert_directory_exists(dir)
+  withr::local_dir(dir)
   lf <- list.files(pattern = pattern)
   l <- length(lf)
   if (l == 0) stop("No files found to rename.")
@@ -378,9 +378,11 @@ rename_with_nums <- function(dir = ".", pattern = NULL) {
 #' dir.remove("UnitDirs_test")}
 #' @export
 unitize_dirs <- function(unit, pattern = NULL, dir = ".") {
+  checkmate::assert_directory_exists(dir)
+  withr::local_dir(dir)
   lf <- list.files(pattern = pattern)
   if (!all(str_detect(lf, unit))) {
-    stop(paste0("The file names must all contain the word", unit, "."))
+    stop(paste0("The file names must all contain the word '", unit, "'."))
   }
   up_to_first_units <- str_before_first(lf, unit)
   nums <- vapply(up_to_first_units, last_number, numeric(1), decimals = TRUE)
