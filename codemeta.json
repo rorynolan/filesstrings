@@ -173,7 +173,7 @@
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://github.com/rorynolan/strex"
+      "sameAs": "https://CRAN.R-project.org/package=strex"
     },
     {
       "@type": "SoftwareApplication",
@@ -273,7 +273,7 @@
   ],
   "releaseNotes": "https://github.com/rorynolan/filesstrings/blob/master/NEWS.md",
   "readme": "https://github.com/rorynolan/filesstrings/blob/master/README.md",
-  "fileSize": "47.974KB",
+  "fileSize": "47.968KB",
   "contIntegration": [
     "https://travis-ci.org/rorynolan/filesstrings",
     "https://ci.appveyor.com/project/rorynolan/filesstrings",
