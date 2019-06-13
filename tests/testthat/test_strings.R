@@ -251,10 +251,10 @@ test_that("put_in_pos works", {
 })
 
 test_that("trim_anything works", {
-  expect_equal(trim_anything("..abcd.", ".", "left"), "abcd.")
-  expect_equal(trim_anything("-ghi--", "-"), "ghi")
-  expect_equal(trim_anything("-ghi--", "--"), "-ghi")
-  expect_equal(trim_anything("-ghi--", "--", "right"), "-ghi")
+  expect_equal(trim_anything("..abcd.", coll("."), "left"), "abcd.")
+  expect_equal(trim_anything("-ghi--", coll("-")), "ghi")
+  expect_equal(trim_anything("-ghi--", coll("--")), "-ghi")
+  expect_equal(trim_anything("-ghi--", coll("--"), "right"), "-ghi")
 })
 
 test_that("locate_braces works", {
