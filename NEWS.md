@@ -1,3 +1,10 @@
+# `filesstrings` 3.1.5
+
+## BUG FIXES
+* Fix `trim_anything()` docs.
+* Insist on latest `strex` (v1.1.1).
+
+
 # `filesstrings` 3.1.4
 
 ## BUG FIXES
