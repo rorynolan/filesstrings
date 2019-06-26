@@ -1,5 +1,3 @@
-context("Graphics")
-
 test_that("display works", {
   img <- read_tif(system.file("img", "Rlogo.tif", package = "ijtiff"))
   grDevices::pdf(tempfile(fileext = ".pdf"))

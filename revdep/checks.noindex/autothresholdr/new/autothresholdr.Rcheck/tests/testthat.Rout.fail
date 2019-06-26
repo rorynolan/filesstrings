@@ -1,0 +1,152 @@
+
+R version 3.6.0 (2019-04-26) -- "Planting of a Tree"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(testthat)
+> library(autothresholdr)
+> 
+> test_check("autothresholdr")
+[31m──[39m [31m1. Error: (unknown) (@test_auto_thresh_methods.R#3) [39m [31m─────────────────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: system.file("extdata", "eg.tif", package = "autothresholdr") %>% ijtiff::read_tif() at testthat/test_auto_thresh_methods.R:3
+2: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+3: eval(quote(`_fseq`(`_lhs`)), env, env)
+4: eval(quote(`_fseq`(`_lhs`)), env, env)
+5: `_fseq`(`_lhs`)
+6: freduce(value, `_function_list`)
+7: withVisible(function_list[[k]](value))
+8: function_list[[k]](value)
+9: ijtiff::read_tif(.)
+10: list_safety %<>% filesstrings::match_arg(c("error", "warning", "none"), ignore_case = TRUE)
+...
+17: function_list[[k]](value)
+18: filesstrings::match_arg
+19: getExportedValue(pkg, name)
+20: asNamespace(ns)
+21: getNamespace(ns)
+22: loadNamespace(name)
+23: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+24: asNamespace(ns)
+25: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+26: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m2. Error: mean_stack_thresh works (@test_stack_thresh.R#3) [39m [31m──────────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: ijtiff::read_tif(system.file("extdata", "50.tif", package = "autothresholdr")) at testthat/test_stack_thresh.R:3
+2: list_safety %<>% filesstrings::match_arg(c("error", "warning", "none"), ignore_case = TRUE)
+3: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+4: eval(quote(`_fseq`(`_lhs`)), env, env)
+5: eval(quote(`_fseq`(`_lhs`)), env, env)
+6: `_fseq`(`_lhs`)
+7: freduce(value, `_function_list`)
+8: withVisible(function_list[[k]](value))
+9: function_list[[k]](value)
+10: filesstrings::match_arg
+11: getExportedValue(pkg, name)
+12: asNamespace(ns)
+13: getNamespace(ns)
+14: loadNamespace(name)
+15: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+16: asNamespace(ns)
+17: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+18: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m3. Error: auto_thresh works (@test_thresh.R#4) [39m [31m──────────────────────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: system.file("extdata", "eg.tif", package = "autothresholdr") %>% ijtiff::read_tif() at testthat/test_thresh.R:4
+2: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+3: eval(quote(`_fseq`(`_lhs`)), env, env)
+4: eval(quote(`_fseq`(`_lhs`)), env, env)
+5: `_fseq`(`_lhs`)
+6: freduce(value, `_function_list`)
+7: withVisible(function_list[[k]](value))
+8: function_list[[k]](value)
+9: ijtiff::read_tif(.)
+10: list_safety %<>% filesstrings::match_arg(c("error", "warning", "none"), ignore_case = TRUE)
+...
+17: function_list[[k]](value)
+18: filesstrings::match_arg
+19: getExportedValue(pkg, name)
+20: asNamespace(ns)
+21: getNamespace(ns)
+22: loadNamespace(name)
+23: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+24: asNamespace(ns)
+25: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+26: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m4. Error: auto_thresh works with matrices (@test_thresh.R#73) [39m [31m───────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: system.file("extdata", "eg.tif", package = "autothresholdr") %>% ijtiff::read_tif() %>% {
+       .[, , 1, 1]
+   } at testthat/test_thresh.R:73
+2: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+3: eval(quote(`_fseq`(`_lhs`)), env, env)
+4: eval(quote(`_fseq`(`_lhs`)), env, env)
+5: `_fseq`(`_lhs`)
+6: freduce(value, `_function_list`)
+7: function_list[[i]](value)
+8: ijtiff::read_tif(.)
+9: list_safety %<>% filesstrings::match_arg(c("error", "warning", "none"), ignore_case = TRUE)
+10: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+...
+16: function_list[[k]](value)
+17: filesstrings::match_arg
+18: getExportedValue(pkg, name)
+19: asNamespace(ns)
+20: getNamespace(ns)
+21: loadNamespace(name)
+22: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+23: asNamespace(ns)
+24: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+25: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m5. Error: translate_fail works (@test_utils.R#4) [39m [31m────────────────────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: expect_equal(translate_fail(3, "s"), 2^8 - 1) at testthat/test_utils.R:4
+2: quasi_label(enquo(object), label, arg = "object")
+3: eval_bare(get_expr(quo), get_env(quo))
+4: translate_fail(3, "s")
+5: filesstrings::match_arg
+6: getExportedValue(pkg, name)
+7: asNamespace(ns)
+8: getNamespace(ns)
+9: loadNamespace(name)
+10: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+11: asNamespace(ns)
+12: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+13: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+══ testthat results  ════════════════════════════════════════════════════════════════════════════
+OK: 0 SKIPPED: 0 WARNINGS: 0 FAILED: 5
+1. Error: (unknown) (@test_auto_thresh_methods.R#3) 
+2. Error: mean_stack_thresh works (@test_stack_thresh.R#3) 
+3. Error: auto_thresh works (@test_thresh.R#4) 
+4. Error: auto_thresh works with matrices (@test_thresh.R#73) 
+5. Error: translate_fail works (@test_utils.R#4) 
+
+Error: testthat unit tests failed
+Execution halted

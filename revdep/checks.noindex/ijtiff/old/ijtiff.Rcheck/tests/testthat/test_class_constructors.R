@@ -1,5 +1,3 @@
-context("Class constructors")
-
 test_that("ijtiff_img works", {
   img <- array(seq_len(2^4), dim = rep(2, 4))
   eq_to <- img

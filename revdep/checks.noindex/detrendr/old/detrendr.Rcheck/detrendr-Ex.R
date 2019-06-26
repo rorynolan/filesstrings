@@ -20,8 +20,9 @@ flush(stderr()); flush(stdout())
 ## Not run: 
 ##D ## These examples are not run on CRAN because they take too long.
 ##D ## You can still try them for yourself.
-##D img <- ijtiff::read_tif(system.file('extdata', 'bleached.tif',
-##D                                     package = 'detrendr'))
+##D img <- ijtiff::read_tif(system.file("extdata", "bleached.tif",
+##D   package = "detrendr"
+##D ))
 ##D best_degree(img, parallel = 2)
 ## End(Not run)
 
@@ -42,8 +43,9 @@ flush(stderr()); flush(stdout())
 ## Not run: 
 ##D ## These examples are not run on CRAN because they take too long.
 ##D ## You can still try them for yourself.
-##D img <- ijtiff::read_tif(system.file('extdata', 'bleached.tif',
-##D                                     package = 'detrendr'))
+##D img <- ijtiff::read_tif(system.file("extdata", "bleached.tif",
+##D   package = "detrendr"
+##D ))
 ##D best_l(img, parallel = 2, purpose = "FFS")
 ## End(Not run)
 
@@ -65,8 +67,9 @@ flush(stderr()); flush(stdout())
 ## Not run: 
 ##D ## These examples are not run on CRAN because they take too long.
 ##D ## You can still try them for yourself.
-##D img <- ijtiff::read_tif(system.file('extdata', 'bleached.tif',
-##D                                     package = 'detrendr'))
+##D img <- ijtiff::read_tif(system.file("extdata", "bleached.tif",
+##D   package = "detrendr"
+##D ))
 ##D best_swaps(img)
 ## End(Not run)
 
@@ -89,8 +92,9 @@ flush(stderr()); flush(stdout())
 ## Not run: 
 ##D ## These examples are not run on CRAN because they take too long.
 ##D ## You can still try them for yourself.
-##D img <- ijtiff::read_tif(system.file('extdata', 'bleached.tif',
-##D                                     package = 'detrendr'))[, , 1, ]
+##D img <- ijtiff::read_tif(system.file("extdata", "bleached.tif",
+##D   package = "detrendr"
+##D ))[, , 1, ]
 ##D best_tau(img, parallel = 2)
 ## End(Not run)
 
@@ -114,7 +118,6 @@ brightness_pillars(aaa)
 
 
 
-
 cleanEx()
 nameEx("detrend-directory")
 ### * detrend-directory
@@ -130,9 +133,13 @@ flush(stderr()); flush(stdout())
 
 ## Not run: 
 ##D setwd(tempdir())
-##D file.copy(c(system.file("extdata", "bleached.tif", package = "detrendr"),
-##D             system.file("img", "2ch_ij.tif", package = "ijtiff")),
-##D           ".")
+##D file.copy(
+##D   c(
+##D     system.file("extdata", "bleached.tif", package = "detrendr"),
+##D     system.file("img", "2ch_ij.tif", package = "ijtiff")
+##D   ),
+##D   "."
+##D )
 ##D dir_detrend_robinhood(thresh = "huang")
 ##D dir_detrend_boxcar(l = "auto", thresh = "tri", purpose = "FFS")
 ##D dir_detrend_exp(tau = "auto", thresh = "tri", purpose = "FCS")
@@ -158,8 +165,9 @@ flush(stderr()); flush(stdout())
 ##D ## These examples are not run on CRAN because they take too long.
 ##D ## You can still try them for yourself.
 ##D 
-##D img <- ijtiff::read_tif(system.file('extdata', 'bleached.tif',
-##D                                     package = 'detrendr'))
+##D img <- ijtiff::read_tif(system.file("extdata", "bleached.tif",
+##D   package = "detrendr"
+##D ))
 ##D corrected <- img_detrend_rh(img)
 ##D corrected <- img_detrend_boxcar(img, "auto", purpose = "fcs", parallel = 2)
 ##D corrected10 <- img_detrend_boxcar(img, 10, purpose = "fcs", parallel = 2)
@@ -185,10 +193,9 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-a <- array(seq_len(2 ^ 3), dim = rep(2, 3))
+a <- array(seq_len(2^3), dim = rep(2, 3))
 sum_frames(a)
 mean_frames(a)
-
 
 
 
@@ -206,12 +213,11 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-aaa <- array(seq_len(2 ^ 4), dim = rep(2, 4))  # a 2-channel, 2-frame array
+aaa <- array(seq_len(2^4), dim = rep(2, 4)) # a 2-channel, 2-frame array
 sum_pillars(aaa)
 mean_pillars(aaa)
 median_pillars(aaa)
 var_pillars(aaa)
-
 
 
 
@@ -233,7 +239,6 @@ rfromboxes(40, balls, weights = c(rep(1, 9), 0))
 
 
 
-
 cleanEx()
 nameEx("rtoboxes")
 ### * rtoboxes
@@ -248,9 +253,10 @@ flush(stderr()); flush(stdout())
 
 rtoboxes(30, 7)
 rtoboxes(30, 7, capacities = c(rep(1, 3), rep(7, 4)))
-rtoboxes(30, 7, capacities = c(rep(1, 3), rep(70, 4)),
-         weights = c(rep(0.1, 6), 1))
-
+rtoboxes(30, 7,
+  capacities = c(rep(1, 3), rep(70, 4)),
+  weights = c(rep(0.1, 6), 1)
+)
 
 
 

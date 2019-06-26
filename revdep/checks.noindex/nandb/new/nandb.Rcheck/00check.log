@@ -5,7 +5,7 @@
 * using options ‘--no-manual --no-build-vignettes’
 * checking for file ‘nandb/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘nandb’ version ‘2.0.0’
+* this is package ‘nandb’ version ‘2.0.2’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -31,10 +31,8 @@
 * checking whether the package can be unloaded cleanly ... OK
 * checking whether the namespace can be loaded with stated dependencies ... OK
 * checking whether the namespace can be unloaded cleanly ... OK
-* checking loading without being on the library search path ... OK
 * checking dependencies in R code ... NOTE
-Namespaces in Imports field not imported from:
-  ‘MASS’ ‘stats’
+Namespace in Imports field not imported from: ‘utils’
   All declared Imports should be used.
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
@@ -52,20 +50,46 @@ Namespaces in Imports field not imported from:
 * checking compiled code ... OK
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
-* checking examples ... OK
+* checking examples ... ERROR
+Running examples in ‘nandb-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: brightness
+> ### Title: Calculate brightness from image series.
+> ### Aliases: brightness
+> 
+> ### ** Examples
+> 
+> img <- ijtiff::read_tif(system.file("extdata", "50.tif", package = "nandb"))
+Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+  namespace ‘strex’ 1.1.0 is being loaded, but >= 1.1.1 is required
+Calls: <Anonymous> ... namespaceImportFrom -> asNamespace -> loadNamespace
+Execution halted
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... OK
+* checking tests ... ERROR
   Running ‘spelling.R’
-  Comparing ‘spelling.Rout’ to ‘spelling.Rout.save’ ...6,10d5
-< Potential spelling errors:
-<   WORD        FOUND IN
-< Kmer        NEWS.md:36
-< linux       NEWS.md:20
-< tidyverse   NEWS.md:27
+  Comparing ‘spelling.Rout’ to ‘spelling.Rout.save’ ... OK
   Running ‘testthat.R’
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+  ══ testthat results  ════════════════════════════════════════════════════════════════════════════
+  OK: 30 SKIPPED: 0 WARNINGS: 0 FAILED: 19
+  1. Error: brightness works (@test-brightness.R#5) 
+  2. Error: brightness_folder works (@test-brightness.R#40) 
+  3. Error: brightness_timeseries works (@test-brightness.R#92) 
+  4. Error: cc_brightness() works (@test-cc_brightness.R#3) 
+  5. Error: cc_brightness_timeseries() works (@test-cc_brightness.R#61) 
+  6. Error: cc_brightness_folder() works (@test-cc_brightness.R#149) 
+  7. Error: cc_brightness_timeseries_folder() works (@test-cc_brightness.R#175) 
+  8. Error: cc_number() works (@test-cc_number.R#3) 
+  9. Error: cc_number_timeseries() works (@test-cc_number.R#61) 
+  1. ...
+  
+  Error: testthat unit tests failed
+  Execution halted
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
 * checking running R code from vignettes ... NONE
 * checking re-building of vignette outputs ... SKIPPED
 * DONE
-Status: 1 NOTE
+Status: 2 ERRORs, 1 NOTE

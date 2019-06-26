@@ -1,7 +1,6 @@
-context("Automatic parameter finding")
-
 test_that("best_tau works", {
   skip_on_os("solaris")
+  skip_if(getRversion() < "3.6.0")
   img <- ijtiff::read_tif(system.file("extdata", "bleached.tif",
     package = "detrendr"
   ), msg = FALSE)

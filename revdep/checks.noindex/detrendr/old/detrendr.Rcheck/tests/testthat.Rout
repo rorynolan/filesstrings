@@ -16,12 +16,12 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(testthat)
-> library(autothresholdr)
+> library(detrendr)
 > 
-> test_check("autothresholdr")
-══ testthat results  ═══════════════════════════════════════════════════════════════════════
-OK: 69 SKIPPED: 0 WARNINGS: 0 FAILED: 0
+> test_check("detrendr")
+══ testthat results  ════════════════════════════════════════════════════════════════════════════
+OK: 219 SKIPPED: 8 WARNINGS: 0 FAILED: 0
 > 
 > proc.time()
    user  system elapsed 
-  3.879   0.215   4.359 
+ 91.330  29.326 120.417 

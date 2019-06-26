@@ -19,9 +19,9 @@ Type 'q()' to quit R.
 > library(ijtiff)
 > 
 > test_check("ijtiff")
-══ testthat results  ═══════════════════════════════════════════════════════════════════════
-OK: 78 SKIPPED: 0 WARNINGS: 0 FAILED: 0
+══ testthat results  ════════════════════════════════════════════════════════════════════════════
+OK: 97 SKIPPED: 0 WARNINGS: 0 FAILED: 0
 > 
 > proc.time()
    user  system elapsed 
-  4.584   0.384   5.567 
+  5.739   0.481   9.928 

@@ -116,11 +116,14 @@ test_that("rboxes derivatives error correctly", {
 
 test_that("`myarray2vec()` works", {
   skip_if_not_installed("arrayhelpers")
-  mat <- matrix(c(9, 13, 2, 6,
-                  7, 5, 15, 12,
-                  1, 10, 3, 8,
-                  4, 11, 16, 14),
-                nrow = 4, byrow = TRUE)
+  mat <- matrix(c(
+    9, 13, 2, 6,
+    7, 5, 15, 12,
+    1, 10, 3, 8,
+    4, 11, 16, 14
+  ),
+  nrow = 4, byrow = TRUE
+  )
   d <- rep(99, 4)
   expect_equal(myarray2vec(mat, d), arrayhelpers::array2vec(mat, d))
   expect_error(
@@ -133,12 +136,15 @@ test_that("`myarray2vec()` works", {
   )
   set.seed(2)
   expect_error(
-    myarray2vec(matrix(c(1, 3, 1, 4,
-                         4, 1, 1, 2,
-                         3, 2, 4, 5,
-                         1, 5, 5, 3),
-                       nrow = 4, byrow = TRUE),
-      dim = rep(4, 4)
+    myarray2vec(matrix(c(
+      1, 3, 1, 4,
+      4, 1, 1, 2,
+      3, 2, 4, 5,
+      1, 5, 5, 3
+    ),
+    nrow = 4, byrow = TRUE
+    ),
+    dim = rep(4, 4)
     ),
     paste0(
       "You are requesting an array index outside the\\s?",

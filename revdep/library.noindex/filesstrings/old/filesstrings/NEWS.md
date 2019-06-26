@@ -1,7 +1,25 @@
+# `filesstrings` 3.1.4
+
+## BUG FIXES
+* Be ready not to break for `strex` v1.1.0.
+
+
+# `filesstrings` 3.1.3
+
+## BUG FIXES
+* Demand bug-fixed `strex` v1.0.3.
+
+
+# `filesstrings` 3.1.2
+
+## BUG FIXES
+* `all_equal()` was dealing inconsistently with attributes.
+
+
 # `filesstrings` 3.1.1
 
 ## BUG FIXES
-* Inherit bug fixes in `strex` 1.0.1.
+* Inherit bug fixes in `strex` v1.0.1.
 
 
 # `filesstrings` 3.1.0

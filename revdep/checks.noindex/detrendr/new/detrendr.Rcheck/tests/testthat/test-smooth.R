@@ -1,5 +1,3 @@
-context("Smoothing")
-
 test_that("cpp smoothing functions work", {
   v <- runif(10)
   expect_equal(boxcar_smooth(v, 1), weighted_smooth(v, rep(1, 3)))
@@ -11,5 +9,7 @@ test_that("cpp smoothing functions work", {
   )
   v <- seq_len(3)
   expect_equal(weighted_smooth(v, rep(1, 21)), rep(2, 3))
-  expect_error(weighted_smooth(v, rep(1, 20)), "must be odd|c\\+\\+ exception")
+  expect_error(weighted_smooth(v, rep(1, 20)), "must be odd|c\\+\\+ exception",
+    class = "C++Error"
+  )
 })

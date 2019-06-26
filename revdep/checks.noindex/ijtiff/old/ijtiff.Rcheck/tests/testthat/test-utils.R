@@ -1,5 +1,3 @@
-context("Utils")
-
 test_that("extract_desired_plane() works", {
   aaa <- array(0, dim = rep(3, 3))
   expect_equal(extract_desired_plane(aaa), aaa[, , 1])
@@ -13,4 +11,15 @@ test_that("extract_desired_plane() works", {
       "to decipher which is the correct one to extract."
     )
   )
+})
+
+test_that("tif_tags_reference() works", {
+  expect_equal(
+    tif_tags_reference(),
+    readr::read_csv(system.file("extdata",
+      "TIFF_tags.csv",
+      package = "ijtiff"
+    ))
+  )
+  expect_s3_class(tif_tags_reference(), "tbl_df")
 })

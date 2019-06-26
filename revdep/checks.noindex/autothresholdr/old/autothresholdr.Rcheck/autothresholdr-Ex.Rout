@@ -40,7 +40,7 @@ Type 'q()' to quit R.
 > img_location <- system.file("extdata", "eg.tif", package = "autothresholdr")
 > img <- ijtiff::read_tif(img_location)
 Reading eg.tif: an 8-bit, 100x100 pixel image of unsigned
-integer type with 1 channel and 1 frame . . .
+integer type. Reading 1 channel and 1 frame . . .
  Done.
 > auto_thresh(img, "huang")
 [1] 5
@@ -112,18 +112,18 @@ attr(,"class")
 > 
 > ### ** Examples
 > 
-> img <- ijtiff::read_tif(system.file('extdata', '50.tif',
-+                                     package = 'autothresholdr'))
+> img <- ijtiff::read_tif(system.file("extdata", "50.tif",
++   package = "autothresholdr"
++ ))
 Reading 50.tif: an 8-bit, 100x100 pixel image of unsigned
-integer type with 1 channel and 50 frames . . .
+integer type. Reading 1 channel and 50 frames . . .
  Done.
 > ijtiff::display(img[, , 1, 1])
-> img_thresh_mask <- mean_stack_thresh(img, 'Otsu')
+> img_thresh_mask <- mean_stack_thresh(img, "Otsu")
 > ijtiff::display(img_thresh_mask[, , 1, 1])
 > ijtiff::display(img[, , 1, 1])
-> img_thresh_mask <- mean_stack_thresh(img, 'Huang')
+> img_thresh_mask <- mean_stack_thresh(img, "Huang")
 > ijtiff::display(img_thresh_mask[, , 1, 1])
-> 
 > 
 > 
 > 
@@ -139,18 +139,18 @@ integer type with 1 channel and 50 frames . . .
 > 
 > ### ** Examples
 > 
-> img <- ijtiff::read_tif(system.file('extdata', '50.tif',
-+                                     package = 'autothresholdr'))
+> img <- ijtiff::read_tif(system.file("extdata", "50.tif",
++   package = "autothresholdr"
++ ))
 Reading 50.tif: an 8-bit, 100x100 pixel image of unsigned
-integer type with 1 channel and 50 frames . . .
+integer type. Reading 1 channel and 50 frames . . .
  Done.
 > ijtiff::display(img[, , 1, 1])
-> img_thresh_mask <- med_stack_thresh(img, 'Otsu')
+> img_thresh_mask <- med_stack_thresh(img, "Otsu")
 > ijtiff::display(img_thresh_mask[, , 1, 1])
 > ijtiff::display(img[, , 1, 1])
-> img_thresh_mask <- med_stack_thresh(img, 'Triangle')
+> img_thresh_mask <- med_stack_thresh(img, "Triangle")
 > ijtiff::display(img_thresh_mask[, , 1, 1])
-> 
 > 
 > 
 > 
@@ -159,7 +159,7 @@ integer type with 1 channel and 50 frames . . .
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  3.382 0.246 5.195 0 0 
+Time elapsed:  3.194 0.284 4.607 0 0 
 > grDevices::dev.off()
 null device 
           1 

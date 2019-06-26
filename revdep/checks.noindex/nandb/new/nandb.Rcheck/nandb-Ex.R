@@ -17,7 +17,7 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-img <- ijtiff::read_tif(system.file('extdata', '50.tif', package = 'nandb'))
+img <- ijtiff::read_tif(system.file("extdata", "50.tif", package = "nandb"))
 ijtiff::display(img[, , 1, 1])
 b <- brightness(img, "e", thresh = "Huang")
 b <- brightness(img, "B", thresh = "tri")
@@ -38,9 +38,9 @@ flush(stderr()); flush(stdout())
 
 ## Not run: 
 ##D setwd(tempdir())
-##D img <- ijtiff::read_tif(system.file('extdata', '50.tif', package = 'nandb'))
-##D ijtiff::write_tif(img, 'img1.tif')
-##D ijtiff::write_tif(img, 'img2.tif')
+##D img <- ijtiff::read_tif(system.file("extdata", "50.tif", package = "nandb"))
+##D ijtiff::write_tif(img, "img1.tif")
+##D ijtiff::write_tif(img, "img2.tif")
 ##D brightness_folder(def = "B", thresh = "Huang")
 ## End(Not run)
 
@@ -58,7 +58,7 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-img <- ijtiff::read_tif(system.file('extdata', '50.tif', package = 'nandb'))
+img <- ijtiff::read_tif(system.file("extdata", "50.tif", package = "nandb"))
 bts <- brightness_timeseries(img, "e", frames_per_set = 20, thresh = "Huang")
 
 
@@ -77,9 +77,9 @@ flush(stderr()); flush(stdout())
 
 ## Not run: 
 ##D setwd(tempdir())
-##D img <- ijtiff::read_tif(system.file('extdata', '50.tif', package = 'nandb'))
-##D ijtiff::write_tif(img, 'img1.tif')
-##D ijtiff::write_tif(img, 'img2.tif')
+##D img <- ijtiff::read_tif(system.file("extdata", "50.tif", package = "nandb"))
+##D ijtiff::write_tif(img, "img1.tif")
+##D ijtiff::write_tif(img, "img2.tif")
 ##D brightness_timeseries_folder(def = "e", thresh = "tri", frames_per_set = 20)
 ## End(Not run)
 
@@ -98,7 +98,8 @@ flush(stderr()); flush(stdout())
 ### ** Examples
 
 img <- ijtiff::read_tif(system.file("extdata", "two_ch.tif",
-                                    package = "nandb"))
+  package = "nandb"
+))
 ijtiff::display(detrendr::mean_pillars(img[, , 1, ]))
 ijtiff::display(detrendr::mean_pillars(img[, , 2, ]))
 b <- brightness(img, def = "e", thresh = "Huang", filt = "median")
@@ -124,8 +125,8 @@ flush(stderr()); flush(stdout())
 
 ## Not run: 
 ##D setwd(tempdir())
-##D ijtiff::write_tif(img, 'a.tif')
-##D ijtiff::write_tif(img, 'ab.tif')
+##D ijtiff::write_tif(img, "a.tif")
+##D ijtiff::write_tif(img, "ab.tif")
 ##D cc_brightness_folder()
 ##D list.files()
 ## End(Not run)
@@ -144,10 +145,13 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-img <- ijtiff::read_tif(system.file('extdata', 'two_ch.tif',
-                        package = 'nandb'))
-cc_bts <- cc_brightness_timeseries(img, 10, thresh = "Huang",
-                                    filt = 'median', parallel = 2)
+img <- ijtiff::read_tif(system.file("extdata", "two_ch.tif",
+  package = "nandb"
+))
+cc_bts <- cc_brightness_timeseries(img, 10,
+  thresh = "Huang",
+  filt = "median", parallel = 2
+)
 ijtiff::display(cc_bts[, , 1, 1])
 
 
@@ -167,8 +171,8 @@ flush(stderr()); flush(stdout())
 
 ## Not run: 
 ##D setwd(tempdir())
-##D ijtiff::write_tif(img, 'a.tif')
-##D ijtiff::write_tif(img, 'ab.tif')
+##D ijtiff::write_tif(img, "a.tif")
+##D ijtiff::write_tif(img, "ab.tif")
 ##D cc_brightness_timeseries_folder(frames_per_set = 25)
 ##D list.files()
 ## End(Not run)
@@ -189,7 +193,8 @@ flush(stderr()); flush(stdout())
 ### ** Examples
 
 img <- ijtiff::read_tif(system.file("extdata", "two_ch.tif",
-                                    package = "nandb"))
+  package = "nandb"
+))
 ijtiff::display(detrendr::mean_pillars(img[, , 1, ]))
 ijtiff::display(detrendr::mean_pillars(img[, , 2, ]))
 n <- number(img, def = "n", thresh = "Huang", filt = "median")
@@ -215,8 +220,8 @@ flush(stderr()); flush(stdout())
 
 ## Not run: 
 ##D setwd(tempdir())
-##D ijtiff::write_tif(img, 'a.tif')
-##D ijtiff::write_tif(img, 'ab.tif')
+##D ijtiff::write_tif(img, "a.tif")
+##D ijtiff::write_tif(img, "ab.tif")
 ##D cc_number_folder()
 ##D list.files()
 ## End(Not run)
@@ -235,12 +240,14 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-img <- ijtiff::read_tif(system.file('extdata', 'two_ch.tif',
-                                    package = 'nandb'))
-cc_nts <- cc_number_timeseries(img, 10, thresh = "Huang",
-                               filt = 'median', parallel = 2)
+img <- ijtiff::read_tif(system.file("extdata", "two_ch.tif",
+  package = "nandb"
+))
+cc_nts <- cc_number_timeseries(img, 10,
+  thresh = "Huang",
+  filt = "median", parallel = 2
+)
 ijtiff::display(cc_nts[, , 1, 1])
-
 
 
 
@@ -259,8 +266,8 @@ flush(stderr()); flush(stdout())
 
 ## Not run: 
 ##D setwd(tempdir())
-##D ijtiff::write_tif(img, 'a.tif')
-##D ijtiff::write_tif(img, 'ab.tif')
+##D ijtiff::write_tif(img, "a.tif")
+##D ijtiff::write_tif(img, "ab.tif")
 ##D cc_number_timeseries_folder(frames_per_set = 25)
 ##D list.files()
 ## End(Not run)
@@ -281,7 +288,6 @@ flush(stderr()); flush(stdout())
 ### ** Examples
 
 cross_var(0:3, 2:5)
-
 
 
 
@@ -316,32 +322,47 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-img <- ijtiff::read_tif(system.file('extdata', '50.tif', package = 'nandb'))
+img <- ijtiff::read_tif(system.file("extdata", "50.tif", package = "nandb"))
 ijtiff::display(img[, , 1, 1])
 matrix_raster_plot(img[, , 1, 1])
 b <- brightness(img, def = "B", detrend = FALSE, thresh = "Huang")
-matrix_raster_plot(b, scale_name = 'brightness')
-matrix_raster_plot(b, scale_name = 'brightness', log_trans = TRUE)
-matrix_raster_plot(b, scale_name = 'brightness', log_trans = TRUE,
-                   include_breaks = 1.35)
-matrix_raster_plot(b, scale_name = 'brightness', log_trans = TRUE,
-                   breaks = 1:3)
-matrix_raster_plot(b, scale_name = 'brightness',
-                   ranges = seq(0.5, 3, length.out = 6),
-                   range_names = paste0(1:5, 'mer'))
-matrix_raster_plot(b, scale_name = "brightness",
-                   ranges = seq(0.5, 3, length.out = 6),
-                   range_names = paste0(1:5, "mer"), log_trans = TRUE)
-matrix_raster_plot(b, scale_name = "brightness",
-                   include_breaks = 1.25, range_names = NULL,
-                   log_trans = FALSE)
-matrix_raster_plot(b, scale_name = "brightness",
-                   include_breaks = 1.25, log_trans = TRUE)
-matrix_raster_plot(b, scale_name = "brightness",
-                   limits = c(1, 1.25), clip = TRUE)
-matrix_raster_plot(b, scale_name = "brightness",
-                   include_breaks = 1.25)
-
+matrix_raster_plot(b, scale_name = "brightness")
+matrix_raster_plot(b, scale_name = "brightness", log_trans = TRUE)
+matrix_raster_plot(b,
+  scale_name = "brightness", log_trans = TRUE,
+  include_breaks = 1.35
+)
+matrix_raster_plot(b,
+  scale_name = "brightness", log_trans = TRUE,
+  breaks = 1:3
+)
+matrix_raster_plot(b,
+  scale_name = "brightness",
+  ranges = seq(0.5, 3, length.out = 6),
+  range_names = paste0(1:5, "mer")
+)
+matrix_raster_plot(b,
+  scale_name = "brightness",
+  ranges = seq(0.5, 3, length.out = 6),
+  range_names = paste0(1:5, "mer"), log_trans = TRUE
+)
+matrix_raster_plot(b,
+  scale_name = "brightness",
+  include_breaks = 1.25, range_names = NULL,
+  log_trans = FALSE
+)
+matrix_raster_plot(b,
+  scale_name = "brightness",
+  include_breaks = 1.25, log_trans = TRUE
+)
+matrix_raster_plot(b,
+  scale_name = "brightness",
+  limits = c(1, 1.25), clip = TRUE
+)
+matrix_raster_plot(b,
+  scale_name = "brightness",
+  include_breaks = 1.25
+)
 
 
 
@@ -383,7 +404,7 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-img <- ijtiff::read_tif(system.file('extdata', '50.tif', package = 'nandb'))
+img <- ijtiff::read_tif(system.file("extdata", "50.tif", package = "nandb"))
 ijtiff::display(img[, , 1, 1])
 num <- number(img, "N", thresh = "Huang")
 num <- number(img, "n", thresh = "tri")
@@ -404,8 +425,8 @@ flush(stderr()); flush(stdout())
 
 ## Not run: 
 ##D setwd(tempdir())
-##D img <- ijtiff::read_tif(system.file('extdata', '50.tif', package = 'nandb'))
-##D ijtiff::write_tif(img, 'img2.tif')
+##D img <- ijtiff::read_tif(system.file("extdata", "50.tif", package = "nandb"))
+##D ijtiff::write_tif(img, "img2.tif")
 ##D number_folder(def = "n", thresh = "Huang", parallel = 2)
 ## End(Not run)
 
@@ -423,7 +444,7 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-img <- ijtiff::read_tif(system.file('extdata', '50.tif', package = "nandb"))
+img <- ijtiff::read_tif(system.file("extdata", "50.tif", package = "nandb"))
 nts <- number_timeseries(img, "n", frames_per_set = 20, thresh = "Huang")
 
 
@@ -442,9 +463,9 @@ flush(stderr()); flush(stdout())
 
 ## Not run: 
 ##D setwd(tempdir())
-##D img <- ijtiff::read_tif(system.file('extdata', '50.tif', package = 'nandb'))
-##D ijtiff::write_tif(img, 'img1.tif')
-##D ijtiff::write_tif(img, 'img2.tif')
+##D img <- ijtiff::read_tif(system.file("extdata", "50.tif", package = "nandb"))
+##D ijtiff::write_tif(img, "img1.tif")
+##D ijtiff::write_tif(img, "img2.tif")
 ##D number_timeseries_folder(def = "n", thresh = "Huang", frames_per_set = 20)
 ## End(Not run)
 

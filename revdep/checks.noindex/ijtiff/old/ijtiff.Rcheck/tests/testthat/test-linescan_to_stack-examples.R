@@ -1,5 +1,3 @@
-context("`linescan_to_stack()`")
-
 test_that("`linescan_to_stack()` works", {
   linescan <- ijtiff_img(array(rep(1:4, each = 4), dim = c(
     4, 4,

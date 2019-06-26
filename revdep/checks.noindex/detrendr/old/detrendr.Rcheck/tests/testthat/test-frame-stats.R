@@ -1,5 +1,3 @@
-context("frame stats")
-
 test_that("frame stats edge cases work correctly", {
   expect_equal(
     sum_frames_na_omit_(array(3L, dim = rep(3, 3))),

@@ -5,7 +5,7 @@
 * using options ‘--no-manual --no-build-vignettes’
 * checking for file ‘nandb/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘nandb’ version ‘2.0.0’
+* this is package ‘nandb’ version ‘2.0.2’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -31,10 +31,8 @@
 * checking whether the package can be unloaded cleanly ... OK
 * checking whether the namespace can be loaded with stated dependencies ... OK
 * checking whether the namespace can be unloaded cleanly ... OK
-* checking loading without being on the library search path ... OK
 * checking dependencies in R code ... NOTE
-Namespaces in Imports field not imported from:
-  ‘MASS’ ‘stats’
+Namespace in Imports field not imported from: ‘utils’
   All declared Imports should be used.
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
@@ -56,12 +54,7 @@ Namespaces in Imports field not imported from:
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... OK
   Running ‘spelling.R’
-  Comparing ‘spelling.Rout’ to ‘spelling.Rout.save’ ...6,10d5
-< Potential spelling errors:
-<   WORD        FOUND IN
-< Kmer        NEWS.md:36
-< linux       NEWS.md:20
-< tidyverse   NEWS.md:27
+  Comparing ‘spelling.Rout’ to ‘spelling.Rout.save’ ... OK
   Running ‘testthat.R’
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK

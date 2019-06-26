@@ -1,5 +1,3 @@
-context("brightness")
-
 test_that("brightness works", {
   v <- sample.int(100)
   expect_equal(brightness_vec(v), var(v) / mean(v))

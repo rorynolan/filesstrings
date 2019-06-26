@@ -199,7 +199,7 @@ test_that("brightness_timeseries works", {
     sum(
       purrr::map_lgl(
         list.files("brightness_timeseries"),
-        ~any(stringr::str_detect(
+        ~ any(stringr::str_detect(
           .,
           paste0(
             "50",
@@ -224,7 +224,7 @@ test_that("brightness_timeseries works", {
     sum(
       purrr::map_lgl(
         list.files("brightness_timeseries"),
-        ~any(stringr::str_detect(
+        ~ any(stringr::str_detect(
           .,
           paste0(
             "50",

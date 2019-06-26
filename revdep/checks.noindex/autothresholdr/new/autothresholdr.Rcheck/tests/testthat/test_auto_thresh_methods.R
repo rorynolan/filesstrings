@@ -5,12 +5,14 @@ img <- system.file("extdata", "eg.tif", package = "autothresholdr") %>%
 
 test_that("IJDefault works", {
   expect_equal(autothresholdr:::IJDefault(c(0, 2, 0)), 1,
-               check.attributes = FALSE)
+    check.attributes = FALSE
+  )
 })
 
 test_that("Huang2 works", {
   expect_equal(auto_thresh(img, "Huang"), auto_thresh(img, "Huang2"),
-               check.attributes = FALSE)
+    check.attributes = FALSE
+  )
   expect_equal(Huang2(3), 0, check.attributes = FALSE)
 })
 

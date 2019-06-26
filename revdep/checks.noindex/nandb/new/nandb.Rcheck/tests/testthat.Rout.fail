@@ -1,0 +1,481 @@
+
+R version 3.6.0 (2019-04-26) -- "Planting of a Tree"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(testthat)
+> library(nandb)
+> 
+> test_check("nandb")
+[31m──[39m [31m1. Error: brightness works (@test-brightness.R#5) [39m [31m───────────────────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: brightness(img, "e", thresh = "Huang", detrend = TRUE, filt = "median", parallel = 2) at testthat/test-brightness.R:5
+2: img %<>% nb_get_img()
+3: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+4: eval(quote(`_fseq`(`_lhs`)), env, env)
+5: eval(quote(`_fseq`(`_lhs`)), env, env)
+6: `_fseq`(`_lhs`)
+7: freduce(value, `_function_list`)
+8: withVisible(function_list[[k]](value))
+9: function_list[[k]](value)
+10: nb_get_img(.)
+...
+27: function_list[[k]](value)
+28: filesstrings::match_arg
+29: getExportedValue(pkg, name)
+30: asNamespace(ns)
+31: getNamespace(ns)
+32: loadNamespace(name)
+33: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+34: asNamespace(ns)
+35: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+36: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m2. Error: brightness_folder works (@test-brightness.R#40) [39m [31m───────────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: ijtiff::read_tif(system.file("extdata", "50.tif", package = "nandb")) at testthat/test-brightness.R:40
+2: list_safety %<>% filesstrings::match_arg(c("error", "warning", "none"), ignore_case = TRUE)
+3: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+4: eval(quote(`_fseq`(`_lhs`)), env, env)
+5: eval(quote(`_fseq`(`_lhs`)), env, env)
+6: `_fseq`(`_lhs`)
+7: freduce(value, `_function_list`)
+8: withVisible(function_list[[k]](value))
+9: function_list[[k]](value)
+10: filesstrings::match_arg
+11: getExportedValue(pkg, name)
+12: asNamespace(ns)
+13: getNamespace(ns)
+14: loadNamespace(name)
+15: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+16: asNamespace(ns)
+17: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+18: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m3. Error: brightness_timeseries works (@test-brightness.R#92) [39m [31m───────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: brightness(img, "e") at testthat/test-brightness.R:92
+2: img %<>% nb_get_img()
+3: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+4: eval(quote(`_fseq`(`_lhs`)), env, env)
+5: eval(quote(`_fseq`(`_lhs`)), env, env)
+6: `_fseq`(`_lhs`)
+7: freduce(value, `_function_list`)
+8: withVisible(function_list[[k]](value))
+9: function_list[[k]](value)
+10: nb_get_img(.)
+...
+27: function_list[[k]](value)
+28: filesstrings::match_arg
+29: getExportedValue(pkg, name)
+30: asNamespace(ns)
+31: getNamespace(ns)
+32: loadNamespace(name)
+33: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+34: asNamespace(ns)
+35: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+36: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m4. Error: cc_brightness() works (@test-cc_brightness.R#3) [39m [31m───────────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: ijtiff::read_tif(system.file("extdata", "two_ch.tif", package = "nandb")) at testthat/test-cc_brightness.R:3
+2: list_safety %<>% filesstrings::match_arg(c("error", "warning", "none"), ignore_case = TRUE)
+3: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+4: eval(quote(`_fseq`(`_lhs`)), env, env)
+5: eval(quote(`_fseq`(`_lhs`)), env, env)
+6: `_fseq`(`_lhs`)
+7: freduce(value, `_function_list`)
+8: withVisible(function_list[[k]](value))
+9: function_list[[k]](value)
+10: filesstrings::match_arg
+11: getExportedValue(pkg, name)
+12: asNamespace(ns)
+13: getNamespace(ns)
+14: loadNamespace(name)
+15: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+16: asNamespace(ns)
+17: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+18: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m5. Error: cc_brightness_timeseries() works (@test-cc_brightness.R#61) [39m [31m───────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: ijtiff::read_tif(system.file("extdata", "two_ch.tif", package = "nandb")) at testthat/test-cc_brightness.R:61
+2: list_safety %<>% filesstrings::match_arg(c("error", "warning", "none"), ignore_case = TRUE)
+3: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+4: eval(quote(`_fseq`(`_lhs`)), env, env)
+5: eval(quote(`_fseq`(`_lhs`)), env, env)
+6: `_fseq`(`_lhs`)
+7: freduce(value, `_function_list`)
+8: withVisible(function_list[[k]](value))
+9: function_list[[k]](value)
+10: filesstrings::match_arg
+11: getExportedValue(pkg, name)
+12: asNamespace(ns)
+13: getNamespace(ns)
+14: loadNamespace(name)
+15: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+16: asNamespace(ns)
+17: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+18: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m6. Error: cc_brightness_folder() works (@test-cc_brightness.R#149) [39m [31m──────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: ijtiff::read_tif(system.file("extdata", "two_ch.tif", package = "nandb")) at testthat/test-cc_brightness.R:149
+2: list_safety %<>% filesstrings::match_arg(c("error", "warning", "none"), ignore_case = TRUE)
+3: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+4: eval(quote(`_fseq`(`_lhs`)), env, env)
+5: eval(quote(`_fseq`(`_lhs`)), env, env)
+6: `_fseq`(`_lhs`)
+7: freduce(value, `_function_list`)
+8: withVisible(function_list[[k]](value))
+9: function_list[[k]](value)
+10: filesstrings::match_arg
+11: getExportedValue(pkg, name)
+12: asNamespace(ns)
+13: getNamespace(ns)
+14: loadNamespace(name)
+15: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+16: asNamespace(ns)
+17: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+18: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m7. Error: cc_brightness_timeseries_folder() works (@test-cc_brightness.R#175) [39m [31m───────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: ijtiff::read_tif(system.file("extdata", "two_ch.tif", package = "nandb")) at testthat/test-cc_brightness.R:175
+2: list_safety %<>% filesstrings::match_arg(c("error", "warning", "none"), ignore_case = TRUE)
+3: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+4: eval(quote(`_fseq`(`_lhs`)), env, env)
+5: eval(quote(`_fseq`(`_lhs`)), env, env)
+6: `_fseq`(`_lhs`)
+7: freduce(value, `_function_list`)
+8: withVisible(function_list[[k]](value))
+9: function_list[[k]](value)
+10: filesstrings::match_arg
+11: getExportedValue(pkg, name)
+12: asNamespace(ns)
+13: getNamespace(ns)
+14: loadNamespace(name)
+15: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+16: asNamespace(ns)
+17: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+18: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m8. Error: cc_number() works (@test-cc_number.R#3) [39m [31m───────────────────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: ijtiff::read_tif(system.file("extdata", "two_ch.tif", package = "nandb")) at testthat/test-cc_number.R:3
+2: list_safety %<>% filesstrings::match_arg(c("error", "warning", "none"), ignore_case = TRUE)
+3: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+4: eval(quote(`_fseq`(`_lhs`)), env, env)
+5: eval(quote(`_fseq`(`_lhs`)), env, env)
+6: `_fseq`(`_lhs`)
+7: freduce(value, `_function_list`)
+8: withVisible(function_list[[k]](value))
+9: function_list[[k]](value)
+10: filesstrings::match_arg
+11: getExportedValue(pkg, name)
+12: asNamespace(ns)
+13: getNamespace(ns)
+14: loadNamespace(name)
+15: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+16: asNamespace(ns)
+17: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+18: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m9. Error: cc_number_timeseries() works (@test-cc_number.R#61) [39m [31m───────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: ijtiff::read_tif(system.file("extdata", "two_ch.tif", package = "nandb")) at testthat/test-cc_number.R:61
+2: list_safety %<>% filesstrings::match_arg(c("error", "warning", "none"), ignore_case = TRUE)
+3: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+4: eval(quote(`_fseq`(`_lhs`)), env, env)
+5: eval(quote(`_fseq`(`_lhs`)), env, env)
+6: `_fseq`(`_lhs`)
+7: freduce(value, `_function_list`)
+8: withVisible(function_list[[k]](value))
+9: function_list[[k]](value)
+10: filesstrings::match_arg
+11: getExportedValue(pkg, name)
+12: asNamespace(ns)
+13: getNamespace(ns)
+14: loadNamespace(name)
+15: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+16: asNamespace(ns)
+17: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+18: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m10. Error: cc_number_folder() works (@test-cc_number.R#151) [39m [31m─────────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: ijtiff::read_tif(system.file("extdata", "two_ch.tif", package = "nandb")) at testthat/test-cc_number.R:151
+2: list_safety %<>% filesstrings::match_arg(c("error", "warning", "none"), ignore_case = TRUE)
+3: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+4: eval(quote(`_fseq`(`_lhs`)), env, env)
+5: eval(quote(`_fseq`(`_lhs`)), env, env)
+6: `_fseq`(`_lhs`)
+7: freduce(value, `_function_list`)
+8: withVisible(function_list[[k]](value))
+9: function_list[[k]](value)
+10: filesstrings::match_arg
+11: getExportedValue(pkg, name)
+12: asNamespace(ns)
+13: getNamespace(ns)
+14: loadNamespace(name)
+15: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+16: asNamespace(ns)
+17: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+18: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m11. Error: cc_number_timeseries_folder() works (@test-cc_number.R#178) [39m [31m──────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: ijtiff::read_tif(system.file("extdata", "two_ch.tif", package = "nandb")) at testthat/test-cc_number.R:178
+2: list_safety %<>% filesstrings::match_arg(c("error", "warning", "none"), ignore_case = TRUE)
+3: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+4: eval(quote(`_fseq`(`_lhs`)), env, env)
+5: eval(quote(`_fseq`(`_lhs`)), env, env)
+6: `_fseq`(`_lhs`)
+7: freduce(value, `_function_list`)
+8: withVisible(function_list[[k]](value))
+9: function_list[[k]](value)
+10: filesstrings::match_arg
+11: getExportedValue(pkg, name)
+12: asNamespace(ns)
+13: getNamespace(ns)
+14: loadNamespace(name)
+15: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+16: asNamespace(ns)
+17: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+18: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m12. Error: Class construction edge cases function correctly (@test-class_constructors.R#5) [39m [31m──[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: number_img(img, "N", 4, structure(8, auto = TRUE), NA) at testthat/test-class_constructors.R:5
+2: img %<>% number_img_common(n_ch = n_ch, def = def, thresh = thresh, swaps = swaps, filt = filt)
+3: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+4: eval(quote(`_fseq`(`_lhs`)), env, env)
+5: eval(quote(`_fseq`(`_lhs`)), env, env)
+6: `_fseq`(`_lhs`)
+7: freduce(value, `_function_list`)
+8: withVisible(function_list[[k]](value))
+9: function_list[[k]](value)
+10: number_img_common(., n_ch = n_ch, def = def, thresh = thresh, swaps = swaps, filt = filt)
+11: filesstrings::all_equal
+12: getExportedValue(pkg, name)
+13: asNamespace(ns)
+14: getNamespace(ns)
+15: loadNamespace(name)
+16: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+17: asNamespace(ns)
+18: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+19: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m13. Error: cross_var_pillars() works (@test-cross_var-examples.R#12) [39m [31m────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: expect_equal(cross_var_pillars(x, y), z) at testthat/test-cross_var-examples.R:12
+2: quasi_label(enquo(object), label, arg = "object")
+3: eval_bare(get_expr(quo), get_env(quo))
+4: cross_var_pillars(x, y)
+5: filesstrings::all_equal
+6: getExportedValue(pkg, name)
+7: asNamespace(ns)
+8: getNamespace(ns)
+9: loadNamespace(name)
+10: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+11: asNamespace(ns)
+12: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+13: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m14. Error: matrix_raster_plot is ggplot (@test-graphics.R#4) [39m [31m────────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: ijtiff::read_tif(system.file("extdata", "50.tif", package = "nandb")) at testthat/test-graphics.R:4
+2: list_safety %<>% filesstrings::match_arg(c("error", "warning", "none"), ignore_case = TRUE)
+3: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+4: eval(quote(`_fseq`(`_lhs`)), env, env)
+5: eval(quote(`_fseq`(`_lhs`)), env, env)
+6: `_fseq`(`_lhs`)
+7: freduce(value, `_function_list`)
+8: withVisible(function_list[[k]](value))
+9: function_list[[k]](value)
+10: filesstrings::match_arg
+11: getExportedValue(pkg, name)
+12: asNamespace(ns)
+13: getNamespace(ns)
+14: loadNamespace(name)
+15: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+16: asNamespace(ns)
+17: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+18: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m15. Error: number works (@test-number.R#5) [39m [31m──────────────────────────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: number(img, "n", thresh = "Huang", filt = "median", detrend = TRUE) at testthat/test-number.R:5
+2: img %<>% nb_get_img()
+3: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+4: eval(quote(`_fseq`(`_lhs`)), env, env)
+5: eval(quote(`_fseq`(`_lhs`)), env, env)
+6: `_fseq`(`_lhs`)
+7: freduce(value, `_function_list`)
+8: withVisible(function_list[[k]](value))
+9: function_list[[k]](value)
+10: nb_get_img(.)
+...
+27: function_list[[k]](value)
+28: filesstrings::match_arg
+29: getExportedValue(pkg, name)
+30: asNamespace(ns)
+31: getNamespace(ns)
+32: loadNamespace(name)
+33: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+34: asNamespace(ns)
+35: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+36: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m16. Error: number_folder works (@test-number.R#34) [39m [31m──────────────────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: ijtiff::read_tif(system.file("extdata", "50.tif", package = "nandb")) at testthat/test-number.R:34
+2: list_safety %<>% filesstrings::match_arg(c("error", "warning", "none"), ignore_case = TRUE)
+3: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+4: eval(quote(`_fseq`(`_lhs`)), env, env)
+5: eval(quote(`_fseq`(`_lhs`)), env, env)
+6: `_fseq`(`_lhs`)
+7: freduce(value, `_function_list`)
+8: withVisible(function_list[[k]](value))
+9: function_list[[k]](value)
+10: filesstrings::match_arg
+11: getExportedValue(pkg, name)
+12: asNamespace(ns)
+13: getNamespace(ns)
+14: loadNamespace(name)
+15: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+16: asNamespace(ns)
+17: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+18: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m17. Error: number_timeseries works (@test-number.R#82) [39m [31m──────────────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: number(img, "N") at testthat/test-number.R:82
+2: img %<>% nb_get_img()
+3: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+4: eval(quote(`_fseq`(`_lhs`)), env, env)
+5: eval(quote(`_fseq`(`_lhs`)), env, env)
+6: `_fseq`(`_lhs`)
+7: freduce(value, `_function_list`)
+8: withVisible(function_list[[k]](value))
+9: function_list[[k]](value)
+10: nb_get_img(.)
+...
+27: function_list[[k]](value)
+28: filesstrings::match_arg
+29: getExportedValue(pkg, name)
+30: asNamespace(ns)
+31: getNamespace(ns)
+32: loadNamespace(name)
+33: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+34: asNamespace(ns)
+35: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+36: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m18. Error: make_cc_nb_filename_ending() edge cases work correctly (@test-utils.R#130) [39m [31m───────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: ijtiff::read_tif(system.file("extdata", "two_ch.tif", package = "nandb")) at testthat/test-utils.R:130
+2: list_safety %<>% filesstrings::match_arg(c("error", "warning", "none"), ignore_case = TRUE)
+3: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+4: eval(quote(`_fseq`(`_lhs`)), env, env)
+5: eval(quote(`_fseq`(`_lhs`)), env, env)
+6: `_fseq`(`_lhs`)
+7: freduce(value, `_function_list`)
+8: withVisible(function_list[[k]](value))
+9: function_list[[k]](value)
+10: filesstrings::match_arg
+11: getExportedValue(pkg, name)
+12: asNamespace(ns)
+13: getNamespace(ns)
+14: loadNamespace(name)
+15: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+16: asNamespace(ns)
+17: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+18: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m19. Error: `make_nb_filename_ending()` works (@test-utils.R#158) [39m [31m────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: ijtiff::read_tif(system.file("extdata", "two_ch.tif", package = "nandb")) at testthat/test-utils.R:158
+2: list_safety %<>% filesstrings::match_arg(c("error", "warning", "none"), ignore_case = TRUE)
+3: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+4: eval(quote(`_fseq`(`_lhs`)), env, env)
+5: eval(quote(`_fseq`(`_lhs`)), env, env)
+6: `_fseq`(`_lhs`)
+7: freduce(value, `_function_list`)
+8: withVisible(function_list[[k]](value))
+9: function_list[[k]](value)
+10: filesstrings::match_arg
+11: getExportedValue(pkg, name)
+12: asNamespace(ns)
+13: getNamespace(ns)
+14: loadNamespace(name)
+15: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+16: asNamespace(ns)
+17: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+18: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+══ testthat results  ════════════════════════════════════════════════════════════════════════════
+OK: 30 SKIPPED: 0 WARNINGS: 0 FAILED: 19
+1. Error: brightness works (@test-brightness.R#5) 
+2. Error: brightness_folder works (@test-brightness.R#40) 
+3. Error: brightness_timeseries works (@test-brightness.R#92) 
+4. Error: cc_brightness() works (@test-cc_brightness.R#3) 
+5. Error: cc_brightness_timeseries() works (@test-cc_brightness.R#61) 
+6. Error: cc_brightness_folder() works (@test-cc_brightness.R#149) 
+7. Error: cc_brightness_timeseries_folder() works (@test-cc_brightness.R#175) 
+8. Error: cc_number() works (@test-cc_number.R#3) 
+9. Error: cc_number_timeseries() works (@test-cc_number.R#61) 
+1. ...
+
+Error: testthat unit tests failed
+Execution halted

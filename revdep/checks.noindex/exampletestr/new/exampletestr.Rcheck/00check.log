@@ -5,7 +5,7 @@
 * using options ‘--no-manual --no-build-vignettes’
 * checking for file ‘exampletestr/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘exampletestr’ version ‘1.4.1’
+* this is package ‘exampletestr’ version ‘1.4.2’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -48,38 +48,13 @@
 * checking files in ‘vignettes’ ... OK
 * checking examples ... OK
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... ERROR
+* checking tests ... OK
   Running ‘spelling.R’
-  Comparing ‘spelling.Rout’ to ‘spelling.Rout.save’ ...6,13d5
-< Potential spelling errors:
-<   WORD        FOUND IN
-< Walthert    NEWS.md:31
-< Wellcome    NEWS.md:80
-< github      NEWS.md:31,79
-< https       NEWS.md:31
-< rorynolan   NEWS.md:31
-< verisons    NEWS.md:24
+  Comparing ‘spelling.Rout’ to ‘spelling.Rout.save’ ... OK
   Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  [31m──[39m [31m1. Error: `make_tests_shells_file()` works (@test-exemplar.R#211) [39m [31m──────────────────────[39m
-  more 'from' files than 'to' files
-  1: expect_true(all(file.copy(system.file("extdata", c("detect.R", "match.R"), package = "exampletestr"), 
-         "R"))) at testthat/test-exemplar.R:211
-  2: quasi_label(enquo(object), label, arg = "object")
-  3: eval_bare(get_expr(quo), get_env(quo))
-  4: file.copy(system.file("extdata", c("detect.R", "match.R"), package = "exampletestr"), "R")
-  5: stop("more 'from' files than 'to' files")
-  
-  ══ testthat results  ═══════════════════════════════════════════════════════════════════════
-  OK: 21 SKIPPED: 0 WARNINGS: 7 FAILED: 1
-  1. Error: `make_tests_shells_file()` works (@test-exemplar.R#211) 
-  
-  Error: testthat unit tests failed
-  Execution halted
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
 * checking running R code from vignettes ... NONE
 * checking re-building of vignette outputs ... SKIPPED
 * DONE
-Status: 1 ERROR
+Status: OK

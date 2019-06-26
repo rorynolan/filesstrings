@@ -46,15 +46,15 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-img <- ijtiff::read_tif(system.file('extdata', '50.tif',
-                                    package = 'autothresholdr'))
+img <- ijtiff::read_tif(system.file("extdata", "50.tif",
+  package = "autothresholdr"
+))
 ijtiff::display(img[, , 1, 1])
-img_thresh_mask <- mean_stack_thresh(img, 'Otsu')
+img_thresh_mask <- mean_stack_thresh(img, "Otsu")
 ijtiff::display(img_thresh_mask[, , 1, 1])
 ijtiff::display(img[, , 1, 1])
-img_thresh_mask <- mean_stack_thresh(img, 'Huang')
+img_thresh_mask <- mean_stack_thresh(img, "Huang")
 ijtiff::display(img_thresh_mask[, , 1, 1])
-
 
 
 
@@ -70,15 +70,15 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-img <- ijtiff::read_tif(system.file('extdata', '50.tif',
-                                    package = 'autothresholdr'))
+img <- ijtiff::read_tif(system.file("extdata", "50.tif",
+  package = "autothresholdr"
+))
 ijtiff::display(img[, , 1, 1])
-img_thresh_mask <- med_stack_thresh(img, 'Otsu')
+img_thresh_mask <- med_stack_thresh(img, "Otsu")
 ijtiff::display(img_thresh_mask[, , 1, 1])
 ijtiff::display(img[, , 1, 1])
-img_thresh_mask <- med_stack_thresh(img, 'Triangle')
+img_thresh_mask <- med_stack_thresh(img, "Triangle")
 ijtiff::display(img_thresh_mask[, , 1, 1])
-
 
 
 

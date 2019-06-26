@@ -1,5 +1,4 @@
-all_equal               A more flexible version of all.equal for
-                        vectors.
+all_equal               An alternative version of 'base::all.equal()'.
 before_last_dot         Get the part of a string before the last
                         period.
 can_be_numeric          Check if a string could be considered as

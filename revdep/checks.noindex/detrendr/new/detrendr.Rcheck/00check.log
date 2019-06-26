@@ -5,7 +5,7 @@
 * using options ‘--no-manual --no-build-vignettes’
 * checking for file ‘detrendr/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘detrendr’ version ‘0.6.1’
+* this is package ‘detrendr’ version ‘0.6.2’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -57,22 +57,25 @@ GNU make is a SystemRequirements.
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... ERROR
   Running ‘spelling.R’
-  Comparing ‘spelling.Rout’ to ‘spelling.Rout.save’ ... OK
+  Comparing ‘spelling.Rout’ to ‘spelling.Rout.save’ ...9,11d8
+< Potential spelling errors:
+<   WORD           FOUND IN
+< Permanentize   NEWS.md:5
   Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
-  x[1]: o=NA.tif"
-  y[1]: "2ch_ij_detrended_thresh=Triangle=0.6,Triangle=0.6_exponential_for_FFS_tau=auto=NA,aut
-  y[1]: o=6.1767578125.tif"
-  
-  x[2]: "bleached_detrended_thresh=Triangle=41.622_exponential_for_FFS_tau=auto=22.0703125.tif
-  x[2]: "
-  y[2]: "bleached_detrended_thresh=Triangle=41.622_exponential_for_FFS_tau=auto=20.703125.tif"
-  
-  ══ testthat results  ═══════════════════════════════════════════════════════════════════════
-  OK: 207 SKIPPED: 0 WARNINGS: 1 FAILED: 2
-  1. Failure: detrending entire derectories works (@test-dir_detrend.R#63) 
-  2. Failure: detrending entire derectories works (@test-dir_detrend.R#93) 
+  ══ testthat results  ════════════════════════════════════════════════════════════════════════════
+  OK: 52 SKIPPED: 8 WARNINGS: 0 FAILED: 16
+  1. Error: best_tau works (@test-best_params.R#4) 
+  2. Error: best_l works (@test-best_params.R#40) 
+  3. Error: best_degree works (@test-best_params.R#81) 
+  4. Error: best_swaps() works (@test-best_params.R#113) 
+  5. Failure: detrended_img works (@test-class-constructors.R#5) 
+  6. Error: detrended_img works (@test-class-constructors.R#14) 
+  7. Error: detrending works (@test-detrend.R#4) 
+  8. Error: detrending errors correctly (@test-detrend.R#171) 
+  9. Error: detrending entire derectories works (@test-dir-detrend.R#11) 
+  1. ...
   
   Error: testthat unit tests failed
   Execution halted

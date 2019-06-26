@@ -1,4 +1,5 @@
 test_that("detrending works", {
+  skip_if(getRversion() < "3.6.0")
   context("Boxcar detrending")
   img <- ijtiff::read_tif(system.file("extdata", "bleached.tif",
     package = "detrendr"

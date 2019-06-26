@@ -34,16 +34,16 @@ RcppExports.cpp:269:1: warning: unused variable 'stop_sym' [-Wunused-variable]
 /Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/library.noindex/autothresholdr/Rcpp/include/Rcpp/macros/macros.h:36:17: note: expanded from macro 'BEGIN_RCPP'
     static SEXP stop_sym = Rf_install("stop");                                                   \
                 ^
-RcppExports.cpp:303:1: warning: unused variable 'stop_sym' [-Wunused-variable]
+RcppExports.cpp:303:1: warning: unused variable 'nprot' [-Wunused-variable]
 BEGIN_RCPP
 ^
-/Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/library.noindex/autothresholdr/Rcpp/include/Rcpp/macros/macros.h:36:17: note: expanded from macro 'BEGIN_RCPP'
-    static SEXP stop_sym = Rf_install("stop");                                                   \
-                ^
-RcppExports.cpp:303:1: warning: unused variable 'nprot' [-Wunused-variable]
 /Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/library.noindex/autothresholdr/Rcpp/include/Rcpp/macros/macros.h:32:9: note: expanded from macro 'BEGIN_RCPP'
     int nprot = 0;                                                                               \
         ^
+RcppExports.cpp:303:1: warning: unused variable 'stop_sym' [-Wunused-variable]
+/Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/library.noindex/autothresholdr/Rcpp/include/Rcpp/macros/macros.h:36:17: note: expanded from macro 'BEGIN_RCPP'
+    static SEXP stop_sym = Rf_install("stop");                                                   \
+                ^
 8 warnings generated.
 clang++ -std=gnu++11 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/library.noindex/autothresholdr/Rcpp/include" -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include  -fPIC  -Wall -g -O2  -c pillar_stats.cpp -o pillar_stats.o
 clang++ -std=gnu++11 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Resources/lib -L/usr/local/lib -o autothresholdr.so AutoThreshold.o RcppExports.o pillar_stats.o -F/Library/Frameworks/R.framework/.. -framework R -Wl,-framework -Wl,CoreFoundation

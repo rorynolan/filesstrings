@@ -19,9 +19,9 @@ Type 'q()' to quit R.
 > library(autothresholdr)
 > 
 > test_check("autothresholdr")
-══ testthat results  ═══════════════════════════════════════════════════════════════════════
+══ testthat results  ════════════════════════════════════════════════════════════════════════════
 OK: 69 SKIPPED: 0 WARNINGS: 0 FAILED: 0
 > 
 > proc.time()
    user  system elapsed 
-  3.835   0.223   4.230 
+  3.808   0.233   4.176 

@@ -37,49 +37,18 @@ Type 'q()' to quit R.
 > 
 > ### ** Examples
 > 
-> usethis::create_package(tempdir(check = TRUE), open = FALSE)
-[32m✔[39m Setting active project to [34m'/private/var/folders/l_/2mwm03p55zg7zjykv084hhvr0000gn/T/RtmpchBQLV'[39m
-Warning: `recursive` is deprecated, please use `recurse` instead
-[32m✔[39m Creating [34m'R/'[39m
-[32m✔[39m Writing [34m'DESCRIPTION'[39m
-[34mPackage[39m: RtmpchBQLV
-[34mTitle[39m: What the Package Does (One Line, Title Case)
-[34mVersion[39m: 0.0.0.9000
-[34mAuthors@R[39m (parsed):
-    * First Last <first.last@example.com> [aut, cre] (<https://orcid.org/YOUR-ORCID-ID>)
-[34mDescription[39m: What the package does (one paragraph).
-[34mLicense[39m: What license it uses
-[34mEncoding[39m: UTF-8
-[34mLazyData[39m: true
-[32m✔[39m Writing [34m'NAMESPACE'[39m
-[32m✔[39m Setting active project to [34m'<no active project>'[39m
-> file.copy(system.file("extdata", c("detect.R", "match.R"),
-+                       package = "exampletestr"),
-+           paste0(tempdir(), "/R"))
-[1] TRUE TRUE
-> make_test_shell_fun("str_detect()", document = TRUE, open = FALSE,
-+                     pkg_dir = tempdir())
-Running [90m`roxygen2::roxygenize()`[39m . . .
-Updating roxygen version in /private/var/folders/l_/2mwm03p55zg7zjykv084hhvr0000gn/T/RtmpchBQLV/DESCRIPTION
-Loading RtmpchBQLV
-[32m✔[39m Setting active project to [34m'/private/var/folders/l_/2mwm03p55zg7zjykv084hhvr0000gn/T/RtmpchBQLV'[39m
-[32m✔[39m Adding [34m'testthat'[39m to [32mSuggests[39m field in DESCRIPTION
-Warning: `recursive` is deprecated, please use `recurse` instead
-[32m✔[39m Creating [34m'tests/testthat/'[39m
-[32m✔[39m Writing [34m'tests/testthat.R'[39m
-[31m●[39m Call [90m`use_test()`[39m to initialize a basic test file and open it for editing.
-[32m✔[39m Wrote [90m`tests/testthat/test-str_detect-examples.R`[39m.
-[31m●[39m Complete the unit tests in [90m`tests/testthat/test-str_detect-examples.R`[39m.
-> make_tests_shells_file("detect", document = FALSE, open = FALSE,
-+                        pkg_dir = tempdir())
-[32m✔[39m Wrote [90m`tests/testthat/test-detect-examples.R`[39m.
-[31m●[39m Complete the unit tests in [90m`tests/testthat/test-detect-examples.R`[39m.
-> make_tests_shells_pkg(overwrite = TRUE, document = FALSE,
-+                       pkg_dir = tempdir())
-[32m✔[39m Wrote [90m`tests/testthat/test-detect-examples.R`[39m.
-[31m●[39m Complete the unit tests in [90m`tests/testthat/test-detect-examples.R`[39m.
-[32m✔[39m Wrote [90m`tests/testthat/test-match-examples.R`[39m.
-[31m●[39m Complete the unit tests in [90m`tests/testthat/test-match-examples.R`[39m.
+> ## Not run: 
+> ##D usethis::create_package(tempdir(check = TRUE), open = FALSE)
+> ##D file.copy(system.file("extdata", c("detect.R", "match.R"),
+> ##D                       package = "exampletestr"),
+> ##D           paste0(tempdir(), "/R"))
+> ##D make_test_shell_fun("str_detect()", document = TRUE, open = FALSE,
+> ##D                     pkg_dir = tempdir())
+> ##D make_tests_shells_file("detect", document = FALSE, open = FALSE,
+> ##D                        pkg_dir = tempdir())
+> ##D make_tests_shells_pkg(overwrite = TRUE, document = FALSE,
+> ##D                       pkg_dir = tempdir())
+> ## End(Not run)
 > 
 > 
 > 
@@ -87,12 +56,9 @@ Warning: `recursive` is deprecated, please use `recurse` instead
 > ### * <FOOTER>
 > ###
 > cleanEx()
-
-detaching ‘devtools_shims’, ‘package:RtmpchBQLV’
-
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  4.248 0.145 5.588 0 0 
+Time elapsed:  0.329 0.032 0.55 0 0 
 > grDevices::dev.off()
 null device 
           1 

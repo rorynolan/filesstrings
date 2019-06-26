@@ -18,16 +18,8 @@ Type 'q()' to quit R.
 > if(requireNamespace('spelling', quietly = TRUE))
 +   spelling::spell_check_test(vignettes = TRUE, error = FALSE,
 +                              skip_on_cran = TRUE)
-Potential spelling errors:
-  WORD        FOUND IN
-Walthert    NEWS.md:31
-Wellcome    NEWS.md:80
-github      NEWS.md:31,79
-https       NEWS.md:31
-rorynolan   NEWS.md:31
-verisons    NEWS.md:24
 All Done!
 > 
 > proc.time()
    user  system elapsed 
-  0.601   0.089   0.779 
+  0.610   0.108   0.858 

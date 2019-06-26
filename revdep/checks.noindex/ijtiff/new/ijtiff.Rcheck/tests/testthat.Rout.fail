@@ -1,0 +1,381 @@
+
+R version 3.6.0 (2019-04-26) -- "Planting of a Tree"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(testthat)
+> library(ijtiff)
+> 
+> test_check("ijtiff")
+[31m──[39m [31m1. Error: `as_EBImage()` works (@test-as_EBImage-examples.R#3) [39m [31m──────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: read_tif(system.file("img", "Rlogo.tif", package = "ijtiff")) at testthat/test-as_EBImage-examples.R:3
+2: list_safety %<>% filesstrings::match_arg(c("error", "warning", "none"), ignore_case = TRUE)
+3: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+4: eval(quote(`_fseq`(`_lhs`)), env, env)
+5: eval(quote(`_fseq`(`_lhs`)), env, env)
+6: `_fseq`(`_lhs`)
+7: freduce(value, `_function_list`)
+8: withVisible(function_list[[k]](value))
+9: function_list[[k]](value)
+10: filesstrings::match_arg
+11: getExportedValue(pkg, name)
+12: asNamespace(ns)
+13: getNamespace(ns)
+14: loadNamespace(name)
+15: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+16: asNamespace(ns)
+17: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+18: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m2. Error: `count_imgs()` works (@test-count_imgs-examples.R#6) [39m [31m──────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: expect_equal(count_frames(system.file("img", "2ch_ij.tif", package = "ijtiff")), structure(5, n_dirs = 10)) at testthat/test-count_imgs-examples.R:6
+2: quasi_label(enquo(object), label, arg = "object")
+3: eval_bare(get_expr(quo), get_env(quo))
+4: count_frames(system.file("img", "2ch_ij.tif", package = "ijtiff"))
+5: prep_read(path, frames = "all", tags1 = read_tags(path, frames = 1)[[1]])
+6: filesstrings::first_number_after_first
+7: getExportedValue(pkg, name)
+8: asNamespace(ns)
+9: getNamespace(ns)
+10: loadNamespace(name)
+11: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+12: asNamespace(ns)
+13: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+14: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m3. Error: display works (@test-graphics.R#2) [39m [31m────────────────────────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: read_tif(system.file("img", "Rlogo.tif", package = "ijtiff")) at testthat/test-graphics.R:2
+2: list_safety %<>% filesstrings::match_arg(c("error", "warning", "none"), ignore_case = TRUE)
+3: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+4: eval(quote(`_fseq`(`_lhs`)), env, env)
+5: eval(quote(`_fseq`(`_lhs`)), env, env)
+6: `_fseq`(`_lhs`)
+7: freduce(value, `_function_list`)
+8: withVisible(function_list[[k]](value))
+9: function_list[[k]](value)
+10: filesstrings::match_arg
+11: getExportedValue(pkg, name)
+12: asNamespace(ns)
+13: getNamespace(ns)
+14: loadNamespace(name)
+15: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+16: asNamespace(ns)
+17: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+18: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m4. Error: Package 2-channel example I/O works (@test-io.R#3) [39m [31m────────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: read_tif(system.file("img", "2ch_ij.tif", package = "ijtiff")) at testthat/test-io.R:3
+2: list_safety %<>% filesstrings::match_arg(c("error", "warning", "none"), ignore_case = TRUE)
+3: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+4: eval(quote(`_fseq`(`_lhs`)), env, env)
+5: eval(quote(`_fseq`(`_lhs`)), env, env)
+6: `_fseq`(`_lhs`)
+7: freduce(value, `_function_list`)
+8: withVisible(function_list[[k]](value))
+9: function_list[[k]](value)
+10: filesstrings::match_arg
+11: getExportedValue(pkg, name)
+12: asNamespace(ns)
+13: getNamespace(ns)
+14: loadNamespace(name)
+15: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+16: asNamespace(ns)
+17: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+18: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m5. Error: Package RGB I/O works (@test-io.R#56) [39m [31m─────────────────────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: read_tif(system.file("img", "Rlogo.tif", package = "ijtiff")) at testthat/test-io.R:56
+2: list_safety %<>% filesstrings::match_arg(c("error", "warning", "none"), ignore_case = TRUE)
+3: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+4: eval(quote(`_fseq`(`_lhs`)), env, env)
+5: eval(quote(`_fseq`(`_lhs`)), env, env)
+6: `_fseq`(`_lhs`)
+7: freduce(value, `_function_list`)
+8: withVisible(function_list[[k]](value))
+9: function_list[[k]](value)
+10: filesstrings::match_arg
+11: getExportedValue(pkg, name)
+12: asNamespace(ns)
+13: getNamespace(ns)
+14: loadNamespace(name)
+15: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+16: asNamespace(ns)
+17: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+18: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m6. Error: 8-bit unsigned integer TIFF I/O works (@test-io.R#66) [39m [31m─────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: write_tif(a2345, tmptif) at testthat/test-io.R:66
+2: filesstrings::str_before_last
+3: getExportedValue(pkg, name)
+4: asNamespace(ns)
+5: getNamespace(ns)
+6: loadNamespace(name)
+7: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+8: asNamespace(ns)
+9: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+10: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m7. Error: 16-bit unsigned integer TIFF I/O works (@test-io.R#78) [39m [31m────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: write_tif(a6789, tmptif) at testthat/test-io.R:78
+2: filesstrings::str_before_last
+3: getExportedValue(pkg, name)
+4: asNamespace(ns)
+5: getNamespace(ns)
+6: loadNamespace(name)
+7: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+8: asNamespace(ns)
+9: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+10: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m8. Error: 32-bit unsigned integer TIFF I/O works (@test-io.R#90) [39m [31m────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: write_tif(a1m, tmptif) at testthat/test-io.R:90
+2: filesstrings::str_before_last
+3: getExportedValue(pkg, name)
+4: asNamespace(ns)
+5: getNamespace(ns)
+6: loadNamespace(name)
+7: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+8: asNamespace(ns)
+9: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+10: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m9. Error: Float (real-numbered) TIFF I/O works (@test-io.R#102) [39m [31m─────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: write_tif(a2345, paste0(tmptif, "f")) at testthat/test-io.R:102
+2: filesstrings::str_before_last
+3: getExportedValue(pkg, name)
+4: asNamespace(ns)
+5: getNamespace(ns)
+6: loadNamespace(name)
+7: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+8: asNamespace(ns)
+9: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+10: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m10. Error: Negative-numbered TIFF I/O works (@test-io.R#123) [39m [31m────────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: write_tif(a2345, tmptif) at testthat/test-io.R:123
+2: filesstrings::str_before_last
+3: getExportedValue(pkg, name)
+4: asNamespace(ns)
+5: getNamespace(ns)
+6: loadNamespace(name)
+7: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+8: asNamespace(ns)
+9: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+10: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m11. Failure: List returning works (@test-io.R#138) [39m [31m──────────────────────────────────────────[39m
+`read_tif(tmptif)` threw an error with unexpected message.
+Expected match: "tried to return a list"
+Actual message: "namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required"
+
+[31m──[39m [31m12. Error: List returning works (@test-io.R#139) [39m [31m────────────────────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: expect_warning(read_tif(tmptif, list_safety = "warn"), "returning a list") at testthat/test-io.R:139
+2: quasi_capture(enquo(object), label, capture_warnings)
+3: .capture(act$val <- eval_bare(get_expr(.quo), get_env(.quo)), ...)
+4: withCallingHandlers(code, warning = function(condition) {
+       out$push(condition)
+       invokeRestart("muffleWarning")
+   })
+5: eval_bare(get_expr(.quo), get_env(.quo))
+6: read_tif(tmptif, list_safety = "warn")
+7: list_safety %<>% filesstrings::match_arg(c("error", "warning", "none"), ignore_case = TRUE)
+8: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+9: eval(quote(`_fseq`(`_lhs`)), env, env)
+10: eval(quote(`_fseq`(`_lhs`)), env, env)
+...
+14: function_list[[k]](value)
+15: filesstrings::match_arg
+16: getExportedValue(pkg, name)
+17: asNamespace(ns)
+18: getNamespace(ns)
+19: loadNamespace(name)
+20: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+21: asNamespace(ns)
+22: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+23: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m13. Failure: TIFFErrorHandler_ works (@test-io.R#154) [39m [31m───────────────────────────────────────[39m
+`suppressWarnings(read_tif(tmptxt))` threw an error with unexpected message.
+Expected match: "Cannot read TIFF header"
+Actual message: "namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required"
+
+[31m──[39m [31m14. Failure: write_tif() errors correctly (@test-io.R#177) [39m [31m──────────────────────────────────[39m
+`write_tif(aaaa, "a")` threw an error with unexpected message.
+Expected match: "The lowest allowable negative value in `img` is -3.40282346638529e+38.\n    * The lowest value in your `img` is -6.80564693277058e+38.\n    *  The `write_txt_img()` function allows you to write images without restriction on the values therein. Maybe you should try that?"
+Actual message: "namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required"
+
+[31m──[39m [31m15. Failure: write_tif() errors correctly (@test-io.R#191) [39m [31m──────────────────────────────────[39m
+`write_tif(aaaa, "a")` threw an error with unexpected message.
+Expected match: " If `img` has negative values (which the input `img` does), then the maximum allowed positive value is 3.40282346638529e+38. \n    * The largest value in your `img` is 6.80564693277058e+38.\n    *  The `write_txt_img()` function allows you to write images without restriction on the values therein. Maybe you should try that?"
+Actual message: "namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required"
+
+[31m──[39m [31m16. Failure: write_tif() errors correctly (@test-io.R#206) [39m [31m──────────────────────────────────[39m
+`write_tif(aaaa, "a", bits_per_sample = 16)` threw an error with unexpected message.
+Expected match: " Your image needs to be written as floating point numbers (not integers). For this, it is necessary to have 32 bits per sample. \n    * You have selected 16 bits per sample."
+Actual message: "namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required"
+
+[31m──[39m [31m17. Failure: write_tif() errors correctly (@test-io.R#217) [39m [31m──────────────────────────────────[39m
+`write_tif(aaaa, "a", bits_per_sample = 16)` threw an error with unexpected message.
+Expected match: " The maximum value in 'img' is 8589934592 which is greater than 2 ^ 32 - 1 and therefore too high to be written to a TIFF file. \n    * The `write_txt_img()` function allows you to write images without restriction on the values therein. Maybe you should try that?"
+Actual message: "namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required"
+
+[31m──[39m [31m18. Failure: write_tif() errors correctly (@test-io.R#230) [39m [31m──────────────────────────────────[39m
+`write_tif(aaaa, "a", bits_per_sample = 16)` threw an error with unexpected message.
+Expected match: " You are trying to write a 16-bit image, however the maximum element in `img` is 1048576, which is too big. \n    *  The largest allowable value in a 16-bit image is 65535.\n    *  To write your `img` to a TIFF file, you need at least 32 bits per sample."
+Actual message: "namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required"
+
+[31m──[39m [31m19. Failure: write_tif() errors correctly (@test-io.R#242) [39m [31m──────────────────────────────────[39m
+`read_tif(system.file("img", "bad_ij1.tif", package = "ijtiff"))` threw an error with unexpected message.
+Expected match: " The ImageJ-written image you're trying to read says in its TIFFTAG_DESCRIPTION that it has 13 images of 5 slices of 2 channels. However, with 5 slices of 2 channels, one would expect there to be 5 x 2 = 10 images. \n    * This discrepancy means that the `ijtiff` package can't read your image correctly.\n    * One possible source of this kind of error is that your image is temporal and volumetric. `ijtiff` can handle either time-based or volumetric stacks, but not both."
+Actual message: "namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required"
+
+[31m──[39m [31m20. Failure: write_tif() errors correctly (@test-io.R#258) [39m [31m──────────────────────────────────[39m
+`read_tif(system.file("img", "bad_ij2.tif", package = "ijtiff"))` threw an error with unexpected message.
+Expected match: " The ImageJ-written image you're trying to read says it has 8 frames AND 5 slices. \n    * To be read by the `ijtiff` package, the number of slices OR the number of frames should be specified in the TIFFTAG_DESCRIPTION (they're interpreted as the same thing), but not both."
+Actual message: "namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required"
+
+[31m──[39m [31m21. Error: text-image-io works (@test-io.R#277) [39m [31m─────────────────────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: write_txt_img(mm, tmpfl) at testthat/test-io.R:277
+2: paste0(filesstrings::before_last_dot(path), ch_part, frame_part) %>% purrr::map_chr(filesstrings::give_ext, 
+       "txt") %T>% {
+       if (length(.) > 1) 
+           . <- filesstrings::nice_nums(.)
+   }
+3: eval(lhs, parent, parent)
+4: eval(lhs, parent, parent)
+5: paste0(filesstrings::before_last_dot(path), ch_part, frame_part)
+6: filesstrings::before_last_dot
+7: getExportedValue(pkg, name)
+8: asNamespace(ns)
+9: getNamespace(ns)
+10: loadNamespace(name)
+11: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+12: asNamespace(ns)
+13: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+14: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m22. Error: reading certain frames works (@test-io.R#342) [39m [31m────────────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: read_tif(path, "A") at testthat/test-io.R:342
+2: list_safety %<>% filesstrings::match_arg(c("error", "warning", "none"), ignore_case = TRUE)
+3: withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+4: eval(quote(`_fseq`(`_lhs`)), env, env)
+5: eval(quote(`_fseq`(`_lhs`)), env, env)
+6: `_fseq`(`_lhs`)
+7: freduce(value, `_function_list`)
+8: withVisible(function_list[[k]](value))
+9: function_list[[k]](value)
+10: filesstrings::match_arg
+11: getExportedValue(pkg, name)
+12: asNamespace(ns)
+13: getNamespace(ns)
+14: loadNamespace(name)
+15: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+16: asNamespace(ns)
+17: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+18: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m23. Error: `read_tags()` works (@test-read_tags-examples.R#21) [39m [31m──────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: expect_equal(read_tags(path, "all")[c(2, 4)], read_tags(path, frames = c(2, 4))) at testthat/test-read_tags-examples.R:21
+2: quasi_label(enquo(object), label, arg = "object")
+3: eval_bare(get_expr(quo), get_env(quo))
+4: read_tags(path, "all")
+5: prep_read(path, frames, tags1, tags = TRUE)
+6: filesstrings::first_number_after_first
+7: getExportedValue(pkg, name)
+8: asNamespace(ns)
+9: getNamespace(ns)
+10: loadNamespace(name)
+11: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+12: asNamespace(ns)
+13: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+14: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+[31m──[39m [31m24. Error: extract_desired_plane() works (@test-utils.R#3) [39m [31m──────────────────────────────────[39m
+namespace 'strex' 1.1.0 is being loaded, but >= 1.1.1 is required
+1: expect_equal(extract_desired_plane(aaa), aaa[, , 1]) at testthat/test-utils.R:3
+2: quasi_label(enquo(object), label, arg = "object")
+3: eval_bare(get_expr(quo), get_env(quo))
+4: extract_desired_plane(aaa)
+5: purrr::map_lgl(seq_len(d[3]), ~filesstrings::all_equal(arr[, , .], 0))
+6: .f(.x[[i]], ...)
+7: filesstrings::all_equal
+8: getExportedValue(pkg, name)
+9: asNamespace(ns)
+10: getNamespace(ns)
+11: loadNamespace(name)
+12: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+       i[[2L]], from = package)
+13: asNamespace(ns)
+14: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+15: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
+       zop, zversion), domain = NA)
+
+══ testthat results  ════════════════════════════════════════════════════════════════════════════
+OK: 15 SKIPPED: 0 WARNINGS: 0 FAILED: 24
+1. Error: `as_EBImage()` works (@test-as_EBImage-examples.R#3) 
+2. Error: `count_imgs()` works (@test-count_imgs-examples.R#6) 
+3. Error: display works (@test-graphics.R#2) 
+4. Error: Package 2-channel example I/O works (@test-io.R#3) 
+5. Error: Package RGB I/O works (@test-io.R#56) 
+6. Error: 8-bit unsigned integer TIFF I/O works (@test-io.R#66) 
+7. Error: 16-bit unsigned integer TIFF I/O works (@test-io.R#78) 
+8. Error: 32-bit unsigned integer TIFF I/O works (@test-io.R#90) 
+9. Error: Float (real-numbered) TIFF I/O works (@test-io.R#102) 
+1. ...
+
+Error: testthat unit tests failed
+Execution halted

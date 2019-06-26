@@ -18,16 +18,18 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-usethis::create_package(tempdir(check = TRUE), open = FALSE)
-file.copy(system.file("extdata", c("detect.R", "match.R"),
-                      package = "exampletestr"),
-          paste0(tempdir(), "/R"))
-make_test_shell_fun("str_detect()", document = TRUE, open = FALSE,
-                    pkg_dir = tempdir())
-make_tests_shells_file("detect", document = FALSE, open = FALSE,
-                       pkg_dir = tempdir())
-make_tests_shells_pkg(overwrite = TRUE, document = FALSE,
-                      pkg_dir = tempdir())
+## Not run: 
+##D usethis::create_package(tempdir(check = TRUE), open = FALSE)
+##D file.copy(system.file("extdata", c("detect.R", "match.R"),
+##D                       package = "exampletestr"),
+##D           paste0(tempdir(), "/R"))
+##D make_test_shell_fun("str_detect()", document = TRUE, open = FALSE,
+##D                     pkg_dir = tempdir())
+##D make_tests_shells_file("detect", document = FALSE, open = FALSE,
+##D                        pkg_dir = tempdir())
+##D make_tests_shells_pkg(overwrite = TRUE, document = FALSE,
+##D                       pkg_dir = tempdir())
+## End(Not run)
 
 
 

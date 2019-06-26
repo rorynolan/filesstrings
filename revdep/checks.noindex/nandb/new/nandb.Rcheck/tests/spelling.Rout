@@ -15,16 +15,14 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-> if (requireNamespace('spelling', quietly = TRUE))
-+   spelling::spell_check_test(vignettes = TRUE, error = FALSE,
-+                              skip_on_cran = TRUE)
-Potential spelling errors:
-  WORD        FOUND IN
-Kmer        NEWS.md:36
-linux       NEWS.md:20
-tidyverse   NEWS.md:27
+> if (requireNamespace("spelling", quietly = TRUE)) {
++   spelling::spell_check_test(
++     vignettes = TRUE, error = FALSE,
++     skip_on_cran = TRUE
++   )
++ }
 All Done!
 > 
 > proc.time()
    user  system elapsed 
-  1.725   0.374   2.373 
+  1.549   0.522   2.210 
