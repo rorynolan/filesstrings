@@ -11,8 +11,8 @@ clang++ -std=gnu++11 -dynamiclib -Wl,-headerpad_max_install_names -undefined dyn
 ld: warning: object file (ImageFilters.o) was built for newer OSX version (10.14) than being linked (10.13)
 ld: warning: object file (RcppExports.o) was built for newer OSX version (10.14) than being linked (10.13)
 ld: warning: object file (cross_var.o) was built for newer OSX version (10.14) than being linked (10.13)
-ld: warning: object file (utils.o) was built for newer OSX version (10.14) than being linked (10.13)
 ld: warning: object file (float.o) was built for newer OSX version (10.14) than being linked (10.13)
+ld: warning: object file (utils.o) was built for newer OSX version (10.14) than being linked (10.13)
 installing to /Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/checks.noindex/nandb/old/nandb.Rcheck/00LOCK-nandb/00new/nandb/libs
 ** R
 ** inst

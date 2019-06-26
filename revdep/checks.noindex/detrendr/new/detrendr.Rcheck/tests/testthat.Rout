@@ -16,12 +16,12 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(testthat)
-> library(exampletestr)
+> library(detrendr)
 > 
-> test_check("exampletestr")
+> test_check("detrendr")
 ══ testthat results  ════════════════════════════════════════════════════════════════════════════
-OK: 4 SKIPPED: 0 WARNINGS: 0 FAILED: 0
+OK: 219 SKIPPED: 8 WARNINGS: 0 FAILED: 0
 > 
 > proc.time()
    user  system elapsed 
-  1.121   0.127   2.610 
+ 96.584  38.877 134.546 

@@ -48,48 +48,15 @@
 * checking compiled code ... OK
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
-* checking examples ... ERROR
-Running examples in ‘autothresholdr-Ex.R’ failed
-The error most likely occurred in:
-
-> ### Name: auto_thresh
-> ### Title: Automatically threshold an array of non-negative integers.
-> ### Aliases: auto_thresh auto_thresh_mask auto_thresh_apply_mask mask
-> ###   apply_mask
-> 
-> ### ** Examples
-> 
-> img_location <- system.file("extdata", "eg.tif", package = "autothresholdr")
-> img <- ijtiff::read_tif(img_location)
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  namespace ‘strex’ 1.1.0 is being loaded, but >= 1.1.1 is required
-Calls: <Anonymous> ... namespaceImportFrom -> asNamespace -> loadNamespace
-Execution halted
+* checking examples ... OK
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... ERROR
+* checking tests ... OK
   Running ‘spelling.R’
   Comparing ‘spelling.Rout’ to ‘spelling.Rout.save’ ... OK
   Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  11: asNamespace(ns)
-  12: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
-  13: stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, 
-         zop, zversion), domain = NA)
-  
-  ══ testthat results  ════════════════════════════════════════════════════════════════════════════
-  OK: 0 SKIPPED: 0 WARNINGS: 0 FAILED: 5
-  1. Error: (unknown) (@test_auto_thresh_methods.R#3) 
-  2. Error: mean_stack_thresh works (@test_stack_thresh.R#3) 
-  3. Error: auto_thresh works (@test_thresh.R#4) 
-  4. Error: auto_thresh works with matrices (@test_thresh.R#73) 
-  5. Error: translate_fail works (@test_utils.R#4) 
-  
-  Error: testthat unit tests failed
-  Execution halted
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
 * checking running R code from vignettes ... NONE
 * checking re-building of vignette outputs ... SKIPPED
 * DONE
-Status: 2 ERRORs
+Status: OK

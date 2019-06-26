@@ -4,16 +4,16 @@
 ** libs
 clang++ -std=gnu++11 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/library.noindex/autothresholdr/Rcpp/include" -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include  -fPIC  -Wall -g -O2  -c AutoThreshold.cpp -o AutoThreshold.o
 clang++ -std=gnu++11 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/library.noindex/autothresholdr/Rcpp/include" -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include  -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-RcppExports.cpp:201:1: warning: unused variable 'nprot' [-Wunused-variable]
+RcppExports.cpp:201:1: warning: unused variable 'stop_sym' [-Wunused-variable]
 BEGIN_RCPP
 ^
-/Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/library.noindex/autothresholdr/Rcpp/include/Rcpp/macros/macros.h:32:9: note: expanded from macro 'BEGIN_RCPP'
-    int nprot = 0;                                                                               \
-        ^
-RcppExports.cpp:201:1: warning: unused variable 'stop_sym' [-Wunused-variable]
 /Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/library.noindex/autothresholdr/Rcpp/include/Rcpp/macros/macros.h:36:17: note: expanded from macro 'BEGIN_RCPP'
     static SEXP stop_sym = Rf_install("stop");                                                   \
                 ^
+RcppExports.cpp:201:1: warning: unused variable 'nprot' [-Wunused-variable]
+/Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/library.noindex/autothresholdr/Rcpp/include/Rcpp/macros/macros.h:32:9: note: expanded from macro 'BEGIN_RCPP'
+    int nprot = 0;                                                                               \
+        ^
 RcppExports.cpp:235:1: warning: unused variable 'nprot' [-Wunused-variable]
 BEGIN_RCPP
 ^

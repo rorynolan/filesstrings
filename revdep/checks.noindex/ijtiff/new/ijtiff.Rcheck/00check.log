@@ -53,61 +53,15 @@
 * checking compiled code ... OK
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
-* checking examples ... ERROR
-Running examples in ‘ijtiff-Ex.R’ failed
-The error most likely occurred in:
-
-> ### Name: as_EBImage
-> ### Title: Convert an ijtiff_img to an EBImage::Image.
-> ### Aliases: as_EBImage
-> 
-> ### ** Examples
-> 
-> if (require(EBImage)) {
-+   img <- read_tif(system.file("img", "Rlogo.tif", package = "ijtiff"))
-+   str(img)
-+   str(as_EBImage(img))
-+   img <- read_tif(system.file("img", "2ch_ij.tif", package = "ijtiff"))
-+   str(img)
-+   str(as_EBImage(img))
-+ }
-Loading required package: EBImage
-
-Attaching package: ‘EBImage’
-
-The following object is masked from ‘package:ijtiff’:
-
-    display
-
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  namespace ‘strex’ 1.1.0 is being loaded, but >= 1.1.1 is required
-Calls: read_tif ... namespaceImportFrom -> asNamespace -> loadNamespace
-Execution halted
+* checking examples ... OK
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... ERROR
+* checking tests ... OK
   Running ‘spelling.R’
   Comparing ‘spelling.Rout’ to ‘spelling.Rout.save’ ... OK
   Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  ══ testthat results  ════════════════════════════════════════════════════════════════════════════
-  OK: 15 SKIPPED: 0 WARNINGS: 0 FAILED: 24
-  1. Error: `as_EBImage()` works (@test-as_EBImage-examples.R#3) 
-  2. Error: `count_imgs()` works (@test-count_imgs-examples.R#6) 
-  3. Error: display works (@test-graphics.R#2) 
-  4. Error: Package 2-channel example I/O works (@test-io.R#3) 
-  5. Error: Package RGB I/O works (@test-io.R#56) 
-  6. Error: 8-bit unsigned integer TIFF I/O works (@test-io.R#66) 
-  7. Error: 16-bit unsigned integer TIFF I/O works (@test-io.R#78) 
-  8. Error: 32-bit unsigned integer TIFF I/O works (@test-io.R#90) 
-  9. Error: Float (real-numbered) TIFF I/O works (@test-io.R#102) 
-  1. ...
-  
-  Error: testthat unit tests failed
-  Execution halted
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
 * checking running R code from vignettes ... NONE
 * checking re-building of vignette outputs ... SKIPPED
 * DONE
-Status: 2 ERRORs
+Status: OK

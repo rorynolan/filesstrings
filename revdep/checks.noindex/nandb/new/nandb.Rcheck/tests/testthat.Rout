@@ -16,12 +16,12 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(testthat)
-> library(exampletestr)
+> library(nandb)
 > 
-> test_check("exampletestr")
+> test_check("nandb")
 ══ testthat results  ════════════════════════════════════════════════════════════════════════════
-OK: 4 SKIPPED: 0 WARNINGS: 0 FAILED: 0
+OK: 155 SKIPPED: 0 WARNINGS: 0 FAILED: 0
 > 
 > proc.time()
    user  system elapsed 
-  1.121   0.127   2.610 
+ 51.409  19.134  74.201 

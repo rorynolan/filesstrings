@@ -16,12 +16,12 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(testthat)
-> library(exampletestr)
+> library(ijtiff)
 > 
-> test_check("exampletestr")
+> test_check("ijtiff")
 ══ testthat results  ════════════════════════════════════════════════════════════════════════════
-OK: 4 SKIPPED: 0 WARNINGS: 0 FAILED: 0
+OK: 97 SKIPPED: 0 WARNINGS: 0 FAILED: 0
 > 
 > proc.time()
    user  system elapsed 
-  1.121   0.127   2.610 
+  5.060   0.423   6.211 

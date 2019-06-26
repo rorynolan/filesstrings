@@ -47,8 +47,8 @@ RcppExports.cpp:303:1: warning: unused variable 'stop_sym' [-Wunused-variable]
 8 warnings generated.
 clang++ -std=gnu++11 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/library.noindex/autothresholdr/Rcpp/include" -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include  -fPIC  -Wall -g -O2  -c pillar_stats.cpp -o pillar_stats.o
 clang++ -std=gnu++11 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Resources/lib -L/usr/local/lib -o autothresholdr.so AutoThreshold.o RcppExports.o pillar_stats.o -F/Library/Frameworks/R.framework/.. -framework R -Wl,-framework -Wl,CoreFoundation
-ld: warning: object file (AutoThreshold.o) was built for newer OSX version (10.14) than being linked (10.13)
-ld: warning: object file (RcppExports.o) was built for newer OSX version (10.14) than being linked (10.13)
+ld: warning: object file (AutoThreshold.o) was built for newer OSX version (10.14) than being linked (10.13)ld: warning: object file (RcppExports.o) was built for newer OSX version (10.14) than being linked (10.13)
+
 ld: warning: object file (pillar_stats.o) was built for newer OSX version (10.14) than being linked (10.13)
 installing to /Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/checks.noindex/autothresholdr/old/autothresholdr.Rcheck/00LOCK-autothresholdr/00new/autothresholdr/libs
 ** R
