@@ -7,18 +7,41 @@
 \alias{str_split_by_numbers}
 \title{Split a string by its numeric characters.}
 \usage{
-str_split_by_nums(string, decimals = FALSE, leading_decimals = FALSE,
-  negs = FALSE, sci = FALSE, commas = FALSE)
+str_split_by_nums(
+  string,
+  decimals = FALSE,
+  leading_decimals = FALSE,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE
+)
 
-split_by_nums(string, decimals = FALSE, leading_decimals = FALSE,
-  negs = FALSE, sci = FALSE, commas = FALSE)
+split_by_nums(
+  string,
+  decimals = FALSE,
+  leading_decimals = FALSE,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE
+)
 
-split_by_numbers(string, decimals = FALSE, leading_decimals = FALSE,
-  negs = FALSE, sci = FALSE, commas = FALSE)
+split_by_numbers(
+  string,
+  decimals = FALSE,
+  leading_decimals = FALSE,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE
+)
 
-str_split_by_numbers(string, decimals = FALSE,
-  leading_decimals = FALSE, negs = FALSE, sci = FALSE,
-  commas = FALSE)
+str_split_by_numbers(
+  string,
+  decimals = FALSE,
+  leading_decimals = FALSE,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE
+)
 }
 \arguments{
 \item{string}{A string.}

@@ -16,8 +16,10 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > if (requireNamespace("spelling", quietly = TRUE)) {
-+   spelling::spell_check_test(vignettes = TRUE, error = FALSE,
-+                              skip_on_cran = TRUE)
++   spelling::spell_check_test(
++     vignettes = TRUE, error = FALSE,
++     skip_on_cran = TRUE
++   )
 + }
 All Done!
 >

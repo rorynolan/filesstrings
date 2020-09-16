@@ -23,3 +23,10 @@ test_that("tif_tags_reference() works", {
   )
   expect_s3_class(tif_tags_reference(), "tbl_df")
 })
+
+test_that("prep_frames() errors correctly", {
+  expect_error(
+    prep_frames("xyz"),
+    paste0("If.+frames.+is a string.+must be.+all.+You have.+frames.+xyz")
+  )
+})

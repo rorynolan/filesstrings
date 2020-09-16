@@ -33,5 +33,6 @@ file.create(files)
 remove_filename_spaces()
 list.files()
 setwd("..")
-dir.remove("RemoveFileNameSpaces_test")}
+dir.remove("RemoveFileNameSpaces_test")
+}
 }

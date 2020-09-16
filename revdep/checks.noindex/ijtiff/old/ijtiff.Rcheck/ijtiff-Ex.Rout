@@ -1,7 +1,7 @@
 
-R version 3.6.0 (2019-04-26) -- "Planting of a Tree"
-Copyright (C) 2019 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin15.6.0 (64-bit)
+R version 4.0.2 (2020-06-22) -- "Taking Off Again"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin17.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -36,25 +36,11 @@ Type 'q()' to quit R.
 > 
 > ### ** Examples
 > 
-> if (require(EBImage)) {
-+   img <- read_tif(system.file("img", "Rlogo.tif", package = "ijtiff"))
-+   str(img)
-+   str(as_EBImage(img))
-+   img <- read_tif(system.file("img", "2ch_ij.tif", package = "ijtiff"))
-+   str(img)
-+   str(as_EBImage(img))
-+ }
-Loading required package: EBImage
-
-Attaching package: ‘EBImage’
-
-The following object is masked from ‘package:ijtiff’:
-
-    display
-
+> img <- read_tif(system.file("img", "Rlogo.tif", package = "ijtiff"))
 Reading Rlogo.tif: an 8-bit, 76x100 pixel image of unsigned
 integer type. Reading 4 channels and 1 frame . . .
  Done.
+> str(img)
  'ijtiff_img' num [1:76, 1:100, 1:4, 1] 0 0 0 0 0 0 0 0 0 0 ...
  - attr(*, "width")= int 100
  - attr(*, "length")= int 76
@@ -69,33 +55,14 @@ integer type. Reading 4 channels and 1 frame . . .
  - attr(*, "resolution_unit")= chr "inch"
  - attr(*, "orientation")= chr "top_left"
  - attr(*, "color_space")= chr "RGB"
+> str(as_EBImage(img))
 Formal class 'Image' [package "EBImage"] with 2 slots
   ..@ .Data    : num [1:100, 1:76, 1:4, 1] 0 0 0 0 0 0 0 0 0 0 ...
   ..@ colormode: int 2
-Reading 2ch_ij.tif: an 8-bit, 15x6 pixel image of unsigned
-integer type. Reading 2 channels and 5 frames . . .
- Done.
- 'ijtiff_img' num [1:15, 1:6, 1:2, 1:5] 0 0 0 1 0 0 1 0 1 1 ...
- - attr(*, "width")= int 6
- - attr(*, "length")= int 15
- - attr(*, "bits_per_sample")= int 8
- - attr(*, "samples_per_pixel")= int 1
- - attr(*, "sample_format")= chr "uint"
- - attr(*, "planar_config")= chr "contiguous"
- - attr(*, "rows_per_strip")= int 15
- - attr(*, "compression")= chr "none"
- - attr(*, "description")= chr "ImageJ=1.51s\nimages=10\nchannels=2\nframes=5\nhyperstack=true\nmode=composite\nloop=false\n"
- - attr(*, "color_space")= chr "black is zero"
-Formal class 'Image' [package "EBImage"] with 2 slots
-  ..@ .Data    : num [1:6, 1:15, 1:2, 1:5] 0 0.00392 0.00392 0 0 ...
-  ..@ colormode: int 0
 > 
 > 
 > 
 > cleanEx()
-
-detaching ‘package:EBImage’
-
 > nameEx("count_frames")
 > ### * count_frames
 > 
@@ -103,7 +70,7 @@ detaching ‘package:EBImage’
 > 
 > ### Name: count_frames
 > ### Title: Count the number of frames in a TIFF file.
-> ### Aliases: count_frames
+> ### Aliases: count_frames frames_count
 > 
 > ### ** Examples
 > 
@@ -111,10 +78,6 @@ detaching ‘package:EBImage’
 [1] 1
 attr(,"n_dirs")
 [1] 1
-> count_frames(system.file("img", "2ch_ij.tif", package = "ijtiff"))
-[1] 5
-attr(,"n_dirs")
-[1] 10
 > 
 > 
 > 
@@ -130,15 +93,17 @@ attr(,"n_dirs")
 > 
 > ### ** Examples
 > 
-> img <- read_tif(system.file("img", "Rlogo.tif", package = "ijtiff"))
+> if (requireNamespace("EBImage")) {
++   img <- read_tif(system.file("img", "Rlogo.tif", package = "ijtiff"))
++   display(img)
++   display(img[, , 1, 1]) # first (red) channel, first frame
++   display(img[, , 2, ]) # second (green) channel, first frame
++   display(img[, , 3, ]) # third (blue) channel, first frame
++   display(img, basic = TRUE) # displays first (red) channel, first frame
++ }
 Reading Rlogo.tif: an 8-bit, 76x100 pixel image of unsigned
 integer type. Reading 4 channels and 1 frame . . .
  Done.
-> display(img)
-> display(img[, , 1, 1]) # first (red) channel, first frame
-> display(img[, , 2, ]) # second (green) channel, first frame
-> display(img[, , 3, ]) # third (blue) channel, first frame
-> display(img, basic = TRUE) # displays first (red) channel, first frame
 > 
 > 
 > 
@@ -156,82 +121,40 @@ integer type. Reading 4 channels and 1 frame . . .
 > 
 > img <- matrix(1:4, nrow = 2) # to be a single-channel, grayscale image
 > ijtiff_img(img, description = "single-channel, grayscale")
-, , 1, 1
-
+2x2 pixel ijtiff_img with 1 channel and 1 frame.
+Preview (top left of first channel of first frame):
      [,1] [,2]
 [1,]    1    3
 [2,]    2    4
-
-attr(,"description")
-[1] "single-channel, grayscale"
-attr(,"class")
-[1] "ijtiff_img" "array"     
+── TIFF tags ───────────────────────────────────────────────────────────────────
+● description: single-channel, grayscale
 > img <- array(seq_len(2^3), dim = rep(2, 3)) # 1 channel, 2 frame
 > ijtiff_img(img, description = "blah blah blah")
-, , 1, 1
-
+2x2 pixel ijtiff_img with 1 channel and 2 frames.
+Preview (top left of first channel of first frame):
      [,1] [,2]
 [1,]    1    3
 [2,]    2    4
-
-, , 1, 2
-
-     [,1] [,2]
-[1,]    5    7
-[2,]    6    8
-
-attr(,"description")
-[1] "blah blah blah"
-attr(,"class")
-[1] "ijtiff_img" "array"     
+── TIFF tags ───────────────────────────────────────────────────────────────────
+● description: blah blah blah
 > img <- array(seq_len(2^3), dim = c(2, 2, 2, 1)) #  2 channel, 1 frame
 > ijtiff_img(img, description = "blah blah")
-, , 1, 1
-
+2x2 pixel ijtiff_img with 2 channels and 1 frame.
+Preview (top left of first channel of first frame):
      [,1] [,2]
 [1,]    1    3
 [2,]    2    4
-
-, , 2, 1
-
-     [,1] [,2]
-[1,]    5    7
-[2,]    6    8
-
-attr(,"description")
-[1] "blah blah"
-attr(,"class")
-[1] "ijtiff_img" "array"     
+── TIFF tags ───────────────────────────────────────────────────────────────────
+● description: blah blah
 > img <- array(seq_len(2^4), dim = rep(2, 4)) # 2 channel, 2 frame
 > ijtiff_img(img, software = "R")
-, , 1, 1
-
+2x2 pixel ijtiff_img with 2 channels and 2 frames.
+Preview (top left of first channel of first frame):
      [,1] [,2]
 [1,]    1    3
 [2,]    2    4
-
-, , 2, 1
-
-     [,1] [,2]
-[1,]    5    7
-[2,]    6    8
-
-, , 1, 2
-
-     [,1] [,2]
-[1,]    9   11
-[2,]   10   12
-
-, , 2, 2
-
-     [,1] [,2]
-[1,]   13   15
-[2,]   14   16
-
-attr(,"software")
-[1] "R"
-attr(,"class")
-[1] "ijtiff_img" "array"     
+── TIFF tags ───────────────────────────────────────────────────────────────────
+● software: R
 > 
 > 
 > 
@@ -249,52 +172,30 @@ attr(,"class")
 > 
 > linescan <- ijtiff_img(array(rep(1:4, each = 4), dim = c(4, 4, 1, 1)))
 > print(linescan)
-, , 1, 1
-
+4x4 pixel ijtiff_img with 1 channel and 1 frame.
+Preview (top left of first channel of first frame):
      [,1] [,2] [,3] [,4]
 [1,]    1    2    3    4
 [2,]    1    2    3    4
 [3,]    1    2    3    4
 [4,]    1    2    3    4
-
-attr(,"class")
-[1] "ijtiff_img" "array"     
+── TIFF tags ───────────────────────────────────────────────────────────────────
 > stack <- linescan_to_stack(linescan)
 > print(stack)
-, , 1, 1
-
-     [,1] [,2] [,3] [,4]
-[1,]    1    2    3    4
-
-, , 1, 2
-
-     [,1] [,2] [,3] [,4]
-[1,]    1    2    3    4
-
-, , 1, 3
-
-     [,1] [,2] [,3] [,4]
-[1,]    1    2    3    4
-
-, , 1, 4
-
-     [,1] [,2] [,3] [,4]
-[1,]    1    2    3    4
-
-attr(,"class")
-[1] "ijtiff_img" "array"     
+1x4 pixel ijtiff_img with 1 channel and 4 frames.
+Preview (top left of first channel of first frame):
+[1] 1 2 3 4
+── TIFF tags ───────────────────────────────────────────────────────────────────
 > linescan <- stack_to_linescan(stack)
 > print(linescan)
-, , 1, 1
-
+4x4 pixel ijtiff_img with 1 channel and 1 frame.
+Preview (top left of first channel of first frame):
      [,1] [,2] [,3] [,4]
 [1,]    1    2    3    4
 [2,]    1    2    3    4
 [3,]    1    2    3    4
 [4,]    1    2    3    4
-
-attr(,"class")
-[1] "ijtiff_img" "array"     
+── TIFF tags ───────────────────────────────────────────────────────────────────
 > 
 > 
 > 
@@ -353,54 +254,21 @@ $frame1$color_space
 [1] "RGB"
 
 
-> read_tags(system.file("img", "2ch_ij.tif", package = "ijtiff"))
-$frame1
-$frame1$width
-[1] 6
-
-$frame1$length
-[1] 15
-
-$frame1$bits_per_sample
-[1] 8
-
-$frame1$samples_per_pixel
-[1] 1
-
-$frame1$sample_format
-[1] "uint"
-
-$frame1$planar_config
-[1] "contiguous"
-
-$frame1$rows_per_strip
-[1] 15
-
-$frame1$compression
-[1] "none"
-
-$frame1$description
-[1] "ImageJ=1.51s\nimages=10\nchannels=2\nframes=5\nhyperstack=true\nmode=composite\nloop=false\n"
-
-$frame1$color_space
-[1] "black is zero"
-
-
-> read_tags(system.file("img", "2ch_ij.tif", package = "ijtiff"),
+> read_tags(system.file("img", "Rlogo-banana.tif", package = "ijtiff"),
 +   frames = c(2, 4)
 + )
 $frame2
 $frame2$width
-[1] 6
+[1] 100
 
 $frame2$length
-[1] 15
+[1] 78
 
 $frame2$bits_per_sample
 [1] 8
 
 $frame2$samples_per_pixel
-[1] 1
+[1] 3
 
 $frame2$sample_format
 [1] "uint"
@@ -409,13 +277,13 @@ $frame2$planar_config
 [1] "contiguous"
 
 $frame2$rows_per_strip
-[1] 15
+[1] 78
 
 $frame2$compression
-[1] "none"
+[1] "deflate"
 
-$frame2$description
-[1] "ImageJ=1.51s\nimages=10\nchannels=2\nframes=5\nhyperstack=true\nmode=composite\nloop=false\n"
+$frame2$software
+[1] "ijtiff package, R 4.0.0"
 
 $frame2$color_space
 [1] "black is zero"
@@ -423,16 +291,16 @@ $frame2$color_space
 
 $frame4
 $frame4$width
-[1] 6
+[1] 100
 
 $frame4$length
-[1] 15
+[1] 78
 
 $frame4$bits_per_sample
 [1] 8
 
 $frame4$samples_per_pixel
-[1] 1
+[1] 3
 
 $frame4$sample_format
 [1] "uint"
@@ -441,13 +309,13 @@ $frame4$planar_config
 [1] "contiguous"
 
 $frame4$rows_per_strip
-[1] 15
+[1] 78
 
 $frame4$compression
-[1] "none"
+[1] "deflate"
 
-$frame4$description
-[1] "ImageJ=1.51s\nimages=10\nchannels=2\nframes=5\nhyperstack=true\nmode=composite\nloop=false\n"
+$frame4$software
+[1] "ijtiff package, R 4.0.0"
 
 $frame4$color_space
 [1] "black is zero"
@@ -472,28 +340,6 @@ $frame4$color_space
 Reading Rlogo.tif: an 8-bit, 76x100 pixel image of unsigned
 integer type. Reading 4 channels and 1 frame . . .
  Done.
-> img <- read_tif(system.file("img", "2ch_ij.tif", package = "ijtiff"))
-Reading 2ch_ij.tif: an 8-bit, 15x6 pixel image of unsigned
-integer type. Reading 2 channels and 5 frames . . .
- Done.
-> str(img) # we see that `ijtiff` correctly recognises this image's 2 channels
- 'ijtiff_img' num [1:15, 1:6, 1:2, 1:5] 0 0 0 1 0 0 1 0 1 1 ...
- - attr(*, "width")= int 6
- - attr(*, "length")= int 15
- - attr(*, "bits_per_sample")= int 8
- - attr(*, "samples_per_pixel")= int 1
- - attr(*, "sample_format")= chr "uint"
- - attr(*, "planar_config")= chr "contiguous"
- - attr(*, "rows_per_strip")= int 15
- - attr(*, "compression")= chr "none"
- - attr(*, "description")= chr "ImageJ=1.51s\nimages=10\nchannels=2\nframes=5\nhyperstack=true\nmode=composite\nloop=false\n"
- - attr(*, "color_space")= chr "black is zero"
-> img <- read_tif(system.file("img", "2ch_ij.tif", package = "ijtiff"),
-+   frames = c(1, 3)
-+ )
-Reading 2ch_ij.tif: an 8-bit, 15x6 pixel image of unsigned
-integer type. Reading 2 channels and 2 frames . . .
- Done.
 > 
 > 
 > 
@@ -505,7 +351,8 @@ integer type. Reading 2 channels and 2 frames . . .
 > 
 > ### Name: text-image-io
 > ### Title: Read/write an image array to/from disk as text file(s).
-> ### Aliases: text-image-io write_txt_img read_txt_img
+> ### Aliases: text-image-io write_txt_img read_txt_img txt_img_write
+> ###   txt_img_read
 > 
 > ### ** Examples
 > 
@@ -515,13 +362,13 @@ integer type. Reading 4 channels and 1 frame . . .
  Done.
 > tmptxt <- tempfile(pattern = "img", fileext = ".txt")
 > write_txt_img(img, tmptxt)
-Writing imgdef7404aac50_ch1.txt, imgdef7404aac50_ch2.txt, imgdef7404aac50_ch3.txt and imgdef7404aac50_ch4.txt: a 76x100 pixel text image with 4 channels and 1 frame . . .
+Writing img1e4011eed09c_ch1.txt, img1e4011eed09c_ch2.txt, img1e4011eed09c_ch3.txt and img1e4011eed09c_ch4.txt: a 76x100 pixel text image with 4 channels and 1 frame . . .
  Done.
 > tmptxt_ch1_path <- paste0(filesstrings::before_last_dot(tmptxt), "_ch1.txt")
 > print(tmptxt_ch1_path)
-[1] "/var/folders/l_/2mwm03p55zg7zjykv084hhvr0000gn/T//Rtmpq7HjJc/imgdef7404aac50_ch1.txt"
+[1] "/var/folders/l_/2mwm03p55zg7zjykv084hhvr0000gn/T//Rtmp04xOzh/img1e4011eed09c_ch1.txt"
 > txt_img <- read_txt_img(tmptxt_ch1_path)
-Reading 76x100 pixel text image 'imgdef7404aac50_ch1.txt' . . .
+Reading 76x100 pixel text image 'img1e4011eed09c_ch1.txt' . . .
  Done.
 > 
 > 
@@ -564,10 +411,9 @@ Reading 76x100 pixel text image 'imgdef7404aac50_ch1.txt' . . .
 > 
 > ### Name: write_tif
 > ### Title: Write images in TIFF format
-> ### Aliases: write_tif
+> ### Aliases: write_tif tif_write
 > 
 > ### ** Examples
-> 
 > 
 > img <- read_tif(system.file("img", "Rlogo.tif", package = "ijtiff"))
 Reading Rlogo.tif: an 8-bit, 76x100 pixel image of unsigned
@@ -593,7 +439,7 @@ integer type with 1 channel and 1 frame . . .
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  2.335 0.248 4.206 0 0 
+Time elapsed:  2.959 0.239 4.802 0 0 
 > grDevices::dev.off()
 null device 
           1 

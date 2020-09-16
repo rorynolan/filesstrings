@@ -14,3 +14,4 @@
 ^paper$
 ^CONDUCT\.md$
 ^junk$
+^\.pre-commit-config\.yaml$

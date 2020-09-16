@@ -11,37 +11,87 @@
 \alias{str_last_number}
 \title{Extract numbers from a string.}
 \usage{
-extract_numbers(string, decimals = FALSE, leading_decimals = decimals,
-  negs = FALSE, sci = FALSE, commas = FALSE,
-  leave_as_string = FALSE)
+extract_numbers(
+  string,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE,
+  leave_as_string = FALSE
+)
 
-str_extract_numbers(string, decimals = FALSE,
-  leading_decimals = decimals, negs = FALSE, sci = FALSE,
-  commas = FALSE, leave_as_string = FALSE)
+str_extract_numbers(
+  string,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE,
+  leave_as_string = FALSE
+)
 
-nth_number(string, n, decimals = FALSE, leading_decimals = decimals,
-  negs = FALSE, sci = FALSE, commas = FALSE,
-  leave_as_string = FALSE)
+nth_number(
+  string,
+  n,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE,
+  leave_as_string = FALSE
+)
 
-str_nth_number(string, n, decimals = FALSE,
-  leading_decimals = decimals, negs = FALSE, sci = FALSE,
-  commas = FALSE, leave_as_string = FALSE)
+str_nth_number(
+  string,
+  n,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE,
+  leave_as_string = FALSE
+)
 
-first_number(string, decimals = FALSE, leading_decimals = decimals,
-  negs = FALSE, sci = FALSE, commas = FALSE,
-  leave_as_string = FALSE)
+first_number(
+  string,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE,
+  leave_as_string = FALSE
+)
 
-str_first_number(string, decimals = FALSE, leading_decimals = decimals,
-  negs = FALSE, sci = FALSE, commas = FALSE,
-  leave_as_string = FALSE)
+str_first_number(
+  string,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE,
+  leave_as_string = FALSE
+)
 
-last_number(string, decimals = FALSE, leading_decimals = decimals,
-  negs = FALSE, sci = FALSE, commas = FALSE,
-  leave_as_string = FALSE)
+last_number(
+  string,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE,
+  leave_as_string = FALSE
+)
 
-str_last_number(string, decimals = FALSE, leading_decimals = decimals,
-  negs = FALSE, sci = FALSE, commas = FALSE,
-  leave_as_string = FALSE)
+str_last_number(
+  string,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE,
+  leave_as_string = FALSE
+)
 }
 \arguments{
 \item{string}{A string.}

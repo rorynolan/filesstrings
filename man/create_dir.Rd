@@ -22,5 +22,6 @@ already exist.
 \examples{
 \dontrun{
 create_dir(c("mydir", "yourdir"))
-remove_dir(c("mydir", "yourdir"))}
+remove_dir(c("mydir", "yourdir"))
+}
 }

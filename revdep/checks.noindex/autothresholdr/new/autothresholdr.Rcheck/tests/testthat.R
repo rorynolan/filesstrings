@@ -1,4 +1,4 @@
 library(testthat)
 library(autothresholdr)
 
-test_check("autothresholdr")
+if (!autothresholdr:::win32bit()) test_check("autothresholdr")

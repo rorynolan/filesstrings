@@ -1,3 +1,9 @@
+# `filesstrings` 3.1.6
+
+## BUG FIXES
+* Ready the package not to break on next release of strex (v1.3.0).
+
+
 # `filesstrings` 3.1.5
 
 ## BUG FIXES

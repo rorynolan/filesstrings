@@ -1,5 +1,8 @@
 #' @import stringr
 #' @importFrom magrittr '%>%' '%<>%' '%T>%'
+#' @importFrom ore is_ore
+#' @importFrom matrixStats allValue
+#' @importFrom vctrs allow_lossy_cast
 #' @importFrom strex match_arg
 NULL
 

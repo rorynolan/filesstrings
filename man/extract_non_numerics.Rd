@@ -11,36 +11,79 @@
 \alias{str_last_non_numeric}
 \title{Extract non-numbers from a string.}
 \usage{
-extract_non_numerics(string, decimals = FALSE,
-  leading_decimals = decimals, negs = FALSE, sci = FALSE,
-  commas = FALSE)
+extract_non_numerics(
+  string,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE
+)
 
-str_extract_non_numerics(string, decimals = FALSE,
-  leading_decimals = decimals, negs = FALSE, sci = FALSE,
-  commas = FALSE)
+str_extract_non_numerics(
+  string,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE
+)
 
-nth_non_numeric(string, n, decimals = FALSE,
-  leading_decimals = decimals, negs = FALSE, sci = FALSE,
-  commas = FALSE)
+nth_non_numeric(
+  string,
+  n,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE
+)
 
-str_nth_non_numeric(string, n, decimals = FALSE,
-  leading_decimals = decimals, negs = FALSE, sci = FALSE,
-  commas = FALSE)
+str_nth_non_numeric(
+  string,
+  n,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE
+)
 
-first_non_numeric(string, decimals = FALSE,
-  leading_decimals = decimals, negs = FALSE, sci = FALSE,
-  commas = FALSE)
+first_non_numeric(
+  string,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE
+)
 
-str_first_non_numeric(string, decimals = FALSE,
-  leading_decimals = decimals, negs = FALSE, sci = FALSE,
-  commas = FALSE)
+str_first_non_numeric(
+  string,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE
+)
 
-last_non_numeric(string, decimals = FALSE, leading_decimals = decimals,
-  negs = FALSE, sci = FALSE, commas = FALSE)
+last_non_numeric(
+  string,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE
+)
 
-str_last_non_numeric(string, decimals = FALSE,
-  leading_decimals = decimals, negs = FALSE, sci = FALSE,
-  commas = FALSE)
+str_last_non_numeric(
+  string,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE
+)
 }
 \arguments{
 \item{string}{A string.}

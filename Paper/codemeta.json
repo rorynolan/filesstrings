@@ -1,0 +1,30 @@
+{
+  "@context": "https://raw.githubusercontent.com/codemeta/codemeta/master/codemeta.jsonld",
+  "@type": "Code",
+  "author": [
+    {
+      "@id": "http://orcid.org/0000-0002-5239-4043",
+      "@type": "Person",
+      "email": "rorynoolan@gmail.com",
+      "name": "Rory Nolan",
+      "affiliation": "University of Oxford"
+    },
+    {
+      "@id": "http://0000-0002-8010-9481",
+      "@type": "Person",
+      "email": "spadilla@well.ox.ac.uk",
+      "name": "Sergi Padilla",
+      "affiliation": "University of Oxford"
+    }
+  ],
+  "identifier": "",
+  "codeRepository": "https://github.com/rorynolan/filesstrings",
+  "datePublished": "2017-04-11",
+  "dateModified": "2017-04-11",
+  "dateCreated": "2017-04-11",
+  "description": "An R package for file and string manipulation",
+  "keywords": "R, file, string",
+  "license": "GPL v3.0",
+  "title": "filesstrings",
+  "version": "0.3.2"
+}

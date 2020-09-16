@@ -1,15 +1,16 @@
 pkgname <- "ijtiff"
 source(file.path(R.home("share"), "R", "examples-header.R"))
 options(warn = 1)
-library('ijtiff')
+library("ijtiff")
 
-base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
-base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+base::assign(".oldSearch", base::search(), pos = "CheckExEnv")
+base::assign(".old_wd", base::getwd(), pos = "CheckExEnv")
 cleanEx()
 nameEx("as_EBImage")
 ### * as_EBImage
 
-flush(stderr()); flush(stdout())
+flush(stderr())
+flush(stdout())
 
 ### Name: as_EBImage
 ### Title: Convert an ijtiff_img to an EBImage::Image.
@@ -17,14 +18,9 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-if (require(EBImage)) {
-  img <- read_tif(system.file("img", "Rlogo.tif", package = "ijtiff"))
-  str(img)
-  str(as_EBImage(img))
-  img <- read_tif(system.file("img", "2ch_ij.tif", package = "ijtiff"))
-  str(img)
-  str(as_EBImage(img))
-}
+img <- read_tif(system.file("img", "Rlogo.tif", package = "ijtiff"))
+str(img)
+str(as_EBImage(img))
 
 
 
@@ -32,16 +28,16 @@ cleanEx()
 nameEx("count_frames")
 ### * count_frames
 
-flush(stderr()); flush(stdout())
+flush(stderr())
+flush(stdout())
 
 ### Name: count_frames
 ### Title: Count the number of frames in a TIFF file.
-### Aliases: count_frames
+### Aliases: count_frames frames_count
 
 ### ** Examples
 
 count_frames(system.file("img", "Rlogo.tif", package = "ijtiff"))
-count_frames(system.file("img", "2ch_ij.tif", package = "ijtiff"))
 
 
 
@@ -49,7 +45,8 @@ cleanEx()
 nameEx("display")
 ### * display
 
-flush(stderr()); flush(stdout())
+flush(stderr())
+flush(stdout())
 
 ### Name: display
 ### Title: Basic image display.
@@ -57,12 +54,14 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-img <- read_tif(system.file("img", "Rlogo.tif", package = "ijtiff"))
-display(img)
-display(img[, , 1, 1]) # first (red) channel, first frame
-display(img[, , 2, ]) # second (green) channel, first frame
-display(img[, , 3, ]) # third (blue) channel, first frame
-display(img, basic = TRUE) # displays first (red) channel, first frame
+if (requireNamespace("EBImage")) {
+  img <- read_tif(system.file("img", "Rlogo.tif", package = "ijtiff"))
+  display(img)
+  display(img[, , 1, 1]) # first (red) channel, first frame
+  display(img[, , 2, ]) # second (green) channel, first frame
+  display(img[, , 3, ]) # third (blue) channel, first frame
+  display(img, basic = TRUE) # displays first (red) channel, first frame
+}
 
 
 
@@ -70,7 +69,8 @@ cleanEx()
 nameEx("ijtiff_img")
 ### * ijtiff_img
 
-flush(stderr()); flush(stdout())
+flush(stderr())
+flush(stdout())
 
 ### Name: ijtiff_img
 ### Title: 'ijtiff_img' class.
@@ -93,7 +93,8 @@ cleanEx()
 nameEx("linescan-conversion")
 ### * linescan-conversion
 
-flush(stderr()); flush(stdout())
+flush(stderr())
+flush(stdout())
 
 ### Name: linescan-conversion
 ### Title: Rejig linescan images.
@@ -114,7 +115,8 @@ cleanEx()
 nameEx("read_tags")
 ### * read_tags
 
-flush(stderr()); flush(stdout())
+flush(stderr())
+flush(stdout())
 
 ### Name: read_tags
 ### Title: Read TIFF tag information without actually reading the image
@@ -124,8 +126,7 @@ flush(stderr()); flush(stdout())
 ### ** Examples
 
 read_tags(system.file("img", "Rlogo.tif", package = "ijtiff"))
-read_tags(system.file("img", "2ch_ij.tif", package = "ijtiff"))
-read_tags(system.file("img", "2ch_ij.tif", package = "ijtiff"),
+read_tags(system.file("img", "Rlogo-banana.tif", package = "ijtiff"),
   frames = c(2, 4)
 )
 
@@ -135,7 +136,8 @@ cleanEx()
 nameEx("read_tif")
 ### * read_tif
 
-flush(stderr()); flush(stdout())
+flush(stderr())
+flush(stdout())
 
 ### Name: read_tif
 ### Title: Read an image stored in the TIFF format
@@ -144,11 +146,6 @@ flush(stderr()); flush(stdout())
 ### ** Examples
 
 img <- read_tif(system.file("img", "Rlogo.tif", package = "ijtiff"))
-img <- read_tif(system.file("img", "2ch_ij.tif", package = "ijtiff"))
-str(img) # we see that `ijtiff` correctly recognises this image's 2 channels
-img <- read_tif(system.file("img", "2ch_ij.tif", package = "ijtiff"),
-  frames = c(1, 3)
-)
 
 
 
@@ -156,11 +153,13 @@ cleanEx()
 nameEx("text-image-io")
 ### * text-image-io
 
-flush(stderr()); flush(stdout())
+flush(stderr())
+flush(stdout())
 
 ### Name: text-image-io
 ### Title: Read/write an image array to/from disk as text file(s).
-### Aliases: text-image-io write_txt_img read_txt_img
+### Aliases: text-image-io write_txt_img read_txt_img txt_img_write
+###   txt_img_read
 
 ### ** Examples
 
@@ -177,7 +176,8 @@ cleanEx()
 nameEx("tif_tags_reference")
 ### * tif_tags_reference
 
-flush(stderr()); flush(stdout())
+flush(stderr())
+flush(stdout())
 
 ### Name: tif_tags_reference
 ### Title: TIFF tag reference.
@@ -193,14 +193,14 @@ cleanEx()
 nameEx("write_tif")
 ### * write_tif
 
-flush(stderr()); flush(stdout())
+flush(stderr())
+flush(stdout())
 
 ### Name: write_tif
 ### Title: Write images in TIFF format
-### Aliases: write_tif
+### Aliases: write_tif tif_write
 
 ### ** Examples
-
 
 img <- read_tif(system.file("img", "Rlogo.tif", package = "ijtiff"))
 temp_dir <- tempdir()
@@ -215,11 +215,11 @@ list.files(temp_dir, pattern = "tif$")
 ###
 cleanEx()
 options(digits = 7L)
-base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = "CheckExEnv"), "\n")
 grDevices::dev.off()
 ###
 ### Local variables: ***
 ### mode: outline-minor ***
 ### outline-regexp: "\\(> \\)?### [*]+" ***
 ### End: ***
-quit('no')
+quit("no")

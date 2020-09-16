@@ -1,4 +1,4 @@
 library(testthat)
 library(nandb)
 
-test_check("nandb")
+if (!nandb:::win32bit()) test_check("nandb")

@@ -15,10 +15,10 @@ str_trim_anything(string, pattern, side = "both")
 \item{pattern}{The pattern to look for.
 
 The default interpretation is a regular expression, as described in
-\link[stringi:stringi-search-regex]{stringi::stringi-search-regex}.
+\link[stringi:about_search_regex]{stringi::stringi-search-regex}.
 
 To match a without regular expression (i.e. as a human would), use
-\link[stringr:coll]{coll()}. For details see \code{\link[stringr:regex]{stringr::regex()}}.}
+\link[stringr:modifiers]{coll()}. For details see \code{\link[stringr:modifiers]{stringr::regex()}}.}
 
 \item{side}{Which side do you want to trim from? \code{"both"} is the
 default, but you can also have just either \code{"left"} or \code{"right"}

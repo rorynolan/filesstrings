@@ -21,77 +21,215 @@
 \alias{str_last_number_after_last}
 \title{Find the \code{n}th number after the \code{m}th occurrence of a pattern.}
 \usage{
-nth_number_after_mth(string, pattern, n, m, decimals = FALSE,
-  leading_decimals = decimals, negs = FALSE, sci = FALSE,
-  commas = FALSE, leave_as_string = FALSE)
+nth_number_after_mth(
+  string,
+  pattern,
+  n,
+  m,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE,
+  leave_as_string = FALSE
+)
 
-str_nth_number_after_mth(string, pattern, n, m, decimals = FALSE,
-  leading_decimals = decimals, negs = FALSE, sci = FALSE,
-  commas = FALSE, leave_as_string = FALSE)
+str_nth_number_after_mth(
+  string,
+  pattern,
+  n,
+  m,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE,
+  leave_as_string = FALSE
+)
 
-nth_number_after_first(string, pattern, n, decimals = FALSE,
-  leading_decimals = decimals, negs = FALSE, sci = FALSE,
-  commas = FALSE, leave_as_string = FALSE)
+nth_number_after_first(
+  string,
+  pattern,
+  n,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE,
+  leave_as_string = FALSE
+)
 
-nth_number_after_last(string, pattern, n, decimals = FALSE,
-  leading_decimals = decimals, negs = FALSE, sci = FALSE,
-  commas = FALSE, leave_as_string = FALSE)
+nth_number_after_last(
+  string,
+  pattern,
+  n,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE,
+  leave_as_string = FALSE
+)
 
-first_number_after_mth(string, pattern, m, decimals = FALSE,
-  leading_decimals = decimals, negs = FALSE, sci = FALSE,
-  commas = FALSE, leave_as_string = FALSE)
+first_number_after_mth(
+  string,
+  pattern,
+  m,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE,
+  leave_as_string = FALSE
+)
 
-last_number_after_mth(string, pattern, m, decimals = FALSE,
-  leading_decimals = decimals, negs = FALSE, sci = FALSE,
-  commas = FALSE, leave_as_string = FALSE)
+last_number_after_mth(
+  string,
+  pattern,
+  m,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE,
+  leave_as_string = FALSE
+)
 
-first_number_after_first(string, pattern, decimals = FALSE,
-  leading_decimals = decimals, negs = FALSE, sci = FALSE,
-  commas = FALSE, leave_as_string = FALSE)
+first_number_after_first(
+  string,
+  pattern,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE,
+  leave_as_string = FALSE
+)
 
-first_number_after_last(string, pattern, decimals = FALSE,
-  leading_decimals = decimals, negs = FALSE, sci = FALSE,
-  commas = FALSE, leave_as_string = FALSE)
+first_number_after_last(
+  string,
+  pattern,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE,
+  leave_as_string = FALSE
+)
 
-last_number_after_first(string, pattern, decimals = FALSE,
-  leading_decimals = decimals, negs = FALSE, sci = FALSE,
-  commas = FALSE, leave_as_string = FALSE)
+last_number_after_first(
+  string,
+  pattern,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE,
+  leave_as_string = FALSE
+)
 
-last_number_after_last(string, pattern, decimals = FALSE,
-  leading_decimals = decimals, negs = FALSE, sci = FALSE,
-  commas = FALSE, leave_as_string = FALSE)
+last_number_after_last(
+  string,
+  pattern,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE,
+  leave_as_string = FALSE
+)
 
-str_nth_number_after_first(string, pattern, n, decimals = FALSE,
-  leading_decimals = decimals, negs = FALSE, sci = FALSE,
-  commas = FALSE, leave_as_string = FALSE)
+str_nth_number_after_first(
+  string,
+  pattern,
+  n,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE,
+  leave_as_string = FALSE
+)
 
-str_nth_number_after_last(string, pattern, n, decimals = FALSE,
-  leading_decimals = decimals, negs = FALSE, sci = FALSE,
-  commas = FALSE, leave_as_string = FALSE)
+str_nth_number_after_last(
+  string,
+  pattern,
+  n,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE,
+  leave_as_string = FALSE
+)
 
-str_first_number_after_mth(string, pattern, m, decimals = FALSE,
-  leading_decimals = decimals, negs = FALSE, sci = FALSE,
-  commas = FALSE, leave_as_string = FALSE)
+str_first_number_after_mth(
+  string,
+  pattern,
+  m,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE,
+  leave_as_string = FALSE
+)
 
-str_last_number_after_mth(string, pattern, m, decimals = FALSE,
-  leading_decimals = decimals, negs = FALSE, sci = FALSE,
-  commas = FALSE, leave_as_string = FALSE)
+str_last_number_after_mth(
+  string,
+  pattern,
+  m,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE,
+  leave_as_string = FALSE
+)
 
-str_first_number_after_first(string, pattern, decimals = FALSE,
-  leading_decimals = decimals, negs = FALSE, sci = FALSE,
-  commas = FALSE, leave_as_string = FALSE)
+str_first_number_after_first(
+  string,
+  pattern,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE,
+  leave_as_string = FALSE
+)
 
-str_first_number_after_last(string, pattern, decimals = FALSE,
-  leading_decimals = decimals, negs = FALSE, sci = FALSE,
-  commas = FALSE, leave_as_string = FALSE)
+str_first_number_after_last(
+  string,
+  pattern,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE,
+  leave_as_string = FALSE
+)
 
-str_last_number_after_first(string, pattern, decimals = FALSE,
-  leading_decimals = decimals, negs = FALSE, sci = FALSE,
-  commas = FALSE, leave_as_string = FALSE)
+str_last_number_after_first(
+  string,
+  pattern,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE,
+  leave_as_string = FALSE
+)
 
-str_last_number_after_last(string, pattern, decimals = FALSE,
-  leading_decimals = decimals, negs = FALSE, sci = FALSE,
-  commas = FALSE, leave_as_string = FALSE)
+str_last_number_after_last(
+  string,
+  pattern,
+  decimals = FALSE,
+  leading_decimals = decimals,
+  negs = FALSE,
+  sci = FALSE,
+  commas = FALSE,
+  leave_as_string = FALSE
+)
 }
 \arguments{
 \item{string}{A character vector.}
@@ -99,10 +237,10 @@ str_last_number_after_last(string, pattern, decimals = FALSE,
 \item{pattern}{The pattern to look for.
 
 The default interpretation is a regular expression, as described in
-\link[stringi:stringi-search-regex]{stringi::stringi-search-regex}.
+\link[stringi:about_search_regex]{stringi::stringi-search-regex}.
 
 To match a without regular expression (i.e. as a human would), use
-\link[stringr:coll]{coll()}. For details see \code{\link[stringr:regex]{stringr::regex()}}.}
+\link[stringr:modifiers]{coll()}. For details see \code{\link[stringr:modifiers]{stringr::regex()}}.}
 
 \item{n}{Vectors of integerish values. Must be either length 1 or have
 length equal to the length of \code{string}. Negative indices count from the

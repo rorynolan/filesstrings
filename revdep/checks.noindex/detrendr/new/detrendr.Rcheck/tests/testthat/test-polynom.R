@@ -1,4 +1,5 @@
 test_that("poly_fits works", {
+  skip_on_cran()
   expect_error(poly_fit_pillars(array(3, dim = rep(3, 3)), 9), "too short")
   m <- matrix(1:4, nrow = 2)
   expect_error(poly_fit_cols(m, 9), "too short")

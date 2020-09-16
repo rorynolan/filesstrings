@@ -10,7 +10,8 @@
 #' @examples
 #' \dontrun{
 #' create_dir(c("mydir", "yourdir"))
-#' remove_dir(c("mydir", "yourdir"))}
+#' remove_dir(c("mydir", "yourdir"))
+#' }
 #' @export
 create_dir <- function(...) {
   dirs <- unique(unlist(...))
@@ -57,19 +58,22 @@ create_dir <- function(...) {
 #' @examples
 #' \dontrun{
 #' sapply(c("mydir1", "mydir2"), dir.create)
-#' remove_dir(c("mydir1", "mydir2"))}
+#' remove_dir(c("mydir1", "mydir2"))
+#' }
 #' @export
 remove_dir <- function(...) {
   dirs <- unlist(list(...))
   exist <- dir.exists(dirs)
   outcome <- !as.logical(vapply(dirs, unlink, integer(1), recursive = TRUE))
   outcome[!exist] <- FALSE
-  outcome %>% {
-    paste(
-      sum(.), ifelse(sum(.) == 1, "directory", "directories"),
-      "deleted.", sum(!.), "failed to delete."
-    )
-  } %>% message()
+  outcome %>%
+    {
+      paste(
+        sum(.), ifelse(sum(.) == 1, "directory", "directories"),
+        "deleted.", sum(!.), "failed to delete."
+      )
+    } %>%
+    message()
   invisible(outcome)
 }
 
@@ -89,7 +93,6 @@ dir.remove <- remove_dir
 #'
 #' @examples
 #' get_new_home("a", "b")
-#'
 #' @noRd
 get_new_home <- function(file, destination) {
   # This function does not move any files, it helps `move_files()` which does
@@ -125,7 +128,8 @@ get_new_home <- function(file, destination) {
 #' dir.create("dir")
 #' files <- c("1litres_1.txt", "1litres_30.txt", "3litres_5.txt")
 #' file.create(files)
-#' file.move(files, "dir")}
+#' file.move(files, "dir")
+#' }
 #' @export
 move_files <- function(files, destinations, overwrite = FALSE) {
   checkmate::assert_character(files)
@@ -231,7 +235,8 @@ file.move <- move_files
 #' nice_file_nums()
 #' nice_file_nums(pattern = "\\.txt$")
 #' setwd("..")
-#' dir.remove("NiceFileNums_test")}
+#' dir.remove("NiceFileNums_test")
+#' }
 #' @export
 nice_file_nums <- function(dir = ".", pattern = NA) {
   checkmate::assert_directory_exists(dir)
@@ -271,7 +276,8 @@ nice_file_nums <- function(dir = ".", pattern = NA) {
 #' remove_filename_spaces()
 #' list.files()
 #' setwd("..")
-#' dir.remove("RemoveFileNameSpaces_test")}
+#' dir.remove("RemoveFileNameSpaces_test")
+#' }
 #' @export
 remove_filename_spaces <- function(dir = ".", pattern = "", replacement = "") {
   checkmate::assert_directory_exists(dir)
@@ -323,7 +329,8 @@ remove_filename_spaces <- function(dir = ".", pattern = "", replacement = "") {
 #' rename_with_nums()
 #' list.files()
 #' setwd("..")
-#' dir.remove("RenameWithNums_test")}
+#' dir.remove("RenameWithNums_test")
+#' }
 #' @export
 rename_with_nums <- function(dir = ".", pattern = NULL) {
   checkmate::assert_directory_exists(dir)
@@ -357,16 +364,16 @@ rename_with_nums <- function(dir = ".", pattern = NULL) {
 #' on. This function does this, but not just for the unit "min", for any unit.
 #'
 #' This function takes the number to be the last number (as defined in
-#' [nth_number()]) before the first occurrence of the unit name. There
-#' is the option to only treat files matching a certain pattern.
+#' [nth_number()]) before the first occurrence of the unit name. There is the
+#' option to only treat files matching a certain pattern.
 #'
 #' @param unit The unit upon which to base the categorizing.
 #' @param pattern If set, only files with names matching this pattern will be
 #'   treated.
-#' @param dir In which directory do you want to perform this action (defaults
-#'   to current)?
-#' @return Invisibly `TRUE` if the operation is successful, if not there will be an
-#'   error.
+#' @param dir In which directory do you want to perform this action (defaults to
+#'   current)?
+#' @return Invisibly `TRUE` if the operation is successful, if not there will be
+#'   an error.
 #' @examples
 #' \dontrun{
 #' dir.create("UnitDirs_test")
@@ -375,7 +382,8 @@ rename_with_nums <- function(dir = ".", pattern = NULL) {
 #' file.create(files)
 #' unitize_dirs("litres", "\\.txt")
 #' setwd("..")
-#' dir.remove("UnitDirs_test")}
+#' dir.remove("UnitDirs_test")
+#' }
 #' @export
 unitize_dirs <- function(unit, pattern = NULL, dir = ".") {
   checkmate::assert_directory_exists(dir)

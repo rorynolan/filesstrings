@@ -23,5 +23,6 @@ Delete directories and all of their contents.
 \examples{
 \dontrun{
 sapply(c("mydir1", "mydir2"), dir.create)
-remove_dir(c("mydir1", "mydir2"))}
+remove_dir(c("mydir1", "mydir2"))
+}
 }

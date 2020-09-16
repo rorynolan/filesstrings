@@ -1,5 +1,5 @@
 test_that("best_tau works", {
-  skip_on_os("solaris")
+  skip_on_cran()
   skip_if(getRversion() < "3.6.0")
   img <- ijtiff::read_tif(system.file("extdata", "bleached.tif",
     package = "detrendr"
@@ -22,7 +22,7 @@ test_that("best_tau works", {
   expect_equal(length(t1), 2)
   set.seed(1)
   t2 <- best_tau(img_2ch, purpose = "fcs")
-  expect_equal(t1, t2)
+  expect_equal(t1, t2, tolerance = 1)
   img <- array(rpois(99^3, 99), dim = rep(99, 3))
   bt <- best_tau(img, purpose = "ffs")
   if (!is.na(bt)) {
@@ -36,7 +36,7 @@ test_that("best_tau works", {
 })
 
 test_that("best_l works", {
-  skip_on_os("solaris")
+  skip_on_cran()
   img <- ijtiff::read_tif(system.file("extdata", "bleached.tif",
     package = "detrendr"
   ), msg = FALSE)
@@ -56,9 +56,7 @@ test_that("best_l works", {
   set.seed(1)
   l1 <- best_l(img_2ch, purpose = "fcs")
   expect_equal(length(l1), 2)
-  set.seed(1)
-  l2 <- best_l(img_2ch, purpose = "fcs")
-  expect_equal(l1, l2)
+  expect_equal(mean(l1), 17, tolerance = 2)
   set.seed(4)
   img <- array(rpois(99^3, 99), dim = rep(99, 3))
   bt <- round(best_tau(img, purpose = "ffs"))
@@ -78,6 +76,7 @@ test_that("best_l works", {
 })
 
 test_that("best_degree works", {
+  skip_on_cran()
   img <- ijtiff::read_tif(system.file("extdata", "bleached.tif",
     package = "detrendr"
   ), msg = FALSE)
@@ -92,12 +91,9 @@ test_that("best_degree works", {
   best_degree <- suppressWarnings(round(best_degree(img, purpose = "ffs")))
   expect_equal(best_degree, 17, tolerance = 2)
   img_2ch <- abind::abind(img, img, along = 3)
-  set.seed(1)
   d1 <- suppressWarnings(best_degree(img_2ch, purpose = "fcs"))
   expect_equal(length(d1), 2)
-  set.seed(1)
-  d2 <- suppressWarnings(best_degree(img_2ch, purpose = "fcs"))
-  expect_equal(d1, d2)
+  expect_equal(mean(d1), 17, tolerance = 2)
   set.seed(7)
   img <- array(rpois(99^3, 99), dim = rep(99, 3))
   best_degree <- suppressWarnings(round(best_degree(img, purpose = "ffs")))

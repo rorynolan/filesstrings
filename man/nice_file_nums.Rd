@@ -42,5 +42,6 @@ file.create(files)
 nice_file_nums()
 nice_file_nums(pattern = "\\\\.txt$")
 setwd("..")
-dir.remove("NiceFileNums_test")}
+dir.remove("NiceFileNums_test")
+}
 }

@@ -29,5 +29,6 @@ file.create(files)
 rename_with_nums()
 list.files()
 setwd("..")
-dir.remove("RenameWithNums_test")}
+dir.remove("RenameWithNums_test")
+}
 }

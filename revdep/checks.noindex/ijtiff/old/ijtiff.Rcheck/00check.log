@@ -1,11 +1,11 @@
 * using log directory ‘/Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/checks.noindex/ijtiff/old/ijtiff.Rcheck’
-* using R version 3.6.0 (2019-04-26)
-* using platform: x86_64-apple-darwin15.6.0 (64-bit)
+* using R version 4.0.2 (2020-06-22)
+* using platform: x86_64-apple-darwin17.0 (64-bit)
 * using session charset: UTF-8
 * using options ‘--no-manual --no-build-vignettes’
 * checking for file ‘ijtiff/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘ijtiff’ version ‘2.0.0’
+* this is package ‘ijtiff’ version ‘2.2.0’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -50,6 +50,7 @@
 * checking compilation flags in Makevars ... OK
 * checking for GNU extensions in Makefiles ... OK
 * checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
+* checking use of PKG_*FLAGS in Makefiles ... OK
 * checking compiled code ... OK
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
@@ -62,6 +63,9 @@
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
 * checking running R code from vignettes ... NONE
+  ‘reading-and-writing-images.Rmd’ using ‘UTF-8’... OK
+  ‘text-images.Rmd’ using ‘UTF-8’... OK
+  ‘the-imagej-problem.Rmd’ using ‘UTF-8’... OK
 * checking re-building of vignette outputs ... SKIPPED
 * DONE
 Status: OK

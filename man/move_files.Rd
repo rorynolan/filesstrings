@@ -39,5 +39,6 @@ first created and then the files are put inside.
 dir.create("dir")
 files <- c("1litres_1.txt", "1litres_30.txt", "3litres_5.txt")
 file.create(files)
-file.move(files, "dir")}
+file.move(files, "dir")
+}
 }

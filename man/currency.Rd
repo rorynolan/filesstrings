@@ -37,5 +37,5 @@ the back: while \code{n = 1} and \code{n = 2} correspond to first and second, \c
 \code{NA}.}
 }
 \description{
-See \code{\link[strex:str_extract_currencies]{strex::str_extract_currencies()}}.
+See \code{\link[strex:currency]{strex::str_extract_currencies()}}.
 }

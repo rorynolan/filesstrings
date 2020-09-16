@@ -1,23 +1,20 @@
 test_that("Package 2-channel example I/O works", {
   set.seed(1)
-  img <- read_tif(system.file("img", "2ch_ij.tif", package = "ijtiff"))
-  expect_equal(dim(img), c(15, 6, 2, 5))
-  img <- read_tif(system.file("img", "Rlogo-banana-red_green.tif",
+  img0 <- read_tif(test_path("testthat-figs", "2ch_ij.tif"))
+  expect_equal(dim(img0), c(15, 6, 2, 5))
+  img1 <- read_tif(system.file("img", "Rlogo-banana-red_green.tif",
     package = "ijtiff"
   ))
-  expect_equal(dim(img), c(155, 200, 2, 3))
-  img <- read_tif(system.file("img", "Rlogo-banana-1-2.tif",
-    package = "ijtiff"
-  ))
-  expect_equal(dim(img), c(155, 200, 3, 2))
-  img <- read_tif(system.file("img", "Rlogo-banana-red_green_blue.tif",
-    package = "ijtiff"
-  ))
-  expect_equal(dim(img), c(155, 200, 3, 2))
-  img <- read_tif(system.file("img", "Rlogo-banana-red.tif",
-    package = "ijtiff"
-  ))
-  expect_equal(dim(img), c(155, 200, 1, 2))
+  expect_equal(dim(img1), c(155, 200, 2, 2))
+  img2 <- read_tif(test_path("testthat-figs", "Rlogo-banana-1-2.tif"))
+  expect_equal(dim(img2), c(155, 200, 3, 2))
+  img3 <- read_tif(
+    test_path("testthat-figs", "Rlogo-banana-red_green_blue.tif")
+  )
+  expect_equal(dim(img3), c(155, 200, 3, 2))
+  img4 <- read_tif(test_path("testthat-figs", "Rlogo-banana-red.tif"))
+  expect_equal(dim(img4), c(155, 200, 1, 2))
+  expect_equal(img3[, , 1, 1], img4[, , 1, 1])
   v22 <- c(2, 2, 1, 1)
   a22 <- array(seq_len(prod(v22)), dim = v22)
   tmptif <- tempfile(fileext = ".tif") %>%
@@ -75,7 +72,7 @@ test_that("16-bit unsigned integer TIFF I/O works", {
   a6789 <- array(sample.int(prod(v6789)), dim = v6789)
   tmptif <- tempfile(fileext = ".tif") %>%
     stringr::str_replace_all(stringr::coll("\\"), "/")
-  write_tif(a6789, tmptif)
+  tif_write(a6789, tmptif)
   in_tif <- read_tif(tmptif)
   expect_equal(dim(in_tif), v6789)
   expect_equal(as.vector(in_tif), as.vector(a6789), check.attributes = FALSE)
@@ -151,11 +148,12 @@ test_that("TIFFErrorHandler_ works", {
   tmptxt <- tempfile(fileext = ".txt") %>%
     stringr::str_replace_all(stringr::coll("\\"), "/")
   writeLines(c("a", "b"), tmptxt)
-  expect_error(suppressWarnings(read_tif(tmptxt)), "Cannot read TIFF header")
+  expect_error(suppressWarnings(tif_read(tmptxt)), "Cannot read TIFF header")
 })
 
 test_that("write_tif() errors correctly", {
   aaaa <- array(0, dim = rep(4, 4))
+  expect_error(tif_write(aaaa, "path/"), "path.+cannot end with.+/")
   expect_error(
     write_tif(aaaa, "a", bits_per_sample = "abc"),
     paste0(
@@ -173,7 +171,7 @@ test_that("write_tif() errors correctly", {
       "    \\* You have used `bits_per_sample = 12`\\..?"
     )
   )
-  aaaa[1] <- -2 * float_max()
+  aaaa[1] <- -2 * .Call("float_max_C", PACKAGE = "ijtiff")
   expect_error(
     write_tif(aaaa, "a"),
     paste(
@@ -187,7 +185,7 @@ test_that("write_tif() errors correctly", {
     fixed = TRUE
   )
   aaaa[1] <- -1
-  aaaa[2] <- 2 * float_max()
+  aaaa[2] <- 2 * .Call("float_max_C", PACKAGE = "ijtiff")
   expect_error(
     write_tif(aaaa, "a"),
     paste(
@@ -240,7 +238,7 @@ test_that("write_tif() errors correctly", {
     fixed = TRUE
   )
   expect_error(
-    read_tif(system.file("img", "bad_ij1.tif", package = "ijtiff")),
+    read_tif(test_path("testthat-figs", "bad_ij1.tif")),
     paste(
       " The ImageJ-written image you're trying to read",
       "says in its TIFFTAG_DESCRIPTION that it has 13",
@@ -256,14 +254,15 @@ test_that("write_tif() errors correctly", {
     fixed = TRUE
   )
   expect_error(
-    read_tif(system.file("img", "bad_ij2.tif", package = "ijtiff")),
+    read_tif(test_path("testthat-figs", "bad_ij2.tif")),
     paste(
       " The ImageJ-written image you're trying to read",
       "says it has 8 frames AND 5 slices. \n    * To be",
       "read by the `ijtiff` package, the number of",
       "slices OR the number of frames should be",
-      "specified in the TIFFTAG_DESCRIPTION (they're",
-      "interpreted as the same thing), but not both."
+      "specified in the TIFFTAG_DESCRIPTION and they're",
+      "interpreted as the same thing. It does not make",
+      "sense for them to be different numbers."
     ),
     fixed = TRUE
   )
@@ -274,16 +273,19 @@ test_that("text-image-io works", {
   dim(mm) %<>% c(1, 1)
   tmpfl <- tempfile() %>%
     stringr::str_replace_all(stringr::coll("\\"), "/")
-  write_txt_img(mm, tmpfl)
+  txt_img_write(mm, tmpfl)
   tmpfl_txt <- filesstrings::give_ext(tmpfl, "txt")
   expect_true(file.exists(tmpfl_txt))
-  expect_equal(as.vector(mm), unlist(read_txt_img(tmpfl_txt)),
+  expect_equal(as.vector(mm), unlist(txt_img_read(tmpfl_txt)),
     check.attributes = FALSE
   )
   file.remove(tmpfl_txt)
   skip_if_not_installed("abind")
   mmm <- abind::abind(mm, mm, along = 3)
-  write_txt_img(mmm, tmpfl, rds = TRUE)
+  expect_message(
+    write_txt_img(mmm, tmpfl, rds = TRUE),
+    "_ch1.txt and .+_ch2.txt"
+  )
   expect_equal(readRDS(filesstrings::give_ext(tmpfl, "rds")), ijtiff_img(mmm))
   tmpfl_txts <- paste0(tmpfl, "_ch", 1:2, ".txt")
   expect_equal(dir(filesstrings::str_before_last(tmpfl, "/"),
@@ -321,7 +323,7 @@ test_that("text-image-io works", {
   )
   bad_txt_img <- dplyr::tribble(
     ~col1, ~col2,
-    1, 5,
+    1, "5",
     8, "y"
   )
   tmpfl <- tempfile(fileext = ".txt")
@@ -338,7 +340,7 @@ test_that("text-image-io works", {
 })
 
 test_that("reading certain frames works", {
-  path <- system.file("img", "2ch_ij.tif", package = "ijtiff")
+  path <- test_path("testthat-figs", "2ch_ij.tif")
   img <- read_tif(path, "A")
   img12 <- read_tif(path, frames = 1:2)
   img34 <- read_tif(path, frames = 3:4)
@@ -389,4 +391,11 @@ test_that("reading certain frames works", {
     ),
     fixed = TRUE
   )
+})
+
+test_that("Reading Mathieu's file works", {
+  i2 <- read_tif(test_path("testthat-figs", "image2.tif"))
+  expect_equal(dim(i2), c(200, 200, 6, 1))
+  expect_equal(dim(attr(i2, "color_map")), c(256, 3))
+  expect_equal(colnames(attr(i2, "color_map")), c("red", "green", "blue"))
 })

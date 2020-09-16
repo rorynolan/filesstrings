@@ -1,7 +1,7 @@
 
-R version 3.6.0 (2019-04-26) -- "Planting of a Tree"
-Copyright (C) 2019 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin15.6.0 (64-bit)
+R version 4.0.2 (2020-06-22) -- "Taking Off Again"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin17.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -38,16 +38,27 @@ Type 'q()' to quit R.
 > ### ** Examples
 > 
 > ## Not run: 
-> ##D usethis::create_package(tempdir(check = TRUE), open = FALSE)
-> ##D file.copy(system.file("extdata", c("detect.R", "match.R"),
-> ##D                       package = "exampletestr"),
-> ##D           paste0(tempdir(), "/R"))
-> ##D make_test_shell_fun("str_detect()", document = TRUE, open = FALSE,
-> ##D                     pkg_dir = tempdir())
-> ##D make_tests_shells_file("detect", document = FALSE, open = FALSE,
-> ##D                        pkg_dir = tempdir())
-> ##D make_tests_shells_pkg(overwrite = TRUE, document = FALSE,
-> ##D                       pkg_dir = tempdir())
+> ##D pkg_dir <- "~/mylilpkg"
+> ##D usethis::create_package(pkg_dir, rstudio = FALSE, open = FALSE)
+> ##D fs::file_copy(
+> ##D   system.file("extdata", c("detect.R", "match.R"),
+> ##D     package = "exampletestr"
+> ##D   ),
+> ##D   paste0(pkg_dir, "/R")
+> ##D )
+> ##D make_test_shell_fun("str_detect()", pkg_dir,
+> ##D   document = TRUE, roxytest = TRUE
+> ##D )
+> ##D make_test_shell_fun("str_detect()", pkg_dir,
+> ##D   document = TRUE, open = FALSE
+> ##D )
+> ##D make_tests_shells_file("detect", pkg_dir,
+> ##D   document = FALSE, open = FALSE
+> ##D )
+> ##D make_tests_shells_pkg(pkg_dir,
+> ##D   overwrite = TRUE, document = FALSE
+> ##D )
+> ##D fs::dir_delete(pkg_dir)
 > ## End(Not run)
 > 
 > 
@@ -58,7 +69,7 @@ Type 'q()' to quit R.
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.314 0.028 0.572 0 0 
+Time elapsed:  0.441 0.032 0.897 0 0 
 > grDevices::dev.off()
 null device 
           1 

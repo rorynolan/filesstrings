@@ -1,7 +1,7 @@
 
-R version 3.6.0 (2019-04-26) -- "Planting of a Tree"
-Copyright (C) 2019 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin15.6.0 (64-bit)
+R version 4.0.2 (2020-06-22) -- "Taking Off Again"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin17.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -18,10 +18,10 @@ Type 'q()' to quit R.
 > library(testthat)
 > library(nandb)
 > 
-> test_check("nandb")
-══ testthat results  ════════════════════════════════════════════════════════════════════════════
-OK: 155 SKIPPED: 0 WARNINGS: 0 FAILED: 0
+> if (!nandb:::win32bit()) test_check("nandb")
+══ testthat results  ═══════════════════════════════════════════════════════════
+[ OK: 155 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 0 ]
 > 
 > proc.time()
    user  system elapsed 
- 51.409  19.134  74.201 
+ 73.805   5.568 113.529 

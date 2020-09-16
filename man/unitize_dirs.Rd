@@ -12,12 +12,12 @@ unitize_dirs(unit, pattern = NULL, dir = ".")
 \item{pattern}{If set, only files with names matching this pattern will be
 treated.}
 
-\item{dir}{In which directory do you want to perform this action (defaults
-to current)?}
+\item{dir}{In which directory do you want to perform this action (defaults to
+current)?}
 }
 \value{
-Invisibly \code{TRUE} if the operation is successful, if not there will be an
-error.
+Invisibly \code{TRUE} if the operation is successful, if not there will be
+an error.
 }
 \description{
 Say you have a number of files with "5min" in their names, number with
@@ -27,8 +27,8 @@ on. This function does this, but not just for the unit "min", for any unit.
 }
 \details{
 This function takes the number to be the last number (as defined in
-\code{\link[=nth_number]{nth_number()}}) before the first occurrence of the unit name. There
-is the option to only treat files matching a certain pattern.
+\code{\link[=nth_number]{nth_number()}}) before the first occurrence of the unit name. There is the
+option to only treat files matching a certain pattern.
 }
 \examples{
 \dontrun{
@@ -38,5 +38,6 @@ files <- c("1litres_1.txt", "1litres_3.txt", "3litres.txt", "5litres_1.txt")
 file.create(files)
 unitize_dirs("litres", "\\\\.txt")
 setwd("..")
-dir.remove("UnitDirs_test")}
+dir.remove("UnitDirs_test")
+}
 }

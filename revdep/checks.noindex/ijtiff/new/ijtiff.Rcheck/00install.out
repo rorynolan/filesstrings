@@ -2,20 +2,15 @@
 ** package ‘ijtiff’ successfully unpacked and MD5 sums checked
 ** using staged installation
 Found pkg-config cflags and libs!
-Using PKG_CFLAGS=-I/usr/local/Cellar/libtiff/4.0.9_4/include
-Using PKG_LIBS=-L/usr/local/Cellar/libtiff/4.0.9_4/lib -ltiff -ljpeg -lz
+Using PKG_CFLAGS=-I/usr/local/Cellar/libtiff/4.1.0/include
+Using PKG_LIBS=-L/usr/local/Cellar/libtiff/4.1.0/lib -ltiff -ljpeg -lz
 ** libs
-clang++ -std=gnu++11 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I/usr/local/Cellar/libtiff/4.0.9_4/include -I"/Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/library.noindex/ijtiff/Rcpp/include" -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include  -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I/usr/local/Cellar/libtiff/4.0.9_4/include -I"/Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/library.noindex/ijtiff/Rcpp/include" -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include  -fPIC  -Wall -g -O2  -c common.c -o common.o
-clang -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I/usr/local/Cellar/libtiff/4.0.9_4/include -I"/Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/library.noindex/ijtiff/Rcpp/include" -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include  -fPIC  -Wall -g -O2  -c read.c -o read.o
-clang++ -std=gnu++11 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I/usr/local/Cellar/libtiff/4.0.9_4/include -I"/Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/library.noindex/ijtiff/Rcpp/include" -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include  -fPIC  -Wall -g -O2  -c utils.cpp -o utils.o
-clang -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I/usr/local/Cellar/libtiff/4.0.9_4/include -I"/Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/library.noindex/ijtiff/Rcpp/include" -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include  -fPIC  -Wall -g -O2  -c write.c -o write.o
-clang++ -std=gnu++11 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Resources/lib -L/usr/local/lib -o ijtiff.so RcppExports.o common.o read.o utils.o write.o -L/usr/local/Cellar/libtiff/4.0.9_4/lib -ltiff -ljpeg -lz -F/Library/Frameworks/R.framework/.. -framework R -Wl,-framework -Wl,CoreFoundation
-ld: warning: object file (RcppExports.o) was built for newer OSX version (10.14) than being linked (10.13)
-ld: warning: object file (common.o) was built for newer OSX version (10.14) than being linked (10.13)
-ld: warning: object file (read.o) was built for newer OSX version (10.14) than being linked (10.13)
-ld: warning: object file (write.o) was built for newer OSX version (10.14) than being linked (10.13)
-ld: warning: object file (utils.o) was built for newer OSX version (10.14) than being linked (10.13)
+clang -mmacosx-version-min=10.13 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I/usr/local/Cellar/libtiff/4.1.0/include  -I/usr/local/include   -fPIC  -Wall -g -O2  -c common.c -o common.o
+clang -mmacosx-version-min=10.13 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I/usr/local/Cellar/libtiff/4.1.0/include  -I/usr/local/include   -fPIC  -Wall -g -O2  -c init.c -o init.o
+clang -mmacosx-version-min=10.13 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I/usr/local/Cellar/libtiff/4.1.0/include  -I/usr/local/include   -fPIC  -Wall -g -O2  -c read.c -o read.o
+clang -mmacosx-version-min=10.13 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I/usr/local/Cellar/libtiff/4.1.0/include  -I/usr/local/include   -fPIC  -Wall -g -O2  -c utils.c -o utils.o
+clang -mmacosx-version-min=10.13 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I/usr/local/Cellar/libtiff/4.1.0/include  -I/usr/local/include   -fPIC  -Wall -g -O2  -c write.c -o write.o
+clang -mmacosx-version-min=10.13 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Resources/lib -L/usr/local/lib -o ijtiff.so common.o init.o read.o utils.o write.o -L/usr/local/Cellar/libtiff/4.1.0/lib -ltiff -ljpeg -lz -F/Library/Frameworks/R.framework/.. -framework R -Wl,-framework -Wl,CoreFoundation
 installing to /Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/checks.noindex/ijtiff/new/ijtiff.Rcheck/00LOCK-ijtiff/00new/ijtiff/libs
 ** R
 ** inst
