@@ -29,7 +29,7 @@ allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.rep
 downloads](http://cranlogs.r-pkg.org/badges/grand-total/filesstrings)
 ![RStudio CRAN monthly
 downloads](http://cranlogs.r-pkg.org/badges/filesstrings)
-[![Rdocumentation](http://www.rdocumentation.org/badges/version/filesstrings)](http://www.rdocumentation.org/packages/filesstrings)
+[![Rdocumentation](https://www.rdocumentation.org/badges/version/filesstrings)](https://www.rdocumentation.org/packages/filesstrings)
 
 [![JOSS
 publication](http://joss.theoj.org/papers/10.21105/joss.00260/status.svg)](https://doi.org/10.21105/joss.00260)
