@@ -1,16 +1,15 @@
 pkgname <- "ijtiff"
 source(file.path(R.home("share"), "R", "examples-header.R"))
 options(warn = 1)
-library("ijtiff")
+library('ijtiff')
 
-base::assign(".oldSearch", base::search(), pos = "CheckExEnv")
-base::assign(".old_wd", base::getwd(), pos = "CheckExEnv")
+base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
 cleanEx()
 nameEx("as_EBImage")
 ### * as_EBImage
 
-flush(stderr())
-flush(stdout())
+flush(stderr()); flush(stdout())
 
 ### Name: as_EBImage
 ### Title: Convert an ijtiff_img to an EBImage::Image.
@@ -28,8 +27,7 @@ cleanEx()
 nameEx("count_frames")
 ### * count_frames
 
-flush(stderr())
-flush(stdout())
+flush(stderr()); flush(stdout())
 
 ### Name: count_frames
 ### Title: Count the number of frames in a TIFF file.
@@ -45,8 +43,7 @@ cleanEx()
 nameEx("display")
 ### * display
 
-flush(stderr())
-flush(stdout())
+flush(stderr()); flush(stdout())
 
 ### Name: display
 ### Title: Basic image display.
@@ -69,8 +66,7 @@ cleanEx()
 nameEx("ijtiff_img")
 ### * ijtiff_img
 
-flush(stderr())
-flush(stdout())
+flush(stderr()); flush(stdout())
 
 ### Name: ijtiff_img
 ### Title: 'ijtiff_img' class.
@@ -93,8 +89,7 @@ cleanEx()
 nameEx("linescan-conversion")
 ### * linescan-conversion
 
-flush(stderr())
-flush(stdout())
+flush(stderr()); flush(stdout())
 
 ### Name: linescan-conversion
 ### Title: Rejig linescan images.
@@ -115,8 +110,7 @@ cleanEx()
 nameEx("read_tags")
 ### * read_tags
 
-flush(stderr())
-flush(stdout())
+flush(stderr()); flush(stdout())
 
 ### Name: read_tags
 ### Title: Read TIFF tag information without actually reading the image
@@ -136,8 +130,7 @@ cleanEx()
 nameEx("read_tif")
 ### * read_tif
 
-flush(stderr())
-flush(stdout())
+flush(stderr()); flush(stdout())
 
 ### Name: read_tif
 ### Title: Read an image stored in the TIFF format
@@ -153,8 +146,7 @@ cleanEx()
 nameEx("text-image-io")
 ### * text-image-io
 
-flush(stderr())
-flush(stdout())
+flush(stderr()); flush(stdout())
 
 ### Name: text-image-io
 ### Title: Read/write an image array to/from disk as text file(s).
@@ -176,8 +168,7 @@ cleanEx()
 nameEx("tif_tags_reference")
 ### * tif_tags_reference
 
-flush(stderr())
-flush(stdout())
+flush(stderr()); flush(stdout())
 
 ### Name: tif_tags_reference
 ### Title: TIFF tag reference.
@@ -193,8 +184,7 @@ cleanEx()
 nameEx("write_tif")
 ### * write_tif
 
-flush(stderr())
-flush(stdout())
+flush(stderr()); flush(stdout())
 
 ### Name: write_tif
 ### Title: Write images in TIFF format
@@ -215,11 +205,11 @@ list.files(temp_dir, pattern = "tif$")
 ###
 cleanEx()
 options(digits = 7L)
-base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = "CheckExEnv"), "\n")
+base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
 grDevices::dev.off()
 ###
 ### Local variables: ***
 ### mode: outline-minor ***
 ### outline-regexp: "\\(> \\)?### [*]+" ***
 ### End: ***
-quit("no")
+quit('no')

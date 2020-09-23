@@ -50,24 +50,48 @@ all_equal <- function(a, b = NULL) {
     checkmate::check_list(b),
     checkmate::check_array(b)
   )
+  if (is.null(b)) {
+    return(alleq1(a))
+  }
+  if (is.array(a) || is.array(b)) {
+    return(alleq_arr(a, b))
+  }
+  if (is.null(a) && (!is.null(b))) {
+    return(FALSE)
+  }
+  if (xor(length(a) == 0, length(b) == 0)) {
+    return(FALSE)
+  }
+  if (length(a) == 1) {
+    a <- rep(a, length(b))
+  }
+  if (length(b) == 1) {
+    b <- rep(b, length(a))
+  }
+  return(isTRUE(all.equal(a, b, check.names = FALSE, check.attributes = FALSE)))
+}
+
+alleq1 <- function(x) {
+  if (rlang::is_atomic(x)) {
+    return(isTRUE(all(x == x[[1]])) || all(is.na(x)))
+  }
+  if (is.list(x)) {
+    x %<>% lapply(function(y) {
+      y %T>% {
+        mostattributes(.) <- NULL
+      }
+    })
+  }
+  return(length(unique(x)) == 1)
+}
+
+alleq_arr <- function(a, b) {
+  checkmate::assert(checkmate::check_array(a), checkmate::check_array(b))
   if (is.array(a) && isTRUE(checkmate::check_scalar(b))) {
     b %<>% array(dim = dim(a))
   }
   if (is.array(b) && isTRUE(checkmate::check_scalar(a))) {
     a %<>% array(dim = dim(b))
-  }
-  if (is.null(b)) {
-    if (rlang::is_atomic(a)) {
-      return(isTRUE(all(a == a[[1]])) || all(is.na(a)))
-    }
-    if (is.list(a)) {
-      a %<>% lapply(function(x) {
-        x %T>% {
-          mostattributes(.) <- NULL
-        }
-      })
-    }
-    return(length(unique(a)) == 1)
   }
   if (is.array(a)) {
     if (!is.array(b)) {
@@ -84,20 +108,5 @@ all_equal <- function(a, b = NULL) {
       return(FALSE)
     }
   }
-  if (is.null(a) && (!is.null(b))) {
-    return(FALSE)
-  }
-  if (length(a) == 1) {
-    if (length(b) == 0) {
-      return(FALSE)
-    }
-    a <- rep(a, length(b))
-  }
-  if (length(b) == 1) {
-    if (length(a) == 0) {
-      return(FALSE)
-    }
-    b <- rep(b, length(a))
-  }
-  return(isTRUE(all.equal(a, b, check.names = FALSE, check.attributes = FALSE)))
+  isTRUE(all.equal(a, b, check.names = FALSE, check.attributes = FALSE))
 }

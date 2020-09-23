@@ -11,6 +11,8 @@ clang -mmacosx-version-min=10.13 -I"/Library/Frameworks/R.framework/Resources/in
 clang -mmacosx-version-min=10.13 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I/usr/local/Cellar/libtiff/4.1.0/include  -I/usr/local/include   -fPIC  -Wall -g -O2  -c utils.c -o utils.o
 clang -mmacosx-version-min=10.13 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I/usr/local/Cellar/libtiff/4.1.0/include  -I/usr/local/include   -fPIC  -Wall -g -O2  -c write.c -o write.o
 clang -mmacosx-version-min=10.13 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Resources/lib -L/usr/local/lib -o ijtiff.so common.o init.o read.o utils.o write.o -L/usr/local/Cellar/libtiff/4.1.0/lib -ltiff -ljpeg -lz -F/Library/Frameworks/R.framework/.. -framework R -Wl,-framework -Wl,CoreFoundation
+ld: warning: ld: warning: dylib (/usr/local/lib/libjpeg.dylib) was built for newer macOS version (10.15) than being linked (10.13)dylib (/usr/local/lib/libtiff.dylib) was built for newer macOS version (10.15) than being linked (10.13)
+
 installing to /Users/rnolan/Dropbox/DPhil/Misc/RStuff/filesstrings/revdep/checks.noindex/ijtiff/new/ijtiff.Rcheck/00LOCK-ijtiff/00new/ijtiff/libs
 ** R
 ** inst

@@ -21,6 +21,5 @@ get_os <- function() {
   tolower(os)
 }
 
-if (get_os() != "mac" || Sys.getenv("NOT_CRAN") == "true") {
+if (get_os() != "mac" || Sys.getenv("NOT_CRAN") == "true")
   test_check("exampletestr")
-}

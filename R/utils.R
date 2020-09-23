@@ -44,3 +44,5 @@ group_close <- function(vec_ascending, max_gap = 1) {
     }
   }
 }
+
+is_l0_char <- function(x) isTRUE(checkmate::check_character(x, max.len = 0))

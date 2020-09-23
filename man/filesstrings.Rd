@@ -7,12 +7,11 @@
 \title{\code{filesstrings}: handy file and string manipulation}
 \description{
 This started out as a package for file and string manipulation. Since then,
-the \code{fs} file manipulation package and the `strex string manipulation package
-emerged, offering functionality previously given by this package (but
+the \code{fs} file manipulation package and the \code{strex} string manipulation
+package emerged, offering functionality previously given by this package (but
 slightly better). Those packages have hence almost pushed 'filesstrings' into
 extinction. However, it still has a small number of unique, handy file
-manipulation functions which can be seen in the
-\href{https://cran.r-project.org/package=filesstrings/vignettes/files.html}{vignette}.
+manipulation functions which can be seen in the \href{https://cran.r-project.org/package=filesstrings/vignettes/files.html}{vignette}..
 One example is a function to remove spaces from all file names in a
 directory.
 }

@@ -132,29 +132,15 @@ get_new_home <- function(file, destination) {
 #' }
 #' @export
 move_files <- function(files, destinations, overwrite = FALSE) {
-  checkmate::assert_character(files)
-  checkmate::assert_character(destinations)
-  checkmate::assert_flag(overwrite)
-  if (is.character(files) && length(files) == 0) {
+  if (is_l0_char(files)) {
     message("0 files moved. 0 failed.")
     return(invisible(logical(0)))
   }
-  checkmate::assert_file_exists(files)
-  checkmate::assert_character(destinations, min.chars = 1)
-  anydup_files <- anyDuplicated(files)
-  if (anydup_files) {
-    stop(
-      "`files` must not have any duplicated elements.", "\n",
-      "    * Element ", anydup_files, " of `files` is a duplicate."
-    )
-  }
-  if (length(destinations) == 1) destinations %<>% rep(length(files))
-  if (length(destinations) != length(files)) {
-    stop(
-      "The number of destinations must be equal to 1 or equal to the ",
-      "number of files to be moved."
-    )
-  }
+  destinations <- argchk_move_files(
+    files = files,
+    destinations = destinations,
+    overwrite = overwrite
+  )$destinations
   n_created_dirs <- sum(suppressMessages(create_dir(destinations)))
   if (n_created_dirs > 0) {
     message(
@@ -163,26 +149,10 @@ move_files <- function(files, destinations, overwrite = FALSE) {
       " created."
     )
   }
-  n_files <- length(files)
-  overwrite_attempt <- FALSE
-  out <- rep(FALSE, n_files)
   new_paths <- get_new_home(files, destinations)
-  for (i in seq_len(n_files)) {
-    if (file.exists(new_paths[i])) {
-      overwrite_attempt <- TRUE
-      if (overwrite) {
-        file.rename(files[i], new_paths[i])
-        if (!file.exists(files[i]) && file.exists(new_paths[i])) {
-          out[i] <- TRUE
-        }
-      }
-    } else {
-      file.rename(files[i], new_paths[i])
-      if (!file.exists(files[i]) && file.exists(new_paths[i])) {
-        out[i] <- TRUE
-      }
-    }
-  }
+  overwrite_attempt <- any(file.exists(new_paths))
+  out <- purrr::map2_lgl(files, new_paths,
+                         ~move_file_basic(.x, .y, overwrite))
   n_succeeded <- sum(out)
   n_failed <- sum(!out)
   message(
@@ -202,6 +172,24 @@ move_files <- function(files, destinations, overwrite = FALSE) {
 #' @rdname move_files
 #' @export
 file.move <- move_files
+
+move_file_basic <- function(file, new_path, overwrite) {
+  out <- FALSE
+  if (file.exists(new_path)) {
+    if (overwrite) {
+      file.rename(file, new_path)
+      if (!file.exists(file) && file.exists(new_path)) {
+        out <- TRUE
+      }
+    }
+  } else {
+    file.rename(file, new_path)
+    if (!file.exists(file) && file.exists(new_path)) {
+      out <- TRUE
+    }
+  }
+  out
+}
 
 #' Make file numbers comply with alphabetical order
 #'

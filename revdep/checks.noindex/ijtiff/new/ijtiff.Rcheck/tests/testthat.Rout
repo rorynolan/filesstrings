@@ -26,7 +26,7 @@ Type 'q()' to quit R.
                                                                                            version 
 "Darwin Kernel Version 19.6.0: Thu Jun 18 20:49:00 PDT 2020; root:xnu-6153.141.1~1/RELEASE_X86_64" 
                                                                                           nodename 
-                                                                                 "Rorys-MBP-8.lan" 
+                                                                       "Rorys-MacBook-Pro-8.local" 
                                                                                            machine 
                                                                                           "x86_64" 
                                                                                              login 
@@ -48,4 +48,4 @@ NULL
 > 
 > proc.time()
    user  system elapsed 
-  6.251   0.550   9.566 
+  6.275   0.587   8.458 

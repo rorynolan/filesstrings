@@ -37,8 +37,8 @@ GithubUsername: r-lib
 GithubRef: master
 GithubSHA1: 6b3f0c6727355a7c4da9bb705f17cb3ac46e898c
 NeedsCompilation: no
-Packaged: 2020-09-16 02:44:50 UTC; rnolan
+Packaged: 2020-09-21 01:29:18 UTC; rnolan
 Author: Gábor Csárdi [aut, cre],
   Brodie Gaslam [ctb]
 Maintainer: Gábor Csárdi <csardi.gabor@gmail.com>
-Built: R 4.0.2; ; 2020-09-16 02:44:50 UTC; unix
+Built: R 4.0.2; ; 2020-09-21 01:29:18 UTC; unix

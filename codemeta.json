@@ -10,7 +10,7 @@
   "codeRepository": "https://github.com/rorynolan/filesstrings",
   "issueTracker": "https://github.com/rorynolan/filesstrings/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "3.1.6",
+  "version": "3.1.7",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -208,6 +208,19 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "purrr",
+      "name": "purrr",
+      "version": ">= 0.3.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=purrr"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "rlang",
       "name": "rlang",
       "version": ">= 0.3.3",
@@ -283,6 +296,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=withr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "zeallot",
+      "name": "zeallot",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=zeallot"
     }
   ],
   "releaseNotes": "https://github.com/rorynolan/filesstrings/blob/master/NEWS.md",
@@ -323,5 +348,5 @@
     }
   ],
   "relatedLink": "https://CRAN.R-project.org/package=filesstrings",
-  "fileSize": "90578.039KB"
+  "fileSize": "52442.636KB"
 }

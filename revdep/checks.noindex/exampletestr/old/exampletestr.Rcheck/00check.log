@@ -49,10 +49,27 @@
 * checking files in ‘vignettes’ ... OK
 * checking examples ... OK
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... OK
+* checking tests ... ERROR
   Running ‘spelling.R’
   Comparing ‘spelling.Rout’ to ‘spelling.Rout.save’ ... OK
   Running ‘testthat.R’
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+  +   tolower(os)
+  + }
+  > 
+  > if (get_os() != "mac" || Sys.getenv("NOT_CRAN") == "true")
+  +   test_check("exampletestr")
+  [31m──[39m [31m1. Failure: `make_tests_shell_fun()` works (@test-functions.R#30) [39m [31m──────────[39m
+  clipr::read_clip(TRUE) not equal to c(...).
+  target is NULL, current is character
+  
+  ══ testthat results  ═══════════════════════════════════════════════════════════
+  [ OK: 27 | SKIPPED: 0 | WARNINGS: 1 | FAILED: 1 ]
+  1. Failure: `make_tests_shell_fun()` works (@test-functions.R#30) 
+  
+  Error: testthat unit tests failed
+  Execution halted
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
 * checking running R code from vignettes ... NONE
@@ -61,4 +78,4 @@
   ‘whole-package.Rmd’ using ‘UTF-8’... OK
 * checking re-building of vignette outputs ... SKIPPED
 * DONE
-Status: OK
+Status: 1 ERROR
