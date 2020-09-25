@@ -151,8 +151,10 @@ move_files <- function(files, destinations, overwrite = FALSE) {
   }
   new_paths <- get_new_home(files, destinations)
   overwrite_attempt <- any(file.exists(new_paths))
-  out <- purrr::map2_lgl(files, new_paths,
-                         ~move_file_basic(.x, .y, overwrite))
+  out <- purrr::map2_lgl(
+    files, new_paths,
+    ~ move_file_basic(.x, .y, overwrite)
+  )
   n_succeeded <- sum(out)
   n_failed <- sum(!out)
   message(

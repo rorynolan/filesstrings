@@ -31,16 +31,11 @@ Depends:
 Imports:
     checkmate (>= 1.9.3),
     magrittr (>= 1.5),
-    matrixStats (>= 0.50.0),
-    ore (>= 1.4.0),
     purrr (>= 0.3.0),
     rlang (>= 0.3.3),
-    strex (>= 1.1.1),
-    stringi (>= 1.3.1),
-    tibble (>= 2.0.1),
-    vctrs (>= 0.2.2),
-    withr (>= 2.1.0),
-    zeallot
+    strex (>= 1.3),
+    stringi (>= 1.5),
+    withr (>= 2.1.0)
 Suggests: 
     covr,
     dplyr,

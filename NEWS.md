@@ -1,7 +1,7 @@
 # `filesstrings` 3.1.7
 
 ## BUG FIXES
-* More readying for `strex` v1.3.0.
+* Post `strex` v1.3.0 release adjustments.
 
 
 # `filesstrings` 3.1.6

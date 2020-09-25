@@ -1,11 +1,7 @@
 #' @import stringr
 #' @importFrom magrittr '%>%' '%<>%' '%T>%'
-#' @importFrom zeallot '%<-%'
-#' @importFrom ore is_ore
-#' @importFrom matrixStats allValue
-#' @importFrom vctrs allow_lossy_cast
 #' @importFrom strex match_arg
-#' @importFrom tibble validate_tibble
+#' @importFrom stringi '%stri$%'
 NULL
 
 ## quiets concerns of R CMD check re: the .'s that appear in pipelines
