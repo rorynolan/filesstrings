@@ -1,7 +1,13 @@
+# `filesstrings` 3.2.0
+
+## BUG FIXES
+* Insist on `strex` >= 1.4 which has improved argument matching.
+
+
 # `filesstrings` 3.1.7
 
 ## BUG FIXES
-* More readying for `strex` v1.3.0.
+* Post `strex` v1.3.0 release adjustments.
 
 
 # `filesstrings` 3.1.6

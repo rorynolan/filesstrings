@@ -56,13 +56,28 @@ GNU make is a SystemRequirements.
 * checking files in ‘vignettes’ ... OK
 * checking examples ... OK
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... OK
+* checking tests ... ERROR
   Running ‘spelling.R’
   Comparing ‘spelling.Rout’ to ‘spelling.Rout.save’ ...9,11d8
 < Potential spelling errors:
 <   WORD       FOUND IN
 < magrittr   NEWS.md:4
   Running ‘testthat.R’
+Running the tests in ‘tests/testthat.R’ failed.
+Complete output:
+  > library(testthat)
+  > library(detrendr)
+  > 
+  > test_check("detrendr")
+  [31m──[39m [31m1. Failure: detrending entire derectories works (@test-dir-detrend.R#127) [39m [31m──[39m
+  any(...) isn't true.
+  
+  ══ testthat results  ═══════════════════════════════════════════════════════════
+  [ OK: 214 | SKIPPED: 8 | WARNINGS: 0 | FAILED: 1 ]
+  1. Failure: detrending entire derectories works (@test-dir-detrend.R#127) 
+  
+  Error: testthat unit tests failed
+  Execution halted
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
 * checking running R code from vignettes ... NONE
@@ -71,4 +86,4 @@ GNU make is a SystemRequirements.
   ‘single-images.Rmd’ using ‘UTF-8’... OK
 * checking re-building of vignette outputs ... SKIPPED
 * DONE
-Status: 1 NOTE
+Status: 1 ERROR, 1 NOTE

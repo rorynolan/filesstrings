@@ -1,7 +1,7 @@
 Type: Package
 Package: filesstrings
 Title: Handy File and String Manipulation
-Version: 3.1.7
+Version: 3.2.0
 Authors@R: 
     c(person(given = "Rory",
              family = "Nolan",
@@ -33,7 +33,7 @@ Imports:
     magrittr (>= 1.5),
     purrr (>= 0.3.0),
     rlang (>= 0.3.3),
-    strex (>= 1.3.1),
+    strex (>= 1.4),
     stringi (>= 1.5),
     withr (>= 2.1.0)
 Suggests: 

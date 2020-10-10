@@ -10,14 +10,16 @@
 |collate  |en_GB.UTF-8                  |
 |ctype    |en_GB.UTF-8                  |
 |tz       |Europe/London                |
-|date     |2020-09-21                   |
+|date     |2020-10-10                   |
 
 # Dependencies
 
-|package      |old   |new        |Δ  |
-|:------------|:-----|:----------|:--|
-|filesstrings |3.1.6 |3.1.7      |*  |
-|crayon       |NA    |1.3.4.9000 |*  |
+|package      |old   |new   |Δ  |
+|:------------|:-----|:-----|:--|
+|filesstrings |3.1.7 |3.1.7 |   |
+|rlang        |NA    |0.4.8 |*  |
+|strex        |1.4.0 |1.4.0 |   |
+|withr        |NA    |2.3.0 |*  |
 
 # Revdeps
 

@@ -56,13 +56,30 @@ GNU make is a SystemRequirements.
 * checking files in ‘vignettes’ ... OK
 * checking examples ... OK
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... OK
+* checking tests ... ERROR
   Running ‘spelling.R’
   Comparing ‘spelling.Rout’ to ‘spelling.Rout.save’ ...9,11d8
 < Potential spelling errors:
 <   WORD       FOUND IN
 < magrittr   NEWS.md:4
   Running ‘testthat.R’
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+  ══ testthat results  ═══════════════════════════════════════════════════════════
+  [ OK: 47 | SKIPPED: 8 | WARNINGS: 0 | FAILED: 16 ]
+  1. Error: best_tau works (@test-best_params.R#4) 
+  2. Error: best_l works (@test-best_params.R#40) 
+  3. Error: best_degree works (@test-best_params.R#80) 
+  4. Error: best_swaps() works (@test-best_params.R#109) 
+  5. Failure: detrended_img works (@test-class-constructors.R#5) 
+  6. Error: detrended_img works (@test-class-constructors.R#14) 
+  7. Error: detrending works (@test-detrend.R#5) 
+  8. Error: detrending errors correctly (@test-detrend.R#172) 
+  9. Error: detrending entire derectories works 
+  1. ...
+  
+  Error: testthat unit tests failed
+  Execution halted
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
 * checking running R code from vignettes ... NONE
@@ -71,4 +88,4 @@ GNU make is a SystemRequirements.
   ‘single-images.Rmd’ using ‘UTF-8’... OK
 * checking re-building of vignette outputs ... SKIPPED
 * DONE
-Status: 1 NOTE
+Status: 1 ERROR, 1 NOTE

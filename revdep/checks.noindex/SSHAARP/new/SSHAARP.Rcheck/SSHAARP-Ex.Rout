@@ -1,0 +1,151 @@
+
+R version 4.0.2 (2020-06-22) -- "Taking Off Again"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin17.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "SSHAARP"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('SSHAARP')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("BLAASD")
+> ### * BLAASD
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: BLAASD
+> ### Title: BLAASD - Build Loci Amino Acid Specific Dataframe
+> ### Aliases: BLAASD
+> 
+> ### ** Examples
+> 
+> #BLAASD with one locus as input
+> 
+> #BLAASD with multiple loci as input
+> 
+> 
+> 
+> cleanEx()
+> nameEx("PALM")
+> ### * PALM
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: PALM
+> ### Title: Population Allele Locating Mapmaker
+> ### Aliases: PALM
+> 
+> ### ** Examples
+> 
+> #example to produce a color frequency heat map where migrant populations are filtered out
+> PALM("DRB1*26F~28E~30Y",filename = solberg_dataset[85:100,], filterMigrant=TRUE)
+Warning in PALM("DRB1*26F~28E~30Y", filename = solberg_dataset[85:100, ],  :
+  DRB1*26F~28E~30Y : No alleles possess this motif
+> #example to produce a greyscale heat map where migrant populations are not filtered out
+> PALM("DRB1*26F~28E~30Y", filename = solberg_dataset[85:100,], color=FALSE, filterMigrant=FALSE)
+Warning in PALM("DRB1*26F~28E~30Y", filename = solberg_dataset[85:100, ],  :
+  DRB1*26F~28E~30Y : No alleles possess this motif
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("checkMotif")
+> ### * checkMotif
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: checkMotif
+> ### Title: Syntactic and semantic validation of HLA amino acid motifs
+> ### Aliases: checkMotif
+> 
+> ### ** Examples
+> 
+> #Example where a motif is formatted correctly
+> 
+> #Example where format is incorrect
+> 
+> #Example where an amino acid position does not exist
+> 
+> 
+> 
+> cleanEx()
+> nameEx("findMotif")
+> ### * findMotif
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: findMotif
+> ### Title: Returns an alignment data frame of alleles that share a specific
+> ###   amino acid motif
+> ### Aliases: findMotif
+> 
+> ### ** Examples
+> 
+> 
+> #example with actual motif
+> 
+> #example with non-existent motif
+> 
+> #extracting names of alleles with user-defined motif
+> findMotif("DRB1*26F~28E~30Y")[,4]
+ [1] "DRB1*03:02:01"    "DRB1*03:02:02"    "DRB1*03:02:03"    "DRB1*03:02:04"   
+ [5] "DRB1*03:03"       "DRB1*03:27"       "DRB1*03:29"       "DRB1*03:38"      
+ [9] "DRB1*03:53"       "DRB1*03:74"       "DRB1*03:88"       "DRB1*03:90"      
+[13] "DRB1*03:102"      "DRB1*03:103"      "DRB1*03:115"      "DRB1*03:119"     
+[17] "DRB1*03:131"      "DRB1*03:154"      "DRB1*03:167"      "DRB1*12:57"      
+[21] "DRB1*13:15"       "DRB1*13:19"       "DRB1*13:26:01"    "DRB1*13:26:02"   
+[25] "DRB1*13:53"       "DRB1*13:57"       "DRB1*13:85"       "DRB1*13:86"      
+[29] "DRB1*13:104"      "DRB1*13:195"      "DRB1*13:198"      "DRB1*13:235"     
+[33] "DRB1*14:02:01:01" "DRB1*14:02:01:02" "DRB1*14:02:02"    "DRB1*14:02:03"   
+[37] "DRB1*14:02:04"    "DRB1*14:02:05"    "DRB1*14:02:06"    "DRB1*14:02:07"   
+[41] "DRB1*14:03:01"    "DRB1*14:03:02"    "DRB1*14:06:01"    "DRB1*14:06:02"   
+[45] "DRB1*14:06:03"    "DRB1*14:06:04"    "DRB1*14:12:01"    "DRB1*14:12:02"   
+[49] "DRB1*14:13"       "DRB1*14:18"       "DRB1*14:19"       "DRB1*14:20"      
+[53] "DRB1*14:24"       "DRB1*14:27:01"    "DRB1*14:27:02"    "DRB1*14:29"      
+[57] "DRB1*14:40"       "DRB1*14:41"       "DRB1*14:46"       "DRB1*14:47"      
+[61] "DRB1*14:48"       "DRB1*14:49"       "DRB1*14:51"       "DRB1*14:52"      
+[65] "DRB1*14:63"       "DRB1*14:67"       "DRB1*14:77"       "DRB1*14:78"      
+[69] "DRB1*14:81"       "DRB1*14:83"       "DRB1*14:85"       "DRB1*14:89"      
+[73] "DRB1*14:94"       "DRB1*14:98"       "DRB1*14:102"      "DRB1*14:106"     
+[77] "DRB1*14:108"      "DRB1*14:109"      "DRB1*14:115"      "DRB1*14:135"     
+[81] "DRB1*14:154"      "DRB1*14:156"      "DRB1*14:159"      "DRB1*14:160"     
+[85] "DRB1*14:165"      "DRB1*14:170"      "DRB1*14:174"      "DRB1*14:176"     
+[89] "DRB1*14:177"      "DRB1*14:181"      "DRB1*14:183"      "DRB1*14:194"     
+[93] "DRB1*14:195N"     "DRB1*14:198"      "DRB1*14:200"      "DRB1*14:209"     
+[97] "DRB1*14:212"      "DRB1*14:218"     
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  5.615 0.413 6.29 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

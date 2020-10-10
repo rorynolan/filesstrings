@@ -50,10 +50,27 @@
 * checking files in ‘vignettes’ ... OK
 * checking examples ... OK
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... OK
+* checking tests ... ERROR
   Running ‘spelling.R’
   Comparing ‘spelling.Rout’ to ‘spelling.Rout.save’ ... OK
   Running ‘testthat.R’
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+  [90m 4. [39mautothresholdr:::translate_fail(3, "s")
+  [90m 5. [39mfilesstrings::match_arg(fail, c("saturate", "zero"), ignore_case = TRUE)
+  [90m 6. [39mstrex:::str_match_arg_basic(...)
+  [90m 7. [39mcheckmate::assert_string(arg_sym, na.ok = TRUE)
+  
+  ══ testthat results  ═══════════════════════════════════════════════════════════
+  [ OK: 0 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 5 ]
+  1. Error: (unknown) (@test_auto_thresh_methods.R#3) 
+  2. Error: mean_stack_thresh works (@test_stack_thresh.R#3) 
+  3. Error: auto_thresh works (@test_thresh.R#4) 
+  4. Error: auto_thresh works with matrices (@test_thresh.R#73) 
+  5. Error: translate_fail works (@test_utils.R#4) 
+  
+  Error: testthat unit tests failed
+  Execution halted
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
 * checking running R code from vignettes ... NONE
@@ -62,4 +79,4 @@
   ‘thresholding-images.Rmd’ using ‘UTF-8’... OK
 * checking re-building of vignette outputs ... SKIPPED
 * DONE
-Status: OK
+Status: 1 ERROR
