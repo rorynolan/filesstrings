@@ -18,7 +18,7 @@ Status](https://travis-ci.org/rorynolan/filesstrings.svg?branch=master)](https:/
 Status](https://ci.appveyor.com/api/projects/status/github/rorynolan/filesstrings?branch=master&svg=true)](https://ci.appveyor.com/project/rorynolan/filesstrings)
 [![codecov](https://codecov.io/gh/rorynolan/filesstrings/branch/master/graph/badge.svg)](https://codecov.io/gh/rorynolan/filesstrings)
 
-[![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
+[![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![Project Status: Inactive – The project has reached a stable, usable
 state but is no longer being actively developed; support/maintenance
 will be provided as time

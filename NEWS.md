@@ -1,8 +1,13 @@
+# `strex` 3.2.2
+
+## BUG FIXES
+* Remove `LazyData` from `DESCRIPTION` (was causing CRAN note).
+
+
 # `filesstrings` 3.2.1
 
 ## BUG FIXES
 * R version 3.5 or greater is needed for `strex` >= 1.4.
-
 
 
 # `filesstrings` 3.2.0
