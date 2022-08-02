@@ -1,4 +1,10 @@
-# `strex` 3.2.2
+# `filesstrings` 3.2.3
+
+## BUG FIXES
+* Insist on bug-fixed `stringi` v1.7.8 and `strex` v1.4.3.
+
+
+# `filesstrings` 3.2.2
 
 ## BUG FIXES
 * Remove `LazyData` from `DESCRIPTION` (was causing CRAN note).
@@ -75,7 +81,7 @@
 
 # `filesstrings` 3.0.1
 
-# BUG FIXES
+## BUG FIXES
 * Depend on latest, least buggy `strex`.
 
 
@@ -95,7 +101,7 @@
 * Insist on `strex` v0.1.1; v0.1.0 didn't pass on mac on CRAN.
 
 
-### `filesstrings` 2.7.0
+# `filesstrings` 2.7.0
 
 ## NEW FEATURES
 * All of the `stringr`-style string manipulation is now done by the `strex` package, which `filesstrings` now depends upon. That was the main functionality of `filesstrings`, so `filesstrings` is going to be more dormant from now on.

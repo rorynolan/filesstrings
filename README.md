@@ -12,11 +12,8 @@ the
 One example is a function to remove spaces from all file names in a
 directory.
 
-[![Travis-CI Build
-Status](https://travis-ci.org/rorynolan/filesstrings.svg?branch=master)](https://travis-ci.org/rorynolan/filesstrings)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/rorynolan/filesstrings?branch=master&svg=true)](https://ci.appveyor.com/project/rorynolan/filesstrings)
-[![codecov](https://codecov.io/gh/rorynolan/filesstrings/branch/master/graph/badge.svg)](https://codecov.io/gh/rorynolan/filesstrings)
+[![R-CMD-check](https://github.com/rorynolan/filesstrings/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rorynolan/filesstrings/actions/workflows/R-CMD-check.yaml)
+[![codecov](https://app.codecov.io/gh/rorynolan/filesstrings/branch/master/graph/badge.svg)](https://app.codecov.io/gh/rorynolan/filesstrings)
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![Project Status: Inactive – The project has reached a stable, usable
@@ -24,12 +21,11 @@ state but is no longer being actively developed; support/maintenance
 will be provided as time
 allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/filesstrings)](https://cran.r-project.org/package=filesstrings)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/filesstrings)](https://cran.r-project.org/package=filesstrings)
 ![RStudio CRAN
 downloads](http://cranlogs.r-pkg.org/badges/grand-total/filesstrings)
 ![RStudio CRAN monthly
 downloads](http://cranlogs.r-pkg.org/badges/filesstrings)
-[![Rdocumentation](https://www.rdocumentation.org/badges/version/filesstrings)](https://www.rdocumentation.org/packages/filesstrings)
 
 [![JOSS
 publication](http://joss.theoj.org/papers/10.21105/joss.00260/status.svg)](https://doi.org/10.21105/joss.00260)

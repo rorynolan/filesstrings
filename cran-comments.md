@@ -1,11 +1,12 @@
 ## Test environments
-* local OS X install, R 4.0.3
-* ubuntu 16.04 (on travis-ci), R 4.0.3
-* Windows Server 2012 (on appveyor), R 4.0.3
-* win-builder (devel and release)
+- local OS X install, R 4.2.1
+- ubuntu 20.04 (on GitHub Actions), R 4.2.1
+- Windows server 2022 (on GitHub Actions), R 4.2.1
+- win-builder (devel and release)
+- rhub::check_for_cran()
 
 ## R CMD check results
-There were no ERRORs, WARNINGs or NOTEs.
+0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
 ## Reverse Dependencies
-There are 5 reverse dependencies. This does not break any of them.
+* There are six reverse dependencies; this update does not break anything.

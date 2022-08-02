@@ -1,18 +1,13 @@
 Type: Package
 Package: filesstrings
 Title: Handy File and String Manipulation
-Version: 3.2.2
-Authors@R: 
-    c(person(given = "Rory",
-             family = "Nolan",
-             role = c("aut", "cre", "cph"),
-             email = "rorynoolan@gmail.com",
-             comment = c(ORCID = "0000-0002-5239-4043")),
-      person(given = "Sergi",
-             family = "Padilla-Parra",
-             role = "ths",
-             email = "spadilla@well.ox.ac.uk",
-             comment = c(ORCID = "0000-0002-8010-9481")))
+Version: 3.2.3
+Authors@R: c(
+    person("Rory", "Nolan", , "rorynoolan@gmail.com", role = c("aut", "cre", "cph"),
+           comment = c(ORCID = "0000-0002-5239-4043")),
+    person("Sergi", "Padilla-Parra", , "spadilla@well.ox.ac.uk", role = "ths",
+           comment = c(ORCID = "0000-0002-8010-9481"))
+  )
 Maintainer: Rory Nolan <rorynoolan@gmail.com>
 Description: This started out as a package for file and string
     manipulation.  Since then, the 'fs' and 'strex' packages emerged,
@@ -33,8 +28,8 @@ Imports:
     magrittr (>= 1.5),
     purrr (>= 0.3.0),
     rlang (>= 0.3.3),
-    strex (>= 1.4.1),
-    stringi (>= 1.4.6),
+    strex (>= 1.4.3),
+    stringi (>= 1.7.8),
     withr (>= 2.1.0)
 Suggests: 
     covr,
@@ -48,4 +43,4 @@ VignetteBuilder:
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.1
