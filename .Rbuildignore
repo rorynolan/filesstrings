@@ -16,3 +16,4 @@
 ^junk$
 ^\.pre-commit-config\.yaml$
 ^\.github$
+^CRAN-SUBMISSION$
