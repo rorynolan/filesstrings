@@ -1,3 +1,9 @@
+# `filesstrings` 3.2.4
+
+## BUG FIXES
+* Insist on bug-fixed `strex` v1.6.0.
+
+
 # `filesstrings` 3.2.3
 
 ## BUG FIXES
