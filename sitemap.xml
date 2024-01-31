@@ -52,9 +52,6 @@
     <loc>/reference/filesstrings.html</loc>
   </url>
   <url>
-    <loc>/reference/give_ext.html</loc>
-  </url>
-  <url>
     <loc>/reference/group_close.html</loc>
   </url>
   <url>
@@ -73,9 +70,6 @@
     <loc>/reference/nice_file_nums.html</loc>
   </url>
   <url>
-    <loc>/reference/nice_nums.html</loc>
-  </url>
-  <url>
     <loc>/reference/nth_number_after_mth.html</loc>
   </url>
   <url>
@@ -91,13 +85,7 @@
     <loc>/reference/remove_filename_spaces.html</loc>
   </url>
   <url>
-    <loc>/reference/remove_quoted.html</loc>
-  </url>
-  <url>
     <loc>/reference/rename_with_nums.html</loc>
-  </url>
-  <url>
-    <loc>/reference/singleize.html</loc>
   </url>
   <url>
     <loc>/reference/str_after_nth.html</loc>
@@ -112,10 +100,22 @@
     <loc>/reference/str_elems.html</loc>
   </url>
   <url>
+    <loc>/reference/str_give_ext.html</loc>
+  </url>
+  <url>
     <loc>/reference/str_locate_nth.html</loc>
   </url>
   <url>
+    <loc>/reference/str_nice_nums.html</loc>
+  </url>
+  <url>
     <loc>/reference/str_paste_elems.html</loc>
+  </url>
+  <url>
+    <loc>/reference/str_remove_quoted.html</loc>
+  </url>
+  <url>
+    <loc>/reference/str_singleize.html</loc>
   </url>
   <url>
     <loc>/reference/str_split_by_nums.html</loc>
@@ -127,7 +127,7 @@
     <loc>/reference/str_to_vec.html</loc>
   </url>
   <url>
-    <loc>/reference/trim_anything.html</loc>
+    <loc>/reference/str_trim_anything.html</loc>
   </url>
   <url>
     <loc>/reference/unitize_dirs.html</loc>
