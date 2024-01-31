@@ -1,11 +1,13 @@
 #' Argument Matching
 #'
-#' See [strex::match_arg()].
+#' Copy of [strex::match_arg()].
 #'
-#' @inheritParams strex::match_arg
+#' @param ... Pass-through to `strex` function.
 #'
 #' @export
-match_arg <- strex::match_arg
+match_arg <- function(...) {
+  strex::match_arg(...)
+}
 
 #' @rdname match_arg
 #' @export

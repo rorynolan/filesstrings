@@ -9,34 +9,21 @@
 \alias{before_last}
 \title{Text before the \code{n}th occurrence of pattern.}
 \usage{
-str_before_nth(string, pattern, n)
+str_before_nth(...)
 
-before_nth(string, pattern, n)
+before_nth(...)
 
-str_before_first(string, pattern)
+str_before_first(...)
 
-before_first(string, pattern)
+before_first(...)
 
-str_before_last(string, pattern)
+str_before_last(...)
 
-before_last(string, pattern)
+before_last(...)
 }
 \arguments{
-\item{string}{A character vector.}
-
-\item{pattern}{The pattern to look for.
-
-The default interpretation is a regular expression, as described in
-\link[stringi:about_search_regex]{stringi::about_search_regex}.
-
-To match a without regular expression (i.e. as a human would), use
-\link[stringr:modifiers]{coll()}. For details see \code{\link[stringr:modifiers]{stringr::regex()}}.}
-
-\item{n}{A vector of integerish values. Must be either length 1 or
-have length equal to the length of \code{string}. Negative indices count from
-the back: while \code{n = 1} and \code{n = 2} correspond to first and second, \code{n = -1} and \code{n = -2} correspond to last and second-last. \code{n = 0} will return
-\code{NA}.}
+\item{...}{Pass-through to \code{strex} function.}
 }
 \description{
-See \code{\link[strex:before-and-after]{strex::str_before_nth()}}.
+Copies of \code{\link[strex:before-and-after]{strex::str_before_nth()}} and friends.
 }

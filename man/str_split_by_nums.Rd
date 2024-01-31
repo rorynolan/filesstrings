@@ -7,61 +7,17 @@
 \alias{str_split_by_numbers}
 \title{Split a string by its numeric characters.}
 \usage{
-str_split_by_nums(
-  string,
-  decimals = FALSE,
-  leading_decimals = FALSE,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE
-)
+str_split_by_nums(...)
 
-split_by_nums(
-  string,
-  decimals = FALSE,
-  leading_decimals = FALSE,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE
-)
+split_by_nums(...)
 
-split_by_numbers(
-  string,
-  decimals = FALSE,
-  leading_decimals = FALSE,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE
-)
+split_by_numbers(...)
 
-str_split_by_numbers(
-  string,
-  decimals = FALSE,
-  leading_decimals = FALSE,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE
-)
+str_split_by_numbers(...)
 }
 \arguments{
-\item{string}{A string.}
-
-\item{decimals}{Do you want to include the possibility of decimal numbers
-(\code{TRUE}) or not (\code{FALSE}, the default).}
-
-\item{leading_decimals}{Do you want to allow a leading decimal point to be
-the start of a number?}
-
-\item{negs}{Do you want to allow negative numbers? Note that double negatives
-are not handled here (see the examples).}
-
-\item{sci}{Make the search aware of scientific notation e.g. 2e3 is the same
-as 2000.}
-
-\item{commas}{Allow comma separators in numbers (i.e. interpret 1,100 as a
-single number (one thousand one hundred) rather than two numbers (one and
-one hundred)).}
+\item{...}{Pass-through to \code{strex} function.}
 }
 \description{
-See \code{\link[strex:str_split_by_numbers]{strex::str_split_by_numbers()}}.
+Copy of \code{\link[strex:str_split_by_numbers]{strex::str_split_by_numbers()}}.
 }

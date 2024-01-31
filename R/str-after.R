@@ -1,27 +1,39 @@
 #' Text after the `n`th occurrence of pattern.
 #'
-#' See [strex::str_after_nth()].
+#' Copies of [strex::str_after_nth()] and friends.
 #'
-#' @inheritParams strex::str_after_nth
+#' @inheritParams match_arg
 #' @export
-str_after_nth <- strex::str_after_nth
+str_after_nth <- function(...){
+  strex::str_after_nth(...)
+}
 
 #' @rdname str_after_nth
 #' @export
-after_nth <- strex::str_after_nth
+after_nth <- function(...){
+  strex::str_after_nth(...)
+}
 
 #' @rdname str_after_nth
 #' @export
-str_after_first <- strex::str_after_first
+str_after_first <- function(...){
+  strex::str_after_first(...)
+}
 
 #' @rdname str_after_nth
 #' @export
-after_first <- strex::str_after_first
+after_first <- function(...){
+  strex::str_after_first(...)
+}
 
 #' @rdname str_after_nth
 #' @export
-str_after_last <- strex::str_after_last
+str_after_last <- function(...){
+  strex::str_after_last(...)
+}
 
 #' @rdname str_after_nth
 #' @export
-after_last <- strex::str_after_last
+after_last <- function(...){
+  strex::str_after_last(...)
+}

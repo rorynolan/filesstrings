@@ -5,36 +5,13 @@
 \alias{str_match_arg}
 \title{Argument Matching}
 \usage{
-match_arg(
-  arg,
-  choices = NULL,
-  index = FALSE,
-  several_ok = FALSE,
-  ignore_case = FALSE
-)
+match_arg(...)
 
-str_match_arg(
-  arg,
-  choices = NULL,
-  index = FALSE,
-  several_ok = FALSE,
-  ignore_case = FALSE
-)
+str_match_arg(...)
 }
 \arguments{
-\item{arg}{A character vector (of length one unless \code{several_ok = TRUE}).}
-
-\item{choices}{A character vector of candidate values.}
-
-\item{index}{Return the index of the match rather than the match itself?}
-
-\item{several_ok}{Allow \code{arg} to have length greater than one to match
-several arguments at once?}
-
-\item{ignore_case}{Ignore case while matching. If this is \code{TRUE}, the
-returned value is the matched element of \code{choices} (with its original
-casing).}
+\item{...}{Pass-through to \code{strex} function.}
 }
 \description{
-See \code{\link[strex:str_match_arg]{strex::match_arg()}}.
+Copy of \code{\link[strex:str_match_arg]{strex::match_arg()}}.
 }

@@ -9,34 +9,21 @@
 \alias{locate_last}
 \title{Get the indices of the \eqn{n}th instance of a pattern.}
 \usage{
-str_locate_nth(string, pattern, n)
+str_locate_nth(...)
 
-locate_nth(string, pattern, n)
+locate_nth(...)
 
-str_locate_first(string, pattern)
+str_locate_first(...)
 
-locate_first(string, pattern)
+locate_first(...)
 
-str_locate_last(string, pattern)
+str_locate_last(...)
 
-locate_last(string, pattern)
+locate_last(...)
 }
 \arguments{
-\item{string}{A character vector.}
-
-\item{pattern}{The pattern to look for.
-
-The default interpretation is a regular expression, as described in
-\link[stringi:about_search_regex]{stringi::about_search_regex}.
-
-To match a without regular expression (i.e. as a human would), use
-\link[stringr:modifiers]{coll()}. For details see \code{\link[stringr:modifiers]{stringr::regex()}}.}
-
-\item{n}{A vector of integerish values. Must be either length 1 or
-have length equal to the length of \code{string}. Negative indices count from
-the back: while \code{n = 1} and \code{n = 2} correspond to first and second, \code{n = -1} and \code{n = -2} correspond to last and second-last. \code{n = 0} will return
-\code{NA}.}
+\item{...}{Pass-through to \code{strex} function.}
 }
 \description{
-See \code{\link[strex:str_locate_nth]{strex::str_locate_nth()}}.
+Copy of \code{\link[strex:str_locate_nth]{strex::str_locate_nth()}}.
 }

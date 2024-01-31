@@ -1,7 +1,7 @@
 Type: Package
 Package: filesstrings
 Title: Handy File and String Manipulation
-Version: 3.2.4
+Version: 3.3.0
 Authors@R: c(
     person("Rory", "Nolan", , "rorynoolan@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0002-5239-4043")),

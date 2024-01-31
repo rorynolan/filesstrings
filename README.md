@@ -13,7 +13,6 @@ One example is a function to remove spaces from all file names in a
 directory.
 
 [![R-CMD-check](https://github.com/rorynolan/filesstrings/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rorynolan/filesstrings/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://app.codecov.io/gh/rorynolan/filesstrings/branch/master/graph/badge.svg)](https://app.codecov.io/gh/rorynolan/filesstrings)
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![Project Status: Inactive – The project has reached a stable, usable

@@ -11,115 +11,25 @@
 \alias{str_last_number}
 \title{Extract numbers from a string.}
 \usage{
-extract_numbers(
-  string,
-  decimals = FALSE,
-  leading_decimals = decimals,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE,
-  leave_as_string = FALSE
-)
+extract_numbers(...)
 
-str_extract_numbers(
-  string,
-  decimals = FALSE,
-  leading_decimals = decimals,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE,
-  leave_as_string = FALSE
-)
+str_extract_numbers(...)
 
-nth_number(
-  string,
-  n,
-  decimals = FALSE,
-  leading_decimals = decimals,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE,
-  leave_as_string = FALSE
-)
+nth_number(...)
 
-str_nth_number(
-  string,
-  n,
-  decimals = FALSE,
-  leading_decimals = decimals,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE,
-  leave_as_string = FALSE
-)
+str_nth_number(...)
 
-first_number(
-  string,
-  decimals = FALSE,
-  leading_decimals = decimals,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE,
-  leave_as_string = FALSE
-)
+first_number(...)
 
-str_first_number(
-  string,
-  decimals = FALSE,
-  leading_decimals = decimals,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE,
-  leave_as_string = FALSE
-)
+str_first_number(...)
 
-last_number(
-  string,
-  decimals = FALSE,
-  leading_decimals = decimals,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE,
-  leave_as_string = FALSE
-)
+last_number(...)
 
-str_last_number(
-  string,
-  decimals = FALSE,
-  leading_decimals = decimals,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE,
-  leave_as_string = FALSE
-)
+str_last_number(...)
 }
 \arguments{
-\item{string}{A string.}
-
-\item{decimals}{Do you want to include the possibility of decimal numbers
-(\code{TRUE}) or not (\code{FALSE}, the default).}
-
-\item{leading_decimals}{Do you want to allow a leading decimal point to be
-the start of a number?}
-
-\item{negs}{Do you want to allow negative numbers? Note that double negatives
-are not handled here (see the examples).}
-
-\item{sci}{Make the search aware of scientific notation e.g. 2e3 is the same
-as 2000.}
-
-\item{commas}{Allow comma separators in numbers (i.e. interpret 1,100 as a
-single number (one thousand one hundred) rather than two numbers (one and
-one hundred)).}
-
-\item{leave_as_string}{Do you want to return the number as a string (\code{TRUE})
-or as numeric (\code{FALSE}, the default)?}
-
-\item{n}{A vector of integerish values. Must be either length 1 or
-have length equal to the length of \code{string}. Negative indices count from
-the back: while \code{n = 1} and \code{n = 2} correspond to first and second, \code{n = -1} and \code{n = -2} correspond to last and second-last. \code{n = 0} will return
-\code{NA}.}
+\item{...}{Pass-through to \code{strex} function.}
 }
 \description{
-See \code{\link[strex:str_extract_numbers]{strex::str_extract_numbers()}}.
+Copies of \code{\link[strex:str_extract_numbers]{strex::str_extract_numbers()}} and friends.
 }

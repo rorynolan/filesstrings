@@ -5,16 +5,13 @@
 \alias{elem}
 \title{Extract a single character from a string, using its index.}
 \usage{
-str_elem(string, index)
+str_elem(...)
 
-elem(string, index)
+elem(...)
 }
 \arguments{
-\item{string}{A character vector.}
-
-\item{index}{An integer. Negative indexing is allowed as in
-\code{\link[stringr:str_sub]{stringr::str_sub()}}.}
+\item{...}{Pass-through to \code{strex} function.}
 }
 \description{
-See \code{\link[strex:str_elem]{strex::str_elem()}}.
+Copy of \code{\link[strex:str_elem]{strex::str_elem()}}.
 }

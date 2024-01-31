@@ -12,29 +12,24 @@
 \alias{last_currency}
 \title{Get the currencies of numbers within a string.}
 \usage{
-str_extract_currencies(string)
+str_extract_currencies(...)
 
-extract_currencies(string)
+extract_currencies(...)
 
-str_nth_currency(string, n)
+str_nth_currency(...)
 
-nth_currency(string, n)
+nth_currency(...)
 
-str_first_currency(string)
+str_first_currency(...)
 
-first_currency(string)
+first_currency(...)
 
-str_last_currency(string)
+str_last_currency(...)
 
-last_currency(string)
+last_currency(...)
 }
 \arguments{
-\item{string}{A character vector.}
-
-\item{n}{A vector of integerish values. Must be either length 1 or
-have length equal to the length of \code{string}. Negative indices count from
-the back: while \code{n = 1} and \code{n = 2} correspond to first and second, \code{n = -1} and \code{n = -2} correspond to last and second-last. \code{n = 0} will return
-\code{NA}.}
+\item{...}{Pass-through to \code{strex} function.}
 }
 \description{
 See \code{\link[strex:currency]{strex::str_extract_currencies()}}.

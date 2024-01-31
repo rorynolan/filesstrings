@@ -21,251 +21,45 @@
 \alias{str_last_number_before_last}
 \title{Find the \code{n}th number before the \code{m}th occurrence of a pattern.}
 \usage{
-nth_number_before_mth(
-  string,
-  pattern,
-  n,
-  m,
-  decimals = FALSE,
-  leading_decimals = decimals,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE,
-  leave_as_string = FALSE
-)
+nth_number_before_mth(...)
 
-str_nth_number_before_mth(
-  string,
-  pattern,
-  n,
-  m,
-  decimals = FALSE,
-  leading_decimals = decimals,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE,
-  leave_as_string = FALSE
-)
+str_nth_number_before_mth(...)
 
-nth_number_before_first(
-  string,
-  pattern,
-  n,
-  decimals = FALSE,
-  leading_decimals = decimals,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE,
-  leave_as_string = FALSE
-)
+nth_number_before_first(...)
 
-nth_number_before_last(
-  string,
-  pattern,
-  n,
-  decimals = FALSE,
-  leading_decimals = decimals,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE,
-  leave_as_string = FALSE
-)
+nth_number_before_last(...)
 
-first_number_before_mth(
-  string,
-  pattern,
-  m,
-  decimals = FALSE,
-  leading_decimals = decimals,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE,
-  leave_as_string = FALSE
-)
+first_number_before_mth(...)
 
-last_number_before_mth(
-  string,
-  pattern,
-  m,
-  decimals = FALSE,
-  leading_decimals = decimals,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE,
-  leave_as_string = FALSE
-)
+last_number_before_mth(...)
 
-first_number_before_first(
-  string,
-  pattern,
-  decimals = FALSE,
-  leading_decimals = decimals,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE,
-  leave_as_string = FALSE
-)
+first_number_before_first(...)
 
-first_number_before_last(
-  string,
-  pattern,
-  decimals = FALSE,
-  leading_decimals = decimals,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE,
-  leave_as_string = FALSE
-)
+first_number_before_last(...)
 
-last_number_before_first(
-  string,
-  pattern,
-  decimals = FALSE,
-  leading_decimals = decimals,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE,
-  leave_as_string = FALSE
-)
+last_number_before_first(...)
 
-last_number_before_last(
-  string,
-  pattern,
-  decimals = FALSE,
-  leading_decimals = decimals,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE,
-  leave_as_string = FALSE
-)
+last_number_before_last(...)
 
-str_nth_number_before_first(
-  string,
-  pattern,
-  n,
-  decimals = FALSE,
-  leading_decimals = decimals,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE,
-  leave_as_string = FALSE
-)
+str_nth_number_before_first(...)
 
-str_nth_number_before_last(
-  string,
-  pattern,
-  n,
-  decimals = FALSE,
-  leading_decimals = decimals,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE,
-  leave_as_string = FALSE
-)
+str_nth_number_before_last(...)
 
-str_first_number_before_mth(
-  string,
-  pattern,
-  m,
-  decimals = FALSE,
-  leading_decimals = decimals,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE,
-  leave_as_string = FALSE
-)
+str_first_number_before_mth(...)
 
-str_last_number_before_mth(
-  string,
-  pattern,
-  m,
-  decimals = FALSE,
-  leading_decimals = decimals,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE,
-  leave_as_string = FALSE
-)
+str_last_number_before_mth(...)
 
-str_first_number_before_first(
-  string,
-  pattern,
-  decimals = FALSE,
-  leading_decimals = decimals,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE,
-  leave_as_string = FALSE
-)
+str_first_number_before_first(...)
 
-str_first_number_before_last(
-  string,
-  pattern,
-  decimals = FALSE,
-  leading_decimals = decimals,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE,
-  leave_as_string = FALSE
-)
+str_first_number_before_last(...)
 
-str_last_number_before_first(
-  string,
-  pattern,
-  decimals = FALSE,
-  leading_decimals = decimals,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE,
-  leave_as_string = FALSE
-)
+str_last_number_before_first(...)
 
-str_last_number_before_last(
-  string,
-  pattern,
-  decimals = FALSE,
-  leading_decimals = decimals,
-  negs = FALSE,
-  sci = FALSE,
-  commas = FALSE,
-  leave_as_string = FALSE
-)
+str_last_number_before_last(...)
 }
 \arguments{
-\item{string}{A character vector.}
-
-\item{pattern}{The pattern to look for.
-
-The default interpretation is a regular expression, as described in
-\link[stringi:about_search_regex]{stringi::about_search_regex}.
-
-To match a without regular expression (i.e. as a human would), use
-\link[stringr:modifiers]{coll()}. For details see \code{\link[stringr:modifiers]{stringr::regex()}}.}
-
-\item{n, m}{Vectors of integerish values. Must be either length 1 or have
-length equal to the length of \code{string}. Negative indices count from the
-back: while \code{1} and \code{2} correspond to first and second, \code{-1} and \code{-2}
-correspond to last and second-last. \code{0} will return \code{NA}.}
-
-\item{decimals}{Do you want to include the possibility of decimal numbers
-(\code{TRUE}) or not (\code{FALSE}, the default).}
-
-\item{leading_decimals}{Do you want to allow a leading decimal point to be
-the start of a number?}
-
-\item{negs}{Do you want to allow negative numbers? Note that double negatives
-are not handled here (see the examples).}
-
-\item{sci}{Make the search aware of scientific notation e.g. 2e3 is the same
-as 2000.}
-
-\item{commas}{Allow comma separators in numbers (i.e. interpret 1,100 as a
-single number (one thousand one hundred) rather than two numbers (one and
-one hundred)).}
-
-\item{leave_as_string}{Do you want to return the number as a string (\code{TRUE})
-or as numeric (\code{FALSE}, the default)?}
+\item{...}{Pass-through to \code{strex} function.}
 }
 \description{
-See \code{\link[strex:str_nth_number_before_mth]{strex::str_nth_number_before_mth()}}.
+Copy of \code{\link[strex:str_nth_number_before_mth]{strex::str_nth_number_before_mth()}}.
 }

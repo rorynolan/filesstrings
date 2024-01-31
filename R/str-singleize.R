@@ -1,12 +1,14 @@
 #' Remove back-to-back duplicates of a pattern in a string.
 #'
-#' See [strex::str_singleize()].
+#' Copy of [strex::str_singleize()].
 #'
-#' @inheritParams strex::str_singleize
+#' @inheritParams match_arg
 #'
 #' @export
-singleize <- strex::str_singleize
+str_singleize <- function(...){
+  strex::str_singleize(...)
+}
 
-#' @rdname singleize
+#' @rdname str_singleize
 #' @export
-str_singleize <- singleize
+singleize <- str_singleize

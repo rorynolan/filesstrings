@@ -5,13 +5,13 @@
 \alias{str_can_be_numeric}
 \title{Check if a string could be considered as numeric.}
 \usage{
-can_be_numeric(string)
+can_be_numeric(...)
 
-str_can_be_numeric(string)
+str_can_be_numeric(...)
 }
 \arguments{
-\item{string}{A character vector.}
+\item{...}{Pass-through to \code{strex} function.}
 }
 \description{
-See \code{\link[strex:str_can_be_numeric]{strex::str_can_be_numeric()}}.
+Copy of \code{\link[strex:str_can_be_numeric]{strex::str_can_be_numeric()}}.
 }

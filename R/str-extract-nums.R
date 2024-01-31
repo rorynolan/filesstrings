@@ -1,20 +1,23 @@
 #' Extract numbers from a string.
 #'
-#' See [strex::str_extract_numbers()].
+#' Copies of [strex::str_extract_numbers()] and friends.
 #'
-#' @inheritParams strex::str_extract_numbers
+#' @inheritParams match_arg
 #'
 #' @export
-extract_numbers <- strex::str_extract_numbers
+extract_numbers <- function(...){
+  strex::str_extract_numbers(...)
+}
 
 #' @rdname extract_numbers
 #' @export
 str_extract_numbers <- extract_numbers
 
 #' @rdname extract_numbers
-#' @inheritParams strex::str_nth_number
 #' @export
-nth_number <- strex::str_nth_number
+nth_number <- function(...){
+  strex::str_nth_number(...)
+}
 
 #' @rdname extract_numbers
 #' @export
@@ -22,7 +25,9 @@ str_nth_number <- nth_number
 
 #' @rdname extract_numbers
 #' @export
-first_number <- strex::str_first_number
+first_number <- function(...){
+  strex::str_first_number(...)
+}
 
 #' @rdname extract_numbers
 #' @export
@@ -30,7 +35,9 @@ str_first_number <- first_number
 
 #' @rdname extract_numbers
 #' @export
-last_number <- strex::str_last_number
+last_number <- function(...){
+  strex::str_last_number(...)
+}
 
 #' @rdname extract_numbers
 #' @export

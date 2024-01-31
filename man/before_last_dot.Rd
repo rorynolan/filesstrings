@@ -5,13 +5,13 @@
 \alias{str_before_last_dot}
 \title{Get the part of a string before the last period.}
 \usage{
-before_last_dot(string)
+before_last_dot(...)
 
-str_before_last_dot(string)
+str_before_last_dot(...)
 }
 \arguments{
-\item{string}{A character vector.}
+\item{...}{Pass-through to \code{strex} function.}
 }
 \description{
-See \code{\link[strex:str_before_last_dot]{strex::str_before_last_dot()}}.
+Copy of \code{\link[strex:str_before_last_dot]{strex::str_before_last_dot()}}.
 }

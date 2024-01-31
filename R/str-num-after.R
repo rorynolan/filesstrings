@@ -1,11 +1,13 @@
 #' Find the `n`th number after the `m`th occurrence of a pattern.
 #'
-#' See [strex::str_nth_number_after_mth()].
+#' Copy of [strex::str_nth_number_after_mth()].
 #'
-#' @inheritParams strex::str_nth_number_after_mth
+#' @inheritParams match_arg
 #'
 #' @export
-nth_number_after_mth <- strex::str_nth_number_after_mth
+nth_number_after_mth <- function(...){
+  strex::str_nth_number_after_mth(...)
+}
 
 #' @rdname nth_number_after_mth
 #' @export
@@ -13,64 +15,96 @@ str_nth_number_after_mth <- nth_number_after_mth
 
 #' @rdname nth_number_after_mth
 #' @export
-nth_number_after_first <- strex::str_nth_number_after_first
+nth_number_after_first <- function(...){
+  strex::str_nth_number_after_first(...)
+}
 
 #' @rdname nth_number_after_mth
 #' @export
-nth_number_after_last <- strex::str_nth_number_after_last
+nth_number_after_last <- function(...){
+  strex::str_nth_number_after_last(...)
+}
 
 #' @rdname nth_number_after_mth
 #' @export
-first_number_after_mth <- strex::str_first_number_after_mth
+first_number_after_mth <- function(...){
+  strex::str_first_number_after_mth(...)
+}
 
 #' @rdname nth_number_after_mth
 #' @export
-last_number_after_mth <- strex::str_last_number_after_mth
+last_number_after_mth <- function(...){
+  strex::str_last_number_after_mth(...)
+}
 
 #' @rdname nth_number_after_mth
 #' @export
-first_number_after_first <- strex::str_first_number_after_first
+first_number_after_first <- function(...){
+  strex::str_first_number_after_first(...)
+}
 
 #' @rdname nth_number_after_mth
 #' @export
-first_number_after_last <- strex::str_first_number_after_last
+first_number_after_last <- function(...){
+  strex::str_first_number_after_last(...)
+}
 
 #' @rdname nth_number_after_mth
 #' @export
-last_number_after_first <- strex::str_last_number_after_first
+last_number_after_first <- function(...){
+  strex::str_last_number_after_first(...)
+}
 
 #' @rdname nth_number_after_mth
 #' @export
-last_number_after_last <- strex::str_last_number_after_last
+last_number_after_last <- function(...){
+  strex::str_last_number_after_last(...)
+}
 
 #' @rdname nth_number_after_mth
 #' @export
-str_nth_number_after_first <- strex::str_nth_number_after_first
+str_nth_number_after_first <- function(...){
+  strex::str_nth_number_after_first(...)
+}
 
 #' @rdname nth_number_after_mth
 #' @export
-str_nth_number_after_last <- strex::str_nth_number_after_last
+str_nth_number_after_last <- function(...){
+  strex::str_nth_number_after_last(...)
+}
 
 #' @rdname nth_number_after_mth
 #' @export
-str_first_number_after_mth <- strex::str_first_number_after_mth
+str_first_number_after_mth <- function(...){
+  strex::str_first_number_after_mth(...)
+}
 
 #' @rdname nth_number_after_mth
 #' @export
-str_last_number_after_mth <- strex::str_last_number_after_mth
+str_last_number_after_mth <- function(...){
+  strex::str_last_number_after_mth(...)
+}
 
 #' @rdname nth_number_after_mth
 #' @export
-str_first_number_after_first <- strex::str_first_number_after_first
+str_first_number_after_first <- function(...){
+  strex::str_first_number_after_first(...)
+}
 
 #' @rdname nth_number_after_mth
 #' @export
-str_first_number_after_last <- strex::str_first_number_after_last
+str_first_number_after_last <- function(...){
+  strex::str_first_number_after_last(...)
+}
 
 #' @rdname nth_number_after_mth
 #' @export
-str_last_number_after_first <- strex::str_last_number_after_first
+str_last_number_after_first <- function(...){
+  strex::str_last_number_after_first(...)
+}
 
 #' @rdname nth_number_after_mth
 #' @export
-str_last_number_after_last <- strex::str_last_number_after_last
+str_last_number_after_last <- function(...){
+  strex::str_last_number_after_last(...)
+}

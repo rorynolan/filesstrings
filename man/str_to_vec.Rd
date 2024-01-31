@@ -5,13 +5,13 @@
 \alias{to_vec}
 \title{Convert a string to a vector of characters}
 \usage{
-str_to_vec(string)
+str_to_vec(...)
 
-to_vec(string)
+to_vec(...)
 }
 \arguments{
-\item{string}{A character vector.}
+\item{...}{Pass-through to \code{strex} function.}
 }
 \description{
-See \code{\link[strex:str_to_vec]{strex::str_to_vec()}}.
+Copy of \code{\link[strex:str_to_vec]{strex::str_to_vec()}}.
 }

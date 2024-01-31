@@ -5,13 +5,13 @@
 \alias{str_locate_braces}
 \title{Locate the braces in a string.}
 \usage{
-locate_braces(string)
+locate_braces(...)
 
-str_locate_braces(string)
+str_locate_braces(...)
 }
 \arguments{
-\item{string}{A character vector}
+\item{...}{Pass-through to \code{strex} function.}
 }
 \description{
-See \code{\link[strex:str_locate_braces]{strex::str_locate_braces()}}.
+Copy of \code{\link[strex:str_locate_braces]{strex::str_locate_braces()}}.
 }

@@ -5,18 +5,13 @@
 \alias{paste_elems}
 \title{Extract bits of a string and paste them together.}
 \usage{
-str_paste_elems(string, indices, sep = "")
+str_paste_elems(...)
 
-paste_elems(string, indices, sep = "")
+paste_elems(...)
 }
 \arguments{
-\item{string}{A character vector.}
-
-\item{indices}{A vector of integerish values. Negative indexing is allowed as
-in \code{\link[stringr:str_sub]{stringr::str_sub()}}.}
-
-\item{sep}{A string. The separator for pasting \code{string} elements together.}
+\item{...}{Pass-through to \code{strex} function.}
 }
 \description{
-See \code{\link[strex:str_paste_elems]{strex::str_paste_elems()}}.
+Copy of \code{\link[strex:str_paste_elems]{strex::str_paste_elems()}}.
 }

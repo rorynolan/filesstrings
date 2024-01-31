@@ -4,35 +4,50 @@
 #'
 #' @name currency
 #'
-#' @inheritParams strex::str_extract_currencies
+#' @inheritParams match_arg
 #'
 #' @export
-str_extract_currencies <- strex::str_extract_currencies
+str_extract_currencies <- function(...){
+  strex::str_extract_currencies(...)
+}
 
 #' @rdname currency
 #' @export
-extract_currencies <- strex::str_extract_currencies
+extract_currencies <- function(...){
+  strex::str_extract_currencies(...)
+}
 
 #' @rdname currency
 #' @export
-str_nth_currency <- strex::str_nth_currency
+str_nth_currency <- function(...){
+  strex::str_nth_currency(...)
+}
 
 #' @rdname currency
 #' @export
-nth_currency <- strex::str_nth_currency
+nth_currency <- function(...){
+  strex::str_nth_currency(...)
+}
 
 #' @rdname currency
 #' @export
-str_first_currency <- strex::str_first_currency
+str_first_currency <- function(...){
+  strex::str_first_currency(...)
+}
 
 #' @rdname currency
 #' @export
-first_currency <- strex::str_first_currency
+first_currency <- function(...){
+  strex::str_first_currency(...)
+}
 
 #' @rdname currency
 #' @export
-str_last_currency <- strex::str_last_currency
+str_last_currency <- function(...){
+  strex::str_last_currency(...)
+}
 
 #' @rdname currency
 #' @export
-last_currency <- strex::str_last_currency
+last_currency <- str_last_currency
+
