@@ -1,6 +1,6 @@
 # `filesstrings` 3.3.0
 
-# NEW FEATURES
+## NEW FEATURES
 * Code is now robust to changes to the `strex` package.
 
 
