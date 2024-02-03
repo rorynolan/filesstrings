@@ -1,3 +1,9 @@
+# `filesstrings` 3.4.0
+
+## NEW FEATURES
+* Add github.io website to DESCRIPTION.
+
+
 # `filesstrings` 3.3.0
 
 ## NEW FEATURES

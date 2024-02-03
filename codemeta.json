@@ -4,10 +4,11 @@
   "identifier": "filesstrings",
   "description": "This started out as a package for file and string manipulation. Since then, the 'fs' and 'strex' packages emerged, offering functionality previously given by this package (but it's done better in these new ones). Those packages have hence almost pushed 'filesstrings' into extinction. However, it still has a small number of unique, handy file manipulation functions which can be seen in the vignette. One example is a function to remove spaces from all file names in a directory.",
   "name": "filesstrings: Handy File and String Manipulation",
+  "relatedLink": ["https://rorynolan.github.io/filesstrings/", "https://CRAN.R-project.org/package=filesstrings"],
   "codeRepository": "https://github.com/rorynolan/filesstrings",
   "issueTracker": "https://github.com/rorynolan/filesstrings/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -244,7 +245,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "822.44KB",
+  "fileSize": "822.565KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",
@@ -279,7 +280,6 @@
   ],
   "releaseNotes": "https://github.com/rorynolan/filesstrings/blob/master/NEWS.md",
   "readme": "https://github.com/rorynolan/filesstrings/blob/master/README.md",
-  "contIntegration": "https://github.com/rorynolan/filesstrings/actions/workflows/R-CMD-check.yaml",
-  "developmentStatus": ["https://lifecycle.r-lib.org/articles/stages.html", "https://www.repostatus.org/#inactive"],
-  "relatedLink": "https://CRAN.R-project.org/package=filesstrings"
+  "contIntegration": ["https://github.com/rorynolan/filesstrings/actions/workflows/R-CMD-check.yaml", "https://app.codecov.io/gh/rorynolan/filesstrings?branch=master"],
+  "developmentStatus": ["https://lifecycle.r-lib.org/articles/stages.html", "https://www.repostatus.org/#inactive"]
 }
